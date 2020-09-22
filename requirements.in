@@ -1,0 +1,14 @@
+Django>=3.0,<3.1
+django-braces
+django-csp
+django-simple-menu
+django-debug-toolbar
+django-extensions # QoF for the admin, adds a lot of useful manage.py commands
+pip-tools
+cryptography
+bpython
+pillow
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.1.0-beta-1#egg=uil-django-core
+mysqlclient
+backports-datetime-fromisoformat
+babel

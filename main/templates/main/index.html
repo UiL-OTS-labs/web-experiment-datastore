@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+
+{% block header_title %}
+    {% trans 'main:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="uu-inner-container">
+        <div class="col-12">
+            <h1>
+                {% trans 'main:home:header' %}
+            </h1>
+            {% transformat 'main:home:text' request.user.get_full_name %}
+
+        </div>
+    </div>
+{% endblock %}
