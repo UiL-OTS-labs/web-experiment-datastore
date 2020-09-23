@@ -1,0 +1,99 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'experiments:detail:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-7">
+        <h1>
+            {% trans 'experiments:detail:header' %} - {{ experiment.title }}
+        </h1>
+        <p>
+            {% trans 'experiments:detail:info_text' %}
+        </p>
+    </div>
+    <div class="col-5">
+        <table>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:access_id' %}
+                </td>
+                <td>
+                    {{ experiment.access_id }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:webexp_location' %}
+                </td>
+                <td>
+                    {{ webexp_host }}/{{ experiment.folder_name }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {% trans 'experiments:detail:researchers' %}
+                </td>
+                <td>
+                    {% for user in experiment.users.all %}
+                        - {{ user.get_full_name }} ({{ user.username }})<br/>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="uu-inner-container mt-5">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="#">
+                {% trans 'experiments:global:download_raw' %}
+            </a>
+        </div>
+        <h3>
+            {% trans 'experiments:detail:data_header' %}
+        </h3>
+        <br/>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "DataPoint" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
+                    </th>
+                    <th>
+                        {% trans 'experiments:global:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for dataPoint in object_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'api:show' dataPoint.pk %}">
+                                {{ dataPoint.pk }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ dataPoint.date_added }}
+                        </td>
+                        <td>
+                            {% trans 'experiments:global:download_raw' %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

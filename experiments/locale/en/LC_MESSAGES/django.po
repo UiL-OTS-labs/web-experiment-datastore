@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-23 11:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: experiments/forms.py:19
+msgid "experiments:forms:folder_name"
+msgstr "Experiment folder"
+
+#: experiments/forms.py:21
+msgid "experiments:forms:folder_name:help"
+msgstr ""
+"How the folder containing your experiment should be named. For example, "
+"'words' would give you the URL {}/words/. Can only contain letters, numbers, "
+"underscores and hyphens."
+
+#: experiments/models.py:16
+msgid "experiments:models:experiment:access_id"
+msgstr "Upload ID"
+
+#: experiments/models.py:27
+msgid "experiments:models:experiment:folder_name"
+msgstr "Experiment folder"
+
+#: experiments/models.py:34
+msgid "experiments:models:experiment:title"
+msgstr "Title"
+
+#: experiments/models.py:38
+msgid "experiments:models:experiment:date_created"
+msgstr "Date created"
+
+#: experiments/models.py:51
+msgid "experiments:models:datapoint:data"
+msgstr "Data"
+
+#: experiments/models.py:55
+msgid "experiments:models:datapoint:date_added"
+msgstr "Date uploaded"
+
+#: experiments/templates/experiments/detail.html:8
+#: experiments/templates/experiments/detail.html:15
+msgid "experiments:detail:header"
+msgstr "Experiment"
+
+#: experiments/templates/experiments/detail.html:18
+msgid "experiments:detail:info_text"
+msgstr ""
+
+#: experiments/templates/experiments/detail.html:25
+msgid "experiments:detail:access_id"
+msgstr "Upload ID"
+
+#: experiments/templates/experiments/detail.html:33
+msgid "experiments:detail:webexp_location"
+msgstr "Location"
+
+#: experiments/templates/experiments/detail.html:41
+msgid "experiments:detail:researchers"
+msgstr "Researchers"
+
+#: experiments/templates/experiments/detail.html:56
+#: experiments/templates/experiments/detail.html:88
+#: experiments/templates/experiments/overview.html:52
+msgid "experiments:global:download_raw"
+msgstr "Download raw data"
+
+#: experiments/templates/experiments/detail.html:60
+msgid "experiments:detail:data_header"
+msgstr "Uploaded data"
+
+#: experiments/templates/experiments/detail.html:73
+#: experiments/templates/experiments/overview.html:35
+msgid "experiments:global:actions"
+msgstr "Actions"
+
+#: experiments/templates/experiments/new.html:8
+#: experiments/templates/experiments/new.html:15
+msgid "experiments:new:header"
+msgstr "Create new experiment"
+
+#: experiments/templates/experiments/new.html:18
+msgid "experiments:new:info_text"
+msgstr ""
+
+#: experiments/templates/experiments/new.html:27
+msgid "experiments:globals:save"
+msgstr "Save"
+
+#: experiments/templates/experiments/overview.html:8
+#: experiments/templates/experiments/overview.html:20
+msgid "experiments:home:header"
+msgstr "My experiments"
+
+#: experiments/templates/experiments/overview.html:16
+msgid "experiments:home:create_experiment"
+msgstr "Create new experiment"
+
+#: experiments/templates/experiments/overview.html:23
+msgid "experiments:home:info_text"
+msgstr " "
+
+#: experiments/views.py:25
+msgid "experiments:message:create:success"
+msgstr "Experiment created!"

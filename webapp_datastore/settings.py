@@ -33,6 +33,9 @@ ENABLE_DEBUG_TOOLBAR = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+# Application specific
+
+WEBEXPERIMENT_HOST = 'web-experiments.lab.hum.uu.nl'
 
 # Application definition
 
@@ -50,6 +53,9 @@ INSTALLED_APPS = [
     # django-simple-menu
     'menu',
 
+    'rest_framework',
+
+    'api',
     'experiments',
     'uil.core',
 
@@ -138,7 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'nl'
+LANGUAGE_CODE = 'en'
 LANGUAGES = (
     ('nl', _('lang:nl')),
     ('en', _('lang:en')),
