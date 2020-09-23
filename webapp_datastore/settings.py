@@ -37,7 +37,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -53,6 +52,9 @@ INSTALLED_APPS = [
 
     'experiments',
     'uil.core',
+
+    # This has to be last, otherwise it's login/logout pages will take over
+    'django.contrib.admin',
 ]
 
 AUTH_USER_MODEL = 'main.User'
