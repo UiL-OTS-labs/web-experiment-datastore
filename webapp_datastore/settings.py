@@ -33,6 +33,12 @@ ENABLE_DEBUG_TOOLBAR = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
+
 # Application specific
 
 WEBEXPERIMENT_HOST = 'web-experiments.lab.hum.uu.nl'
