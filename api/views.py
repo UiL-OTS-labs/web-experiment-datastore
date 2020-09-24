@@ -1,10 +1,10 @@
 from typing import Union
 
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
@@ -18,13 +18,13 @@ class ShowDataView(APIView):
 
 
 class UploadView(APIView):
-    parser_classes = [JSONParser]
+    parser_classes = [PlainTextParser]
 
-    def post(self, request):
+    def post(self, request, access_key):
         payload = request.data
-        print(payload)
 
-        if 'upload_id' not in payload:
+        # Should not happen, as it's a path variable. BBSTS
+        if not access_key or len(access_key) == 0:
             return Response({
                 "result": "ERR_NO_ID",
                 "message": "No upload_id was provided"
@@ -32,7 +32,7 @@ class UploadView(APIView):
                 status=400
             )
 
-        if 'data' not in payload:
+        if not payload:
             return Response({
                 "result":  "ERR_NO_DATA",
                 "message": "No data was provided"
@@ -40,7 +40,7 @@ class UploadView(APIView):
                 status=400
             )
 
-        experiment = self.get_experiment(payload.get('upload_id'))
+        experiment = self.get_experiment(access_key)
 
         if not experiment:
             return Response({
@@ -52,7 +52,7 @@ class UploadView(APIView):
 
         dp = DataPoint()
         dp.experiment = experiment
-        dp.data = payload.get('data')
+        dp.data = payload
         dp.save()
 
         return Response({
