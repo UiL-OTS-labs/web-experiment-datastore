@@ -36,7 +36,7 @@ msgstr "Log out"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
-msgstr "Log in"
+msgstr "Welcome {}"
 
 #. Translators: This is the title that will end up in the header (in blue)
 #: main/templates/base/site_header.html:4
