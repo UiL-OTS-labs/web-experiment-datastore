@@ -20,37 +20,37 @@ msgstr ""
 
 #: main/menus.py:5
 msgid "mainmenu:home"
-msgstr ""
+msgstr "Home"
 
 #: main/menus.py:10
 msgid "mainmenu:experiments"
-msgstr ""
+msgstr "Mijn Experimenten"
 
 #: main/menus.py:15
 msgid "footermenu:login"
-msgstr ""
+msgstr "Log in"
 
 #: main/menus.py:20 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
-msgstr ""
+msgstr "Log uit"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
-msgstr ""
+msgstr "Welkom {}"
 
 #. Translators: This is the title that will end up in the header (in blue)
 #: main/templates/base/site_header.html:4
 msgid "site:header:title"
-msgstr ""
+msgstr "Web-experiment data opslag"
 
 #. Translators: This is the title that will end up in the tab of the browser
 #: main/templates/base/site_title.html:5
 msgid "site:name"
-msgstr ""
+msgstr "Web-experiment datastore"
 
 #: main/templates/main/index.html:6 main/templates/main/index.html:13
 msgid "main:home:header"
-msgstr ""
+msgstr "Welkom"
 
 #: main/templates/main/index.html:15
 msgid "main:home:text"
@@ -58,16 +58,16 @@ msgstr ""
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"
-msgstr ""
+msgstr "Uitgelogd"
 
 #: main/templates/registration/logged_out.html:9
 msgid "main:logged_out_text"
-msgstr ""
+msgstr "U bent nu uitgelogd."
 
 #: main/templates/registration/login.html:9
 msgid "login:header:login"
-msgstr ""
+msgstr "Log in"
 
 #: main/templates/registration/login.html:15
 msgid "login:button:login"
-msgstr ""
+msgstr "Log in"

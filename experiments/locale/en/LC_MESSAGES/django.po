@@ -31,7 +31,7 @@ msgstr ""
 
 #: experiments/models.py:16
 msgid "experiments:models:experiment:access_id"
-msgstr "Upload ID"
+msgstr "Access ID"
 
 #: experiments/models.py:27
 msgid "experiments:models:experiment:folder_name"
@@ -64,7 +64,7 @@ msgstr ""
 
 #: experiments/templates/experiments/detail.html:25
 msgid "experiments:detail:access_id"
-msgstr "Upload ID"
+msgstr "Access ID"
 
 #: experiments/templates/experiments/detail.html:33
 msgid "experiments:detail:webexp_location"

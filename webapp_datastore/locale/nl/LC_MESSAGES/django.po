@@ -20,8 +20,8 @@ msgstr ""
 
 #: webapp_datastore/settings.py:146
 msgid "lang:nl"
-msgstr ""
+msgstr "Nederlands"
 
 #: webapp_datastore/settings.py:147
 msgid "lang:en"
-msgstr ""
+msgstr "English"

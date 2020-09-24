@@ -20,40 +20,43 @@ msgstr ""
 
 #: experiments/forms.py:19
 msgid "experiments:forms:folder_name"
-msgstr ""
+msgstr "Experiment map"
 
 #: experiments/forms.py:21
 msgid "experiments:forms:folder_name:help"
 msgstr ""
+"Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:"
+"'words' geeft u de URL {}/words/. Mag alleen letters, cijfers,"
+"onderstrepingstekens en koppeltekens bevatten."
 
 #: experiments/models.py:16
 msgid "experiments:models:experiment:access_id"
-msgstr ""
+msgstr "Toegang ID"
 
 #: experiments/models.py:27
 msgid "experiments:models:experiment:folder_name"
-msgstr ""
+msgstr "Experiment map"
 
 #: experiments/models.py:34
 msgid "experiments:models:experiment:title"
-msgstr ""
+msgstr "Titel"
 
 #: experiments/models.py:38
 msgid "experiments:models:experiment:date_created"
-msgstr ""
+msgstr "Datum aangemaakt"
 
 #: experiments/models.py:51
 msgid "experiments:models:datapoint:data"
-msgstr ""
+msgstr "Data"
 
 #: experiments/models.py:55
 msgid "experiments:models:datapoint:date_added"
-msgstr ""
+msgstr "Datum toegevoegd"
 
 #: experiments/templates/experiments/detail.html:8
 #: experiments/templates/experiments/detail.html:15
 msgid "experiments:detail:header"
-msgstr ""
+msgstr "Experiment"
 
 #: experiments/templates/experiments/detail.html:18
 msgid "experiments:detail:info_text"
@@ -61,35 +64,35 @@ msgstr ""
 
 #: experiments/templates/experiments/detail.html:25
 msgid "experiments:detail:access_id"
-msgstr ""
+msgstr "Toegang ID"
 
 #: experiments/templates/experiments/detail.html:33
 msgid "experiments:detail:webexp_location"
-msgstr ""
+msgstr "Locatie"
 
 #: experiments/templates/experiments/detail.html:41
 msgid "experiments:detail:researchers"
-msgstr ""
+msgstr "Onderzoekers"
 
 #: experiments/templates/experiments/detail.html:56
 #: experiments/templates/experiments/detail.html:88
 #: experiments/templates/experiments/overview.html:52
 msgid "experiments:global:download_raw"
-msgstr ""
+msgstr "Download ruwe data"
 
 #: experiments/templates/experiments/detail.html:60
 msgid "experiments:detail:data_header"
-msgstr ""
+msgstr "Opgeslagen data"
 
 #: experiments/templates/experiments/detail.html:73
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
-msgstr ""
+msgstr "Acties"
 
 #: experiments/templates/experiments/new.html:8
 #: experiments/templates/experiments/new.html:15
 msgid "experiments:new:header"
-msgstr ""
+msgstr "Nieuw experiment aanmaken"
 
 #: experiments/templates/experiments/new.html:18
 msgid "experiments:new:info_text"
@@ -97,16 +100,16 @@ msgstr ""
 
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
-msgstr ""
+msgstr "Opslaan"
 
 #: experiments/templates/experiments/overview.html:8
 #: experiments/templates/experiments/overview.html:20
 msgid "experiments:home:header"
-msgstr ""
+msgstr "Mijn experimenten"
 
 #: experiments/templates/experiments/overview.html:16
 msgid "experiments:home:create_experiment"
-msgstr ""
+msgstr "Nieuw experiment"
 
 #: experiments/templates/experiments/overview.html:23
 msgid "experiments:home:info_text"
@@ -114,4 +117,4 @@ msgstr ""
 
 #: experiments/views.py:25
 msgid "experiments:message:create:success"
-msgstr ""
+msgstr "Experiment aangemaakt!"
