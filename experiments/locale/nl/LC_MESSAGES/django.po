@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-23 11:26+0000\n"
+"POT-Creation-Date: 2020-09-30 15:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,9 +25,9 @@ msgstr "Experiment map"
 #: experiments/forms.py:21
 msgid "experiments:forms:folder_name:help"
 msgstr ""
-"Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:"
-"'words' geeft u de URL {}/words/. Mag alleen letters, cijfers,"
-"onderstrepingstekens en koppeltekens bevatten."
+"Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:'words' geeft "
+"u de URL {}/words/. Mag alleen letters, cijfers,onderstrepingstekens en "
+"koppeltekens bevatten."
 
 #: experiments/models.py:16
 msgid "experiments:models:experiment:access_id"
@@ -75,16 +75,22 @@ msgid "experiments:detail:researchers"
 msgstr "Onderzoekers"
 
 #: experiments/templates/experiments/detail.html:56
-#: experiments/templates/experiments/detail.html:88
+#: experiments/templates/experiments/detail.html:94
 #: experiments/templates/experiments/overview.html:52
 msgid "experiments:global:download_raw"
 msgstr "Download ruwe data"
 
-#: experiments/templates/experiments/detail.html:60
+#: experiments/templates/experiments/detail.html:61
+#: experiments/templates/experiments/detail.html:98
+#| msgid "experiments:global:download_raw"
+msgid "experiments:global:download_csv"
+msgstr "Download data als CSV"
+
+#: experiments/templates/experiments/detail.html:65
 msgid "experiments:detail:data_header"
 msgstr "Opgeslagen data"
 
-#: experiments/templates/experiments/detail.html:73
+#: experiments/templates/experiments/detail.html:78
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Acties"
@@ -115,6 +121,6 @@ msgstr "Nieuw experiment"
 msgid "experiments:home:info_text"
 msgstr ""
 
-#: experiments/views.py:25
+#: experiments/views.py:27
 msgid "experiments:message:create:success"
 msgstr "Experiment aangemaakt!"

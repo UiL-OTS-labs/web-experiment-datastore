@@ -1,3 +1,4 @@
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404
 from django.utils.functional import cached_property
 from django.views import generic
 import braces.views as braces
@@ -8,6 +9,7 @@ from django.conf import settings
 
 from .forms import ExperimentForm
 from .models import Experiment, DataPoint
+from .utils import create_download_response_zip, create_file_response_single
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -54,3 +56,30 @@ class ExperimentDetailView(braces.LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(experiment=self.experiment)
+
+
+class DownloadView(braces.LoginRequiredMixin, generic.View):
+    _formats = ['csv', 'raw']
+
+    def get(self, request, experiment, file_format='csv', data_point=None):
+        if file_format not in self._formats:
+            return HttpResponseBadRequest()
+
+        # Only allow users that are attached to this experiment
+        if not self.experiment.users.filter(
+                username=request.user.username
+        ).exists():
+            return HttpResponseForbidden()
+
+        if data_point:
+            qs = self.experiment.datapoint_set.filter(pk=data_point)
+            if not qs.exists():
+                return Http404()
+
+            return create_file_response_single(file_format, qs.first())
+        else:
+            return create_download_response_zip(file_format, self.experiment)
+
+    @cached_property
+    def experiment(self):
+        return Experiment.objects.get(pk=self.kwargs['experiment'])

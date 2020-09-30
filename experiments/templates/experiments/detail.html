@@ -52,8 +52,13 @@
 <div class="uu-inner-container mt-5">
     <div class="col-12">
         <div class="float-right button button-colored">
-            <a href="#">
+            <a href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                 {% trans 'experiments:global:download_raw' %}
+            </a>
+        </div>
+        <div class="float-right button button-colored mr-2">
+            <a href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
+                {% trans 'experiments:global:download_csv' %}
             </a>
         </div>
         <h3>
@@ -79,15 +84,19 @@
                 {% for dataPoint in object_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'api:show' dataPoint.pk %}">
-                                {{ dataPoint.pk }}
-                            </a>
+                            {{ dataPoint.pk }}
                         </td>
                         <td>
                             {{ dataPoint.date_added }}
                         </td>
                         <td>
-                            {% trans 'experiments:global:download_raw' %}
+                            <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'raw' %}" target="_blank">
+                                {% trans 'experiments:global:download_raw' %}
+                            </a>
+                            <br/>
+                            <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'csv' %}" target="_blank">
+                                {% trans 'experiments:global:download_csv' %}
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}

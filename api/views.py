@@ -7,16 +7,6 @@ from rest_framework.views import APIView
 from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
-
-class ShowDataView(APIView):
-
-    def get(self, request, pk):
-        print(pk)
-        dp = DataPoint.objects.get(pk=pk)
-
-        return Response(dp.data)
-
-
 class UploadView(APIView):
     parser_classes = [PlainTextParser]
 
