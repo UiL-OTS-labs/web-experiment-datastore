@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'administration:ldap:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'administration:ldap:header' %}
+        </h1>
+        <p>
+            {% trans 'administration:ldap:info_text' %}
+        </p>
+        <pre>
+{{ content }}
+        </pre>
+    </div>
+</div>
+{% endblock %}

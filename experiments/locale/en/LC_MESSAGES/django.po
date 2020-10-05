@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 15:28+0000\n"
+"POT-Creation-Date: 2020-10-05 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,13 +76,13 @@ msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:56
 #: experiments/templates/experiments/detail.html:94
-#: experiments/templates/experiments/overview.html:52
+#: experiments/templates/experiments/overview.html:53
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:61
 #: experiments/templates/experiments/detail.html:98
-#| msgid "experiments:global:download_raw"
+#: experiments/templates/experiments/overview.html:57
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 

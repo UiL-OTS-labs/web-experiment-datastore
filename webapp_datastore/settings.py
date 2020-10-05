@@ -42,6 +42,7 @@ INTERNAL_IPS = [
 # Application specific
 
 WEBEXPERIMENT_HOST = 'web-experiments.lab.hum.uu.nl'
+WEBEXPERIMENT_WEBROOT = '/hum/web/web-experiments.lab.hum.uu.nl/htdocs/'
 
 # Application definition
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
+    'administration',
     'api',
     'experiments',
     'uil.core',

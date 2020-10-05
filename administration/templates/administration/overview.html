@@ -1,0 +1,98 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'administration:home:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <div class="float-right button button-colored">
+            <a href="{% url 'administration:ldap' %}">
+                {% trans 'administration:home:server_config' %}
+            </a>
+        </div>
+        <div class="float-right button button-colored mr-2">
+            <a href="{% url 'admin:index' %}">
+                {% trans 'administration:home:django_admin' %}
+            </a>
+        </div>
+        <h1>
+            {% trans 'administration:home:header' %}
+        </h1>
+        <p>
+            {% trans 'administration:home:info_text' %}
+        </p>
+        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+            <thead>
+                <tr>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "title" %}
+                    </th>
+                    <th>
+                        {% trans 'administration:home:folder' %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "users" %}
+                    </th>
+                    <th>
+                        {% trans 'administration:home:date_created' %}
+                    </th>
+                    <th>
+                        {% trans 'administration:home:data_count' %}
+                    </th>
+                    <th>
+                        {% trans 'administration:home:last_upload' %}
+                    </th>
+                    <th>
+                        {% trans 'administration:globals:actions' %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for experiment in object_list %}
+                    <tr>
+                        <td>
+                            {{ experiment.pk }}
+                        </td>
+                        <td>
+                            {{ experiment }}
+                        </td>
+                        <td>
+                            {{ experiment.folder_name }}
+                        </td>
+                        <td>
+                            {% for user in experiment.users.all %}
+                                - {{ user.get_full_name }}<br/>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{ experiment.date_created|date:"Y-m-d H:i" }}
+                        </td>
+                        <td>
+                            {{ experiment.datapoint_set.count }}
+                        </td>
+                        <td>
+                            {{ experiment.datapoint_set.last.date_added|date:"Y-m-d H:i" }}
+                        </td>
+                        <td>
+                            <a href="{% url 'admin:experiments_experiment_change' experiment.pk %}">
+                                {% trans 'administration:globals:open_in_admin' %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/>
+    </div>
+</div>
+{% endblock %}

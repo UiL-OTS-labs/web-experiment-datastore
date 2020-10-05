@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-05 12:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: administration/templates/administration/ldap.html:8
+#: administration/templates/administration/ldap.html:15
+msgid "administration:ldap:header"
+msgstr "Hosting-server LDAP configuration"
+
+#: administration/templates/administration/ldap.html:18
+msgid "administration:ldap:info_text"
+msgstr ""
+"Please place the contents of this file in X"
+
+#: administration/templates/administration/overview.html:8
+#: administration/templates/administration/overview.html:25
+msgid "administration:home:header"
+msgstr "Administration"
+
+#: administration/templates/administration/overview.html:16
+msgid "administration:home:server_config"
+msgstr "LDAP server config"
+
+#: administration/templates/administration/overview.html:21
+msgid "administration:home:django_admin"
+msgstr "Open Django Admin"
+
+#: administration/templates/administration/overview.html:28
+msgid "administration:home:info_text"
+msgstr ""
+"Here you can see all experiments, and edit them in the Django Admin. In "
+"addition, you can generate the hosting-server LDAP config here. "
+
+#: administration/templates/administration/overview.html:40
+msgid "administration:home:folder"
+msgstr "Folder"
+
+#: administration/templates/administration/overview.html:46
+msgid "administration:home:date_created"
+msgstr "Created"
+
+#: administration/templates/administration/overview.html:49
+msgid "administration:home:data_count"
+msgstr "Num. Datapoints"
+
+#: administration/templates/administration/overview.html:52
+msgid "administration:home:last_upload"
+msgstr "Last Upload"
+
+#: administration/templates/administration/overview.html:55
+msgid "administration:globals:actions"
+msgstr "Actions"
+
+#: administration/templates/administration/overview.html:88
+msgid "administration:globals:open_in_admin"
+msgstr "Edit in Django Admin"

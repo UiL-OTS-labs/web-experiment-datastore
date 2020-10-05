@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-30 15:28+0000\n"
+"POT-Creation-Date: 2020-10-05 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,10 +27,14 @@ msgid "mainmenu:experiments"
 msgstr "My Experiments"
 
 #: main/menus.py:15
+msgid "mainmenu:administration"
+msgstr "Administration"
+
+#: main/menus.py:20
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:20 main/templates/base/login_header.html:7
+#: main/menus.py:25 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log out"
 
