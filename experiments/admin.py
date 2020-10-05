@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Experiment
+
+
+@admin.register(Experiment)
+class ExperimentAdmin(admin.ModelAdmin):
+    pass
