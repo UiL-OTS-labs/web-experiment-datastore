@@ -4,6 +4,7 @@ django-csp
 django-simple-menu
 django-debug-toolbar
 django-rest-framework
+django-auth-ldap
 django-extensions # QoF for the admin, adds a lot of useful manage.py commands
 pip-tools
 cryptography

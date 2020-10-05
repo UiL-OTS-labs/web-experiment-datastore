@@ -16,24 +16,28 @@ chardet==3.0.4            # via requests
 click==7.1.2              # via pip-tools
 cryptography==3.1.1       # via -r requirements.in
 curtsies==0.3.4           # via bpython
+django-auth-ldap==2.2.0   # via -r requirements.in
 django-braces==1.14.0     # via -r requirements.in
 django-csp==3.7           # via -r requirements.in
 django-debug-toolbar==3.1  # via -r requirements.in
 django-extensions==3.0.9  # via -r requirements.in
 django-rest-framework==0.1.0  # via -r requirements.in
 django-simple-menu==1.2.1  # via -r requirements.in
-django==3.0.10            # via -r requirements.in, django-braces, django-csp, django-debug-toolbar, django-simple-menu, djangorestframework
+django==3.0.10            # via -r requirements.in, django-auth-ldap, django-braces, django-csp, django-debug-toolbar, django-simple-menu, djangorestframework
 djangorestframework==3.11.1  # via django-rest-framework
 greenlet==0.4.17          # via bpython
 idna==2.10                # via requests
 mysqlclient==2.0.1        # via -r requirements.in
 pillow==7.2.0             # via -r requirements.in
 pip-tools==5.3.1          # via -r requirements.in
+pyasn1-modules==0.2.8     # via python-ldap
+pyasn1==0.4.8             # via pyasn1-modules, python-ldap
 pycparser==2.20           # via cffi
 pygments==2.7.1           # via bpython
+python-ldap==3.3.1        # via django-auth-ldap
 pytz==2020.1              # via babel, django
 requests==2.24.0          # via bpython
-six==1.15.0               # via bpython, cryptography, django-braces, pip-tools
+six==1.15.0               # via blessings, bpython, cryptography, django-braces, pip-tools
 sqlparse==0.3.1           # via django, django-debug-toolbar
 urllib3==1.25.10          # via requests
 wcwidth==0.2.5            # via curtsies
