@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 12:46+0000\n"
+"POT-Creation-Date: 2020-10-05 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,7 @@ msgstr "Hosting-server LDAP config"
 
 #: administration/templates/administration/ldap.html:18
 msgid "administration:ldap:info_text"
-msgstr ""
-"Plaats deze config in X."
+msgstr "Plaats deze config in X."
 
 #: administration/templates/administration/overview.html:8
 #: administration/templates/administration/overview.html:25

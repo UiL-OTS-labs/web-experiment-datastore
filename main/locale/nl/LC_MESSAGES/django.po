@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 12:46+0000\n"
+"POT-Creation-Date: 2020-10-05 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,18 +23,22 @@ msgid "mainmenu:home"
 msgstr "Home"
 
 #: main/menus.py:10
+msgid "mainmenu:login"
+msgstr "Log in"
+
+#: main/menus.py:16
 msgid "mainmenu:experiments"
 msgstr "Mijn Experimenten"
 
-#: main/menus.py:15
+#: main/menus.py:22
 msgid "mainmenu:administration"
 msgstr "Administratie"
 
-#: main/menus.py:20
+#: main/menus.py:28
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:25 main/templates/base/login_header.html:7
+#: main/menus.py:33 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
 
@@ -51,14 +55,6 @@ msgstr "Web-experiment data opslag"
 #: main/templates/base/site_title.html:5
 msgid "site:name"
 msgstr "Web-experiment datastore"
-
-#: main/templates/main/index.html:6 main/templates/main/index.html:13
-msgid "main:home:header"
-msgstr "Welkom"
-
-#: main/templates/main/index.html:15
-msgid "main:home:text"
-msgstr ""
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

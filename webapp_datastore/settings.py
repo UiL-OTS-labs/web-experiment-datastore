@@ -74,9 +74,7 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'main.User'
 
-#AUTHENTICATION_BACKENDS = ['api.auth.backend.ApiAuthenticationBackend']
-
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = reverse_lazy('experiments:home')
 
 LOGIN_URL = reverse_lazy('main:login')
 
