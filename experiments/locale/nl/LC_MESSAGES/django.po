@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 13:40+0000\n"
+"POT-Creation-Date: 2020-10-05 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,11 @@ msgstr "Experiment"
 #: experiments/templates/experiments/detail.html:18
 msgid "experiments:detail:info_text"
 msgstr ""
+"Hier kunt u alle gegevens bekijken die tot dusver voor dit experiment zijn "
+"verzameld. <br/> <br/> 'Download ruwe data' downloadt de gegevens zoals "
+"ontvangen, dit zijn waarschijnlijk JSON-bestanden. <br/> 'Download als CSV' "
+"zal proberen om JSON-gegevens om te zetten naar CSV-bestanden. Dit kan "
+"mislukken als een van de gegevenspunten onjuist opgemaakte gegevens bevat."
 
 #: experiments/templates/experiments/detail.html:25
 msgid "experiments:detail:access_id"
@@ -102,7 +107,7 @@ msgstr "Nieuw experiment aanmaken"
 
 #: experiments/templates/experiments/new.html:18
 msgid "experiments:new:info_text"
-msgstr ""
+msgstr " "
 
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
@@ -119,7 +124,7 @@ msgstr "Nieuw experiment"
 
 #: experiments/templates/experiments/overview.html:23
 msgid "experiments:home:info_text"
-msgstr ""
+msgstr " "
 
 #: experiments/views.py:27
 msgid "experiments:message:create:success"

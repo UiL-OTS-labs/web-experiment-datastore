@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 13:40+0000\n"
+"POT-Creation-Date: 2020-10-05 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,6 +61,10 @@ msgstr "Experiment"
 #: experiments/templates/experiments/detail.html:18
 msgid "experiments:detail:info_text"
 msgstr ""
+"Here you can view all the data collected for this experiment so far.<br/><br/"
+">'Download raw' will download the data as received, which will most likely "
+"be JSON files.<br/>'Download as CSV' will try to transform JSON data to CSV "
+"files. This might fail if one of the data-points has malformed data."
 
 #: experiments/templates/experiments/detail.html:25
 msgid "experiments:detail:access_id"
@@ -102,7 +106,7 @@ msgstr "Create new experiment"
 
 #: experiments/templates/experiments/new.html:18
 msgid "experiments:new:info_text"
-msgstr ""
+msgstr " "
 
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
