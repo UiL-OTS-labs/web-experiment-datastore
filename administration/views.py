@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.views import generic
 import braces.views as braces
 
@@ -10,12 +11,17 @@ class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
     model = Experiment
 
 
-class LDAPConfigView(braces.StaffuserRequiredMixin, generic.TemplateView):
+class LDAPConfigView(braces.StaffuserRequiredMixin, generic.View):
     template_name = 'administration/ldap.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, **kwargs):
+        response = HttpResponse(
+            generate_ldap_config(),
+            content_type="text/plain",
+        )
 
-        context['content'] = generate_ldap_config()
+        filename = "webdav-experiment-shares.conf"
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(
+            filename)
 
-        return context
+        return response
