@@ -25,7 +25,7 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
             experiment,
             lambda dp, zf: zf.writestr(
                 str(dp.pk) + '.csv',
-                _flatten_json(dp.data).read()
+                _flatten_json(dp.data)
             )
         )
 
