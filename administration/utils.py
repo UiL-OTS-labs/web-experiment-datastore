@@ -1,4 +1,6 @@
 from django.conf import settings
+from uil.core.utils.mail import send_template_email
+
 from experiments.models import Experiment
 
 TEMPLATE = """
@@ -25,7 +27,7 @@ Alias /{folder} {web_root}{folder}
 def generate_ldap_config() -> str:
     config = ""
 
-    for experiment in Experiment.objects.all():
+    for experiment in Experiment.objects.filter(show_in_ldap_config=True):
         user_string = " ".join(
             [user.username for user in experiment.users.all()]
         )
@@ -39,3 +41,29 @@ def generate_ldap_config() -> str:
         )
 
     return config
+
+
+def approve_experiment(experiment: Experiment) -> None:
+    experiment.approved = True
+    experiment.save()
+
+    sent_confirmation_email(experiment)
+
+
+def sent_confirmation_email(experiment: Experiment) -> None:
+    recipient_list = [user.email for user in experiment.users.all()]
+
+    # Add lab-staff as well, so the others know this experiment has been
+    # approved.
+    recipient_list.append(settings.LABSTAFF_EMAIL)
+
+    send_template_email(
+        recipient_list,
+        "Your experiment has been approved",
+        "administration/mail/experiment_approved",
+        {
+            "experiment": experiment,
+        },
+        from_email=settings.LABSTAFF_EMAIL,
+        language='en',
+    )

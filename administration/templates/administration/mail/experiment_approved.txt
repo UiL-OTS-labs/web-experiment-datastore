@@ -1,0 +1,14 @@
+Dear researcher,
+
+Your experiment ({{ experiment.title }}) has been approved! You will now be able
+to (let jsPsych) upload data into the application. You can view the details of
+this experiment here:
+{% url 'experiments:detail' experiment.pk %}
+
+Additionally, a folder has been created on our server. You can find the details
+on how to access this folder on the details page linked above.
+
+Kind regards,
+the UiL OTS Labs staff
+
+This mail was automatically generated.

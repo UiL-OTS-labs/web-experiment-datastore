@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 09:09+0000\n"
+"POT-Creation-Date: 2020-10-07 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,23 +55,35 @@ msgstr ""
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/models.py:42
+#: experiments/models.py:43
 msgid "experiments:models:experiment:title"
 msgstr "Title"
 
-#: experiments/models.py:46
+#: experiments/models.py:47
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:52
+#: experiments/models.py:53
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
-#: experiments/models.py:65
+#: experiments/models.py:58
+msgid "experiments:models:experiment:approved"
+msgstr "Approved"
+
+#: experiments/models.py:63
+msgid "experiments:models:experiment:show_in_ldap_config"
+msgstr "In LDAP config"
+
+#: experiments/models.py:69
+msgid "experiments:detail:awaiting_approval"
+msgstr "Awaiting approval"
+
+#: experiments/models.py:86
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:69
+#: experiments/models.py:90
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
@@ -143,44 +155,48 @@ msgstr "Experiment details"
 msgid "experiments:global:edit"
 msgstr "Edit"
 
-#: experiments/templates/experiments/detail.html:29
+#: experiments/templates/experiments/detail.html:30
 msgid "experiments:detail:access_id"
 msgstr "Access ID"
 
-#: experiments/templates/experiments/detail.html:37
+#: experiments/templates/experiments/detail.html:49
 msgid "experiments:detail:webexp_location"
 msgstr "Location"
 
-#: experiments/templates/experiments/detail.html:45
+#: experiments/templates/experiments/detail.html:59
+msgid "experiments:detail:webdav_location"
+msgstr "Webdav share"
+
+#: experiments/templates/experiments/detail.html:68
 msgid "experiments:detail:researchers"
 msgstr "Researchers"
 
-#: experiments/templates/experiments/detail.html:60
-#: experiments/templates/experiments/detail.html:102
+#: experiments/templates/experiments/detail.html:83
+#: experiments/templates/experiments/detail.html:125
 #: experiments/templates/experiments/overview.html:61
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
-#: experiments/templates/experiments/detail.html:65
-#: experiments/templates/experiments/detail.html:106
+#: experiments/templates/experiments/detail.html:88
+#: experiments/templates/experiments/detail.html:129
 #: experiments/templates/experiments/overview.html:65
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
-#: experiments/templates/experiments/detail.html:69
+#: experiments/templates/experiments/detail.html:92
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:82
+#: experiments/templates/experiments/detail.html:105
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Actions"
 
-#: experiments/templates/experiments/detail.html:98
+#: experiments/templates/experiments/detail.html:121
 msgid "experiments:global:delete_datapoint"
 msgstr "Delete"
 
-#: experiments/templates/experiments/detail.html:118
+#: experiments/templates/experiments/detail.html:141
 msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
 
@@ -224,22 +240,22 @@ msgstr " "
 msgid "experiments:global:delete_experiment"
 msgstr "Delete experiment"
 
-#: experiments/views.py:28
+#: experiments/views.py:29
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:49
+#: experiments/views.py:52
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:87
+#: experiments/views.py:91
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:97
+#: experiments/views.py:101
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:113
+#: experiments/views.py:117
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"

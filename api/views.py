@@ -40,7 +40,7 @@ class UploadView(APIView):
                 status=400  # Bad request
             )
 
-        if not experiment.state == experiment.OPEN:
+        if not experiment.state == experiment.OPEN or not experiment.approved:
             return Response({
                 "result":  "ERR_NOT_OPEN",
                 "message": "The experiment is not open to new uploads"

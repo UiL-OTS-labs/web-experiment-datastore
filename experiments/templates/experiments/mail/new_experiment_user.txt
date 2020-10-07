@@ -5,9 +5,11 @@ You can view the details here:
 {% url 'experiments:detail' experiment.pk %}
 
 We will now review your experiment and create a folder for your experiment on our server. You will receive an e-mail
-when we are done.
+when we are done. We aim to do this within 2 working days.
 
 Until your experiment has been approved, you will not be able to upload any experiment data to the application.
+
+If you have any questions, please reply to this e-mail.
 
 Kind regards,
 the UiL OTS Labs staff

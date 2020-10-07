@@ -19,19 +19,21 @@
         </p>
     </div>
     <div class="col-5">
-        {% trans 'experiments:details:detail_header' %} -
+        <strong>{% trans 'experiments:details:detail_header' %}</strong> -
         <a href="{% url 'experiments:edit' experiment.pk %}">
             {% trans 'experiments:global:edit' %}
         </a>
         <table class="mt-2">
-            <tr>
-                <td>
-                    {% trans 'experiments:detail:access_id' %}
-                </td>
-                <td>
-                    {{ experiment.access_id }}
-                </td>
-            </tr>
+            {% if experiment.approved %}
+                <tr>
+                    <td>
+                        {% trans 'experiments:detail:access_id' %}
+                    </td>
+                    <td>
+                        {{ experiment.access_id }}
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <td>
                     {% get_verbose_field_name "experiments" "Experiment" "state" %}
@@ -41,14 +43,26 @@
                     {{ experiment.get_state_display }}
                 </td>
             </tr>
-            <tr>
-                <td>
-                    {% trans 'experiments:detail:webexp_location' %}
-                </td>
-                <td>
-                    {{ webexp_host }}/{{ experiment.folder_name }}
-                </td>
-            </tr>
+            {% if experiment.approved %}
+                <tr>
+                    <td>
+                        {% trans 'experiments:detail:webexp_location' %}
+                    </td>
+                    <td>
+                        <a href="{{ webexp_host }}/{{ experiment.folder_name }}/" target="_blank">
+                            {{ webexp_host }}/{{ experiment.folder_name }}/
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {% trans 'experiments:detail:webdav_location' %}
+                    </td>
+                    <td>
+                        {{ webexp_webdav_host }}/{{ experiment.folder_name }}/
+                    </td>
+                </tr>
+            {% endif %}
             <tr>
                 <td>
                     {% trans 'experiments:detail:researchers' %}

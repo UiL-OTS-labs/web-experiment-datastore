@@ -43,6 +43,12 @@
                         {% get_verbose_field_name "experiments" "Experiment" "users" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "state" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "show_in_ldap_config" %}
+                    </th>
+                    <th>
                         {% trans 'administration:home:date_created' %}
                     </th>
                     <th>
@@ -75,6 +81,15 @@
                             {% endfor %}
                         </td>
                         <td>
+                            {{ experiment.get_state_display }}
+                        </td>
+                        <td>
+                            {{ experiment.show_in_ldap_config|yesno }}
+                            - <a href="{% url 'administration:switch_ldap_inclusion' experiment.pk %}">
+                                switch
+                            </a>
+                        </td>
+                        <td>
                             {{ experiment.date_created|date:"Y-m-d H:i" }}
                         </td>
                         <td>
@@ -84,6 +99,12 @@
                             {{ experiment.datapoint_set.last.date_added|date:"Y-m-d H:i" }}
                         </td>
                         <td>
+                            {% if not experiment.approved %}
+                                <a href="{% url 'administration:approve' experiment.pk %}">
+                                    {% trans 'administration:home:approve' %}
+                                </a>
+                                <br/>
+                            {% endif %}
                             <a href="{% url 'admin:experiments_experiment_change' experiment.pk %}">
                                 {% trans 'administration:globals:open_in_admin' %}
                             </a>

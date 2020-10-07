@@ -54,6 +54,31 @@ class Experiment(models.Model):
         auto_now_add=True
     )
 
+    approved = models.BooleanField(
+        _("experiments:models:experiment:approved"),
+        default=False,
+    )
+
+    show_in_ldap_config = models.BooleanField(
+        _("experiments:models:experiment:show_in_ldap_config"),
+        default=True,
+    )
+
+    def get_state_display(self):
+        # While not included, this is actually a state. One that overrides the
+        # state defined by researchers. That is also the reason why it's not
+        # a state itself, because it's a hassle to make sure researchers cannot
+        # override the 'awaiting approval' state.
+        if not self.approved:
+            return _('experiments:detail:awaiting_approval')
+        else:
+            for id, text in self.STATES:
+                if id == self.state:
+                    return text
+
+        # Should(TM) not happen
+        return "<UNKNOWN>"
+
     def __str__(self):
         return self.title
 

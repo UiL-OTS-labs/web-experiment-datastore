@@ -1,0 +1,32 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    New experiment created: <strong>{{ experiment.title }}</strong>
+{% endblock %}
+
+{% block content %}
+    <p>
+    Dear researcher,
+    </p>
+    <p>
+    Your experiment ({{ experiment.title }}) has been approved! You will now be able to (let jsPsych) upload data into
+    the application. You can view the details of this experiment <a href="{% url 'experiments:detail' experiment.pk %}">
+    here</a>.
+    </p>
+    <p>
+    Additionally, a folder has been created on our server. You can find the details on how to access this folder on the
+    details page linked above.
+    </p>
+    <p>
+    Kind regards,<br/>
+    the UiL OTS Labs staff
+    </p>
+{% endblock %}
+
+{% block footer %}
+    <p>
+        <i>
+        This e-mail was automatically generated.
+        </i>
+    </p>
+{% endblock %}

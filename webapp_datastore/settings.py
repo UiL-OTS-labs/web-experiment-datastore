@@ -43,6 +43,7 @@ INTERNAL_IPS = [
 
 WEBEXPERIMENT_HOST = 'web-experiments.lab.hum.uu.nl'
 WEBEXPERIMENT_WEBROOT = '/hum/web/web-experiments.lab.hum.uu.nl/htdocs/'
+WEBEXPERIMENT_WEBDAV_HOST = 'webdav.web-experiments.lab.hum.uu.nl'
 
 LABSTAFF_EMAIL = "labman.gw@uu.nl"
 

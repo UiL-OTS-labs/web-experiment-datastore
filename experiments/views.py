@@ -75,6 +75,7 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
 
         context['experiment'] = self.experiment
         context['webexp_host'] = settings.WEBEXPERIMENT_HOST
+        context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
 
         return context
 
