@@ -1,0 +1,8 @@
+Dear lab-staff,
+
+{{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in me. Could you kindly review it?
+
+Thanks!
+
+Beep boop,
+The UiL OTS web-experiment datastore

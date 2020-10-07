@@ -9,7 +9,8 @@ from django.conf import settings
 
 from .forms import ExperimentForm
 from .models import Experiment, DataPoint
-from .utils import create_download_response_zip, create_file_response_single
+from .utils import create_download_response_zip, create_file_response_single, \
+    send_new_experiment_mail
 from .mixins import UserAllowedMixin
 
 
@@ -37,6 +38,8 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         if not experiment.users.filter(pk=self.request.user.pk).exists():
             experiment.users.add(self.request.user)
             experiment.save()
+
+        send_new_experiment_mail(experiment, self.request.user)
 
         return super().form_valid(form)
 

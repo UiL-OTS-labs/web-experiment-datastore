@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.1.0-beta-3#egg=uil-django-core  # via -r requirements.in
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v1.1.0-beta-5#egg=uil-django-core  # via -r requirements.in
 asgiref==3.2.10           # via django
 babel==2.8.0              # via -r requirements.in
 backports-datetime-fromisoformat==1.0.0  # via -r requirements.in

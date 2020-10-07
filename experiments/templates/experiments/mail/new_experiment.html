@@ -1,0 +1,27 @@
+{% extends 'mail/base.html' %}
+
+{% block subtitle %}
+    New experiment created: <strong>{{ experiment.title }}</strong>
+{% endblock %}
+
+{% block content %}
+    <p>
+    Dear lab-staff,
+    </p>
+    <p>
+    {{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in me. Could you kindly review it?
+    </p>
+    <p>
+    Thanks!
+    </p>
+    <p>
+    Beep boop,
+    The UiL OTS web-experiment datastore
+    </p>
+{% endblock %}
+
+{% block footer %}
+    <i>
+    This mail is automatically generated.
+    </i>
+{% endblock %}

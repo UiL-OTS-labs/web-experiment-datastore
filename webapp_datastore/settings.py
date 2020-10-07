@@ -44,6 +44,8 @@ INTERNAL_IPS = [
 WEBEXPERIMENT_HOST = 'web-experiments.lab.hum.uu.nl'
 WEBEXPERIMENT_WEBROOT = '/hum/web/web-experiments.lab.hum.uu.nl/htdocs/'
 
+LABSTAFF_EMAIL = "labman.gw@uu.nl"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -96,6 +98,12 @@ if DEBUG and ENABLE_DEBUG_TOOLBAR:
     # toolbar enabled
     INSTALLED_APPS.append('debug_toolbar')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware', )
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 2525
+EMAIL_FROM = 'T.D.Mees@uu.nl'
 
 
 ROOT_URLCONF = 'webapp_datastore.urls'
