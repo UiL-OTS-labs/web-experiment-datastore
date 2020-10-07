@@ -10,6 +10,7 @@ from django.conf import settings
 from .forms import ExperimentForm
 from .models import Experiment, DataPoint
 from .utils import create_download_response_zip, create_file_response_single
+from .mixins import ExperimentMixin, UserAllowedMixin
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -21,7 +22,7 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
-                         generic.CreateView):
+                           generic.CreateView):
     template_name = 'experiments/new.html'
     form_class = ExperimentForm
     success_message = _('experiments:message:create:success')
@@ -40,12 +41,13 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return super().form_valid(form)
 
 
-class ExperimentEditView(braces.LoginRequiredMixin, SuccessMessageMixin,
+class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
                          generic.UpdateView):
     template_name = 'experiments/edit.html'
     form_class = ExperimentForm
     model = Experiment
     success_message = _('experiments:message:edit:success')
+    _experiment_kwargs_key = 'pk'
 
     def get_success_url(self):
         return reverse('experiments:detail', args=[self.object.pk])
@@ -61,13 +63,9 @@ class ExperimentEditView(braces.LoginRequiredMixin, SuccessMessageMixin,
         return super().form_valid(form)
 
 
-class ExperimentDetailView(braces.LoginRequiredMixin, generic.ListView):
+class ExperimentDetailView(UserAllowedMixin, generic.ListView):
     template_name = 'experiments/detail.html'
     model = DataPoint
-
-    @cached_property
-    def experiment(self):
-        return Experiment.objects.get(pk=self.kwargs['experiment'])
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -81,7 +79,12 @@ class ExperimentDetailView(braces.LoginRequiredMixin, generic.ListView):
         return self.model.objects.filter(experiment=self.experiment)
 
 
-class DownloadView(braces.LoginRequiredMixin, generic.View):
+class DeleteExperimentView(UserAllowedMixin, generic.DeleteView):
+    model = Experiment
+    _experiment_kwargs_key = 'pk'
+
+
+class DownloadView(UserAllowedMixin, generic.View):
     _formats = ['csv', 'raw']
 
     def get(self, request, experiment, file_format='csv', data_point=None):
@@ -102,7 +105,3 @@ class DownloadView(braces.LoginRequiredMixin, generic.View):
             return create_file_response_single(file_format, qs.first())
         else:
             return create_download_response_zip(file_format, self.experiment)
-
-    @cached_property
-    def experiment(self):
-        return Experiment.objects.get(pk=self.kwargs['experiment'])
