@@ -4,10 +4,20 @@ from django.conf import settings
 from .models import Experiment
 
 
-class ExperimentForm(forms.ModelForm):
+class EditExperimentForm(forms.ModelForm):
     class Meta:
         model = Experiment
-        fields = ('title', 'state', 'folder_name', 'users',)
+        fields = ('title', 'state', 'users',)
+        widgets = {
+            'title':         forms.TextInput,
+            'folder_name':         forms.TextInput,
+        }
+
+
+class CreateExperimentForm(forms.ModelForm):
+    class Meta:
+        model = Experiment
+        fields = ('title', 'folder_name', 'users',)
         widgets = {
             'title':         forms.TextInput,
             'folder_name':         forms.TextInput,

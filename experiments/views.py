@@ -11,7 +11,7 @@ from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
 from uil.core.views.mixins import DeleteSuccessMessageMixin
 
-from .forms import ExperimentForm
+from .forms import CreateExperimentForm, EditExperimentForm
 from .models import Experiment, DataPoint
 from .utils import create_download_response_zip, create_file_response_single, \
     send_new_experiment_mail
@@ -29,11 +29,17 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
                            generic.CreateView):
     template_name = 'experiments/new.html'
-    form_class = ExperimentForm
+    form_class = CreateExperimentForm
     success_message = _('experiments:message:create:success')
 
     def get_success_url(self):
         return reverse('experiments:detail', args=[self.object.pk])
+
+    def get_initial(self):
+        """Sets initial user to current User"""
+        initial = super().get_initial()
+        initial['users'] = [self.request.user]
+        return initial
 
     def form_valid(self, form):
         # Add current user to users
@@ -61,7 +67,7 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
                          generic.UpdateView):
     template_name = 'experiments/edit.html'
-    form_class = ExperimentForm
+    form_class = EditExperimentForm
     model = Experiment
     success_message = _('experiments:message:edit:success')
     _experiment_kwargs_key = 'pk'
