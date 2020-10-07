@@ -9,3 +9,6 @@ class User(AbstractUser):
             self.get_full_name(),
             self.username
         )
+
+    def __audit_repr__(self):
+        return "<{}: {}>".format(self.username, self.get_full_name())

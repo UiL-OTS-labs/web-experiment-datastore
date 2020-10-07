@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 import braces.views as braces
 
 from administration.utils import approve_experiment, generate_ldap_config
+from auditlog.enums import Event, UserType
+from auditlog.utils.log import log
 from experiments.mixins import ExperimentMixin
 from experiments.models import Experiment
 from uil.core.views.mixins import RedirectSuccessMessageMixin
@@ -20,7 +22,16 @@ class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
     model = Experiment
 
     def post(self, request, *args, **kwargs):
-        approve_experiment(self.get_object())
+        experiment = self.get_object()
+        approve_experiment(experiment)
+
+        log(
+            Event.MODIFY_DATA,
+            "Approved experiment {} ({})".format(experiment.title,
+                                                 experiment.pk),
+            self.request.user,
+            UserType.ADMIN,
+        )
 
         return HttpResponseRedirect(reverse('administration:home'))
 
@@ -34,6 +45,16 @@ class SwitchLDAPInclusionView(braces.StaffuserRequiredMixin,
     def get(self, *args, **kwargs):
         self.experiment.show_in_ldap_config = not self.experiment.show_in_ldap_config
         self.experiment.save()
+
+        log(
+            Event.MODIFY_DATA,
+            "Switched ldap inclusion for experiment {} ({})".format(
+                self.experiment.title,
+                self.experiment.pk
+            ),
+            self.request.user,
+            UserType.ADMIN,
+        )
 
         return super().get(*args, **kwargs)
 

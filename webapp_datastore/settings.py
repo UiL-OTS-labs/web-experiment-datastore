@@ -66,6 +66,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
+    'auditlog',
     'administration',
     'api',
     'experiments',
@@ -136,9 +137,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME':  os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'auditlog': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':   os.path.join(BASE_DIR, 'auditlog.sqlite3'),
+    },
 }
 
+DATABASE_ROUTERS = [
+    'webapp_datastore.db_router.DatabaseRouter',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -209,6 +217,10 @@ CSP_SCRIPT_SRC = ["'self'", ]
 CSP_FONT_SRC = ["'self'", 'data:', ]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'", 'data:', ]
+
+# Auditlog
+
+AUDIT_LOG_ENABLE = True
 
 # Django Simple Menu
 # https://django-simple-menu.readthedocs.io/en/latest/index.html

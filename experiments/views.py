@@ -7,6 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy as reverse
 from django.conf import settings
 
+from auditlog.enums import Event, UserType
+from auditlog.utils.log import log
+from uil.core.views.mixins import DeleteSuccessMessageMixin
+
 from .forms import ExperimentForm
 from .models import Experiment, DataPoint
 from .utils import create_download_response_zip, create_file_response_single, \
@@ -39,6 +43,16 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
             experiment.users.add(self.request.user)
             experiment.save()
 
+        log(
+            Event.ADD_DATA,
+            "Created experiment {} ({})".format(
+                experiment.title,
+                experiment.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
+
         send_new_experiment_mail(experiment, self.request.user)
 
         return super().form_valid(form)
@@ -63,6 +77,16 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
             experiment.users.add(self.request.user)
             experiment.save()
 
+        log(
+            Event.MODIFY_DATA,
+            "Edited experiment {} ({})".format(
+                experiment.title,
+                experiment.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
+
         return super().form_valid(form)
 
 
@@ -83,22 +107,49 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
         return self.model.objects.filter(experiment=self.experiment)
 
 
-class DeleteExperimentView(UserAllowedMixin, SuccessMessageMixin,
+class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
                            generic.DeleteView):
     model = Experiment
     _experiment_kwargs_key = 'pk'
     template_name = 'experiments/delete_experiment.html'
     success_message = _('experiments:message:delete:success')
 
+    def delete(self, request, *args, **kwargs):
+        log(
+            Event.DELETE_DATA,
+            "Deleted experiment {} ({})".format(
+                self.object.title,
+                self.object.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
+
+        return super().delete(request, *args, **kwargs)
+
     def get_success_url(self):
         return reverse('experiments:home')
 
 
-class DeleteDataPointView(UserAllowedMixin, SuccessMessageMixin,
+class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
                           generic.DeleteView):
     model = DataPoint
     template_name = 'experiments/delete_experiment.html'
     success_message = _('experiments:message:delete_datapoint:success')
+
+    def delete(self, request, *args, **kwargs):
+        log(
+            Event.DELETE_DATA,
+            "Deleted datapoint {} from experiment {} ({})".format(
+                self.object.pk,
+                self.experiment.title,
+                self.experiment.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
+
+        return super().delete(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -118,6 +169,16 @@ class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
     
     def post(self, request, experiment):
         self.experiment.datapoint_set.all().delete()
+
+        log(
+            Event.DELETE_DATA,
+            "Deleted all data from experiment {} ({})".format(
+                self.experiment.title,
+                self.experiment.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
         
         return HttpResponseRedirect(self.get_success_url())
 
@@ -144,6 +205,22 @@ class DownloadView(UserAllowedMixin, generic.View):
                 username=request.user.username
         ).exists():
             return HttpResponseForbidden()
+
+        subject = "all data"
+        if data_point:
+            subject = "datapoint {}".format(data_point)
+
+        # log action to auditlog
+        log(
+            Event.DOWNLOAD_DATA,
+            "Downloaded {} from experiment {} ({})".format(
+                subject,
+                self.experiment.title,
+                self.experiment.pk
+            ),
+            self.request.user,
+            UserType.RESEARCHER
+        )
 
         if data_point:
             qs = self.experiment.datapoint_set.filter(pk=data_point)
