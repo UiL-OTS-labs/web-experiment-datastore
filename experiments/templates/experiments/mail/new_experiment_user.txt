@@ -7,6 +7,8 @@ You can view the details here:
 We will now review your experiment and create a folder for your experiment on our server. You will receive an e-mail
 when we are done.
 
+Until your experiment has been approved, you will not be able to upload any experiment data to the application.
+
 Kind regards,
 the UiL OTS Labs staff
 
