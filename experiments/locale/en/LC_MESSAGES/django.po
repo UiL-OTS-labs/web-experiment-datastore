@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 07:55+0000\n"
+"POT-Creation-Date: 2020-10-07 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,52 @@ msgstr "Data"
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
+#: experiments/templates/experiments/delete_all_data.html:8
+#: experiments/templates/experiments/delete_all_data.html:16
+msgid "experiments:delete_all_data:header"
+msgstr "Delete all data from experiment"
+
+#: experiments/templates/experiments/delete_all_data.html:19
+msgid "experiments:delete_all_data:text"
+msgstr ""
+"Are you sure you want to delete <strong>all data</strong> from experiment "
+"'{}'?<br/><br/>This cannot be undone!"
+
+#: experiments/templates/experiments/delete_all_data.html:22
+#: experiments/templates/experiments/delete_datapoint.html:22
+#: experiments/templates/experiments/delete_experiment.html:22
+msgid "experiments:delete:cancel"
+msgstr "Cancel"
+
+#: experiments/templates/experiments/delete_all_data.html:25
+#: experiments/templates/experiments/delete_datapoint.html:25
+#: experiments/templates/experiments/delete_experiment.html:25
+msgid "experiments:delete:confirm"
+msgstr "Confirm"
+
+#: experiments/templates/experiments/delete_datapoint.html:8
+#: experiments/templates/experiments/delete_datapoint.html:16
+msgid "experiments:delete_datapoint:header"
+msgstr "Delete datapoint"
+
+#: experiments/templates/experiments/delete_datapoint.html:19
+msgid "experiments:delete_datapoint:text"
+msgstr ""
+"Are you sure you want to delete <strong>datapoint '{}'</strong> from this "
+"experiment?<br/><br/>This cannot be undone!"
+
+#: experiments/templates/experiments/delete_experiment.html:8
+#: experiments/templates/experiments/delete_experiment.html:16
+msgid "experiments:delete:header"
+msgstr "Delete experiment"
+
+#: experiments/templates/experiments/delete_experiment.html:19
+msgid "experiments:delete:text"
+msgstr ""
+"Are you sure you want to delete <strong>experiment '{}'</strong>?<br/><br/"
+"><strong>This will delete all data associated with this experiment!</"
+"strong><br/><br/>This cannot be undone!"
+
 #: experiments/templates/experiments/detail.html:8
 #: experiments/templates/experiments/detail.html:15
 msgid "experiments:detail:header"
@@ -98,14 +144,14 @@ msgid "experiments:detail:researchers"
 msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:60
-#: experiments/templates/experiments/detail.html:98
-#: experiments/templates/experiments/overview.html:56
+#: experiments/templates/experiments/detail.html:102
+#: experiments/templates/experiments/overview.html:61
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:65
-#: experiments/templates/experiments/detail.html:102
-#: experiments/templates/experiments/overview.html:60
+#: experiments/templates/experiments/detail.html:106
+#: experiments/templates/experiments/overview.html:65
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
@@ -117,6 +163,14 @@ msgstr "Uploaded data"
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Actions"
+
+#: experiments/templates/experiments/detail.html:98
+msgid "experiments:global:delete_datapoint"
+msgstr "Delete"
+
+#: experiments/templates/experiments/detail.html:118
+msgid "experiments:global:delete_all_data"
+msgstr "Delete all data"
 
 #: experiments/templates/experiments/edit.html:8
 #: experiments/templates/experiments/edit.html:15
@@ -154,10 +208,26 @@ msgstr "Create new experiment"
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/views.py:27
+#: experiments/templates/experiments/overview.html:57
+msgid "experiments:global:delete_experiment"
+msgstr "Delete experiment"
+
+#: experiments/views.py:28
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:48
+#: experiments/views.py:49
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
+
+#: experiments/views.py:87
+msgid "experiments:message:delete:success"
+msgstr "Experiment deleted!"
+
+#: experiments/views.py:97
+msgid "experiments:message:delete_datapoint:success"
+msgstr "Datapoint deleted!"
+
+#: experiments/views.py:113
+msgid "experiments:message:delete_all_data:success"
+msgstr "All data deleted!"

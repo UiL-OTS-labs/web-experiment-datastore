@@ -1,5 +1,5 @@
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404
-from django.utils.functional import cached_property
+from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404, \
+    HttpResponseRedirect
 from django.views import generic
 import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
@@ -10,7 +10,7 @@ from django.conf import settings
 from .forms import ExperimentForm
 from .models import Experiment, DataPoint
 from .utils import create_download_response_zip, create_file_response_single
-from .mixins import ExperimentMixin, UserAllowedMixin
+from .mixins import UserAllowedMixin
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
@@ -79,9 +79,53 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
         return self.model.objects.filter(experiment=self.experiment)
 
 
-class DeleteExperimentView(UserAllowedMixin, generic.DeleteView):
+class DeleteExperimentView(UserAllowedMixin, SuccessMessageMixin,
+                           generic.DeleteView):
     model = Experiment
     _experiment_kwargs_key = 'pk'
+    template_name = 'experiments/delete_experiment.html'
+    success_message = _('experiments:message:delete:success')
+
+    def get_success_url(self):
+        return reverse('experiments:home')
+
+
+class DeleteDataPointView(UserAllowedMixin, SuccessMessageMixin,
+                          generic.DeleteView):
+    model = DataPoint
+    template_name = 'experiments/delete_experiment.html'
+    success_message = _('experiments:message:delete_datapoint:success')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['experiment'] = self.experiment
+
+        return context
+
+    def get_success_url(self):
+        return reverse('experiments:detail', args=[self.experiment.pk])
+
+
+class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
+                        generic.TemplateView):
+    template_name = 'experiments/delete_all_data.html'
+    success_message = _('experiments:message:delete_all_data:success')
+    
+    def post(self, request, experiment):
+        self.experiment.datapoint_set.all().delete()
+        
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['experiment'] = self.experiment
+
+        return context
+
+    def get_success_url(self):
+        return reverse('experiments:detail', args=[self.experiment.pk])
 
 
 class DownloadView(UserAllowedMixin, generic.View):

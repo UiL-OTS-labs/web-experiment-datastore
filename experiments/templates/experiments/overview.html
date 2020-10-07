@@ -53,7 +53,7 @@
                                 {% trans 'experiments:global:edit' %}
                             </a>
                             -
-                            <a href="#">
+                            <a href="{% url 'experiments:delete_experiment' experiment.pk %}">
                                 {% trans 'experiments:global:delete_experiment' %}
                             </a>
                             <br/>

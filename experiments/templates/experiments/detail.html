@@ -94,6 +94,10 @@
                             {{ dataPoint.date_added }}
                         </td>
                         <td>
+                            <a href="{% url 'experiments:delete_datapoint' experiment.id dataPoint.pk %}">
+                                {% trans 'experiments:global:delete_datapoint' %}
+                            </a>
+                            <br/>
                             <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'raw' %}" target="_blank">
                                 {% trans 'experiments:global:download_raw' %}
                             </a>
@@ -106,7 +110,13 @@
                 {% endfor %}
             </tbody>
         </table>
-        <br/>
+    </div>
+</div>
+<div class="uu-inner-container justify-content-center mt-2 mb-5">
+    <div class="button button-colored">
+        <a href="{% url 'experiments:delete_all_data' experiment.id %}">
+            {% trans 'experiments:global:delete_all_data' %}
+        </a>
     </div>
 </div>
 {% endblock %}
