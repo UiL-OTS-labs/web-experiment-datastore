@@ -52,6 +52,7 @@
                             <a href="{% url 'experiments:edit' experiment.pk %}">
                                 {% trans 'experiments:global:edit' %}
                             </a>
+                            <br/>
                             <a href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                                 {% trans 'experiments:global:download_raw' %}
                             </a>
