@@ -13,5 +13,6 @@ def send_new_experiment_mail(experiment: Experiment, user: User) -> None:
         {
             "experiment": experiment,
             "user": user
-        }
+        },
+        language='en',
     )
