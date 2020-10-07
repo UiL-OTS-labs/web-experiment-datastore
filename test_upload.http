@@ -1,0 +1,26 @@
+POST http://localhost:8000/api/{{access_id}}/upload/
+Content-Type: text/plain
+
+[
+{"Test": "Test"},
+{"Test2": 3, "Test": "Meep"}
+]
+
+###
+POST http://localhost:8000/api/{{access_id}}/upload/
+Content-Type: text/plain
+
+[
+{"Test": "Test"}
+{"Test2": 3, "Test": "Meep"}
+]
+
+####
+POST http://localhost:8000/api/{{access_id}}/upload/
+Content-Type: text/plain
+
+{"Test":"Test"}
+
+###
+
+

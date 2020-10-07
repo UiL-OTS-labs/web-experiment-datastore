@@ -9,24 +9,32 @@ from django.utils.datastructures import OrderedSet
 from experiments.models import DataPoint, Experiment
 
 
+EXPORT_REPORT_HEADER = """EXPORT REPORT
+
+This file contains a list of all files in this experiment.
+
+It also indicates if the file was successfully added or not. If a file could 
+not be added, you can look at the raw file to see what caused it to fail.
+
+Files:
+
+"""
+
+
 def create_download_response_zip(file_format: str, experiment: Experiment) -> \
         FileResponse:
 
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp, zf: zf.writestr(
-                str(dp.pk) + '.txt',
-                dp.data
-            )
+            lambda dp: str(dp.pk) + '.txt',
+            lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp, zf: zf.writestr(
-                str(dp.pk) + '.csv',
-                _flatten_json(dp.data)
-            )
+            lambda dp: str(dp.pk) + '.csv',
+            lambda dp: _flatten_json(dp.data)
         )
 
     # Reset the buffer cursor to the start, so FileResponse reads the entire
@@ -42,13 +50,19 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
 def create_file_response_single(file_format: str, data_point: DataPoint) -> \
         HttpResponse:
 
-    if file_format == 'raw':
-        data = data_point.data
-        file_format = 'txt'
+    try:
+        if file_format == 'raw':
+            data = data_point.data
+            file_format = 'txt'
+            content_type = "text/plain"
+        else:
+            data = _flatten_json(data_point.data)
+            content_type = "text/csv"
+    except:
+        data = "Sorry, your file could not be exported. Try looking at the " \
+               "raw file to see what could mess up any conversion."
         content_type = "text/plain"
-    else:
-        data = _flatten_json(data_point.data)
-        content_type = "text/csv"
+        file_format = 'txt'
 
     response = HttpResponse(
         data,
@@ -65,12 +79,26 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
     return response
 
 
-def _create_zip(experiment: Experiment, processor: callable) -> io.BytesIO:
+def _create_zip(
+        experiment: Experiment,
+        filename_generator: callable,
+        processor: callable
+) -> io.BytesIO:
     buffer = io.BytesIO()
 
     with zipfile.ZipFile(buffer, "a", zipfile.ZIP_DEFLATED, True) as zip_file:
+        export_report = EXPORT_REPORT_HEADER
+
         for dataPoint in experiment.datapoint_set.all():
-            processor(dataPoint, zip_file)
+            filename = filename_generator(dataPoint)
+            try:
+                data = processor(dataPoint)
+                zip_file.writestr(filename, data)
+                export_report += "-{} - SUCCESS\n".format(filename)
+            except Exception as e:
+                export_report += "-{} - FAILED\n".format(filename)
+
+        zip_file.writestr("export_report.txt", export_report)
 
     return buffer
 
