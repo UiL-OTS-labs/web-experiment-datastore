@@ -12,16 +12,22 @@
     {{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in me. Could you kindly review it?
     </p>
     <p>
+    You can review all experiments <a href="{% url 'administration:home' %}">here</a>.
+    </p>
+    <p>
     Thanks!
     </p>
     <p>
-    Beep boop,
+    Beep boop,<br/>
     The UiL OTS web-experiment datastore
     </p>
 {% endblock %}
 
 {% block footer %}
-    <i>
-    This mail is automatically generated.
-    </i>
+    <p>
+        <i>
+        I am but a mere Python programme. I'm afraid I cannot respond to any replies!<br/>
+        (Don't worry, all mails to non-labstaff are a lot more professional).
+        </i>
+    </p>
 {% endblock %}

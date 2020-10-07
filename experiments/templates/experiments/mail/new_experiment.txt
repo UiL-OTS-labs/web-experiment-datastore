@@ -2,6 +2,9 @@ Dear lab-staff,
 
 {{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in me. Could you kindly review it?
 
+You can review all experiments here:
+{% url 'administration:home' %}
+
 Thanks!
 
 Beep boop,
