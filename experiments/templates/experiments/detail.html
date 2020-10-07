@@ -34,6 +34,15 @@
             </tr>
             <tr>
                 <td>
+                    {% get_verbose_field_name "experiments" "Experiment" "state" %}
+                </td>
+                <td>
+                    {# get_state_display gives us the human readable version, instead of the internal integer value #}
+                    {{ experiment.get_state_display }}
+                </td>
+            </tr>
+            <tr>
+                <td>
                     {% trans 'experiments:detail:webexp_location' %}
                 </td>
                 <td>

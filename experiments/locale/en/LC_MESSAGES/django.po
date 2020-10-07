@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 08:51+0000\n"
+"POT-Creation-Date: 2020-10-07 09:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,37 +29,49 @@ msgstr ""
 "'words' would give you the URL {}/words/. Can only contain letters, numbers, "
 "underscores and hyphens."
 
+#: experiments/models.py:15
+msgid "experiments:models:experiment:state:open"
+msgstr "Open"
+
 #: experiments/models.py:16
+msgid "experiments:models:experiment:state:closed"
+msgstr "Closed"
+
+#: experiments/models.py:22
 msgid "experiments:models:experiment:access_id"
 msgstr "Access ID"
 
-#: experiments/models.py:24
+#: experiments/models.py:30
 msgid "experiments:models:experiment:users"
 msgstr "Researchers"
 
-#: experiments/models.py:25
+#: experiments/models.py:31
 msgid "experiments:models:experiment:users:help"
 msgstr ""
 "Add any user that need access to this experiment here. Note: users should "
 "log in to this application at least once before they will show up here."
 
-#: experiments/models.py:29
+#: experiments/models.py:35
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/models.py:36
+#: experiments/models.py:42
 msgid "experiments:models:experiment:title"
 msgstr "Title"
 
-#: experiments/models.py:40
+#: experiments/models.py:46
+msgid "experiments:models:experiment:state"
+msgstr "Status"
+
+#: experiments/models.py:52
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
-#: experiments/models.py:53
+#: experiments/models.py:65
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:57
+#: experiments/models.py:69
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 

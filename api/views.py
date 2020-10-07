@@ -19,7 +19,7 @@ class UploadView(APIView):
                 "result": "ERR_NO_ID",
                 "message": "No upload_id was provided"
                 },
-                status=400
+                status=400  # Bad request
             )
 
         if not payload:
@@ -27,7 +27,7 @@ class UploadView(APIView):
                 "result":  "ERR_NO_DATA",
                 "message": "No data was provided"
                 },
-                status=400
+                status=400  # Bad request
             )
 
         experiment = self.get_experiment(access_key)
@@ -37,7 +37,15 @@ class UploadView(APIView):
                 "result":  "ERR_UNKNOWN_ID",
                 "message": "No experiment using that id was found"
                 },
-                status=400
+                status=400  # Bad request
+            )
+
+        if not experiment.state == experiment.OPEN:
+            return Response({
+                "result":  "ERR_NOT_OPEN",
+                "message": "The experiment is not open to new uploads"
+            },
+                status=403  # Forbidden
             )
 
         dp = DataPoint()

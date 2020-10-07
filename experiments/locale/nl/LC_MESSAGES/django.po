@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 08:56+0000\n"
+"POT-Creation-Date: 2020-10-07 09:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,38 +29,50 @@ msgstr ""
 "u de URL {}/words/. Mag alleen letters, cijfers,onderstrepingstekens en "
 "koppeltekens bevatten."
 
+#: experiments/models.py:15
+msgid "experiments:models:experiment:state:open"
+msgstr "Open"
+
 #: experiments/models.py:16
+msgid "experiments:models:experiment:state:closed"
+msgstr "Gesloten"
+
+#: experiments/models.py:22
 msgid "experiments:models:experiment:access_id"
 msgstr "Toegang ID"
 
-#: experiments/models.py:24
+#: experiments/models.py:30
 msgid "experiments:models:experiment:users"
 msgstr "Onderzoekers"
 
-#: experiments/models.py:25
+#: experiments/models.py:31
 msgid "experiments:models:experiment:users:help"
 msgstr ""
 "Voeg alle onderzoekers toe die toegang moeten hebben tot dit experiment. "
 "Onderzoekers moeten minimaal 1 keer ingelogd hebben in deze applicatie "
 "voordat ze hier zichtbaar worden."
 
-#: experiments/models.py:29
+#: experiments/models.py:35
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment map"
 
-#: experiments/models.py:36
+#: experiments/models.py:42
 msgid "experiments:models:experiment:title"
 msgstr "Titel"
 
-#: experiments/models.py:40
+#: experiments/models.py:46
+msgid "experiments:models:experiment:state"
+msgstr "Status"
+
+#: experiments/models.py:52
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
-#: experiments/models.py:53
+#: experiments/models.py:65
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:57
+#: experiments/models.py:69
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
@@ -72,8 +84,8 @@ msgstr "Verwijderd alle data"
 #: experiments/templates/experiments/delete_all_data.html:19
 msgid "experiments:delete_all_data:text"
 msgstr ""
-"Weet u zeker dat u <strong> alle data </strong> uit experiment '{}' wilt verwijderen"
-"? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
+"Weet u zeker dat u <strong> alle data </strong> uit experiment '{}' wilt "
+"verwijderen? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
 
 #: experiments/templates/experiments/delete_all_data.html:22
 #: experiments/templates/experiments/delete_datapoint.html:22
@@ -94,8 +106,9 @@ msgstr "Verwijder datapunt"
 
 #: experiments/templates/experiments/delete_datapoint.html:19
 msgid "experiments:delete_datapoint:text"
-msgstr "Weet u zeker dat u <strong> datapunt '{}' </strong> uit dit experiment wilt verwijderen"
-"? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
+msgstr ""
+"Weet u zeker dat u <strong> datapunt '{}' </strong> uit dit experiment wilt "
+"verwijderen? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
 
 #: experiments/templates/experiments/delete_experiment.html:8
 #: experiments/templates/experiments/delete_experiment.html:16
@@ -105,9 +118,10 @@ msgstr "Verwijder experiment"
 #: experiments/templates/experiments/delete_experiment.html:19
 msgid "experiments:delete:text"
 msgstr ""
-"Weet u zeker dat u <strong> experiment '{}' </strong> wilt verwijderen? <br/> <br /"
-"> <strong> Hiermee worden alle gegevens verwijderd die aan dit experiment zijn gekoppeld! </"
-"strong> <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
+"Weet u zeker dat u <strong> experiment '{}' </strong> wilt verwijderen? <br/"
+"> <br /> <strong> Hiermee worden alle gegevens verwijderd die aan dit "
+"experiment zijn gekoppeld! </strong> <br/> <br/> Dit kan niet ongedaan "
+"worden gemaakt!"
 
 #: experiments/templates/experiments/detail.html:8
 #: experiments/templates/experiments/detail.html:15

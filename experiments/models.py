@@ -9,6 +9,12 @@ from main.models import User
 
 
 class Experiment(models.Model):
+    OPEN = 1
+    CLOSED = 2
+    STATES = (
+        (OPEN, _("experiments:models:experiment:state:open")),
+        (CLOSED, _("experiments:models:experiment:state:closed"))
+    )
 
     # As using UUID's as PK has some annoying implications, we just add it as
     # a separate field.
@@ -34,6 +40,12 @@ class Experiment(models.Model):
 
     title = models.TextField(
         _("experiments:models:experiment:title"),
+    )
+
+    state = models.PositiveIntegerField(
+        _("experiments:models:experiment:state"),
+        choices=STATES,
+        default=CLOSED
     )
 
     date_created = models.DateTimeField(
