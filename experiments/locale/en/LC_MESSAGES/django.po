@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 13:53+0000\n"
+"POT-Creation-Date: 2020-10-07 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,23 +33,33 @@ msgstr ""
 msgid "experiments:models:experiment:access_id"
 msgstr "Access ID"
 
-#: experiments/models.py:27
+#: experiments/models.py:24
+msgid "experiments:models:experiment:users"
+msgstr "Researchers"
+
+#: experiments/models.py:25
+msgid "experiments:models:experiment:users:help"
+msgstr ""
+"Add any user that need access to this experiment here. Note: users should "
+"log in to this application at least once before they will show up here."
+
+#: experiments/models.py:29
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/models.py:34
+#: experiments/models.py:36
 msgid "experiments:models:experiment:title"
 msgstr "Title"
 
-#: experiments/models.py:38
+#: experiments/models.py:40
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
-#: experiments/models.py:51
+#: experiments/models.py:53
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:55
+#: experiments/models.py:57
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
@@ -66,38 +76,61 @@ msgstr ""
 "be JSON files.<br/>'Download as CSV' will try to transform JSON data to CSV "
 "files. This might fail if one of the data-points has malformed data."
 
-#: experiments/templates/experiments/detail.html:25
+#: experiments/templates/experiments/detail.html:22
+msgid "experiments:details:detail_header"
+msgstr "Experiment details"
+
+#: experiments/templates/experiments/detail.html:24
+#: experiments/templates/experiments/overview.html:53
+msgid "experiments:global:edit"
+msgstr "Edit"
+
+#: experiments/templates/experiments/detail.html:29
 msgid "experiments:detail:access_id"
 msgstr "Access ID"
 
-#: experiments/templates/experiments/detail.html:33
+#: experiments/templates/experiments/detail.html:37
 msgid "experiments:detail:webexp_location"
 msgstr "Location"
 
-#: experiments/templates/experiments/detail.html:41
+#: experiments/templates/experiments/detail.html:45
 msgid "experiments:detail:researchers"
 msgstr "Researchers"
 
-#: experiments/templates/experiments/detail.html:56
-#: experiments/templates/experiments/detail.html:94
-#: experiments/templates/experiments/overview.html:53
+#: experiments/templates/experiments/detail.html:60
+#: experiments/templates/experiments/detail.html:98
+#: experiments/templates/experiments/overview.html:56
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
-#: experiments/templates/experiments/detail.html:61
-#: experiments/templates/experiments/detail.html:98
-#: experiments/templates/experiments/overview.html:57
+#: experiments/templates/experiments/detail.html:65
+#: experiments/templates/experiments/detail.html:102
+#: experiments/templates/experiments/overview.html:60
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
-#: experiments/templates/experiments/detail.html:65
+#: experiments/templates/experiments/detail.html:69
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:78
+#: experiments/templates/experiments/detail.html:82
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Actions"
+
+#: experiments/templates/experiments/edit.html:8
+#: experiments/templates/experiments/edit.html:15
+msgid "experiments:edit:header"
+msgstr "Edit experiment"
+
+#: experiments/templates/experiments/edit.html:18
+msgid "experiments:edit:info_text"
+msgstr " "
+
+#: experiments/templates/experiments/edit.html:27
+#: experiments/templates/experiments/new.html:27
+msgid "experiments:globals:save"
+msgstr "Save"
 
 #: experiments/templates/experiments/new.html:8
 #: experiments/templates/experiments/new.html:15
@@ -107,10 +140,6 @@ msgstr "Create new experiment"
 #: experiments/templates/experiments/new.html:18
 msgid "experiments:new:info_text"
 msgstr " "
-
-#: experiments/templates/experiments/new.html:27
-msgid "experiments:globals:save"
-msgstr "Save"
 
 #: experiments/templates/experiments/overview.html:8
 #: experiments/templates/experiments/overview.html:20
@@ -128,3 +157,7 @@ msgstr " "
 #: experiments/views.py:27
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
+
+#: experiments/views.py:48
+msgid "experiments:message:edit:success"
+msgstr "Experiment updated!"

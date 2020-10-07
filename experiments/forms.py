@@ -7,7 +7,7 @@ from .models import Experiment
 class ExperimentForm(forms.ModelForm):
     class Meta:
         model = Experiment
-        fields = ('title', 'folder_name')
+        fields = ('title', 'folder_name', 'users')
         widgets = {
             'title':         forms.TextInput,
             'folder_name':         forms.TextInput,

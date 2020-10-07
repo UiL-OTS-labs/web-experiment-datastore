@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 13:53+0000\n"
+"POT-Creation-Date: 2020-10-07 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,23 +33,34 @@ msgstr ""
 msgid "experiments:models:experiment:access_id"
 msgstr "Toegang ID"
 
-#: experiments/models.py:27
+#: experiments/models.py:24
+msgid "experiments:models:experiment:users"
+msgstr "Onderzoekers"
+
+#: experiments/models.py:25
+msgid "experiments:models:experiment:users:help"
+msgstr ""
+"Voeg alle onderzoekers toe die toegang moeten hebben tot dit experiment. "
+"Onderzoekers moeten minimaal 1 keer ingelogd hebben in deze applicatie "
+"voordat ze hier zichtbaar worden."
+
+#: experiments/models.py:29
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment map"
 
-#: experiments/models.py:34
+#: experiments/models.py:36
 msgid "experiments:models:experiment:title"
 msgstr "Titel"
 
-#: experiments/models.py:38
+#: experiments/models.py:40
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
-#: experiments/models.py:51
+#: experiments/models.py:53
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:55
+#: experiments/models.py:57
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
@@ -67,38 +78,61 @@ msgstr ""
 "zal proberen om JSON-gegevens om te zetten naar CSV-bestanden. Dit kan "
 "mislukken als een van de gegevenspunten onjuist opgemaakte gegevens bevat."
 
-#: experiments/templates/experiments/detail.html:25
+#: experiments/templates/experiments/detail.html:22
+msgid "experiments:details:detail_header"
+msgstr "Experiment details"
+
+#: experiments/templates/experiments/detail.html:24
+#: experiments/templates/experiments/overview.html:53
+msgid "experiments:global:edit"
+msgstr "Wijzig"
+
+#: experiments/templates/experiments/detail.html:29
 msgid "experiments:detail:access_id"
 msgstr "Toegang ID"
 
-#: experiments/templates/experiments/detail.html:33
+#: experiments/templates/experiments/detail.html:37
 msgid "experiments:detail:webexp_location"
 msgstr "Locatie"
 
-#: experiments/templates/experiments/detail.html:41
+#: experiments/templates/experiments/detail.html:45
 msgid "experiments:detail:researchers"
 msgstr "Onderzoekers"
 
-#: experiments/templates/experiments/detail.html:56
-#: experiments/templates/experiments/detail.html:94
-#: experiments/templates/experiments/overview.html:53
+#: experiments/templates/experiments/detail.html:60
+#: experiments/templates/experiments/detail.html:98
+#: experiments/templates/experiments/overview.html:56
 msgid "experiments:global:download_raw"
 msgstr "Download ruwe data"
 
-#: experiments/templates/experiments/detail.html:61
-#: experiments/templates/experiments/detail.html:98
-#: experiments/templates/experiments/overview.html:57
+#: experiments/templates/experiments/detail.html:65
+#: experiments/templates/experiments/detail.html:102
+#: experiments/templates/experiments/overview.html:60
 msgid "experiments:global:download_csv"
 msgstr "Download data als CSV"
 
-#: experiments/templates/experiments/detail.html:65
+#: experiments/templates/experiments/detail.html:69
 msgid "experiments:detail:data_header"
 msgstr "Opgeslagen data"
 
-#: experiments/templates/experiments/detail.html:78
+#: experiments/templates/experiments/detail.html:82
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Acties"
+
+#: experiments/templates/experiments/edit.html:8
+#: experiments/templates/experiments/edit.html:15
+msgid "experiments:edit:header"
+msgstr "Experiment wijzigen"
+
+#: experiments/templates/experiments/edit.html:18
+msgid "experiments:edit:info_text"
+msgstr " "
+
+#: experiments/templates/experiments/edit.html:27
+#: experiments/templates/experiments/new.html:27
+msgid "experiments:globals:save"
+msgstr "Opslaan"
 
 #: experiments/templates/experiments/new.html:8
 #: experiments/templates/experiments/new.html:15
@@ -108,10 +142,6 @@ msgstr "Nieuw experiment aanmaken"
 #: experiments/templates/experiments/new.html:18
 msgid "experiments:new:info_text"
 msgstr " "
-
-#: experiments/templates/experiments/new.html:27
-msgid "experiments:globals:save"
-msgstr "Opslaan"
 
 #: experiments/templates/experiments/overview.html:8
 #: experiments/templates/experiments/overview.html:20
@@ -129,3 +159,7 @@ msgstr " "
 #: experiments/views.py:27
 msgid "experiments:message:create:success"
 msgstr "Experiment aangemaakt!"
+
+#: experiments/views.py:48
+msgid "experiments:message:edit:success"
+msgstr "Experiment gewijzigd!"

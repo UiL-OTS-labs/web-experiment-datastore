@@ -1,6 +1,6 @@
 from django.core.validators import RegexValidator
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 import uuid
 
 from uil.core.fields import EncryptedTextField
@@ -20,7 +20,9 @@ class Experiment(models.Model):
     )
 
     users = models.ManyToManyField(
-        User
+        User,
+        verbose_name=_("experiments:models:experiment:users"),
+        help_text=_("experiments:models:experiment:users:help"),
     )
 
     folder_name = models.TextField(

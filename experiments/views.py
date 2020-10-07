@@ -21,19 +21,42 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
-                           generic.CreateView):
+                         generic.CreateView):
     template_name = 'experiments/new.html'
     form_class = ExperimentForm
     success_message = _('experiments:message:create:success')
 
     def get_success_url(self):
-        return reverse('experiments:home')
+        return reverse('experiments:detail', args=[self.object.pk])
 
     def form_valid(self, form):
         # Add current user to users
         experiment = form.save()
-        experiment.users.add(self.request.user)
-        experiment.save()
+
+        if not experiment.users.filter(pk=self.request.user.pk).exists():
+            experiment.users.add(self.request.user)
+            experiment.save()
+
+        return super().form_valid(form)
+
+
+class ExperimentEditView(braces.LoginRequiredMixin, SuccessMessageMixin,
+                         generic.UpdateView):
+    template_name = 'experiments/edit.html'
+    form_class = ExperimentForm
+    model = Experiment
+    success_message = _('experiments:message:edit:success')
+
+    def get_success_url(self):
+        return reverse('experiments:detail', args=[self.object.pk])
+
+    def form_valid(self, form):
+        # Add current user to users
+        experiment = form.save()
+
+        if not experiment.users.filter(pk=self.request.user.pk).exists():
+            experiment.users.add(self.request.user)
+            experiment.save()
 
         return super().form_valid(form)
 

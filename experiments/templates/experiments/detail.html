@@ -19,7 +19,11 @@
         </p>
     </div>
     <div class="col-5">
-        <table>
+        {% trans 'experiments:details:detail_header' %} -
+        <a href="{% url 'experiments:edit' experiment.pk %}">
+            {% trans 'experiments:global:edit' %}
+        </a>
+        <table class="mt-2">
             <tr>
                 <td>
                     {% trans 'experiments:detail:access_id' %}
