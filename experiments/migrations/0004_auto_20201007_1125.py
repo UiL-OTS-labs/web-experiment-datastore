@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='experiment',
             name='folder_name',
-            field=models.TextField(unique=True, validators=[django.core.validators.RegexValidator('[a-zA-Z0-9\\-_]*')], verbose_name='experiments:models:experiment:folder_name'),
+            field=models.TextField(validators=[django.core.validators.RegexValidator('[a-zA-Z0-9\\-_]*')], verbose_name='experiments:models:experiment:folder_name'),
         ),
     ]

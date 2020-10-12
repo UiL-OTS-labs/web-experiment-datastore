@@ -33,7 +33,6 @@ class Experiment(models.Model):
 
     folder_name = models.TextField(
         _("experiments:models:experiment:folder_name"),
-        unique=True,
         validators=[
             RegexValidator(r"[a-zA-Z0-9\-_]*")
         ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 14:22+0000\n"
+"POT-Creation-Date: 2020-10-12 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms.py:29
+#: experiments/forms.py:31
 msgid "experiments:forms:folder_name"
 msgstr "Experiment map"
 
-#: experiments/forms.py:31
+#: experiments/forms.py:33
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:'words' geeft "
 "u de URL {}/words/. Mag alleen letters, cijfers,onderstrepingstekens en "
 "koppeltekens bevatten."
+
+#: experiments/forms.py:42
+msgid "experiments:forms:create:duplicate_folder"
+msgstr "Een ander experiment gebruikt deze naam al."
 
 #: experiments/models.py:15
 msgid "experiments:models:experiment:state:open"
@@ -56,35 +60,35 @@ msgstr ""
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment map"
 
-#: experiments/models.py:43
+#: experiments/models.py:42
 msgid "experiments:models:experiment:title"
 msgstr "Titel"
 
-#: experiments/models.py:47
+#: experiments/models.py:46
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:53
+#: experiments/models.py:52
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
-#: experiments/models.py:58
+#: experiments/models.py:57
 msgid "experiments:models:experiment:approved"
 msgstr "Goedgekeurd"
 
-#: experiments/models.py:63
+#: experiments/models.py:62
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:73
+#: experiments/models.py:72
 msgid "experiments:detail:awaiting_approval"
 msgstr "Wacht op goedkeuring"
 
-#: experiments/models.py:91
+#: experiments/models.py:90
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:95
+#: experiments/models.py:94
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
@@ -170,36 +174,36 @@ msgstr "Locatie"
 msgid "experiments:detail:webdav_location"
 msgstr "WebDav share"
 
-#: experiments/templates/experiments/detail.html:68
+#: experiments/templates/experiments/detail.html:71
 msgid "experiments:detail:researchers"
 msgstr "Onderzoekers"
 
-#: experiments/templates/experiments/detail.html:83
-#: experiments/templates/experiments/detail.html:125
+#: experiments/templates/experiments/detail.html:86
+#: experiments/templates/experiments/detail.html:128
 #: experiments/templates/experiments/overview.html:61
 msgid "experiments:global:download_raw"
 msgstr "Download ruwe data"
 
-#: experiments/templates/experiments/detail.html:88
-#: experiments/templates/experiments/detail.html:129
+#: experiments/templates/experiments/detail.html:91
+#: experiments/templates/experiments/detail.html:132
 #: experiments/templates/experiments/overview.html:65
 msgid "experiments:global:download_csv"
 msgstr "Download data als CSV"
 
-#: experiments/templates/experiments/detail.html:92
+#: experiments/templates/experiments/detail.html:95
 msgid "experiments:detail:data_header"
 msgstr "Opgeslagen data"
 
-#: experiments/templates/experiments/detail.html:105
+#: experiments/templates/experiments/detail.html:108
 #: experiments/templates/experiments/overview.html:35
 msgid "experiments:global:actions"
 msgstr "Acties"
 
-#: experiments/templates/experiments/detail.html:121
+#: experiments/templates/experiments/detail.html:124
 msgid "experiments:global:delete_datapoint"
 msgstr "Verwijder"
 
-#: experiments/templates/experiments/detail.html:141
+#: experiments/templates/experiments/detail.html:144
 msgid "experiments:global:delete_all_data"
 msgstr "Verwijder alle data"
 

@@ -1,6 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from rest_framework.exceptions import ValidationError
+
 from .models import Experiment
 
 
@@ -30,3 +32,14 @@ class CreateExperimentForm(forms.ModelForm):
         self.fields['folder_name'].help_text = _(
             "experiments:forms:folder_name:help"
         ).format(settings.WEBEXPERIMENT_HOST)
+
+    def clean_folder_name(self):
+        data = self.cleaned_data['folder_name']
+
+        if Experiment.objects.filter(folder_name=data).exists():
+            self.add_error(
+                'folder_name',
+                _('experiments:forms:create:duplicate_folder')
+            )
+
+        return data
