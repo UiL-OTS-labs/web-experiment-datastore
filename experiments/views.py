@@ -121,11 +121,12 @@ class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
     success_message = _('experiments:message:delete:success')
 
     def delete(self, request, *args, **kwargs):
+        object = self.get_object()
         log(
             Event.DELETE_DATA,
             "Deleted experiment {} ({})".format(
-                self.object.title,
-                self.object.pk
+                object.title,
+                object.pk
             ),
             self.request.user,
             UserType.RESEARCHER
