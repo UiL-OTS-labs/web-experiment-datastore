@@ -32,6 +32,9 @@
                         {% get_verbose_field_name "experiments" "Experiment" "title" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "access_id" %}
+                    </th>
+                    <th>
                         {% trans 'experiments:global:actions' %}
                     </th>
                 </tr>
@@ -47,6 +50,9 @@
                             <a href="{% url 'experiments:detail' experiment.pk %}">
                                 {{ experiment }}
                             </a>
+                        </td>
+                        <td>
+                            {{ experiment.access_id }}
                         </td>
                         <td>
                             <a href="{% url 'experiments:edit' experiment.pk %}">
