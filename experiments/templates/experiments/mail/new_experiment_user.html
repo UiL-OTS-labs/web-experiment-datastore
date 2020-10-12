@@ -10,7 +10,7 @@
     </p>
     <p>
     {{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in our web-experiment datastore.
-    You can view the details <a href="{% url 'experiments:detail' experiment.pk %}">here</a>.
+    You can view the details <a href="{{ link }}">here</a>.
     </p>
     <p>
     We will now review your experiment and create a folder for your experiment on our server. You will receive an e-mail

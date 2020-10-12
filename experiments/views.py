@@ -59,7 +59,7 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
             UserType.RESEARCHER
         )
 
-        send_new_experiment_mail(experiment, self.request.user)
+        send_new_experiment_mail(experiment, self.request.user, self.request)
 
         return super().form_valid(form)
 

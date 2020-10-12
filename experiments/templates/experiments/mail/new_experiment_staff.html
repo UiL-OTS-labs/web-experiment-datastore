@@ -12,7 +12,7 @@
     {{ user.get_full_name }} has created a new experiment ({{ experiment.title }}) in me. Could you kindly review it?
     </p>
     <p>
-    You can review all experiments <a href="{% url 'administration:home' %}">here</a>.
+    You can review all experiments <a href="{{ link }}">here</a>.
     </p>
     <p>
     Thanks!

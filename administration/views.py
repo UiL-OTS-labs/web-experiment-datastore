@@ -23,7 +23,7 @@ class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
 
     def post(self, request, *args, **kwargs):
         experiment = self.get_object()
-        approve_experiment(experiment)
+        approve_experiment(experiment, self.request)
 
         log(
             Event.MODIFY_DATA,

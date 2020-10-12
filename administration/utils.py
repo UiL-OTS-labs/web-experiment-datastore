@@ -1,4 +1,6 @@
 from django.conf import settings
+from django.urls import reverse
+
 from uil.core.utils.mail import send_template_email
 
 from experiments.models import Experiment
@@ -43,14 +45,14 @@ def generate_ldap_config() -> str:
     return config
 
 
-def approve_experiment(experiment: Experiment) -> None:
+def approve_experiment(experiment: Experiment, request) -> None:
     experiment.approved = True
     experiment.save()
 
-    sent_confirmation_email(experiment)
+    sent_confirmation_email(experiment, request)
 
 
-def sent_confirmation_email(experiment: Experiment) -> None:
+def sent_confirmation_email(experiment: Experiment, request) -> None:
     recipient_list = [user.email for user in experiment.users.all()]
 
     # Add lab-staff as well, so the others know this experiment has been
@@ -63,6 +65,9 @@ def sent_confirmation_email(experiment: Experiment) -> None:
         "administration/mail/experiment_approved",
         {
             "experiment": experiment,
+            "link": request.build_absolute_uri(
+                reverse('experiments:detail', args=[experiment.pk])
+            ),
         },
         from_email=settings.LABSTAFF_EMAIL,
         language='en',
