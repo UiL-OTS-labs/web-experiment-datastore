@@ -59,7 +59,10 @@
                         {% trans 'experiments:detail:webdav_location' %}
                     </td>
                     <td>
-                        {{ webexp_webdav_host }}/{{ experiment.folder_name }}/
+                        {{ webexp_webdav_host }}/{{ experiment.folder_name }}/ -
+                        <a href="{% url 'main:help' %}#collapse-webdav">
+                            Help
+                        </a>
                     </td>
                 </tr>
             {% endif %}

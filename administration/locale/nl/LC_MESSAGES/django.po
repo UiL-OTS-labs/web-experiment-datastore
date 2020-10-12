@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 13:25+0000\n"
+"POT-Creation-Date: 2020-10-07 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,6 @@ msgstr "Keur goed"
 msgid "administration:globals:open_in_admin"
 msgstr "Bewerk"
 
-#: administration/views.py:32
+#: administration/views.py:43
 msgid "administration:messages:switched_ldap_inclusion"
 msgstr "Switched ldap inclusion"

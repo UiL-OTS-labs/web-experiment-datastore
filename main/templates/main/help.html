@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+{% load static %}
+
+{% block header_title %}
+    {% trans 'main:help:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block html_head %}
+    <script src="{% static 'main/js/help.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'main:help:header' %}
+        </h1>
+        <p>
+            {% trans 'main:help:info_text' %}
+        </p>
+        <div class="panel-group uu-panel mt-4">
+            {% include 'main/help_parts/general.html' %}
+            {% include 'main/help_parts/webdav.html' %}
+            {% include 'main/help_parts/developer.html' %}
+            {% include 'main/help_parts/faq.html' %}
+        </div>
+        <br/>
+    </div>
+</div>
+{% endblock %}

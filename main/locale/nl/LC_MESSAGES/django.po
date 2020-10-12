@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 13:25+0000\n"
+"POT-Creation-Date: 2020-10-07 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,14 +31,18 @@ msgid "mainmenu:experiments"
 msgstr "Mijn Experimenten"
 
 #: main/menus.py:22
+msgid "mainmenu:help"
+msgstr "Help"
+
+#: main/menus.py:28
 msgid "mainmenu:administration"
 msgstr "Administratie"
 
-#: main/menus.py:28
+#: main/menus.py:34
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:33 main/templates/base/login_header.html:7
+#: main/menus.py:39 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
 
@@ -55,6 +59,30 @@ msgstr "Web-experiment data opslag"
 #: main/templates/base/site_title.html:5
 msgid "site:name"
 msgstr "Web-experiment datastore"
+
+#: main/templates/main/help.html:8 main/templates/main/help.html:15
+msgid "main:help:header"
+msgstr "Help"
+
+#: main/templates/main/help.html:18
+msgid "main:help:info_text"
+msgstr "Op deze pagina hebben staat informatie om te helpen bij het gebruik van deze applicatie. Helaas is deze pagina in het Engels."
+
+#: main/templates/main/help_parts/developer.html:7
+msgid "main:help:developer:header"
+msgstr "(Developer) Data uploaden vanuit jsPsych"
+
+#: main/templates/main/help_parts/faq.html:7
+msgid "main:help:faq:header"
+msgstr "Veel gestelde vragen"
+
+#: main/templates/main/help_parts/general.html:7
+msgid "main:help:general:header"
+msgstr "Algemeen"
+
+#: main/templates/main/help_parts/webdav.html:7
+msgid "main:help:webdav:header"
+msgstr "Toegang tot je experiment map"
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

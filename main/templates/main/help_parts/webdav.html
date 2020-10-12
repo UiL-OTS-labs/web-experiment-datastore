@@ -1,0 +1,114 @@
+{% load i18n %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-webdav">
+                {% trans 'main:help:webdav:header' %}
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-webdav" class="panel-collapse collapse">
+        <div class="panel-body">
+            <p>
+                To host your web-experiment, we provide a folder on our
+                <i>hosting server</i>. To upload your experiment, you have to
+                connect to the WebDav share for your experiment.
+            </p>
+            <p>
+                You can find the location of your share on the details page of
+                your experiment.
+            </p>
+            <h3>On Windows</h3>
+            <ol>
+                <li>
+                    Start file explorer
+                </li>
+                <li>
+                    Right-click Computer > Map Network Drive
+                </li>
+                <li>
+                    Select a drive letter (e.g. Y)
+                </li>
+                <li>
+                    Insert https://{the URL listed on your experiment page}<br/>
+                    (Do not forget to add the <i>https://</i>)
+                </li>
+                <li>
+                    Uncheck Reconnect at Logon
+                </li>
+                <li>
+                    Check Connect using different credentials
+                </li>
+                <li>
+                    Press Finish and insert Solis-ID credentials
+                </li>
+            </ol>
+            <p>
+                You should now have access to your folder. Upload your experiment by copying the files to this folder.
+                Make sure your experiment's main HTML file is called <i>index.html</i>!
+            </p>
+            <h3>On macOS</h3>
+            <ol>
+                <li>
+                    Open "Finder" > "Connect to Server"
+                </li>
+                <li>
+                    Insert https://{the URL listed on your experiment page}<br/>
+                    (Do not forget to add the <i>https://</i>)
+                </li>
+                <li>
+                    Provide queried credentials (Solis-ID)
+                </li>
+            </ol>
+            <p>
+                You should now have access to your folder. Upload your experiment by copying the files to this folder.
+                Make sure your experiment's main HTML file is called <i>index.html</i>!
+            </p>
+            <h3>On Linux</h3>
+            <h4>KDE (Kubuntu, OpenSUSE)</h4>
+            <ol>
+                <li>
+                    Open Dolphin (the file manager)
+                </li>
+                <li>
+                    Select the URI bar or press CTRL+L
+                </li>
+                <li>
+                    Insert webdavs://{the URL listed on your experiment page}<br/>
+                    (Do not forget to add the <i>webdavs://</i>)
+                </li>
+                <li>
+                    Provide queried credentials (Solis-ID)
+                </li>
+            </ol>
+            <p>
+                You should now have access to your folder. Upload your experiment by copying the files to this folder.
+                Make sure your experiment's main HTML file is called <i>index.html</i>!
+            </p>
+            <h4>GNOME (Ubuntu 18.04+, Fedora)</h4>
+            <ol>
+                <li>
+                    Open Files
+                </li>
+                <li>
+                    Go to 'Other locations'
+                </li>
+                <li>
+                    Select the 'Connect to server' box
+                </li>
+                <li>
+                    Insert davs://{the URL listed on your experiment page}<br/>
+                    (Do not forget to add the <i>davs://</i>)
+                </li>
+                <li>
+                    Press connect and provide queried credentials (Solis-ID)
+                </li>
+            </ol>
+            <p>
+                You should now have access to your folder. Upload your experiment by copying the files to this folder.
+                Make sure your experiment's main HTML file is called <i>index.html</i>!
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-faq">
+                {% trans 'main:help:faq:header' %}
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-faq" class="panel-collapse collapse">
+        <div class="panel-body">
+            <strong>
+                How do I upload my web-experiment?
+            </strong>
+            <p>
+                To upload your experiment, you need to upload your experiment
+                to the web-share we have provided. See
+                <a href="{% url 'main:help' %}#collapse-webdav" target="_blank">Access your experiment folder</a>.
+            </p>
+            <strong>
+                Why can't I change the name of my folder on the hosting-server?
+            </strong>
+            <p>
+                Any changes to the name requires the lab-staff to do some manual
+                changes as well. Please
+                <a href="mailto:{{ labstaff_email }}">contact us</a> if you need
+                to get the name changed.
+            </p>
+            <strong>
+                Why are my fellow researchers not listed when trying to add them
+                to my experiment?
+            </strong>
+            <p>
+                Make sure they have logged into the application at least once.
+                Due to technical limitations, this application is not aware of
+                anyone that has not logged in.
+            </p>
+            <p>
+                If you are a teacher in a course and want to create an
+                experiment for your students, please
+                <a href="mailto:{{ labstaff_email }}">contact the lab staff</a>.
+                They will be able to do add your students in bulk to the
+                application.
+            </p>
+            <strong>
+                I just added a new researcher to my experiment, but they cannot
+                access the experiment share.
+            </strong>
+            <p>
+                Giving access to the experiment shares is a manual process.
+                Please <a href="mailto:{{ labstaff_email }}">contact us</a>
+                to update the access configuration.
+            </p>
+            <p>
+                <i>Your question not listed here? <a href="mailto:{{ labstaff_email }}">Contact us!</a></i>
+            </p>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 13:25+0000\n"
+"POT-Creation-Date: 2020-10-07 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms.py:19
+#: experiments/forms.py:29
 msgid "experiments:forms:folder_name"
 msgstr "Experiment map"
 
-#: experiments/forms.py:21
+#: experiments/forms.py:31
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:'words' geeft "
@@ -76,15 +76,15 @@ msgstr "Goedgekeurd"
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:69
+#: experiments/models.py:73
 msgid "experiments:detail:awaiting_approval"
 msgstr "Wacht op goedkeuring"
 
-#: experiments/models.py:86
+#: experiments/models.py:91
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:90
+#: experiments/models.py:95
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
@@ -243,22 +243,22 @@ msgstr " "
 msgid "experiments:global:delete_experiment"
 msgstr "Verwijder experiment"
 
-#: experiments/views.py:29
+#: experiments/views.py:33
 msgid "experiments:message:create:success"
 msgstr "Experiment aangemaakt!"
 
-#: experiments/views.py:52
+#: experiments/views.py:72
 msgid "experiments:message:edit:success"
 msgstr "Experiment gewijzigd!"
 
-#: experiments/views.py:91
+#: experiments/views.py:121
 msgid "experiments:message:delete:success"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views.py:101
+#: experiments/views.py:144
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapunt verwijderd!"
 
-#: experiments/views.py:117
+#: experiments/views.py:174
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"

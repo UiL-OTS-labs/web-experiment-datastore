@@ -1,0 +1,107 @@
+{% load i18n %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-general">
+                {% trans 'main:help:general:header' %}
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-general" class="panel-collapse collapse">
+        <div class="panel-body">
+            <p>
+                This application provides safe storage for data collected from
+                web-experiments. This guide will describe the process of
+                using this application.
+            </p>
+            <h4>Definitions</h4>
+            <dl>
+                <dt>Hosting server</dt>
+                <dd>We provide a server you can use to host your web-experiment</dd>
+                <dt>Webshare</dt>
+                <dd>To upload your experiment, we provide a so-called webshare
+                    you can mount on your PC</dd>
+            </dl>
+            <h4>Step 1: Register your experiment</h4>
+            <p>
+                On the 'My Experiments' page, click 'Create new experiment'.
+                You will be asked for some information:
+            </p>
+            <p>
+                Title: The name of your experiment<br/>
+                Experiment folder: The name of the folder you want to hold
+                your experiment on the server. <br/>
+                Researchers: everyone (including you) that should have access
+                to the data and to the experiment web-share
+            </p>
+            <p>
+                If you do not intend to use our server to host your experiment,
+                please <a href="mailto:{{ labstaff_email }}">contact us</a>.
+                This application will not accept data from experiments not
+                hosted on an approved server.
+            </p>
+            <h4>
+                Step 2: Approval
+            </h4>
+            <p>
+                Once your experiment has been created, we need to create your
+                webshare. This should take 1 to 2 working days, you will be
+                notified when we have done so.
+            </p>
+            <h4>
+                Step 3: Couple your experiment to this application
+            </h4>
+            <p>
+                When your experiment has been created, you should be able to
+                find the access ID to your experiment on the details page.
+            </p>
+            <p>
+                If you are using an experiment provided by us, it should already
+                contain the code necessary to upload the data. If not, you can
+                find it in the block called '(Developer) Uploading data from
+                jsPsych' below.
+            </p>
+            <h4>
+                Step 4: Upload your experiment
+            </h4>
+            <p>
+                You can now upload your experiment to the webshare. Details on
+                how to mount the webshare can be found in the block below.
+            </p>
+            <p>
+                Make sure the main HTML file is called <i>index.html</i>.
+                Otherwise, the server cannot find which file should be displayed
+                without explicitly adding it to the URL.
+            </p>
+            <h4>
+                Step 5: Open your experiment
+            </h4>
+            <p>
+                By default, all experiments are closed to new uploads. When you
+                are ready to sent your experiment to participants, you should
+                open it by changing it's status on the 'Edit experiment' page.
+            </p>
+            <h4>Step 6: Downloading your data</h4>
+            <p>
+                Once you've finished collecting data, you can download the data
+                on the details page.
+            </p>
+            <p>
+                It's a good idea to close your experiment at this point, so
+                no new data will be added.
+            </p>
+            <p>
+                <i>Note:</i> Some data might not be uploaded correctly, in which
+                case the transforming said data to CSV will fail. When
+                downloading all data, an export report will added to the zip
+                file. This file will report for every datapoint if transforming
+                it to CSV failed or succeeded.
+            </p>
+            <p>
+                Downloading the file as raw data should always work, allowing
+                you to see the malformed data if needed.
+            </p>
+        </div>
+    </div>
+</div>

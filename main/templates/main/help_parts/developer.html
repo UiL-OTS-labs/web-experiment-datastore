@@ -1,0 +1,48 @@
+{% load i18n %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-developer">
+                {% trans 'main:help:developer:header' %}
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-developer" class="panel-collapse collapse">
+        <div class="panel-body">
+            <p>
+                <i>This page requires some changes to your JavaScript</i>
+            </p>
+            <p>
+                To let jsPsych upload data to this application, you will need
+                to add a special function that uploads said data. Add the
+                following function to your experiment's JavaScript.
+            </p>
+            <pre>
+function saveData() {
+  let access_key = "{YOUR ACCESS KEY HERE}"
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://experiment-datastore.lab.hum.uu.nl/api/' + access_key + '/upload/');
+  xhr.setRequestHeader('Content-Type', 'text/plain'); // Don't change, server only accepts plain text
+  xhr.send(jsPsych.data.get().json());
+}
+            </pre>
+            <p>
+                Remember to replace "{YOUR ACCES KEY HERE}" with your key. This
+                can be found on the details page of your experiment, under
+                'Access ID'
+            </p>
+            <p>
+                Finally, you need to call this function at the end of your
+                experiment. This is done by added '<i>on_finish: savaData</i>'
+                to your experiment's <i>jsPsych.init</i>. For example:
+            </p>
+            <pre>
+jsPsych.init({
+  ...
+  on_finish: savaData
+})
+            </pre>
+        </div>
+    </div>
+</div>
