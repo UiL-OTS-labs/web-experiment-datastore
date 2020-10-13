@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class Event(Enum):
+    """Enum to describe the nature of the event"""
     UNCATEGORISED = 'uncategorised'
     DOWNLOAD_DATA = 'download_data'
     VIEW_DATA = 'view_data'
@@ -12,7 +13,8 @@ class Event(Enum):
 
 
 class UserType(Enum):
-    SYSTEM = 'system'
+    """Enum to describe the role of the user who created the event"""
+    SYSTEM = 'system'  # Use only when the system takes an action on it's own.
     ADMIN = 'admin'
     RESEARCHER = 'researcher'
-    UNKNOWN = 'unknown'
+    UNKNOWN = 'unknown'  # Default value, should not be used by you!

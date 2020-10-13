@@ -19,6 +19,7 @@ from .mixins import UserAllowedMixin
 
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
+    """Overview of all experiments of the current user"""
     template_name = 'experiments/overview.html'
     model = Experiment
 
@@ -28,6 +29,7 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
                            generic.CreateView):
+    """Creation view for new experiments"""
     template_name = 'experiments/new.html'
     form_class = CreateExperimentForm
     success_message = _('experiments:message:create:success')
@@ -66,6 +68,7 @@ class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
 
 class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
                          generic.UpdateView):
+    """Edit view for experiments"""
     template_name = 'experiments/edit.html'
     form_class = EditExperimentForm
     model = Experiment
@@ -97,6 +100,12 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
 
 
 class ExperimentDetailView(UserAllowedMixin, generic.ListView):
+    """Detail view for an experiment.
+
+    Uses a ListView instead of DetailView, as this allows use easier access to
+    the DataPoints in this experiment. The experiment is added manually to the
+    context.
+    """
     template_name = 'experiments/detail.html'
     model = DataPoint
 
@@ -115,6 +124,7 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
 
 class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
                            generic.DeleteView):
+    """View to delete an entire experiment"""
     model = Experiment
     _experiment_kwargs_key = 'pk'
     template_name = 'experiments/delete_experiment.html'
@@ -140,6 +150,7 @@ class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
 
 class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
                           generic.DeleteView):
+    """DeleteView for a single DataPoint"""
     model = DataPoint
     template_name = 'experiments/delete_experiment.html'
     success_message = _('experiments:message:delete_datapoint:success')
@@ -171,6 +182,13 @@ class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
 
 class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
                         generic.TemplateView):
+    """View to delete all data in an experiment.
+
+    It does not use DeleteView, as that base class cannot do bulk deletions.
+    Instead, we use the TemplateView's get method to render a template
+    containing a confirmation form. This form triggers the post method, which
+    deletes the data and redirects back to the experiment detail view.
+    """
     template_name = 'experiments/delete_all_data.html'
     success_message = _('experiments:message:delete_all_data:success')
     
@@ -201,17 +219,16 @@ class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
 
 
 class DownloadView(UserAllowedMixin, generic.View):
+    """View that downloads single, or all data in either CSV or Raw format
+
+    The decision whether to download a single or all data is made by checking
+    if a datapoint ID was provided.
+    """
     _formats = ['csv', 'raw']
 
     def get(self, request, experiment, file_format='csv', data_point=None):
         if file_format not in self._formats:
             return HttpResponseBadRequest()
-
-        # Only allow users that are attached to this experiment
-        if not self.experiment.users.filter(
-                username=request.user.username
-        ).exists():
-            return HttpResponseForbidden()
 
         subject = "all data"
         if data_point:

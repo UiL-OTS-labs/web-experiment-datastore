@@ -9,6 +9,7 @@ from main.models import User
 
 
 class Experiment(models.Model):
+    """Describes the metadata of an experiment"""
     OPEN = 1
     CLOSED = 2
     STATES = (
@@ -25,12 +26,14 @@ class Experiment(models.Model):
         editable=False
     )
 
+    # All users with access to this experiment
     users = models.ManyToManyField(
         User,
         verbose_name=_("experiments:models:experiment:users"),
         help_text=_("experiments:models:experiment:users:help"),
     )
 
+    # The desired folder name on the hosting server
     folder_name = models.TextField(
         _("experiments:models:experiment:folder_name"),
         validators=[
@@ -38,10 +41,12 @@ class Experiment(models.Model):
         ]
     )
 
+    # The human readable name of the experiment
     title = models.TextField(
         _("experiments:models:experiment:title"),
     )
 
+    # Open or closed
     state = models.PositiveIntegerField(
         _("experiments:models:experiment:state"),
         choices=STATES,
@@ -53,11 +58,13 @@ class Experiment(models.Model):
         auto_now_add=True
     )
 
+    # Experiments should be approved by staff before it can be used
     approved = models.BooleanField(
         _("experiments:models:experiment:approved"),
         default=False,
     )
 
+    # Used to exclude experiments from the Apache config
     show_in_ldap_config = models.BooleanField(
         _("experiments:models:experiment:show_in_ldap_config"),
         default=True,
@@ -83,9 +90,11 @@ class Experiment(models.Model):
 
 
 class DataPoint(models.Model):
+    """Model to hold data from a participant in an experiment"""
 
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
+    # Encrypted field for extra security
     data = EncryptedTextField(
         _("experiments:models:datapoint:data"),
     )
