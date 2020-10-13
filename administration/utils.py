@@ -27,14 +27,20 @@ Alias /{folder} {web_root}{folder}
 
 
 def generate_ldap_config() -> str:
+    """This method generates the contents of the LDAP authorization config for
+    the hosting server, using TEMPLATE
+    """
     config = ""
 
     for experiment in Experiment.objects.filter(show_in_ldap_config=True):
+        # Join all solis-id's together using a space
         user_string = " ".join(
             [user.username for user in experiment.users.all()]
         )
+        # Prepend the LDAP directive
         permission_string = "Require ldap-user {}".format(user_string)
 
+        # Format the template for this experiment
         config += TEMPLATE.format(
             name=experiment.title,
             folder=experiment.folder_name,
@@ -46,6 +52,11 @@ def generate_ldap_config() -> str:
 
 
 def approve_experiment(experiment: Experiment, request) -> None:
+    """Approves an experiment, and informs users of the approval
+
+    :param experiment: :class:`Experiment` the experiment to approve
+    :param request: Django request. Used to create an absolute URL in the mail
+    """
     experiment.approved = True
     experiment.save()
 
@@ -53,6 +64,11 @@ def approve_experiment(experiment: Experiment, request) -> None:
 
 
 def sent_confirmation_email(experiment: Experiment, request) -> None:
+    """Sends the confirmation email
+
+    :param experiment: :class:`Experiment` that was apprvoed
+    :param request: Django request. Used to create an absolute URL in the mail
+    """
     recipient_list = [user.email for user in experiment.users.all()]
 
     # Add lab-staff as well, so the others know this experiment has been
@@ -65,6 +81,9 @@ def sent_confirmation_email(experiment: Experiment, request) -> None:
         "administration/mail/experiment_approved",
         {
             "experiment": experiment,
+            # By default, reverse generates a relative url. Using
+            # build_absolute_url gives us an absolute url that actually works
+            # in mails.
             "link": request.build_absolute_uri(
                 reverse('experiments:detail', args=[experiment.pk])
             ),

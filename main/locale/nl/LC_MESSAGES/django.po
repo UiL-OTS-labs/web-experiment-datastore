@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-07 14:22+0000\n"
+"POT-Creation-Date: 2020-10-12 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,13 +60,15 @@ msgstr "Web-experiment data opslag"
 msgid "site:name"
 msgstr "Web-experiment datastore"
 
-#: main/templates/main/help.html:8 main/templates/main/help.html:15
+#: main/templates/main/help.html:9 main/templates/main/help.html:21
 msgid "main:help:header"
 msgstr "Help"
 
-#: main/templates/main/help.html:18
+#: main/templates/main/help.html:24
 msgid "main:help:info_text"
-msgstr "Op deze pagina hebben staat informatie om te helpen bij het gebruik van deze applicatie. Helaas is deze pagina in het Engels."
+msgstr ""
+"Op deze pagina hebben staat informatie om te helpen bij het gebruik van deze "
+"applicatie. Helaas is deze pagina in het Engels."
 
 #: main/templates/main/help_parts/developer.html:7
 msgid "main:help:developer:header"

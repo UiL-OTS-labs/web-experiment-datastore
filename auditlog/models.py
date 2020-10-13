@@ -8,29 +8,40 @@ import uil.core.fields as encrypted_models
 
 
 class LogEntry(models.Model):
+    """Describes an event that should be logged"""
     class Meta:
+        # Only allow additions
         default_permissions = ('add',)
 
+    # Describes the event in a code format
     event = models.TextField(
         choices=get_choices_from_enum(Event)
     )
 
+    # Human readable description of the event, should provide some more info
+    # than the event field.
     message = models.TextField(
         null=True,
         blank=True,
     )
 
+    # The user that created the event. Stored as a string to allow for
+    # more flexibility. (Using the User model would not allow system actions
+    # for example).
     user = models.TextField(
         null=True,
         blank=True,
     )
 
+    # Describes the user's role in the application
     user_type = models.TextField(
         null=True,
         blank=True,
         choices=get_choices_from_enum(UserType),
     )
 
+    # Any additional data that provides more info about the event. Accepts
+    # most Python data, as it's stored as a JSON string.
     extra = auditlog_fields.JSONField(
         null=True,
         blank=True,

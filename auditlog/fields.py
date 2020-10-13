@@ -6,6 +6,7 @@ from django.db import models
 
 
 class JSONEncoder(json.JSONEncoder):
+    """Overrides the default JSONEncoder to format dates as strings"""
     def default(self, obj):
         if isinstance(obj, datetime):
             return obj.strftime('%Y-%m-%d %H:%M:%S')
@@ -17,6 +18,7 @@ class JSONEncoder(json.JSONEncoder):
 
 
 class JSONField(models.TextField):
+    """A model field that stores it's value as a JSON string."""
     def _dumps(self, data):
         return JSONEncoder().encode(data)
 

@@ -8,6 +8,10 @@ from uil.core.utils.mail import send_template_email
 
 def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
         None:
+    """Sent a mail to the lab staff asking them to approve the experiment. In
+    addition, sent an email to the users confirming the creation of the
+    experiment.
+    """
     send_template_email(
         [settings.LABSTAFF_EMAIL],
         "New experiment",
@@ -15,6 +19,8 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
         {
             "experiment": experiment,
             "user": user,
+            # By default, reverse provides a relative URL. We need an
+            # absolute url
             "link": request.build_absolute_uri(reverse('administration:home'))
         },
         language='en',
@@ -28,6 +34,8 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
         {
             "experiment": experiment,
             "user": user,
+            # By default, reverse provides a relative URL. We need an
+            # absolute url
             "link": request.build_absolute_uri(
                 reverse('experiments:detail', args=[experiment.pk])
             )
