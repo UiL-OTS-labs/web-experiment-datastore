@@ -12,7 +12,7 @@ web experiments.
 
 # Installation
 
-For production/acceptation deployment, please see our Puppet script. 
+For production/acceptation deployment, please see our Puppet module. 
 (Hosted on our private GitLab server).
 
 Development instructions:
