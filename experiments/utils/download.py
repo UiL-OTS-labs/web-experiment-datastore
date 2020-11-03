@@ -146,7 +146,12 @@ def _flatten_json(data: str) -> str:
     # DictWriter writes a dict into a CSV, only including the columns given.
     # In addition, extrasaction is set to ignore to keep it from raising
     # exceptions when it encounters an unknown column.
-    csw_writer = csv.DictWriter(buffer, columns, extrasaction='ignore')
+    csw_writer = csv.DictWriter(
+        buffer,
+        columns,
+        extrasaction='ignore',
+        restval='NA',
+    )
 
     csw_writer.writeheader()
     csw_writer.writerows(json_data)
