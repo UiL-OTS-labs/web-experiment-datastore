@@ -91,8 +91,14 @@ class Experiment(models.Model):
 
 class DataPoint(models.Model):
     """Model to hold data from a participant in an experiment"""
+    class Meta:
+        unique_together = ['experiment', 'number']
 
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+
+    # Counter of the amount of DP's in an experiment
+    # Used to display an incrementing ID, independent from other experiments
+    number = models.PositiveIntegerField(null=False)
 
     # Encrypted field for extra security
     data = EncryptedTextField(

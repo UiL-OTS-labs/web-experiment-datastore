@@ -31,14 +31,14 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.pk) + '.txt',
+            lambda dp: str(dp.number) + '.txt',
             # Raw should just return the data of the DataPoint
             lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.pk) + '.csv',
+            lambda dp: str(dp.number) + '.csv',
             # CSV should apply _flatten_json to the data and return the result
             lambda dp: _flatten_json(dp.data)
         )
