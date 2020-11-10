@@ -148,7 +148,8 @@ def _flatten_json(data: str) -> str:
                 # If this key has no/an empty value, we want to print NA instead
                 # However, the DictWriter only adds NA if the field is missing
                 # So, we set it to NA manually
-                if not el[key]:
+                # We do an additional check to allow 'False' as a value
+                if not el[key] and not el[key] is False:
                     el[key] = EXPORT_NO_VALUE
 
     buffer = io.StringIO()
