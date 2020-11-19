@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-12 09:25+0000\n"
+"POT-Creation-Date: 2020-10-27 11:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,76 +18,76 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms.py:31
+#: experiments/forms.py:40
 msgid "experiments:forms:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/forms.py:33
+#: experiments/forms.py:42
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "How the folder containing your experiment should be named. For example, "
 "'words' would give you the URL {}/words/. Can only contain letters, numbers, "
 "underscores and hyphens."
 
-#: experiments/forms.py:42
+#: experiments/forms.py:52
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "A different experiment already uses this folder name!"
 
-#: experiments/models.py:15
+#: experiments/models.py:16
 msgid "experiments:models:experiment:state:open"
 msgstr "Open"
 
-#: experiments/models.py:16
+#: experiments/models.py:17
 msgid "experiments:models:experiment:state:closed"
 msgstr "Closed"
 
-#: experiments/models.py:22
+#: experiments/models.py:23
 msgid "experiments:models:experiment:access_id"
 msgstr "Access ID"
 
-#: experiments/models.py:30
+#: experiments/models.py:32
 msgid "experiments:models:experiment:users"
 msgstr "Researchers"
 
-#: experiments/models.py:31
+#: experiments/models.py:33
 msgid "experiments:models:experiment:users:help"
 msgstr ""
 "Add any user that need access to this experiment here. Note: users should "
 "log in to this application at least once before they will show up here."
 
-#: experiments/models.py:35
+#: experiments/models.py:38
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/models.py:42
+#: experiments/models.py:46
 msgid "experiments:models:experiment:title"
 msgstr "Title"
 
-#: experiments/models.py:46
+#: experiments/models.py:51
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:52
+#: experiments/models.py:57
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
-#: experiments/models.py:57
+#: experiments/models.py:63
 msgid "experiments:models:experiment:approved"
 msgstr "Approved"
 
-#: experiments/models.py:62
+#: experiments/models.py:69
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:72
+#: experiments/models.py:79
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:90
+#: experiments/models.py:99
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:94
+#: experiments/models.py:103
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
@@ -155,7 +155,7 @@ msgid "experiments:details:detail_header"
 msgstr "Experiment details"
 
 #: experiments/templates/experiments/detail.html:24
-#: experiments/templates/experiments/overview.html:53
+#: experiments/templates/experiments/overview.html:59
 msgid "experiments:global:edit"
 msgstr "Edit"
 
@@ -177,13 +177,13 @@ msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:86
 #: experiments/templates/experiments/detail.html:128
-#: experiments/templates/experiments/overview.html:61
+#: experiments/templates/experiments/overview.html:67
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:91
 #: experiments/templates/experiments/detail.html:132
-#: experiments/templates/experiments/overview.html:65
+#: experiments/templates/experiments/overview.html:71
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
@@ -192,7 +192,7 @@ msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
 #: experiments/templates/experiments/detail.html:108
-#: experiments/templates/experiments/overview.html:35
+#: experiments/templates/experiments/overview.html:38
 msgid "experiments:global:actions"
 msgstr "Actions"
 
@@ -240,26 +240,26 @@ msgstr "Create new experiment"
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/overview.html:57
+#: experiments/templates/experiments/overview.html:63
 msgid "experiments:global:delete_experiment"
 msgstr "Delete experiment"
 
-#: experiments/views.py:33
+#: experiments/views.py:35
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:72
+#: experiments/views.py:75
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:121
+#: experiments/views.py:131
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:144
+#: experiments/views.py:156
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:174
+#: experiments/views.py:193
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"

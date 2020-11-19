@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'corsheaders',
+    'axes',
 
     # Django extensions
     'django_extensions',
@@ -90,9 +91,15 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 if DEBUG and ENABLE_DEBUG_TOOLBAR:
@@ -206,6 +213,11 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
+AXES_LOCKOUT_TEMPLATE = 'main/login_lockout.html'
+AXES_RESET_ON_SUCCESS = True
+AXES_USE_USER_AGENT = True
+AXES_COOLOFF_TIME = 1
+
 # Django CSP
 # http://django-csp.readthedocs.io/en/latest/index.html
 CSP_REPORT_ONLY = False
@@ -217,6 +229,7 @@ CSP_SCRIPT_SRC = ["'self'", ]
 CSP_FONT_SRC = ["'self'", 'data:', ]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'", 'data:', ]
+CSP_FRAME_ANCESTORS = ["'none'", ]
 
 # Auditlog
 

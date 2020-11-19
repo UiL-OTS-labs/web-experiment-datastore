@@ -8,6 +8,7 @@ from django.utils.datastructures import OrderedSet
 
 from experiments.models import DataPoint, Experiment
 
+EXPORT_NO_VALUE = "NA"
 
 EXPORT_REPORT_HEADER = """EXPORT REPORT
 
@@ -30,14 +31,14 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.pk) + '.txt',
+            lambda dp: str(dp.number) + '.txt',
             # Raw should just return the data of the DataPoint
             lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.pk) + '.csv',
+            lambda dp: str(dp.number) + '.csv',
             # CSV should apply _flatten_json to the data and return the result
             lambda dp: _flatten_json(dp.data)
         )
@@ -140,13 +141,27 @@ def _flatten_json(data: str) -> str:
         # It should be a dict
         if isinstance(el, dict):
             for key in el.keys():
+                # Always add the key, even if the value is empty (checked
+                # later on). The column itself should at least be included
                 columns.add(key)
+
+                # If this key has no/an empty value, we want to print NA instead
+                # However, the DictWriter only adds NA if the field is missing
+                # So, we set it to NA manually
+                # We do an additional check to allow 'False' as a value
+                if not el[key] and not el[key] is False:
+                    el[key] = EXPORT_NO_VALUE
 
     buffer = io.StringIO()
     # DictWriter writes a dict into a CSV, only including the columns given.
     # In addition, extrasaction is set to ignore to keep it from raising
     # exceptions when it encounters an unknown column.
-    csw_writer = csv.DictWriter(buffer, columns, extrasaction='ignore')
+    csw_writer = csv.DictWriter(
+        buffer,
+        columns,
+        extrasaction='ignore',
+        restval=EXPORT_NO_VALUE,
+    )
 
     csw_writer.writeheader()
     csw_writer.writerows(json_data)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-12 09:25+0000\n"
+"POT-Creation-Date: 2020-10-27 11:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,15 @@ msgstr "Algemeen"
 #: main/templates/main/help_parts/webdav.html:7
 msgid "main:help:webdav:header"
 msgstr "Toegang tot je experiment map"
+
+#: main/templates/main/login_lockout.html:9
+#: main/templates/main/login_lockout.html:17
+msgid "main:login_lockout:header"
+msgstr "Te veel login pogingen"
+
+#: main/templates/main/login_lockout.html:20
+msgid "main:login_lockout:info_text"
+msgstr "Vanwege veel mislukte inlogpogingen is inloggen een uur lang uitgeschakeld voor deze computer."
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"
