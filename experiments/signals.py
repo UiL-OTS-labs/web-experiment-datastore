@@ -13,4 +13,7 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
             'date_added'
         ).last()
 
-        instance.number = last_datapoint.number + 1
+        if last_datapoint:
+            instance.number = last_datapoint.number + 1
+        else:
+            instance.number = 1
