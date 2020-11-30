@@ -81,7 +81,7 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
     # downloadable file
     filename = "{}-{}.{}".format(
         data_point.experiment.title,
-        data_point.pk,
+        data_point.number,
         file_format
     )
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
