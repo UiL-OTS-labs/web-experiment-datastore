@@ -72,7 +72,7 @@ msgstr ""
 
 #: main/templates/main/help_parts/developer.html:7
 msgid "main:help:developer:header"
-msgstr "(Developer) Data uploaden vanuit jsPsych"
+msgstr "(Developer) Data uploaden vanuit JavaScript"
 
 #: main/templates/main/help_parts/faq.html:7
 msgid "main:help:faq:header"

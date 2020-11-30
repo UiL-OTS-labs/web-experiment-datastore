@@ -11,38 +11,59 @@
     <div id="collapse-developer" class="panel-collapse collapse">
         <div class="panel-body">
             <p>
-                <i>This page requires some changes to your JavaScript</i>
+                <i>This page requires some changes to your JavaScript. Feel free
+                    to <a href="mailto:{{ labstaff_email }}">email</a> us if you
+                    need assistance.</i>
+            </p>
+            <h3>JSPsych</h3>
+            <p>
+                If you are using one of our JSPsych boilerplates, we probably
+                already have implemented this for you. Please see the
+                documentation of your boilerplate for more information.
             </p>
             <p>
-                To let jsPsych upload data to this application, you will need
-                to add a special function that uploads said data. Add the
-                following function to your experiment's JavaScript.
+                If you are building your own JSPsych experiment, you can use our
+                library. This library is also used by our boilerplates, and is
+                guaranteed to work with this application.
+            </p>
+            <p>
+                You can find out more about our
+                <a href="https://github.com/UiL-OTS-labs/jspsych-uil-utils">
+                    JSPsych utilities library at GitHub
+                </a>
+            </p>
+            <h3>Generic implementation</h3>
+            <p>
+                To let your web-experiment upload data to this application, you
+                will need to add a special function that uploads said data. Add
+                the following function to your experiment's JavaScript.
             </p>
             <pre>
-function saveData() {
+function saveData(data) {
   let access_key = "{YOUR ACCESS KEY HERE}"
   let xhr = new XMLHttpRequest();
   xhr.open('POST', 'https://experiment-datastore.lab.hum.uu.nl/api/' + access_key + '/upload/');
   xhr.setRequestHeader('Content-Type', 'text/plain'); // Don't change, server only accepts plain text
-  xhr.send(jsPsych.data.get().json());
+  xhr.send(data);
 }
             </pre>
             <p>
-                Remember to replace "{YOUR ACCES KEY HERE}" with your key. This
+                Remember to replace "{YOUR ACCESS KEY HERE}" with your key. This
                 can be found on the details page of your experiment, under
                 'Access ID'
             </p>
             <p>
                 Finally, you need to call this function at the end of your
-                experiment. This is done by added '<i>on_finish: savaData</i>'
-                to your experiment's <i>jsPsych.init</i>. For example:
+                experiment. This is done by calling `saveData` with the intended
+                data:
             </p>
             <pre>
-jsPsych.init({
-  ...
-  on_finish: savaData
-})
+saveData(experiment_data);
             </pre>
+            <p>
+                It is recommended that your data is formatted as either a plain
+                JavaScript object or a JSON string.
+            </p>
         </div>
     </div>
 </div>
