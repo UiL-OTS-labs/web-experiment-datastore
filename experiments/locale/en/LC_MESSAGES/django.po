@@ -43,7 +43,7 @@ msgstr "Closed"
 
 #: experiments/models.py:23
 msgid "experiments:models:experiment:access_id"
-msgstr "Access ID"
+msgstr "Access Key"
 
 #: experiments/models.py:32
 msgid "experiments:models:experiment:users"
@@ -161,7 +161,7 @@ msgstr "Edit"
 
 #: experiments/templates/experiments/detail.html:30
 msgid "experiments:detail:access_id"
-msgstr "Access ID"
+msgstr "Access Key"
 
 #: experiments/templates/experiments/detail.html:49
 msgid "experiments:detail:webexp_location"
