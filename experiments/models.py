@@ -109,3 +109,6 @@ class DataPoint(models.Model):
         _("experiments:models:datapoint:date_added"),
         auto_now_add=True
     )
+
+    def __str__(self):
+        return "Datapoint {}".format(self.number)
