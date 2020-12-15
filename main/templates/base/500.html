@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block header_title %}
+    {% trans '500:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h2>{% trans '500:header' %}</h2>
+        <p>
+            {% trans '500:p1' %}
+        </p>
+        <p>
+            {% trans '500:p2' %}
+        </p>
+        <ul>
+            <li>
+                {% trans '500:advice:reload' %}
+            </li>
+            <li>
+                {% trans '500:advice:wait' %}
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
