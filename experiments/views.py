@@ -159,7 +159,7 @@ class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
         log(
             Event.DELETE_DATA,
             "Deleted datapoint {} from experiment {} ({})".format(
-                self.object.pk,
+                self.get_object().pk,
                 self.experiment.title,
                 self.experiment.pk
             ),

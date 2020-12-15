@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-27 11:33+0000\n"
+"POT-Creation-Date: 2020-12-15 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,52 @@ msgstr "Log in"
 #: main/menus.py:39 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
+
+#: main/templates/base/403.html:9 main/templates/base/403.html:16
+msgid "403:header"
+msgstr "Geen toegang"
+
+#: main/templates/base/403.html:18
+msgid "403:p1"
+msgstr "Het lijkt er op dat je een pagina wilt bezoeken waar je niet bij mag."
+
+#: main/templates/base/403.html:21
+msgid "403:p2"
+msgstr "Als je denkt dat dit een fout is, neem contact op met de lab technici."
+
+#: main/templates/base/404.html:10 main/templates/base/404.html:17
+msgid "404:header"
+msgstr "Pagina niet gevonden"
+
+#: main/templates/base/404.html:19
+msgid "404:p1"
+msgstr "We kunnen de pagina waarnaar u op zoek bent niet vinden."
+
+#: main/templates/base/404.html:22
+msgid "404:p2"
+msgstr ""
+"De link waarop u hebt geklikt is mogelijk incorrect of de pagina is "
+"verplaatst."
+
+#: main/templates/base/500.html:5 main/templates/base/500.html:11
+msgid "500:header"
+msgstr "Er is iets fout gegaan"
+
+#: main/templates/base/500.html:13
+msgid "500:p1"
+msgstr "Sorry! Het lijkt er op dat wij iets fout hebben gedaan aan onze kant!"
+
+#: main/templates/base/500.html:16
+msgid "500:p2"
+msgstr "In de tussentijd is dit wat u kunt doen:"
+
+#: main/templates/base/500.html:20
+msgid "500:advice:reload"
+msgstr "<strong>De pagina verversen</strong> (dit helpt soms)"
+
+#: main/templates/base/500.html:23
+msgid "500:advice:wait"
+msgstr "<strong>Probeer het later nog een keer</strong>"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
@@ -93,7 +139,9 @@ msgstr "Te veel login pogingen"
 
 #: main/templates/main/login_lockout.html:20
 msgid "main:login_lockout:info_text"
-msgstr "Vanwege veel mislukte inlogpogingen is inloggen een uur lang uitgeschakeld voor deze computer."
+msgstr ""
+"Vanwege veel mislukte inlogpogingen is inloggen een uur lang uitgeschakeld "
+"voor deze computer."
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"

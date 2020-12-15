@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block html_head %}
+    <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block header_title %}
+    {% trans '403:header' %} - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h2>{% trans '403:header' %}</h2>
+        <p>
+            {% trans '403:p1' %}
+        </p>
+        <p>
+            {% trans '403:p2' %}
+        </p>
+    </div>
+</div>
+{% endblock %}

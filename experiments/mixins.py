@@ -22,6 +22,7 @@ class UserAllowedMixin(braces.LoginRequiredMixin, ExperimentMixin):
     """Extension of the LoginRequiredMixin which also checks if the users is
     allowed to view this experiment.
     """
+    raise_exception = True
 
     def dispatch(self, request, *args, **kwargs):
         if not self.experiment.users.filter(pk=request.user.pk).exists():

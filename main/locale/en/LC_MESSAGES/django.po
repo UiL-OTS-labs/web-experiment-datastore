@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-27 11:33+0000\n"
+"POT-Creation-Date: 2020-12-15 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,51 @@ msgstr "Log in"
 #: main/menus.py:39 main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log out"
+
+#: main/templates/base/403.html:9 main/templates/base/403.html:16
+msgid "403:header"
+msgstr "Not authorized"
+
+#: main/templates/base/403.html:18
+msgid "403:p1"
+msgstr ""
+"It looks like you are trying to access a page you are not allowed to view."
+
+#: main/templates/base/403.html:21
+msgid "403:p2"
+msgstr "If you think this is a mistake, please contact the lab technicians."
+
+#: main/templates/base/404.html:10 main/templates/base/404.html:17
+msgid "404:header"
+msgstr "Page not found"
+
+#: main/templates/base/404.html:19
+msgid "404:p1"
+msgstr "We can't seem to find the page you're looking for."
+
+#: main/templates/base/404.html:22
+msgid "404:p2"
+msgstr "The link you clicked may be broken or the page may have been moved."
+
+#: main/templates/base/500.html:5 main/templates/base/500.html:11
+msgid "500:header"
+msgstr "Something went wrong"
+
+#: main/templates/base/500.html:13
+msgid "500:p1"
+msgstr "Sorry! It looks like we made a mistake our side!"
+
+#: main/templates/base/500.html:16
+msgid "500:p2"
+msgstr "In the meantime, these are some things you can do:"
+
+#: main/templates/base/500.html:20
+msgid "500:advice:reload"
+msgstr "<strong>Reload the page</strong> (this might help)"
+
+#: main/templates/base/500.html:23
+msgid "500:advice:wait"
+msgstr "<strong>Try again later</strong>"
 
 #: main/templates/base/login_header.html:6
 msgid "site:header:login"
@@ -93,7 +138,9 @@ msgstr "Login disabled"
 
 #: main/templates/main/login_lockout.html:20
 msgid "main:login_lockout:info_text"
-msgstr "Due to many failed login attempts, logging in has been disabled for this computer for one hour."
+msgstr ""
+"Due to many failed login attempts, logging in has been disabled for this "
+"computer for one hour."
 
 #: main/templates/registration/logged_out.html:8
 msgid "main:logged_out_title"
