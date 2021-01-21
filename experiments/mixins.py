@@ -26,13 +26,12 @@ class UserAllowedMixin(braces.LoginRequiredMixin, ExperimentMixin):
     raise_exception = True
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.experiment.users.filter(pk=request.user.pk).exists():
+        if not request.user.is_authenticated:
+            redirect_to_login(request.get_full_path(),
+                              self.get_login_url(),
+                              self.get_redirect_field_name())
 
-            if request.user.is_authenticated:
-                return self.handle_no_permission(request)
-            else:
-                redirect_to_login(request.get_full_path(),
-                                  self.get_login_url(),
-                                  self.get_redirect_field_name())
+        if not self.experiment.users.filter(pk=request.user.pk).exists():
+            return self.handle_no_permission(request)
 
         return super().dispatch(request, *args, **kwargs)
