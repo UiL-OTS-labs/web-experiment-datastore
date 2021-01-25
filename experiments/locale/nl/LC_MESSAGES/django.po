@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-15 12:06+0000\n"
+"POT-Creation-Date: 2021-01-25 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,8 @@ msgid "experiments:forms:folder_name:help"
 msgstr ""
 "Hoe de map met uw experiment moet worden genoemd. Bijvoorbeeld:'words' geeft "
 "u de URL {}/words/. Mag alleen letters, cijfers, onderstrepingstekens en "
-"koppeltekens bevatten. We zullen alle hoofdletters vervangen met kleine letters."
+"koppeltekens bevatten. We zullen alle hoofdletters vervangen met kleine "
+"letters."
 
 #: experiments/forms.py:52
 msgid "experiments:forms:create:duplicate_folder"
@@ -68,27 +69,35 @@ msgstr "Titel"
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:57
+#: experiments/models.py:52
+msgid "experiments:models:experiment:state:help"
+msgstr ""
+"Als je je experiment sluit, worden er alleen geen gegevens meer geüpload, "
+"het zal je experiment zelf niet offline halen. Als je klaar bent met het "
+"uitvoeren van uw experiment, vervang dan je experiment met een alternatieve "
+"pagina, of vraag de lab technici om uw experimentmap offline te halen."
+
+#: experiments/models.py:58
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
-#: experiments/models.py:63
+#: experiments/models.py:64
 msgid "experiments:models:experiment:approved"
 msgstr "Goedgekeurd"
 
-#: experiments/models.py:69
+#: experiments/models.py:70
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:79
+#: experiments/models.py:80
 msgid "experiments:detail:awaiting_approval"
 msgstr "Wacht op goedkeuring"
 
-#: experiments/models.py:105
+#: experiments/models.py:106
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:109
+#: experiments/models.py:110
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
