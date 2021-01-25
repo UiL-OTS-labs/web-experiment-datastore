@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-27 11:33+0000\n"
+"POT-Creation-Date: 2020-12-15 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "experiments:forms:folder_name:help"
 msgstr ""
 "How the folder containing your experiment should be named. For example, "
 "'words' would give you the URL {}/words/. Can only contain letters, numbers, "
-"underscores and hyphens."
+"underscores and hyphens. We will convert the name to all lowercase letters."
 
 #: experiments/forms.py:52
 msgid "experiments:forms:create:duplicate_folder"
@@ -83,11 +83,11 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:99
+#: experiments/models.py:105
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:103
+#: experiments/models.py:109
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
@@ -148,7 +148,7 @@ msgstr ""
 "Here you can view all the data collected for this experiment so far.<br/><br/"
 ">'Download raw' will download the data as received, which will most likely "
 "be JSON files.<br/>'Download as CSV' will try to transform JSON data to CSV "
-"files. This might fail if one of the data-points has malformed data."
+"files. This might fail if one of the data points has malformed data."
 
 #: experiments/templates/experiments/detail.html:22
 msgid "experiments:details:detail_header"

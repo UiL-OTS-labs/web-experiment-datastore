@@ -52,4 +52,4 @@ class CreateExperimentForm(forms.ModelForm):
                 _('experiments:forms:create:duplicate_folder')
             )
 
-        return data
+        return data.lower()
