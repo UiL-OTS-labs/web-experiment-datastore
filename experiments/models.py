@@ -49,6 +49,7 @@ class Experiment(models.Model):
     # Open or closed
     state = models.PositiveIntegerField(
         _("experiments:models:experiment:state"),
+        help_text=_("experiments:models:experiment:state:help"),
         choices=STATES,
         default=CLOSED
     )
