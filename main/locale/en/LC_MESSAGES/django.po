@@ -77,7 +77,7 @@ msgstr "Something went wrong"
 
 #: main/templates/base/500.html:13
 msgid "500:p1"
-msgstr "Sorry! It looks like we made a mistake our side!"
+msgstr "Sorry! It looks like we may have made a mistake!"
 
 #: main/templates/base/500.html:16
 msgid "500:p2"
