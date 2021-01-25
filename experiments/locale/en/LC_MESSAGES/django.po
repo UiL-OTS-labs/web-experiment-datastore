@@ -148,7 +148,7 @@ msgstr ""
 "Here you can view all the data collected for this experiment so far.<br/><br/"
 ">'Download raw' will download the data as received, which will most likely "
 "be JSON files.<br/>'Download as CSV' will try to transform JSON data to CSV "
-"files. This might fail if one of the data-points has malformed data."
+"files. This might fail if one of the data points has malformed data."
 
 #: experiments/templates/experiments/detail.html:22
 msgid "experiments:details:detail_header"
