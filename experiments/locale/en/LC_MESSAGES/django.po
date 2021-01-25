@@ -27,7 +27,7 @@ msgid "experiments:forms:folder_name:help"
 msgstr ""
 "How the folder containing your experiment should be named. For example, "
 "'words' would give you the URL {}/words/. Can only contain letters, numbers, "
-"underscores and hyphens."
+"underscores and hyphens. We will convert the name to all lowercase letters."
 
 #: experiments/forms.py:52
 msgid "experiments:forms:create:duplicate_folder"
