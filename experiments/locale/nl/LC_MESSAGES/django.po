@@ -178,15 +178,11 @@ msgstr "Access Key"
 
 #: experiments/templates/experiments/detail.html:49
 #: experiments/templates/experiments/overview.html:94
-#, fuzzy
-#| msgid "experiments:detail:webexp_location"
 msgid "experiments:global:webexp_location"
 msgstr "Locatie"
 
 #: experiments/templates/experiments/detail.html:59
 #: experiments/templates/experiments/overview.html:104
-#, fuzzy
-#| msgid "experiments:detail:webdav_location"
 msgid "experiments:global:webdav_location"
 msgstr "WebDav share"
 
@@ -262,10 +258,8 @@ msgid "experiments:home:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/overview.html:51
-#, fuzzy
-#| msgid "experiments:globals:save"
 msgid "experiments:global:view"
-msgstr "Opslaan"
+msgstr "Meer details"
 
 #: experiments/templates/experiments/overview.html:61
 #: experiments/templates/experiments/overview.html:189
@@ -273,10 +267,8 @@ msgid "experiments:global:delete_experiment"
 msgstr "Verwijder experiment"
 
 #: experiments/templates/experiments/overview.html:123
-#, fuzzy
-#| msgid "experiments:models:datapoint:data"
 msgid "experiments:home:num_datapoints"
-msgstr "Data"
+msgstr "Ge-uploade data"
 
 #: experiments/views.py:43
 msgid "experiments:message:create:success"
