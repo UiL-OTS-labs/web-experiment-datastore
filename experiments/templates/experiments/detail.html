@@ -46,7 +46,7 @@
             {% if experiment.approved %}
                 <tr>
                     <td>
-                        {% trans 'experiments:detail:webexp_location' %}
+                        {% trans 'experiments:global:webexp_location' %}
                     </td>
                     <td>
                         <a href="https://{{ webexp_host }}/{{ experiment.folder_name }}/" target="_blank">
@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                     <td>
-                        {% trans 'experiments:detail:webdav_location' %}
+                        {% trans 'experiments:global:webdav_location' %}
                     </td>
                     <td>
                         {{ webexp_webdav_host }}/{{ experiment.folder_name }}/ -

@@ -23,8 +23,20 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'experiments/overview.html'
     model = Experiment
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['webexp_host'] = settings.WEBEXPERIMENT_HOST
+        context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
+
+        return context
+
     def get_queryset(self):
-        return self.model.objects.filter(users=self.request.user)
+        return self.model.objects.filter(
+            users=self.request.user
+        ).order_by(
+            "-date_created"
+        )
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,

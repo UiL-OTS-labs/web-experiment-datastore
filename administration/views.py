@@ -16,7 +16,7 @@ class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
     """Home view, containing a list of all experiments"""
     template_name = 'administration/overview.html'
     model = Experiment
-
+    ordering = "-date_created"
 
 class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
     """View that approves experiments.
