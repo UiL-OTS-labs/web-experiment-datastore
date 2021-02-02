@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 13:54+0000\n"
+"POT-Creation-Date: 2021-02-02 15:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,8 @@ msgid "experiments:details:detail_header"
 msgstr "Experiment details"
 
 #: experiments/templates/experiments/detail.html:24
-#: experiments/templates/experiments/overview.html:59
+#: experiments/templates/experiments/overview.html:56
+#: experiments/templates/experiments/overview.html:185
 msgid "experiments:global:edit"
 msgstr "Edit"
 
@@ -172,11 +173,13 @@ msgid "experiments:detail:access_id"
 msgstr "Access Key"
 
 #: experiments/templates/experiments/detail.html:49
-msgid "experiments:detail:webexp_location"
+#: experiments/templates/experiments/overview.html:94
+msgid "experiments:global:webexp_location"
 msgstr "Location"
 
 #: experiments/templates/experiments/detail.html:59
-msgid "experiments:detail:webdav_location"
+#: experiments/templates/experiments/overview.html:104
+msgid "experiments:global:webdav_location"
 msgstr "Webdav share"
 
 #: experiments/templates/experiments/detail.html:71
@@ -185,13 +188,15 @@ msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:86
 #: experiments/templates/experiments/detail.html:128
-#: experiments/templates/experiments/overview.html:67
+#: experiments/templates/experiments/overview.html:132
+#: experiments/templates/experiments/overview.html:193
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:91
 #: experiments/templates/experiments/detail.html:132
-#: experiments/templates/experiments/overview.html:71
+#: experiments/templates/experiments/overview.html:139
+#: experiments/templates/experiments/overview.html:197
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
@@ -200,7 +205,7 @@ msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
 #: experiments/templates/experiments/detail.html:108
-#: experiments/templates/experiments/overview.html:38
+#: experiments/templates/experiments/overview.html:165
 msgid "experiments:global:actions"
 msgstr "Actions"
 
@@ -235,39 +240,48 @@ msgstr "Create new experiment"
 msgid "experiments:new:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/overview.html:8
-#: experiments/templates/experiments/overview.html:20
+#: experiments/templates/experiments/overview.html:11
+#: experiments/templates/experiments/overview.html:37
 msgid "experiments:home:header"
 msgstr "My experiments"
 
-#: experiments/templates/experiments/overview.html:16
+#: experiments/templates/experiments/overview.html:33
 msgid "experiments:home:create_experiment"
 msgstr "Create new experiment"
 
-#: experiments/templates/experiments/overview.html:23
+#: experiments/templates/experiments/overview.html:40
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/overview.html:63
+#: experiments/templates/experiments/overview.html:51
+msgid "experiments:global:view"
+msgstr "More details"
+
+#: experiments/templates/experiments/overview.html:61
+#: experiments/templates/experiments/overview.html:189
 msgid "experiments:global:delete_experiment"
 msgstr "Delete experiment"
 
-#: experiments/views.py:35
+#: experiments/templates/experiments/overview.html:123
+msgid "experiments:home:num_datapoints"
+msgstr "Data uploaded"
+
+#: experiments/views.py:43
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:75
+#: experiments/views.py:83
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:131
+#: experiments/views.py:139
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:156
+#: experiments/views.py:164
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:193
+#: experiments/views.py:201
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
