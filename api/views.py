@@ -6,9 +6,9 @@ from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
-class StatusView(ApiExperimentMixin, APIView):
+class MetadataView(ApiExperimentMixin, APIView):
 
-    # List of all views that are 'statusable'
+    # List of all variables that are retrievable
     fields = ('state', )
 
     def get(self, request, access_key, field=None):
