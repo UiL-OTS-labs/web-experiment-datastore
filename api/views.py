@@ -1,14 +1,58 @@
-from typing import Union
-
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .mixins import ApiExperimentMixin
 from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
-class UploadView(APIView):
+class MetadataView(ApiExperimentMixin, APIView):
+
+    # List of all variables that are retrievable
+    fields = ('state', )
+
+    def get(self, request, access_key, field=None):
+
+        # Should not happen(tm), as it's a path variable.
+        if not access_key or len(access_key) == 0:
+            return Response({
+                "result": "ERR_NO_ID",
+                "message": "No access key was provided"
+            },
+                status=400  # Bad request
+            )
+
+        experiment = self.get_experiment(access_key)
+
+        if not experiment:
+            return Response({
+                "result":  "ERR_UNKNOWN_ID",
+                "message": "No experiment using that id was found"
+                },
+                status=404  # Not found
+            )
+
+        if field in self.fields:
+            return Response(self.get_value(experiment, field))
+
+        return Response({field: self.get_value(experiment, field) for field in self.fields})
+
+    @staticmethod
+    def get_value(experiment: Experiment, field):
+        methods = dir(experiment)
+        try:
+            method = "get_{}_display".format(field)
+            # If this field has an explicit display method, use that
+            if method in methods:
+                return getattr(experiment, method)()
+            else:
+                # Otherwise, just get the value
+                return getattr(experiment, field)
+        except AttributeError:
+            return None
+
+
+class UploadView(ApiExperimentMixin, APIView):
     """This view is used to upload data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
@@ -33,7 +77,7 @@ class UploadView(APIView):
         if not access_key or len(access_key) == 0:
             return Response({
                 "result": "ERR_NO_ID",
-                "message": "No upload_id was provided"
+                "message": "No access key was provided"
                 },
                 status=400  # Bad request
             )
@@ -54,7 +98,7 @@ class UploadView(APIView):
                 "result":  "ERR_UNKNOWN_ID",
                 "message": "No experiment using that id was found"
                 },
-                status=400  # Bad request
+                status=404  # Not found
             )
 
         # The experiment should be approved and open.
@@ -78,13 +122,3 @@ class UploadView(APIView):
             "message": "Upload successful"
         })
 
-    def get_experiment(self, access_id: str) -> Union[Experiment, None]:
-        """Tries to get experiment for the given access_id. Returns None if
-        it does not exist of it does not pass validation.
-
-        The validation error sometimes happens for unknown reasons...
-        """
-        try:
-            return Experiment.objects.get(access_id=access_id)
-        except (ObjectDoesNotExist, ValidationError):
-            return None
