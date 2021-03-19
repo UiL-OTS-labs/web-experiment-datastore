@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-02 15:47+0000\n"
+"POT-Creation-Date: 2021-03-19 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,69 +33,74 @@ msgstr ""
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "A different experiment already uses this folder name!"
 
-#: experiments/models.py:16
+#: experiments/models.py:17
 msgid "experiments:models:experiment:state:open"
 msgstr "Open"
 
-#: experiments/models.py:17
+#: experiments/models.py:18
 msgid "experiments:models:experiment:state:closed"
 msgstr "Closed"
 
-#: experiments/models.py:23
+#: experiments/models.py:19
+msgid "experiments:models:experiment:state:piloting"
+msgstr "Piloting"
+
+#: experiments/models.py:25
 msgid "experiments:models:experiment:access_id"
 msgstr "Access Key"
 
-#: experiments/models.py:32
+#: experiments/models.py:34
 msgid "experiments:models:experiment:users"
 msgstr "Researchers"
 
-#: experiments/models.py:33
+#: experiments/models.py:35
 msgid "experiments:models:experiment:users:help"
 msgstr ""
 "Add any user that need access to this experiment here. Note: users should "
 "log in to this application at least once before they will show up here."
 
-#: experiments/models.py:38
+#: experiments/models.py:40
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/models.py:46
+#: experiments/models.py:48
 msgid "experiments:models:experiment:title"
 msgstr "Title"
 
-#: experiments/models.py:51
+#: experiments/models.py:53
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:52
+#: experiments/models.py:54
 msgid "experiments:models:experiment:state:help"
 msgstr ""
-"Closing your experiment will only stop data from being uploaded. It will not "
-"take your experiment itself offline. If you're done running your experiment, "
-"either replace your experiment with an alternative page, or ask the lab-"
-"staff to take your experiment folder offline. "
+"Closing your experiment will only stop data from being uploaded. If you use "
+"a boilerplate from our lab it will also take your experiment offline. If you "
+"have programmed your own experiment, you will need to do it yourself when "
+"you are done running your experiment, or ask the lab technicians to take "
+"your experiment folder offline. "
 
-#: experiments/models.py:58
+#: experiments/models.py:60
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
-#: experiments/models.py:64
+#: experiments/models.py:66
 msgid "experiments:models:experiment:approved"
 msgstr "Approved"
 
-#: experiments/models.py:70
+#: experiments/models.py:72
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:80
+#: experiments/models.py:82
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:106
+#: experiments/models.py:108
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:110
+#: experiments/models.py:112
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
@@ -164,7 +169,6 @@ msgstr "Experiment details"
 
 #: experiments/templates/experiments/detail.html:24
 #: experiments/templates/experiments/overview.html:56
-#: experiments/templates/experiments/overview.html:185
 msgid "experiments:global:edit"
 msgstr "Edit"
 
@@ -189,14 +193,12 @@ msgstr "Researchers"
 #: experiments/templates/experiments/detail.html:86
 #: experiments/templates/experiments/detail.html:128
 #: experiments/templates/experiments/overview.html:132
-#: experiments/templates/experiments/overview.html:193
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:91
 #: experiments/templates/experiments/detail.html:132
 #: experiments/templates/experiments/overview.html:139
-#: experiments/templates/experiments/overview.html:197
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
@@ -205,7 +207,6 @@ msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
 #: experiments/templates/experiments/detail.html:108
-#: experiments/templates/experiments/overview.html:165
 msgid "experiments:global:actions"
 msgstr "Actions"
 
@@ -258,7 +259,6 @@ msgid "experiments:global:view"
 msgstr "More details"
 
 #: experiments/templates/experiments/overview.html:61
-#: experiments/templates/experiments/overview.html:189
 msgid "experiments:global:delete_experiment"
 msgstr "Delete experiment"
 
@@ -266,22 +266,22 @@ msgstr "Delete experiment"
 msgid "experiments:home:num_datapoints"
 msgstr "Data uploaded"
 
-#: experiments/views.py:43
+#: experiments/views.py:47
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:83
+#: experiments/views.py:87
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:139
+#: experiments/views.py:143
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:164
+#: experiments/views.py:168
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:201
+#: experiments/views.py:205
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"

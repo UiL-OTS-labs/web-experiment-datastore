@@ -12,9 +12,11 @@ class Experiment(models.Model):
     """Describes the metadata of an experiment"""
     OPEN = 1
     CLOSED = 2
+    PILOTING = 3
     STATES = (
         (OPEN, _("experiments:models:experiment:state:open")),
-        (CLOSED, _("experiments:models:experiment:state:closed"))
+        (CLOSED, _("experiments:models:experiment:state:closed")),
+        (PILOTING, _("experiments:models:experiment:state:piloting")),
     )
 
     # As using UUID's as PK has some annoying implications, we just add it as

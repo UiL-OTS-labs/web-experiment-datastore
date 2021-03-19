@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-02 15:47+0000\n"
+"POT-Creation-Date: 2021-03-19 09:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,70 +34,75 @@ msgstr ""
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "Een ander experiment gebruikt deze naam al."
 
-#: experiments/models.py:16
+#: experiments/models.py:17
 msgid "experiments:models:experiment:state:open"
 msgstr "Open"
 
-#: experiments/models.py:17
+#: experiments/models.py:18
 msgid "experiments:models:experiment:state:closed"
 msgstr "Gesloten"
 
-#: experiments/models.py:23
+#: experiments/models.py:19
+msgid "experiments:models:experiment:state:piloting"
+msgstr "Piloting"
+
+#: experiments/models.py:25
 msgid "experiments:models:experiment:access_id"
 msgstr "Access Key"
 
-#: experiments/models.py:32
+#: experiments/models.py:34
 msgid "experiments:models:experiment:users"
 msgstr "Onderzoekers"
 
-#: experiments/models.py:33
+#: experiments/models.py:35
 msgid "experiments:models:experiment:users:help"
 msgstr ""
 "Voeg alle onderzoekers toe die toegang moeten hebben tot dit experiment. "
 "Onderzoekers moeten minimaal 1 keer ingelogd hebben in deze applicatie "
 "voordat ze hier zichtbaar worden."
 
-#: experiments/models.py:38
+#: experiments/models.py:40
 msgid "experiments:models:experiment:folder_name"
 msgstr "Experiment map"
 
-#: experiments/models.py:46
+#: experiments/models.py:48
 msgid "experiments:models:experiment:title"
 msgstr "Titel"
 
-#: experiments/models.py:51
+#: experiments/models.py:53
 msgid "experiments:models:experiment:state"
 msgstr "Status"
 
-#: experiments/models.py:52
+#: experiments/models.py:54
 msgid "experiments:models:experiment:state:help"
 msgstr ""
-"Als je je experiment sluit, worden er alleen geen gegevens meer geüpload, "
-"het zal je experiment zelf niet offline halen. Als je klaar bent met het "
-"uitvoeren van uw experiment, vervang dan je experiment met een alternatieve "
-"pagina, of vraag de lab technici om uw experimentmap offline te halen."
+"Als je je experiment sluit, worden er alleen geen gegevens meer geüpload. "
+"Indien je een boilerplate van ons lab gebruiks zal het zal het ook je "
+"experiment offline halen. Indien je je eigen experiment hebt geprogrammeerd, "
+"moet je dit zelf doen als je klaar bent met het uitvoeren van uw experiment, "
+"of vraag de lab technici om uw experimentmap offline te halen."
 
-#: experiments/models.py:58
+#: experiments/models.py:60
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
-#: experiments/models.py:64
+#: experiments/models.py:66
 msgid "experiments:models:experiment:approved"
 msgstr "Goedgekeurd"
 
-#: experiments/models.py:70
+#: experiments/models.py:72
 msgid "experiments:models:experiment:show_in_ldap_config"
 msgstr "In LDAP config"
 
-#: experiments/models.py:80
+#: experiments/models.py:82
 msgid "experiments:detail:awaiting_approval"
 msgstr "Wacht op goedkeuring"
 
-#: experiments/models.py:106
+#: experiments/models.py:108
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:110
+#: experiments/models.py:112
 msgid "experiments:models:datapoint:date_added"
 msgstr "Datum toegevoegd"
 
@@ -168,7 +173,6 @@ msgstr "Experiment details"
 
 #: experiments/templates/experiments/detail.html:24
 #: experiments/templates/experiments/overview.html:56
-#: experiments/templates/experiments/overview.html:185
 msgid "experiments:global:edit"
 msgstr "Wijzig"
 
@@ -193,14 +197,12 @@ msgstr "Onderzoekers"
 #: experiments/templates/experiments/detail.html:86
 #: experiments/templates/experiments/detail.html:128
 #: experiments/templates/experiments/overview.html:132
-#: experiments/templates/experiments/overview.html:193
 msgid "experiments:global:download_raw"
 msgstr "Download ruwe data"
 
 #: experiments/templates/experiments/detail.html:91
 #: experiments/templates/experiments/detail.html:132
 #: experiments/templates/experiments/overview.html:139
-#: experiments/templates/experiments/overview.html:197
 msgid "experiments:global:download_csv"
 msgstr "Download data als CSV"
 
@@ -209,7 +211,6 @@ msgid "experiments:detail:data_header"
 msgstr "Opgeslagen data"
 
 #: experiments/templates/experiments/detail.html:108
-#: experiments/templates/experiments/overview.html:165
 msgid "experiments:global:actions"
 msgstr "Acties"
 
@@ -262,7 +263,6 @@ msgid "experiments:global:view"
 msgstr "Meer details"
 
 #: experiments/templates/experiments/overview.html:61
-#: experiments/templates/experiments/overview.html:189
 msgid "experiments:global:delete_experiment"
 msgstr "Verwijder experiment"
 
@@ -270,22 +270,22 @@ msgstr "Verwijder experiment"
 msgid "experiments:home:num_datapoints"
 msgstr "Ge-uploade data"
 
-#: experiments/views.py:43
+#: experiments/views.py:47
 msgid "experiments:message:create:success"
 msgstr "Experiment aangemaakt!"
 
-#: experiments/views.py:83
+#: experiments/views.py:87
 msgid "experiments:message:edit:success"
 msgstr "Experiment gewijzigd!"
 
-#: experiments/views.py:139
+#: experiments/views.py:143
 msgid "experiments:message:delete:success"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views.py:164
+#: experiments/views.py:168
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapunt verwijderd!"
 
-#: experiments/views.py:201
+#: experiments/views.py:205
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"
