@@ -164,7 +164,7 @@ class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
                           generic.DeleteView):
     """DeleteView for a single DataPoint"""
     model = DataPoint
-    template_name = 'experiments/delete_experiment.html'
+    template_name = 'experiments/delete_datapoint.html'
     success_message = _('experiments:message:delete_datapoint:success')
 
     def delete(self, request, *args, **kwargs):
