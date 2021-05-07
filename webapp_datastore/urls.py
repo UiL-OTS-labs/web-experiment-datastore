@@ -32,6 +32,8 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('experiments/', include('experiments.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('uilcore/', include('uil.core.urls')),
+    path('vue/', include('uil.vue.urls')),
     path('admin/', admin.site.urls),
 ]
 

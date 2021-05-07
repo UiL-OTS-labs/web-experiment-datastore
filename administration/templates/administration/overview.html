@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load vue_tags %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -12,16 +13,26 @@
 {% endblock %}
 
 {% block html_head %}
-    {# We need to load pagination manually, as the CSP will block uu-fancy-list from loading it itself #}
-    <script src="{% static 'uil.core/js/pagination.js' %}"></script>
-    <script src="{% static 'uil.core/js/uu-fancy-list.js' %}"></script>
+    {# This template loads in either the dev or prod Vue library, depending on settings.DEBUG #}
+    {% include 'uil.vue/vueloader.html' %}
+    {% load_vue_component 'AdminExperimentList' request.csp_nonce %}
 
     <script nonce="{{ request.csp_nonce }}">
-        $(function () {
-            $('.uu-fancy-list-container').fancyList({
-                language: '{{ LANGUAGE_CODE }}',
+        // Needs to be wrapped into an onload to ensure all dependencies are loaded
+        window.onload = _ => {
+            const i18n = new VueI18n({
+                locale: '{{ LANGUAGE_CODE }}',
             });
-        });
+            new Vue({
+                i18n,
+                el: "#list",
+                components: {
+                    // Loaded by the load_vue_component tag, no need to manually load this
+                    AdminExperimentList
+                },
+                template: "<AdminExperimentList></AdminExperimentList>",
+            });
+        }
     </script>
 {% endblock %}
 
@@ -44,121 +55,7 @@
         <p>
             {% trans 'administration:home:info_text' %}
         </p>
-        <div class="uu-fancy-list-container">
-            <div class="uu-fancy-list">
-                {% for experiment in object_list %}
-                    <div class="ufl-item clearfix" data-show="true">
-                        <h4>{{ experiment }}</h4>
-
-                        <div class="ufl-undertitle">
-                            <div class="ufl-undertitle-line">
-                                {% get_verbose_field_name "experiments" "Experiment" "state" %}: {{ experiment.get_state_display }}
-                            </div>
-                            {% if not experiment.approved %}
-                                <div class="ufl-undertitle-line">
-                                    <a href="{% url 'administration:approve' experiment.pk %}">
-                                        {% trans 'administration:home:approve' %}
-                                    </a>
-                                </div>
-                            {% endif %}
-                            <div class="ufl-undertitle-line">
-                                <a href="{% url 'admin:experiments_experiment_change' experiment.pk %}">
-                                    {% trans 'administration:globals:open_in_admin' %}
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="ufl-details">
-                            <div class="row">
-                                <div class="col-12 col-md-6">
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                {% get_verbose_field_name "experiments" "Experiment" "id" %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.pk }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% get_verbose_field_name "experiments" "Experiment" "access_id" %}
-                                            </td>
-
-                                            <td>
-                                                {{ experiment.access_id }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% trans 'administration:home:folder' %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.folder_name }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% get_verbose_field_name "experiments" "Experiment" "show_in_ldap_config" %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.show_in_ldap_config|yesno }}
-                                                - <a href="{% url 'administration:switch_ldap_inclusion' experiment.pk %}">
-                                                    switch
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </div>
-
-                                <div class="col-12 col-md-6">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                {% get_verbose_field_name "experiments" "Experiment" "users" %}
-                                            </td>
-                                            <td>
-                                                {% for user in experiment.users.all %}
-                                                    - {{ user.get_full_name }}<br/>
-                                                {% endfor %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% trans 'administration:home:date_created' %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.date_created|date:"Y-m-d H:i" }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% trans 'administration:home:last_upload' %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.datapoint_set.last.date_added|date:"Y-m-d H:i" }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                {% trans 'administration:home:data_count' %}
-                                            </td>
-                                            <td>
-                                                {{ experiment.datapoint_set.count }}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+        <div id="list"></div>
         <br/>
     </div>
 </div>

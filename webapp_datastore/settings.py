@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'api',
     'experiments',
     'uil.core',
+    'uil.vue',
 
     # This has to be last, otherwise it's login/logout pages will take over
     'django.contrib.admin',
@@ -225,7 +226,7 @@ CSP_UPGRADE_INSECURE_REQUESTS = not DEBUG
 CSP_INCLUDE_NONCE_IN = ['script-src']
 
 CSP_DEFAULT_SRC = ["'self'", ]
-CSP_SCRIPT_SRC = ["'self'", ]
+CSP_SCRIPT_SRC = ["'self'", "'unsafe-eval'"]
 CSP_FONT_SRC = ["'self'", 'data:', ]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'", 'data:', ]
