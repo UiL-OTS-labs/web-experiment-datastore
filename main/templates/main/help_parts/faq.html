@@ -28,6 +28,18 @@
                 to get the name changed.
             </p>
             <strong>
+                I'm trying to upload data to the application, but nothing is
+                being saved!
+            </strong>
+            <p>
+                Make sure that the status of your experiment is set to 'Open'.
+                The current status of your experiment is shown both on the main
+                page as well as the details page.
+            </p>
+            <p>
+                You can change the status of your experiment on the edit page.
+            </p>
+            <strong>
                 Why are my fellow researchers not listed when trying to add them
                 to my experiment?
             </strong>
@@ -55,12 +67,20 @@
             </p>
             <strong>I closed my experiment in this application, but it's still available on the experiment server.</strong>
             <p>
-                The data and experiment servers aren't linked directly for security reasons. Thus, we cannot take
-                your experiment offline automatically when you close the experiment.
+                The data and experiment servers aren't linked directly for
+                security reasons. Thus, we cannot take your experiment offline
+                automatically when you close the experiment.
             </p>
             <p>
-                Either replace your experiment with an alternative page, or ask us to take your experiment folder
-                offline when you're done running your experiment.
+                If you're using JSPsych, you can use our library to
+                automatically redirect your participant to a generic 'closed'
+                page. You can also manually query the status of your experiment
+                if you're not using JSPsych.
+            </p>
+            <p>
+                If you are using one of our templates, changes are that this is
+                already set up. Otherwise, please contact us for instructions on
+                how to set this up.
             </p>
             <p>
                 <i>Your question not listed here? <a href="mailto:{{ labstaff_email }}">Contact us!</a></i>
