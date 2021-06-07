@@ -1,15 +1,21 @@
+from typing import Dict, Any
+
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import braces.views as braces
+from rest_framework.authentication import SessionAuthentication
 
+from administration.serializers import AdminExperimentSerializer
 from administration.utils import approve_experiment, generate_ldap_config
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
 from experiments.mixins import ExperimentMixin
 from experiments.models import Experiment
 from uil.core.views.mixins import RedirectSuccessMessageMixin
+from uil.vue.rest import FancyListApiView
 
 
 class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
@@ -17,6 +23,54 @@ class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
     template_name = 'administration/overview.html'
     model = Experiment
     ordering = "-date_created"
+
+
+class AdministrationHomeApiView(braces.StaffuserRequiredMixin,
+                                FancyListApiView):
+    authentication_classes = (SessionAuthentication,)
+    serializer_class = AdminExperimentSerializer
+
+    sort_definitions = [
+        FancyListApiView.SortDefinition(
+            'date_created',
+            _("experiments:models:experiment:date_created")
+        ),
+        FancyListApiView.SortDefinition(
+            'last_upload',
+            _("administration:home:last_upload")
+        ),
+    ]
+    default_sort = ('date_created', 'desc')
+
+    filter_definitions = [
+        FancyListApiView.FilterDefinition(
+            "approved",
+            _("experiments:models:experiment:approved")
+        ),
+        FancyListApiView.FilterDefinition(
+            "show_in_ldap_config",
+            _("experiments:models:experiment:show_in_ldap_config")
+        ),
+        FancyListApiView.FilterDefinition(
+            'get_state_display',
+            _("experiments:models:experiment:state")
+        ),
+    ]
+
+    def get_context(self) -> Dict[str, Any]:
+        context = super().get_context()
+
+        context['webexp_host'] = settings.WEBEXPERIMENT_HOST
+        context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
+        context['PILOTING'] = Experiment.PILOTING
+        context['CLOSED'] = Experiment.CLOSED
+        context['OPEN'] = Experiment.OPEN
+
+        return context
+
+    def get_queryset(self):
+        return Experiment.objects.all()
+
 
 class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
     """View that approves experiments.

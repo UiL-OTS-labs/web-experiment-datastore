@@ -2,12 +2,14 @@ from django.urls import path
 
 from .views import ExperimentHomeView, ExperimentCreateView, \
     ExperimentEditView, ExperimentDetailView, DownloadView, \
-    DeleteExperimentView, DeleteDataPointView, DeleteAllDataView
+    DeleteExperimentView, DeleteDataPointView, DeleteAllDataView, \
+    ExperimentHomeApiView
 
 app_name = 'experiments'
 
 urlpatterns = [
     path('', ExperimentHomeView.as_view(), name='home'),
+    path('api/home/', ExperimentHomeApiView.as_view(), name='home_api'),
 
     path('new/', ExperimentCreateView.as_view(), name='new'),
     path('<int:pk>/edit/', ExperimentEditView.as_view(), name='edit'),

@@ -1,18 +1,22 @@
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404, \
-    HttpResponseRedirect
+from typing import Dict, Any
+
+from django.http import HttpResponseBadRequest, Http404, HttpResponseRedirect
 from django.views import generic
 import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy as reverse
 from django.conf import settings
+from rest_framework.authentication import SessionAuthentication
 
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
 from uil.core.views.mixins import DeleteSuccessMessageMixin
+from uil.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm
 from .models import Experiment, DataPoint
+from .serializers import ExperimentSerializer
 from .utils import create_download_response_zip, create_file_response_single, \
     send_new_experiment_mail
 from .mixins import UserAllowedMixin
@@ -23,19 +27,33 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     template_name = 'experiments/overview.html'
     model = Experiment
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+
+class ExperimentHomeApiView(braces.LoginRequiredMixin, FancyListApiView):
+    authentication_classes = (SessionAuthentication, )
+    serializer_class = ExperimentSerializer
+
+    sort_definitions = [
+        FancyListApiView.SortDefinition(
+            'date_created',
+            _("experiments:models:experiment:date_created")
+        )
+    ]
+    default_sort = ('date_created', 'desc')
+
+    def get_context(self) -> Dict[str, Any]:
+        context = super().get_context()
 
         context['webexp_host'] = settings.WEBEXPERIMENT_HOST
         context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
+        context['PILOTING'] = Experiment.PILOTING
+        context['CLOSED'] = Experiment.CLOSED
+        context['OPEN'] = Experiment.OPEN
 
         return context
 
     def get_queryset(self):
-        return self.model.objects.filter(
+        return Experiment.objects.filter(
             users=self.request.user
-        ).order_by(
-            "-date_created"
         )
 
 
