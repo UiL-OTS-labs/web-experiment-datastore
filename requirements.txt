@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
--e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v2.0.0-beta4#egg=uil-django-core
+-e git+https://github.com/UiL-OTS-labs/django-shared-core.git@v2.0.1#egg=uil-django-core
     # via -r requirements.in
 asgiref==3.3.4
     # via django
@@ -16,13 +16,13 @@ blessings==1.7
     # via curtsies
 bpython==0.21
     # via -r requirements.in
-certifi==2020.12.5
+certifi==2021.5.30
     # via requests
 cffi==1.14.5
     # via cryptography
 chardet==4.0.0
     # via requests
-click==7.1.2
+click==8.0.1
     # via pip-tools
 closure==20191111
     # via uil-django-core
@@ -36,7 +36,7 @@ cwcwidth==0.1.4
     #   curtsies
 django-auth-ldap==2.4.0
     # via -r requirements.in
-django-axes==5.15.0
+django-axes==5.17.0
     # via -r requirements.in
 django-braces==1.14.0
     # via -r requirements.in
@@ -54,7 +54,7 @@ django-rest-framework==0.1.0
     # via -r requirements.in
 django-simple-menu==1.2.1
     # via -r requirements.in
-django==3.0.14
+django==3.2.4
     # via
     #   -r requirements.in
     #   django-auth-ldap
@@ -68,13 +68,17 @@ django==3.0.14
     #   djangorestframework
     #   uil-django-core
 djangorestframework==3.12.4
-    # via django-rest-framework
+    # via
+    #   django-rest-framework
+    #   uil-django-core
 greenlet==1.1.0
     # via bpython
 idna==2.10
     # via requests
-importlib-metadata==4.0.1
-    # via pep517
+importlib-metadata==4.5.0
+    # via
+    #   click
+    #   pep517
 lesscpy==0.14.0
     # via uil-django-core
 mysqlclient==2.0.3
@@ -131,7 +135,7 @@ typing-extensions==3.10.0.0
     # via
     #   asgiref
     #   importlib-metadata
-urllib3==1.26.4
+urllib3==1.26.5
     # via requests
 vbuild==0.8.1
     # via uil-django-core

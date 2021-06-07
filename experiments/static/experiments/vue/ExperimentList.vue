@@ -6,6 +6,8 @@
       :searchable-fields="searchableFields"
       :num-item-options="numItemsOptions"
       :sort-definitions="sortDefinitions"
+      :show-controls="showControls"
+      :default-items-per-page="defaultItemsPerPage"
       :loaded="loaded"
   >
     <template #title="{ item: experiment, context }">
@@ -207,6 +209,8 @@ export default {
       'filterDefinitions': {},
       'numItemsOptions': [],
       'sortDefinitions': {},
+      'showControls': false,
+      'defaultItemsPerPage': 10,
       'loaded': false,
     };
   },

@@ -1,11 +1,10 @@
 from typing import Dict, Any
 
-from django.http import HttpResponseBadRequest, HttpResponseForbidden, Http404, \
-    HttpResponseRedirect
+from django.http import HttpResponseBadRequest, Http404, HttpResponseRedirect
 from django.views import generic
 import braces.views as braces
 from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy as reverse
 from django.conf import settings
 from rest_framework.authentication import SessionAuthentication
