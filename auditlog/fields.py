@@ -23,7 +23,7 @@ class JSONField(models.TextField):
         return JSONEncoder().encode(data)
 
     def _loads(self, str):
-        return json.loads(str, encoding=settings.DEFAULT_CHARSET)
+        return json.loads(str)
 
     def db_type(self, connection):
         return 'text'
