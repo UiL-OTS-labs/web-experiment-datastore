@@ -42,6 +42,15 @@ class TestExperimentApi(APITestCase):
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.json()['result'], 'ERR_UNKNOWN_ID')
 
+    def test_upload_fail_when_not_approved(self):
+        self.exp.state = Experiment.OPEN
+        self.exp.approved = False
+        self.exp.save()
+
+        response = self._upload()
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.json()['result'], 'ERR_NOT_OPEN')
+
     def test_get_metadata(self):
         self.exp.state = Experiment.OPEN
         self.exp.approved = True
