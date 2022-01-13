@@ -1,3 +1,4 @@
+from django.utils import translation
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -6,7 +7,14 @@ from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
-class MetadataView(ApiExperimentMixin, APIView):
+class ApiExperimentView(ApiExperimentMixin, APIView):
+    def dispatch(self, *args, **kwargs):
+        # API responses should always use English messages
+        with translation.override('en'):
+            return super().dispatch(*args, **kwargs)
+
+
+class MetadataView(ApiExperimentView):
 
     # List of all variables that are retrievable
     fields = ('state', )
@@ -52,7 +60,7 @@ class MetadataView(ApiExperimentMixin, APIView):
             return None
 
 
-class UploadView(ApiExperimentMixin, APIView):
+class UploadView(ApiExperimentView):
     """This view is used to upload data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
@@ -121,4 +129,3 @@ class UploadView(ApiExperimentMixin, APIView):
             "result":  "OK",
             "message": "Upload successful"
         })
-

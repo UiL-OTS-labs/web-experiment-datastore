@@ -2,7 +2,6 @@ import json
 import uuid
 
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 from rest_framework.test import APITestCase
 
 from experiments.models import Experiment
@@ -59,7 +58,7 @@ class TestExperimentApi(APITestCase):
 
         response = self.client.get(reverse('api:metadata', args=[self.exp.access_id]))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['state'], _("experiments:models:experiment:state:open"))
+        self.assertEqual(response.json()['state'], 'Open')
 
     def test_get_metadata_not_found(self):
         response = self.client.get(reverse('api:metadata', args=[uuid.uuid4()]))
