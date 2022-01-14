@@ -7,6 +7,14 @@ from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
+class ResultCodes:
+    OK = "OK"
+    ERR_NO_ID = "ERR_NO_ID"
+    ERR_NO_DATA = "ERR_NO_DATA"
+    ERR_UNKNOWN_ID = "ERR_UNKNOWN_ID"
+    ERR_NOT_OPEN = "ERR_NOT_OPEN"
+
+
 class ApiExperimentView(ApiExperimentMixin, APIView):
     def dispatch(self, *args, **kwargs):
         # API responses should always use English messages
@@ -24,7 +32,7 @@ class MetadataView(ApiExperimentView):
         # Should not happen(tm), as it's a path variable.
         if not access_key or len(access_key) == 0:
             return Response({
-                "result": "ERR_NO_ID",
+                "result": ResultCodes.ERR_NO_ID,
                 "message": "No access key was provided"
             },
                 status=400  # Bad request
@@ -34,7 +42,7 @@ class MetadataView(ApiExperimentView):
 
         if not experiment:
             return Response({
-                "result":  "ERR_UNKNOWN_ID",
+                "result":  ResultCodes.ERR_UNKNOWN_ID,
                 "message": "No experiment using that id was found"
                 },
                 status=404  # Not found
@@ -84,7 +92,7 @@ class UploadView(ApiExperimentView):
         # Should not happen(tm), as it's a path variable.
         if not access_key or len(access_key) == 0:
             return Response({
-                "result": "ERR_NO_ID",
+                "result": ResultCodes.ERR_NO_ID,
                 "message": "No access key was provided"
                 },
                 status=400  # Bad request
@@ -93,7 +101,7 @@ class UploadView(ApiExperimentView):
         # Error if no data was sent
         if not payload:
             return Response({
-                "result":  "ERR_NO_DATA",
+                "result":  ResultCodes.ERR_NO_DATA,
                 "message": "No data was provided"
                 },
                 status=400  # Bad request
@@ -103,7 +111,7 @@ class UploadView(ApiExperimentView):
 
         if not experiment:
             return Response({
-                "result":  "ERR_UNKNOWN_ID",
+                "result":  ResultCodes.ERR_UNKNOWN_ID,
                 "message": "No experiment using that id was found"
                 },
                 status=404  # Not found
@@ -112,7 +120,7 @@ class UploadView(ApiExperimentView):
         # The experiment should be approved and open.
         if not experiment.state == experiment.OPEN or not experiment.approved:
             return Response({
-                "result":  "ERR_NOT_OPEN",
+                "result":  ResultCodes.ERR_NOT_OPEN.__str__(),
                 "message": "The experiment is not open to new uploads"
             },
                 status=403  # Forbidden
@@ -126,6 +134,6 @@ class UploadView(ApiExperimentView):
 
         # Return that everything went OK
         return Response({
-            "result":  "OK",
+            "result":  ResultCodes.OK,
             "message": "Upload successful"
         })

@@ -5,6 +5,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from experiments.models import Experiment
+from .views import ResultCodes
 
 
 class TestExperimentApi(APITestCase):
@@ -20,7 +21,7 @@ class TestExperimentApi(APITestCase):
     def test_upload_default_fail(self):
         response = self._upload()
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json()['result'], 'ERR_NOT_OPEN')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)
 
     def test_upload_ok(self):
         self.exp.state = Experiment.OPEN
@@ -31,7 +32,7 @@ class TestExperimentApi(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         j = response.json()
-        self.assertEqual(j['result'], 'OK')
+        self.assertEqual(j['result'], ResultCodes.OK)
         self.assertEqual(j['message'], 'Upload successful')
 
         self.assertEqual(self.exp.datapoint_set.count(), 1)
@@ -40,7 +41,7 @@ class TestExperimentApi(APITestCase):
     def test_upload_not_found(self):
         response = self.client.post(reverse('api:upload', args=[uuid.uuid4()]), {}, content_type='text/plain')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['result'], 'ERR_UNKNOWN_ID')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_UNKNOWN_ID)
 
     def test_upload_fail_when_not_approved(self):
         self.exp.state = Experiment.OPEN
@@ -49,7 +50,7 @@ class TestExperimentApi(APITestCase):
 
         response = self._upload()
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json()['result'], 'ERR_NOT_OPEN')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)
 
     def test_get_metadata(self):
         self.exp.state = Experiment.OPEN
@@ -63,4 +64,4 @@ class TestExperimentApi(APITestCase):
     def test_get_metadata_not_found(self):
         response = self.client.get(reverse('api:metadata', args=[uuid.uuid4()]))
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['result'], 'ERR_UNKNOWN_ID')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_UNKNOWN_ID)
