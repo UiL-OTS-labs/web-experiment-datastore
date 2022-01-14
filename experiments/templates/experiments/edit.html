@@ -9,6 +9,15 @@
 {% endblock %}
 
 {% block content %}
+<style>
+ input:read-only {
+     background:#efefef;
+ }
+
+ .target-group-form {
+     margin-top: 2em;
+ }
+</style>
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
@@ -22,11 +31,38 @@
             <table width="100%">
                 {{ form.as_table }}
             </table>
+            <h3>{% trans 'experiments:edit:target_groups_header' %}</h3>
+            {{ target_group_formset.management_form }}
+            {% for group_form in target_group_formset %}
+                <div class="target-group-form">
+                    <table width="100%">
+                        {{ group_form.as_table }}
+                    </table>
+                </div>
+            {% endfor %}
             <br/>
+            <a href="#" id="add_group">+ {% trans 'experiments:edit:add_group' %}</a>
             <div class="float-right">
                 <button type="submit">{% trans 'experiments:globals:save' %}</button>
             </div>
         </form>
     </div>
 </div>
+<script nonce="{{ request.csp_nonce }}">
+ let existingGroups = {{ object.targetgroup_set.count }};
+ $('.target-group-form').each((idx, el) => {
+     if (idx >= existingGroups) {
+         $(el).hide();
+     }
+ });
+ $('#add_group').click((event) => {
+     event.preventDefault();
+     let hidden = $('.target-group-form:hidden');
+     hidden.last().show();
+
+     if (hidden.length - 1 <= 0) {
+         $('#add_group').hide();
+     }
+ });
+</script>
 {% endblock %}

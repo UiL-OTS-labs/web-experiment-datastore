@@ -91,6 +91,50 @@ class Experiment(models.Model):
     def __str__(self):
         return self.title
 
+    def is_open(self):
+        return self.state == self.OPEN and self.approved
+
+    def assign_to_group(self):
+        # the basic idea here is to assign incoming sessions equally across all available groups.
+        # however, since opened session don't necessarily reflect completed sessions, we also try
+        # to rebalance the distribution whenever a session is completed
+        groups = list(self.targetgroup_set.all().order_by('pk'))
+
+        if len(groups) < 1:
+            # experiment has no groups defined, it should still be possible to run it using the old API
+            # but trying to create a participant session should fail.
+            return None
+
+        last_opened = self.participantsession_set.order_by('-date_started').first()
+        last_closed = self.participantsession_set\
+            .filter(state=ParticipantSession.COMPLETED)\
+            .order_by('-date_updated').first()
+
+        if last_closed is not None and last_closed.date_updated > last_opened.date_started:
+            # last thing to happen was a session being completed
+            # assign the incoming participant to the group with less completed sessions
+            for group in self.targetgroup_set.order_by('completed'):
+                if group.is_open():
+                    return group
+            return None
+        else:
+            # last thing to happen was a new session being opened
+            # assign the incoming participant to the next group in line
+            if last_opened is None:
+                # no participants yet
+                last_idx = len(groups) - 1
+            else:
+                last_idx = groups.index(last_opened.group)
+            i = (last_idx + 1) % len(groups)
+            while not groups[i].is_open():
+                # too many completed sessions, advance to the next group
+                if i == last_idx:
+                    # looped around, no group to assign
+                    return None
+                i = (i + 1) % len(groups)
+
+            return groups[i]
+
 
 class DataPoint(models.Model):
     """Model to hold data from a participant in an experiment"""
@@ -115,3 +159,71 @@ class DataPoint(models.Model):
 
     def __str__(self):
         return "Datapoint {}".format(self.number)
+
+    session = models.ForeignKey(
+        'ParticipantSession', on_delete=models.CASCADE, null=True)
+
+
+class ParticipantSession(models.Model):
+    STARTED = 1
+    COMPLETED = 2
+    REJECTED = 3
+    STATES = (
+        (STARTED, _("experiments:models:participant:state:started")),
+        (COMPLETED, _("experiments:models:participant:state:completed")),
+        (REJECTED, _("experiments:models:participant:state:rejected")),
+    )
+
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    uuid = models.UUIDField(_("experiments:models:participant:uuid"),
+                            unique=True, default=uuid.uuid4, editable=False)
+    state = models.PositiveIntegerField(
+        _("experiments:models:participant:state"),
+        help_text=_("experiments:models:participant:state:help"),
+        choices=STATES,
+        default=STARTED
+    )
+    experiment_state = models.PositiveIntegerField(null=True)
+
+    group = models.ForeignKey('TargetGroup', on_delete=models.PROTECT)
+    date_started = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def group_name(self):
+        return self.group.name
+
+    def complete(self):
+        self.state = self.COMPLETED
+        self.experiment_state = self.experiment.state
+        self.save()
+        self.group.update_completed()
+
+
+class TargetGroup(models.Model):
+    experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+    name = models.CharField(
+        _("experiments:models:targetgroup:name"),
+        max_length=100,
+        help_text=_("experiments:models:targetgroup:name:help"),
+    )
+
+    completed = models.PositiveIntegerField(
+        _("experiments:models:targetgroup:completed"),
+        default=0,
+        help_text=_("experiments:models:targetgroup:completed:help"),
+    )
+
+    completion_target = models.IntegerField(
+        _("experiments:models:targetgroup:completion_target"),
+        help_text=_("experiments:models:targetgroup:completion_target:help"),
+    )
+
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def update_completed(self):
+        self.completed = self.participantsession_set.filter(state=ParticipantSession.COMPLETED).count()
+        self.save()
+
+    def is_open(self):
+        return self.completed < self.completion_target

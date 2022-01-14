@@ -2,11 +2,11 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from .models import Experiment
+from .models import Experiment, TargetGroup
 
 
 class EditExperimentForm(forms.ModelForm):
-    """From to edit an experiment. Differs from the creation form, as it
+    """Form to edit an experiment. Differs from the creation form, as it
     does not allow editing of the folder_name, but does allow changing the
     state of the experiment.
     """

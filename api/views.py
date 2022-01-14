@@ -1,10 +1,12 @@
+from django.http import Http404
 from django.utils import translation
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.views import exception_handler as default_exception_handler
+from rest_framework.generics import GenericAPIView, CreateAPIView
+from rest_framework.serializers import ModelSerializer
 
-from .mixins import ApiExperimentMixin
 from .parsers import PlainTextParser
-from experiments.models import DataPoint, Experiment
+from experiments.models import DataPoint, Experiment, ParticipantSession
 
 
 class ResultCodes:
@@ -13,45 +15,54 @@ class ResultCodes:
     ERR_NO_DATA = "ERR_NO_DATA"
     ERR_UNKNOWN_ID = "ERR_UNKNOWN_ID"
     ERR_NOT_OPEN = "ERR_NOT_OPEN"
+    ERR_GROUP_ASSIGN_FAIL = "ERR_GROUP_ASSIGN_FAIL"
 
 
-class ApiExperimentView(ApiExperimentMixin, APIView):
+class ApiExperimentView(GenericAPIView):
+    lookup_field = 'access_id'
+    lookup_url_kwarg = 'access_key'
+    queryset = Experiment.objects.all()
+
     def dispatch(self, *args, **kwargs):
         # API responses should always use English messages
         with translation.override('en'):
             return super().dispatch(*args, **kwargs)
 
+    def get_object(self):
+        try:
+            return super().get_object()
+        except Http404 as e:
+            # add exception code
+            e.code = ResultCodes.ERR_UNKNOWN_ID
+            e.detail = 'No experiment using that id was found'
+            raise
+
+    @property
+    def experiment(self):
+        return self.get_object()
+
+
+def exception_handler(exc, context):
+    response = default_exception_handler(exc, context)
+
+    if response:
+        if hasattr(exc, 'code'):
+            response.data['result'] = exc.code
+        if hasattr(exc, 'detail'):
+            response.data['message'] = exc.detail
+
+    return response
+
 
 class MetadataView(ApiExperimentView):
-
     # List of all variables that are retrievable
     fields = ('state', )
 
     def get(self, request, access_key, field=None):
-
-        # Should not happen(tm), as it's a path variable.
-        if not access_key or len(access_key) == 0:
-            return Response({
-                "result": ResultCodes.ERR_NO_ID,
-                "message": "No access key was provided"
-            },
-                status=400  # Bad request
-            )
-
-        experiment = self.get_experiment(access_key)
-
-        if not experiment:
-            return Response({
-                "result":  ResultCodes.ERR_UNKNOWN_ID,
-                "message": "No experiment using that id was found"
-                },
-                status=404  # Not found
-            )
-
         if field in self.fields:
-            return Response(self.get_value(experiment, field))
+            return Response(self.get_value(self.experiment, field))
 
-        return Response({field: self.get_value(experiment, field) for field in self.fields})
+        return Response({field: self.get_value(self.experiment, field) for field in self.fields})
 
     @staticmethod
     def get_value(experiment: Experiment, field):
@@ -86,39 +97,20 @@ class UploadView(ApiExperimentView):
     """
     parser_classes = [PlainTextParser]
 
-    def post(self, request, access_key):
+    def post(self, request, access_key, participant_id=None):
         payload = request.data
-
-        # Should not happen(tm), as it's a path variable.
-        if not access_key or len(access_key) == 0:
-            return Response({
-                "result": ResultCodes.ERR_NO_ID,
-                "message": "No access key was provided"
-                },
-                status=400  # Bad request
-            )
 
         # Error if no data was sent
         if not payload:
             return Response({
                 "result":  ResultCodes.ERR_NO_DATA,
                 "message": "No data was provided"
-                },
+            },
                 status=400  # Bad request
             )
 
-        experiment = self.get_experiment(access_key)
-
-        if not experiment:
-            return Response({
-                "result":  ResultCodes.ERR_UNKNOWN_ID,
-                "message": "No experiment using that id was found"
-                },
-                status=404  # Not found
-            )
-
         # The experiment should be approved and open.
-        if not experiment.state == experiment.OPEN or not experiment.approved:
+        if not self.experiment.is_open():
             return Response({
                 "result":  ResultCodes.ERR_NOT_OPEN,
                 "message": "The experiment is not open to new uploads"
@@ -126,14 +118,61 @@ class UploadView(ApiExperimentView):
                 status=403  # Forbidden
             )
 
+        participant = None
+        if participant_id:
+            participant = ParticipantSession.objects.get(uuid=participant_id)
         # Create the new datapoint
         dp = DataPoint()
-        dp.experiment = experiment
+        dp.experiment = self.experiment
         dp.data = payload
+
+        if participant:
+            dp.session = participant
         dp.save()
+
+        if participant:
+            participant.complete()
 
         # Return that everything went OK
         return Response({
             "result":  ResultCodes.OK,
             "message": "Upload successful"
         })
+
+
+class ParticipantSerializer(ModelSerializer):
+    class Meta:
+        model = ParticipantSession
+        fields = ['uuid', 'state', 'group_name']
+
+
+class ParticipantView(ApiExperimentView, CreateAPIView):
+    serializer_class = ParticipantSerializer
+
+    def create(self, *args, **kwargs):
+        """creates a new participant session"""
+        if not self.experiment.is_open():
+            return Response({
+                "result":  ResultCodes.ERR_NOT_OPEN,
+                "message": "The experiment is not open to new uploads"
+            },
+                status=403  # Forbidden
+            )
+
+        group = self.experiment.assign_to_group()
+        if not group:
+            return Response({
+                'result': ResultCodes.ERR_GROUP_ASSIGN_FAIL,
+                'message': 'Could not assign participant to any group',
+            },
+                status=400
+            )
+
+        participant = ParticipantSession.objects.create(
+            experiment=self.experiment,
+            state=ParticipantSession.STARTED,
+            group=group
+        )
+
+        serialized = self.serializer_class(participant)
+        return Response(serialized.data)

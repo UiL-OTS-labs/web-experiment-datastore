@@ -1,5 +1,6 @@
 from typing import Dict, Any
 
+from django import forms
 from django.http import HttpResponseBadRequest, Http404, HttpResponseRedirect
 from django.views import generic
 import braces.views as braces
@@ -15,7 +16,7 @@ from uil.core.views.mixins import DeleteSuccessMessageMixin
 from uil.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm
-from .models import Experiment, DataPoint
+from .models import Experiment, DataPoint, TargetGroup
 from .serializers import ExperimentSerializer
 from .utils import create_download_response_zip, create_file_response_single, \
     send_new_experiment_mail
@@ -104,13 +105,52 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
     model = Experiment
     success_message = _('experiments:message:edit:success')
     _experiment_kwargs_key = 'pk'
+    target_group_widgets = {
+        'completed': forms.TextInput(attrs={'readonly': True})
+    }
+    target_group_formset = forms.inlineformset_factory(
+        Experiment,
+        TargetGroup,
+        fields=('name', 'completion_target', 'completed'),
+        widgets=target_group_widgets,
+        can_delete=False,
+        extra=4
+    )
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['target_group_formset'] = kwargs.get('target_group_formset',
+                                                     self.target_group_formset(instance=self.get_object()))
+
+        # remove the "completed: 0" field from the 'extra' target group forms
+        for form in context['target_group_formset']:
+            if form.instance.id is None:
+                del form.fields['completed']
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, instance=self.object)
+        formset = self.target_group_formset(request.POST, instance=self.object)
+
+        for group_form in formset:
+            del group_form.fields['completed']
+
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
+        elif not form.is_valid():
+            return self.form_invalid(form)
+
+        return self.render_to_response(self.get_context_data(form=form,
+                                                             target_group_formset=formset))
 
     def get_success_url(self):
         return reverse('experiments:detail', args=[self.object.pk])
 
-    def form_valid(self, form):
+    def form_valid(self, form, formset):
         # Add current user to users
         experiment = form.save()
+        formset.save()
 
         if not experiment.users.filter(pk=self.request.user.pk).exists():
             experiment.users.add(self.request.user)
@@ -221,7 +261,7 @@ class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
     """
     template_name = 'experiments/delete_all_data.html'
     success_message = _('experiments:message:delete_all_data:success')
-    
+
     def post(self, request, experiment):
         self.experiment.datapoint_set.all().delete()
 
@@ -234,7 +274,7 @@ class DeleteAllDataView(UserAllowedMixin, SuccessMessageMixin,
             self.request.user,
             UserType.RESEARCHER
         )
-        
+
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
