@@ -120,7 +120,7 @@ class UploadView(ApiExperimentView):
         # The experiment should be approved and open.
         if not experiment.state == experiment.OPEN or not experiment.approved:
             return Response({
-                "result":  ResultCodes.ERR_NOT_OPEN.__str__(),
+                "result":  ResultCodes.ERR_NOT_OPEN,
                 "message": "The experiment is not open to new uploads"
             },
                 status=403  # Forbidden
