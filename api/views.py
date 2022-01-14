@@ -1,3 +1,4 @@
+from django.utils import translation
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -6,7 +7,22 @@ from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment
 
 
-class MetadataView(ApiExperimentMixin, APIView):
+class ResultCodes:
+    OK = "OK"
+    ERR_NO_ID = "ERR_NO_ID"
+    ERR_NO_DATA = "ERR_NO_DATA"
+    ERR_UNKNOWN_ID = "ERR_UNKNOWN_ID"
+    ERR_NOT_OPEN = "ERR_NOT_OPEN"
+
+
+class ApiExperimentView(ApiExperimentMixin, APIView):
+    def dispatch(self, *args, **kwargs):
+        # API responses should always use English messages
+        with translation.override('en'):
+            return super().dispatch(*args, **kwargs)
+
+
+class MetadataView(ApiExperimentView):
 
     # List of all variables that are retrievable
     fields = ('state', )
@@ -16,7 +32,7 @@ class MetadataView(ApiExperimentMixin, APIView):
         # Should not happen(tm), as it's a path variable.
         if not access_key or len(access_key) == 0:
             return Response({
-                "result": "ERR_NO_ID",
+                "result": ResultCodes.ERR_NO_ID,
                 "message": "No access key was provided"
             },
                 status=400  # Bad request
@@ -26,7 +42,7 @@ class MetadataView(ApiExperimentMixin, APIView):
 
         if not experiment:
             return Response({
-                "result":  "ERR_UNKNOWN_ID",
+                "result":  ResultCodes.ERR_UNKNOWN_ID,
                 "message": "No experiment using that id was found"
                 },
                 status=404  # Not found
@@ -52,7 +68,7 @@ class MetadataView(ApiExperimentMixin, APIView):
             return None
 
 
-class UploadView(ApiExperimentMixin, APIView):
+class UploadView(ApiExperimentView):
     """This view is used to upload data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
@@ -76,7 +92,7 @@ class UploadView(ApiExperimentMixin, APIView):
         # Should not happen(tm), as it's a path variable.
         if not access_key or len(access_key) == 0:
             return Response({
-                "result": "ERR_NO_ID",
+                "result": ResultCodes.ERR_NO_ID,
                 "message": "No access key was provided"
                 },
                 status=400  # Bad request
@@ -85,7 +101,7 @@ class UploadView(ApiExperimentMixin, APIView):
         # Error if no data was sent
         if not payload:
             return Response({
-                "result":  "ERR_NO_DATA",
+                "result":  ResultCodes.ERR_NO_DATA,
                 "message": "No data was provided"
                 },
                 status=400  # Bad request
@@ -95,7 +111,7 @@ class UploadView(ApiExperimentMixin, APIView):
 
         if not experiment:
             return Response({
-                "result":  "ERR_UNKNOWN_ID",
+                "result":  ResultCodes.ERR_UNKNOWN_ID,
                 "message": "No experiment using that id was found"
                 },
                 status=404  # Not found
@@ -104,7 +120,7 @@ class UploadView(ApiExperimentMixin, APIView):
         # The experiment should be approved and open.
         if not experiment.state == experiment.OPEN or not experiment.approved:
             return Response({
-                "result":  "ERR_NOT_OPEN",
+                "result":  ResultCodes.ERR_NOT_OPEN,
                 "message": "The experiment is not open to new uploads"
             },
                 status=403  # Forbidden
@@ -118,7 +134,6 @@ class UploadView(ApiExperimentMixin, APIView):
 
         # Return that everything went OK
         return Response({
-            "result":  "OK",
+            "result":  ResultCodes.OK,
             "message": "Upload successful"
         })
-
