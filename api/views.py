@@ -16,6 +16,7 @@ class ResultCodes:
     ERR_UNKNOWN_ID = "ERR_UNKNOWN_ID"
     ERR_NOT_OPEN = "ERR_NOT_OPEN"
     ERR_GROUP_ASSIGN_FAIL = "ERR_GROUP_ASSIGN_FAIL"
+    ERR_NO_SESSION = "ERR_NO_SESSION"
 
 
 class ApiExperimentView(GenericAPIView):
@@ -120,7 +121,17 @@ class UploadView(ApiExperimentView):
 
         participant = None
         if participant_id:
-            participant = ParticipantSession.objects.get(uuid=participant_id)
+            participant = self.experiment.participantsession_set\
+                                         .get(uuid=participant_id)
+
+        if self.experiment.has_groups() and participant is None:
+            # If the experiment is configured to use target groups,
+            # then session ids are mandatory
+            return Response({
+                "result":  ResultCodes.ERR_NO_SESSION,
+                "message": "Bad or missing participant session id"
+            }, status=403)
+
         # Create the new datapoint
         dp = DataPoint()
         dp.experiment = self.experiment

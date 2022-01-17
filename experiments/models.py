@@ -94,6 +94,9 @@ class Experiment(models.Model):
     def is_open(self):
         return self.state == self.OPEN and self.approved
 
+    def has_groups(self):
+        return self.targetgroup_set.count() > 0
+
     def assign_to_group(self):
         # the basic idea here is to assign incoming sessions equally across all available groups.
         # however, since opened session don't necessarily reflect completed sessions, we also try

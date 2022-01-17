@@ -211,3 +211,10 @@ class TestTargetGroupAllocation(APITestCase):
 
             # should keep trying to assign us to B
             self.assertEqual(self.exp.assign_to_group(), self.group_b)
+
+    def test_upload_fail_without_session(self):
+        # if the experiment has target groups configured, then it should no longer
+        # be possible to upload data without a session id
+        data = json.dumps({'key': 'value'})
+        response = self.client.post(reverse('api:upload', args=[self.exp.access_id]), data, content_type='text/plain')
+        self.assertEqual(response.status_code, 403)
