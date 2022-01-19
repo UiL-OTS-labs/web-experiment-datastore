@@ -83,7 +83,7 @@ class MetadataView(ApiExperimentView):
 
 
 class BaseUploadView(ApiExperimentView):
-    """This view is used to upload data into an experiment.
+    """Base view for uploading data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
     Framework tries to force the data into a Python format. Not only is this
