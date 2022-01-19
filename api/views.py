@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.utils import translation
+from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
 from rest_framework.views import exception_handler as default_exception_handler
 from rest_framework.generics import GenericAPIView, CreateAPIView
@@ -32,11 +33,9 @@ class ApiExperimentView(GenericAPIView):
     def get_object(self):
         try:
             return super().get_object()
-        except Http404 as e:
-            # add exception code
-            e.code = ResultCodes.ERR_UNKNOWN_ID
-            e.detail = 'No experiment using that id was found'
-            raise
+        except Http404:
+            raise NotFound(code=ResultCodes.ERR_UNKNOWN_ID,
+                           detail='No experiment using that id was found')
 
     @property
     def experiment(self):
@@ -44,15 +43,13 @@ class ApiExperimentView(GenericAPIView):
 
 
 def exception_handler(exc, context):
-    response = default_exception_handler(exc, context)
+    if isinstance(exc, APIException):
+        details = exc.get_full_details()
+        details['result'] = details['code']
+        del details['code']
+        return Response(details, status=exc.status_code)
 
-    if response:
-        if hasattr(exc, 'code'):
-            response.data['result'] = exc.code
-        if hasattr(exc, 'detail'):
-            response.data['message'] = exc.detail
-
-    return response
+    return default_exception_handler(exc, context)
 
 
 class MetadataView(ApiExperimentView):
