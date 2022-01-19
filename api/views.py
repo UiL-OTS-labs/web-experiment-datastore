@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.utils import translation
+from rest_framework import status
 from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
 from rest_framework.views import exception_handler as default_exception_handler
@@ -18,6 +19,10 @@ class ResultCodes:
     ERR_NOT_OPEN = "ERR_NOT_OPEN"
     ERR_GROUP_ASSIGN_FAIL = "ERR_GROUP_ASSIGN_FAIL"
     ERR_NO_SESSION = "ERR_NO_SESSION"
+
+
+class ConfigError(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
 
 
 class ApiExperimentView(GenericAPIView):
@@ -77,7 +82,7 @@ class MetadataView(ApiExperimentView):
             return None
 
 
-class UploadView(ApiExperimentView):
+class BaseUploadView(ApiExperimentView):
     """This view is used to upload data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
@@ -95,51 +100,66 @@ class UploadView(ApiExperimentView):
     """
     parser_classes = [PlainTextParser]
 
-    def post(self, request, access_key, participant_id=None):
-        payload = request.data
-
+    def _validate_request(self, payload):
         # Error if no data was sent
         if not payload:
-            return Response({
-                "result":  ResultCodes.ERR_NO_DATA,
-                "message": "No data was provided"
-            },
-                status=400  # Bad request
-            )
+            raise APIException(code=ResultCodes.ERR_NO_DATA, detail='No data was provided')
 
         # The experiment should be approved and open.
         if not self.experiment.is_open():
-            return Response({
-                "result":  ResultCodes.ERR_NOT_OPEN,
-                "message": "The experiment is not open to new uploads"
-            },
-                status=403  # Forbidden
-            )
+            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
+                                   detail='The experiment is not open to new uploads')
 
-        participant = None
-        if participant_id:
-            participant = self.experiment.participantsession_set\
-                                         .get(uuid=participant_id)
-
-        if self.experiment.has_groups() and participant is None:
-            # If the experiment is configured to use target groups,
-            # then session ids are mandatory
-            return Response({
-                "result":  ResultCodes.ERR_NO_SESSION,
-                "message": "Bad or missing participant session id"
-            }, status=403)
-
-        # Create the new datapoint
+    def _save_data_point(self, payload):
         dp = DataPoint()
         dp.experiment = self.experiment
         dp.data = payload
-
-        if participant:
-            dp.session = participant
         dp.save()
 
-        if participant:
-            participant.complete()
+        return dp
+
+
+class UploadView(BaseUploadView):
+
+    def post(self, request, access_key):
+        payload = request.data
+        self._validate_request(payload)
+
+        if self.experiment.has_groups():
+            # If the experiment is configured to use target groups,
+            # then session ids are mandatory
+            raise ConfigError(code=ResultCodes.ERR_NO_SESSION,
+                              detail='Missing participant session id')
+
+        self._save_data_point(payload)
+        return Response({
+            'result': ResultCodes.OK,
+            'message': 'Upload successful'
+        })
+
+
+class SessionUploadView(BaseUploadView):
+
+    def post(self, request, access_key, participant_id):
+        payload = request.data
+        self._validate_request(payload)
+
+        if not self.experiment.has_groups():
+            raise ValidationError(detail='Experiment is not using session ids')
+
+        try:
+            participant = self.experiment.participantsession_set\
+                                         .get(uuid=participant_id)
+        except ParticipantSession.DoesNotExist:
+            raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
+                                   detail='Bad participant session id')
+
+        # Create the new datapoint
+        dp = self._save_data_point(payload)
+        dp.session = participant
+        dp.save()
+
+        participant.complete()
 
         # Return that everything went OK
         return Response({
@@ -160,21 +180,13 @@ class ParticipantView(ApiExperimentView, CreateAPIView):
     def create(self, *args, **kwargs):
         """creates a new participant session"""
         if not self.experiment.is_open():
-            return Response({
-                "result":  ResultCodes.ERR_NOT_OPEN,
-                "message": "The experiment is not open to new uploads"
-            },
-                status=403  # Forbidden
-            )
+            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
+                                   detail="The experiment is not open to new uploads")
 
         group = self.experiment.assign_to_group()
         if not group:
-            return Response({
-                'result': ResultCodes.ERR_GROUP_ASSIGN_FAIL,
-                'message': 'Could not assign participant to any group',
-            },
-                status=400
-            )
+            raise ConfigError(code=ResultCodes.ERR_GROUP_ASSIGN_FAIL,
+                              detail='Could not assign participant to any group')
 
         participant = ParticipantSession.objects.create(
             experiment=self.experiment,

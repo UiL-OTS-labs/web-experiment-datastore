@@ -217,4 +217,4 @@ class TestTargetGroupAllocation(APITestCase):
         # be possible to upload data without a session id
         data = json.dumps({'key': 'value'})
         response = self.client.post(reverse('api:upload', args=[self.exp.access_id]), data, content_type='text/plain')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 400)
