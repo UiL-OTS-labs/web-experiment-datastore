@@ -1,10 +1,14 @@
+from django.http import Http404
 from django.utils import translation
+from functools import cached_property
+from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.generics import GenericAPIView, CreateAPIView
 
-from .mixins import ApiExperimentMixin
+from .exceptions import ConfigError
 from .parsers import PlainTextParser
-from experiments.models import DataPoint, Experiment
+from .serializers import ParticipantSerializer
+from experiments.models import DataPoint, Experiment, ParticipantSession
 
 
 class ResultCodes:
@@ -13,45 +17,41 @@ class ResultCodes:
     ERR_NO_DATA = "ERR_NO_DATA"
     ERR_UNKNOWN_ID = "ERR_UNKNOWN_ID"
     ERR_NOT_OPEN = "ERR_NOT_OPEN"
+    ERR_GROUP_ASSIGN_FAIL = "ERR_GROUP_ASSIGN_FAIL"
+    ERR_NO_SESSION = "ERR_NO_SESSION"
 
 
-class ApiExperimentView(ApiExperimentMixin, APIView):
+class BaseExperimentApiView(GenericAPIView):
+    lookup_field = 'access_id'
+    lookup_url_kwarg = 'access_key'
+    queryset = Experiment.objects.all()
+
     def dispatch(self, *args, **kwargs):
         # API responses should always use English messages
         with translation.override('en'):
             return super().dispatch(*args, **kwargs)
 
+    def get_object(self):
+        try:
+            return super().get_object()
+        except Http404:
+            raise NotFound(code=ResultCodes.ERR_UNKNOWN_ID,
+                           detail='No experiment using that id was found')
 
-class MetadataView(ApiExperimentView):
+    @cached_property
+    def experiment(self):
+        return self.get_object()
 
+
+class MetadataView(BaseExperimentApiView):
     # List of all variables that are retrievable
     fields = ('state', )
 
     def get(self, request, access_key, field=None):
-
-        # Should not happen(tm), as it's a path variable.
-        if not access_key or len(access_key) == 0:
-            return Response({
-                "result": ResultCodes.ERR_NO_ID,
-                "message": "No access key was provided"
-            },
-                status=400  # Bad request
-            )
-
-        experiment = self.get_experiment(access_key)
-
-        if not experiment:
-            return Response({
-                "result":  ResultCodes.ERR_UNKNOWN_ID,
-                "message": "No experiment using that id was found"
-                },
-                status=404  # Not found
-            )
-
         if field in self.fields:
-            return Response(self.get_value(experiment, field))
+            return Response(self.get_value(self.experiment, field))
 
-        return Response({field: self.get_value(experiment, field) for field in self.fields})
+        return Response({field: self.get_value(self.experiment, field) for field in self.fields})
 
     @staticmethod
     def get_value(experiment: Experiment, field):
@@ -68,8 +68,8 @@ class MetadataView(ApiExperimentView):
             return None
 
 
-class UploadView(ApiExperimentView):
-    """This view is used to upload data into an experiment.
+class BaseUploadView(BaseExperimentApiView):
+    """Base view for uploading data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
     Framework tries to force the data into a Python format. Not only is this
@@ -86,54 +86,93 @@ class UploadView(ApiExperimentView):
     """
     parser_classes = [PlainTextParser]
 
-    def post(self, request, access_key):
-        payload = request.data
-
-        # Should not happen(tm), as it's a path variable.
-        if not access_key or len(access_key) == 0:
-            return Response({
-                "result": ResultCodes.ERR_NO_ID,
-                "message": "No access key was provided"
-                },
-                status=400  # Bad request
-            )
-
+    def _validate_request(self, payload):
         # Error if no data was sent
         if not payload:
-            return Response({
-                "result":  ResultCodes.ERR_NO_DATA,
-                "message": "No data was provided"
-                },
-                status=400  # Bad request
-            )
-
-        experiment = self.get_experiment(access_key)
-
-        if not experiment:
-            return Response({
-                "result":  ResultCodes.ERR_UNKNOWN_ID,
-                "message": "No experiment using that id was found"
-                },
-                status=404  # Not found
-            )
+            raise APIException(code=ResultCodes.ERR_NO_DATA, detail='No data was provided')
 
         # The experiment should be approved and open.
-        if not experiment.state == experiment.OPEN or not experiment.approved:
-            return Response({
-                "result":  ResultCodes.ERR_NOT_OPEN,
-                "message": "The experiment is not open to new uploads"
-            },
-                status=403  # Forbidden
-            )
+        if not self.experiment.is_open():
+            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
+                                   detail='The experiment is not open to new uploads')
 
-        # Create the new datapoint
+    def _save_data_point(self, payload):
         dp = DataPoint()
-        dp.experiment = experiment
+        dp.experiment = self.experiment
         dp.data = payload
         dp.save()
+
+        return dp
+
+
+class UploadView(BaseUploadView):
+
+    def post(self, request, access_key):
+        payload = request.data
+        self._validate_request(payload)
+
+        if self.experiment.has_groups():
+            # If the experiment is configured to use target groups,
+            # then session ids are mandatory
+            raise ConfigError(code=ResultCodes.ERR_NO_SESSION,
+                              detail='Missing participant session id')
+
+        self._save_data_point(payload)
+        return Response({
+            'result': ResultCodes.OK,
+            'message': 'Upload successful'
+        })
+
+
+class SessionUploadView(BaseUploadView):
+
+    def post(self, request, access_key, participant_id):
+        payload = request.data
+        self._validate_request(payload)
+
+        if not self.experiment.has_groups():
+            raise ValidationError(detail='Experiment is not using session ids')
+
+        try:
+            participant = self.experiment.participantsession_set\
+                                         .get(uuid=participant_id)
+        except ParticipantSession.DoesNotExist:
+            raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
+                                   detail='Bad participant session id')
+
+        # Create the new datapoint
+        dp = self._save_data_point(payload)
+        dp.session = participant
+        dp.save()
+
+        participant.complete()
 
         # Return that everything went OK
         return Response({
             "result":  ResultCodes.OK,
             "message": "Upload successful"
         })
+
+
+class ParticipantView(BaseExperimentApiView, CreateAPIView):
+    serializer_class = ParticipantSerializer
+
+    def create(self, *args, **kwargs):
+        """creates a new participant session"""
+        if not self.experiment.is_open():
+            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
+                                   detail="The experiment is not open to new uploads")
+
+        group = self.experiment.get_next_group()
+        if not group:
+            raise ConfigError(code=ResultCodes.ERR_GROUP_ASSIGN_FAIL,
+                              detail='Could not assign participant to any group')
+
+        participant = ParticipantSession.objects.create(
+            experiment=self.experiment,
+            state=ParticipantSession.STARTED,
+            group=group
+        )
+
+        serialized = self.serializer_class(participant)
+        return Response(serialized.data)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 09:30+0000\n"
+"POT-Creation-Date: 2022-01-24 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,7 +80,7 @@ msgstr ""
 "you are done running your experiment, or ask the lab technicians to take "
 "your experiment folder offline. "
 
-#: experiments/models.py:60
+#: experiments/models.py:60 experiments/views.py:39
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
@@ -96,13 +96,64 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:108
+#: experiments/models.py:155
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:112
+#: experiments/models.py:159
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
+
+#: experiments/models.py:175
+msgid "experiments:models:participant:state:started"
+msgstr "Started"
+
+#: experiments/models.py:176
+msgid "experiments:models:participant:state:completed"
+msgstr "Completed"
+
+#: experiments/models.py:177
+msgid "experiments:models:participant:state:rejected"
+msgstr "Rejected"
+
+#: experiments/models.py:181
+msgid "experiments:models:participant:uuid"
+msgstr "UUID"
+
+#: experiments/models.py:184
+msgid "experiments:models:participant:state"
+msgstr "Status"
+
+#: experiments/models.py:185
+msgid "experiments:models:participant:state:help"
+msgstr ""
+
+#: experiments/models.py:209
+msgid "experiments:models:targetgroup:name"
+msgstr "Name"
+
+#: experiments/models.py:211
+msgid "experiments:models:targetgroup:name:help"
+msgstr ""
+"The name of the target group should match the one in your experiment script"
+
+#: experiments/models.py:215
+msgid "experiments:models:targetgroup:completed"
+msgstr "Completed"
+
+#: experiments/models.py:217
+msgid "experiments:models:targetgroup:completed:help"
+msgstr ""
+"How many participants from that target group had completed the experiment "
+"(so far)"
+
+#: experiments/models.py:221
+msgid "experiments:models:targetgroup:completion_target"
+msgstr "Completion target"
+
+#: experiments/models.py:222
+msgid "experiments:models:targetgroup:completion_target:help"
+msgstr "How many participants should the target group contain in total"
 
 #: experiments/templates/experiments/delete_all_data.html:8
 #: experiments/templates/experiments/delete_all_data.html:16
@@ -168,7 +219,6 @@ msgid "experiments:details:detail_header"
 msgstr "Experiment details"
 
 #: experiments/templates/experiments/detail.html:24
-#: experiments/templates/experiments/overview.html:56
 msgid "experiments:global:edit"
 msgstr "Edit"
 
@@ -177,12 +227,10 @@ msgid "experiments:detail:access_id"
 msgstr "Access Key"
 
 #: experiments/templates/experiments/detail.html:49
-#: experiments/templates/experiments/overview.html:94
 msgid "experiments:global:webexp_location"
 msgstr "Location"
 
 #: experiments/templates/experiments/detail.html:59
-#: experiments/templates/experiments/overview.html:104
 msgid "experiments:global:webdav_location"
 msgstr "Webdav share"
 
@@ -192,13 +240,11 @@ msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:86
 #: experiments/templates/experiments/detail.html:128
-#: experiments/templates/experiments/overview.html:132
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:91
 #: experiments/templates/experiments/detail.html:132
-#: experiments/templates/experiments/overview.html:139
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
@@ -219,15 +265,27 @@ msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
 
 #: experiments/templates/experiments/edit.html:8
-#: experiments/templates/experiments/edit.html:15
+#: experiments/templates/experiments/edit.html:24
 msgid "experiments:edit:header"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/edit.html:18
+#: experiments/templates/experiments/edit.html:27
 msgid "experiments:edit:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/edit.html:27
+#: experiments/templates/experiments/edit.html:34
+msgid "experiments:edit:target_groups_header"
+msgstr "Target Groups"
+
+#: experiments/templates/experiments/edit.html:35
+msgid "experiments:edit:target_groups_instructions"
+msgstr "If your design includes multiple item lists, you can configure them by adding target groups using the link below. Participants would be assigned to lists randomly but in a balanced fashion. Be sure to configure your jsPsych script accordingly."
+
+#: experiments/templates/experiments/edit.html:45
+msgid "experiments:edit:add_group"
+msgstr "Add target group"
+
+#: experiments/templates/experiments/edit.html:47
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
 msgstr "Save"
@@ -241,47 +299,35 @@ msgstr "Create new experiment"
 msgid "experiments:new:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/overview.html:11
-#: experiments/templates/experiments/overview.html:37
+#: experiments/templates/experiments/overview.html:12
+#: experiments/templates/experiments/overview.html:48
 msgid "experiments:home:header"
 msgstr "My experiments"
 
-#: experiments/templates/experiments/overview.html:33
+#: experiments/templates/experiments/overview.html:44
 msgid "experiments:home:create_experiment"
 msgstr "Create new experiment"
 
-#: experiments/templates/experiments/overview.html:40
+#: experiments/templates/experiments/overview.html:51
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/overview.html:51
-msgid "experiments:global:view"
-msgstr "More details"
-
-#: experiments/templates/experiments/overview.html:61
-msgid "experiments:global:delete_experiment"
-msgstr "Delete experiment"
-
-#: experiments/templates/experiments/overview.html:123
-msgid "experiments:home:num_datapoints"
-msgstr "Data uploaded"
-
-#: experiments/views.py:47
+#: experiments/views.py:66
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:87
+#: experiments/views.py:106
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:143
+#: experiments/views.py:201
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:168
+#: experiments/views.py:226
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:205
+#: experiments/views.py:263
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
