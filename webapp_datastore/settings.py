@@ -245,5 +245,5 @@ MENU_SELECT_PARENTS = True
 MENU_HIDE_EMPTY = False
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'api.views.exception_handler',
+    'EXCEPTION_HANDLER': 'api.exceptions.exception_handler',
 }

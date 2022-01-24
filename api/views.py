@@ -1,12 +1,11 @@
 from django.http import Http404
 from django.utils import translation
-from rest_framework import status
 from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
-from rest_framework.views import exception_handler as default_exception_handler
 from rest_framework.generics import GenericAPIView, CreateAPIView
 from rest_framework.serializers import ModelSerializer
 
+from .exceptions import ConfigError
 from .parsers import PlainTextParser
 from experiments.models import DataPoint, Experiment, ParticipantSession
 
@@ -19,10 +18,6 @@ class ResultCodes:
     ERR_NOT_OPEN = "ERR_NOT_OPEN"
     ERR_GROUP_ASSIGN_FAIL = "ERR_GROUP_ASSIGN_FAIL"
     ERR_NO_SESSION = "ERR_NO_SESSION"
-
-
-class ConfigError(APIException):
-    status_code = status.HTTP_400_BAD_REQUEST
 
 
 class ApiExperimentView(GenericAPIView):
@@ -45,16 +40,6 @@ class ApiExperimentView(GenericAPIView):
     @property
     def experiment(self):
         return self.get_object()
-
-
-def exception_handler(exc, context):
-    if isinstance(exc, APIException):
-        details = exc.get_full_details()
-        details['result'] = details['code']
-        del details['code']
-        return Response(details, status=exc.status_code)
-
-    return default_exception_handler(exc, context)
 
 
 class MetadataView(ApiExperimentView):
