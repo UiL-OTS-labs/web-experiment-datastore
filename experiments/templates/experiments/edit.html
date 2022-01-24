@@ -31,7 +31,10 @@
             <table width="100%">
                 {{ form.as_table }}
             </table>
-            <h3>{% trans 'experiments:edit:target_groups_header' %}</h3>
+            <div class="mt-4">
+              <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
+              <p>{% trans 'experiments:edit:target_groups_instructions' %}</p>
+            </div>
             {{ target_group_formset.management_form }}
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">

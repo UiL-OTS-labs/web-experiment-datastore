@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-14 15:43+0000\n"
+"POT-Creation-Date: 2022-01-24 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,59 +96,62 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:152
+#: experiments/models.py:155
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:156
+#: experiments/models.py:159
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
-#: experiments/models.py:172
+#: experiments/models.py:175
 msgid "experiments:models:participant:state:started"
 msgstr "Started"
 
-#: experiments/models.py:173
+#: experiments/models.py:176
 msgid "experiments:models:participant:state:completed"
 msgstr "Completed"
 
-#: experiments/models.py:174
+#: experiments/models.py:177
 msgid "experiments:models:participant:state:rejected"
 msgstr "Rejected"
 
-#: experiments/models.py:178
+#: experiments/models.py:181
 msgid "experiments:models:participant:uuid"
 msgstr "UUID"
 
-#: experiments/models.py:181
+#: experiments/models.py:184
 msgid "experiments:models:participant:state"
 msgstr "Status"
 
-#: experiments/models.py:182
+#: experiments/models.py:185
 msgid "experiments:models:participant:state:help"
 msgstr ""
 
-#: experiments/models.py:206
+#: experiments/models.py:209
 msgid "experiments:models:targetgroup:name"
 msgstr "Name"
 
-#: experiments/models.py:208
+#: experiments/models.py:211
 msgid "experiments:models:targetgroup:name:help"
-msgstr "The name of the target group should match the one in your experiment script"
+msgstr ""
+"The name of the target group should match the one in your experiment script"
 
-#: experiments/models.py:212
+#: experiments/models.py:215
 msgid "experiments:models:targetgroup:completed"
 msgstr "Completed"
 
-#: experiments/models.py:214
+#: experiments/models.py:217
 msgid "experiments:models:targetgroup:completed:help"
-msgstr "How many participants from that target group had completed the experiment (so far)"
+msgstr ""
+"How many participants from that target group had completed the experiment "
+"(so far)"
 
-#: experiments/models.py:218
+#: experiments/models.py:221
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Completion target"
 
-#: experiments/models.py:219
+#: experiments/models.py:222
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "How many participants should the target group contain in total"
 
@@ -274,11 +277,15 @@ msgstr " "
 msgid "experiments:edit:target_groups_header"
 msgstr "Target Groups"
 
-#: experiments/templates/experiments/edit.html:44
+#: experiments/templates/experiments/edit.html:35
+msgid "experiments:edit:target_groups_instructions"
+msgstr "If your design includes multiple item lists, you can configure them by adding target groups using the link below. Participants would be assigned to lists randomly but in a balanced fashion. Be sure to configure your jsPsych script accordingly."
+
+#: experiments/templates/experiments/edit.html:45
 msgid "experiments:edit:add_group"
 msgstr "Add target group"
 
-#: experiments/templates/experiments/edit.html:46
+#: experiments/templates/experiments/edit.html:47
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
 msgstr "Save"
