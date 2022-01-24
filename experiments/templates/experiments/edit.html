@@ -3,9 +3,14 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load static %}
 
 {% block header_title %}
     {% trans 'experiments:edit:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block html_head %}
+    <script src="{% static 'experiments/js/edit.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -52,20 +57,8 @@
     </div>
 </div>
 <script nonce="{{ request.csp_nonce }}">
- let existingGroups = {{ object.targetgroup_set.count }};
- $('.target-group-form').each((idx, el) => {
-     if (idx >= existingGroups) {
-         $(el).hide();
-     }
- });
- $('#add_group').click((event) => {
-     event.preventDefault();
-     let hidden = $('.target-group-form:hidden');
-     hidden.last().show();
-
-     if (hidden.length - 1 <= 0) {
-         $('#add_group').hide();
-     }
+ $(function() {
+     hideExtraForms({{ object.targetgroup_set.count }});
  });
 </script>
 {% endblock %}
