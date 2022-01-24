@@ -4,7 +4,7 @@ This Django project provides a generic datastore, intended to store data from
 web experiments. 
 
 # Requirements
-- Python 3.6+
+- Python 3.9+
 - Pip (see requirements.txt)
 - A WSGI capable web server (not needed for development)
 - A SQL database (tested with SQLite and MariaDB)
