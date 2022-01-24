@@ -44,7 +44,13 @@
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">
                     <table width="100%">
-                        {{ group_form.as_table }}
+                      {{ group_form.as_table }}
+                      {% if group_form.instance.id %}
+                        <tr>
+                            <th>Completed:</th>
+                            <td>{{ group_form.instance.num_completed }}</td>
+                        </tr>
+                        {% endif %}
                     </table>
                 </div>
             {% endfor %}

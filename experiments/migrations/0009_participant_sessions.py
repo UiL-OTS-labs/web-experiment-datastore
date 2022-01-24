@@ -17,7 +17,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(help_text='experiments:models:targetgroup:name:help', max_length=100, verbose_name='experiments:models:targetgroup:name')),
-                ('completed', models.PositiveIntegerField(default=0, help_text='experiments:models:targetgroup:completed:help', verbose_name='experiments:models:targetgroup:completed')),
                 ('completion_target', models.IntegerField(help_text='experiments:models:targetgroup:completion_target:help', verbose_name='experiments:models:targetgroup:completion_target')),
                 ('date_updated', models.DateTimeField(auto_now=True)),
                 ('experiment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='experiments.experiment')),

@@ -331,12 +331,3 @@ msgstr "Datapoint deleted!"
 #: experiments/views.py:263
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
-
-#~ msgid "experiments:global:view"
-#~ msgstr "More details"
-
-#~ msgid "experiments:global:delete_experiment"
-#~ msgstr "Delete experiment"
-
-#~ msgid "experiments:home:num_datapoints"
-#~ msgstr "Data uploaded"

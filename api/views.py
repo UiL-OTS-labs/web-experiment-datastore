@@ -1,12 +1,13 @@
 from django.http import Http404
 from django.utils import translation
+from functools import cached_property
 from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, CreateAPIView
-from rest_framework.serializers import ModelSerializer
 
 from .exceptions import ConfigError
 from .parsers import PlainTextParser
+from .serializers import ParticipantSerializer
 from experiments.models import DataPoint, Experiment, ParticipantSession
 
 
@@ -20,7 +21,7 @@ class ResultCodes:
     ERR_NO_SESSION = "ERR_NO_SESSION"
 
 
-class ApiExperimentView(GenericAPIView):
+class BaseExperimentApiView(GenericAPIView):
     lookup_field = 'access_id'
     lookup_url_kwarg = 'access_key'
     queryset = Experiment.objects.all()
@@ -37,12 +38,12 @@ class ApiExperimentView(GenericAPIView):
             raise NotFound(code=ResultCodes.ERR_UNKNOWN_ID,
                            detail='No experiment using that id was found')
 
-    @property
+    @cached_property
     def experiment(self):
         return self.get_object()
 
 
-class MetadataView(ApiExperimentView):
+class MetadataView(BaseExperimentApiView):
     # List of all variables that are retrievable
     fields = ('state', )
 
@@ -67,7 +68,7 @@ class MetadataView(ApiExperimentView):
             return None
 
 
-class BaseUploadView(ApiExperimentView):
+class BaseUploadView(BaseExperimentApiView):
     """Base view for uploading data into an experiment.
 
     It only accepts plain text content, as otherwise the Django Rest
@@ -153,13 +154,7 @@ class SessionUploadView(BaseUploadView):
         })
 
 
-class ParticipantSerializer(ModelSerializer):
-    class Meta:
-        model = ParticipantSession
-        fields = ['uuid', 'state', 'group_name']
-
-
-class ParticipantView(ApiExperimentView, CreateAPIView):
+class ParticipantView(BaseExperimentApiView, CreateAPIView):
     serializer_class = ParticipantSerializer
 
     def create(self, *args, **kwargs):
@@ -168,7 +163,7 @@ class ParticipantView(ApiExperimentView, CreateAPIView):
             raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
                                    detail="The experiment is not open to new uploads")
 
-        group = self.experiment.assign_to_group()
+        group = self.experiment.get_next_group()
         if not group:
             raise ConfigError(code=ResultCodes.ERR_GROUP_ASSIGN_FAIL,
                               detail='Could not assign participant to any group')

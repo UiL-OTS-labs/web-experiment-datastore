@@ -105,27 +105,21 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
     model = Experiment
     success_message = _('experiments:message:edit:success')
     _experiment_kwargs_key = 'pk'
-    target_group_widgets = {
-        'completed': forms.TextInput(attrs={'readonly': True})
-    }
     target_group_formset = forms.inlineformset_factory(
         Experiment,
         TargetGroup,
-        fields=('name', 'completion_target', 'completed'),
-        widgets=target_group_widgets,
+        fields=('name', 'completion_target'),
         can_delete=False,
         extra=4
     )
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['target_group_formset'] = kwargs.get('target_group_formset',
-                                                     self.target_group_formset(instance=self.get_object()))
+        context['target_group_formset'] = kwargs.get(
+            'target_group_formset',
+            self.target_group_formset(instance=self.get_object())
+        )
 
-        # remove the "completed: 0" field from the 'extra' target group forms
-        for form in context['target_group_formset']:
-            if form.instance.id is None:
-                del form.fields['completed']
         return context
 
     def post(self, request, *args, **kwargs):
@@ -133,16 +127,17 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
         form = self.form_class(request.POST, instance=self.object)
         formset = self.target_group_formset(request.POST, instance=self.object)
 
-        for group_form in formset:
-            del group_form.fields['completed']
-
         if form.is_valid() and formset.is_valid():
             return self.form_valid(form, formset)
         elif not form.is_valid():
             return self.form_invalid(form)
 
-        return self.render_to_response(self.get_context_data(form=form,
-                                                             target_group_formset=formset))
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                target_group_formset=formset
+            )
+        )
 
     def get_success_url(self):
         return reverse('experiments:detail', args=[self.object.pk])

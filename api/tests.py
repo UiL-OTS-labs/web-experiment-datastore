@@ -6,7 +6,7 @@ import uuid
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
-from experiments.models import Experiment
+from experiments.models import Experiment, ParticipantSession
 from .views import ResultCodes
 
 
@@ -136,23 +136,25 @@ class TestTargetGroupAllocation(APITestCase):
         self.assertEqual(response.json()['group_name'], 'A')
 
     def test_target_group_rebalance_on_complete(self):
-        self.assertEqual(self.exp.assign_to_group(), self.group_a)
+        self.assertEqual(self.exp.get_next_group(), self.group_a)
         p1 = self.exp.participantsession_set.create(group=self.group_a)
         p2 = self.exp.participantsession_set.create(group=self.group_a)  # noqa
-        self.assertEqual(self.exp.assign_to_group(), self.group_b)
+        self.assertEqual(self.exp.get_next_group(), self.group_b)
         p3 = self.exp.participantsession_set.create(group=self.group_b)  # noqa
 
         # round-robin should point next participant to A
-        self.assertEqual(self.exp.assign_to_group(), self.group_a)
+        self.assertEqual(self.exp.get_next_group(), self.group_a)
         # but when one of the A sessions is complete, we should assign to B because it has less sessiosn
         p1.complete()
-        self.assertEqual(self.exp.assign_to_group(), self.group_b)
+        self.assertEqual(self.exp.get_next_group(), self.group_b)
 
     def test_target_group_full(self):
-        self.group_a.completed = self.group_a.completion_target
-        self.group_a.save()
+        for i in range(self.group_a.completion_target):
+            self.exp.participantsession_set.create(
+                group=self.group_a,
+                state=ParticipantSession.COMPLETED)
 
-        group = self.exp.assign_to_group()
+        group = self.exp.get_next_group()
         # should assign to group B if group A is full
         self.assertEqual(group, self.group_b)
 
@@ -169,7 +171,7 @@ class TestTargetGroupAllocation(APITestCase):
         self.group_b.save()
 
         def _participant_session():
-            group = self.exp.assign_to_group()
+            group = self.exp.get_next_group()
             if not group:
                 # exhausted
                 return
@@ -186,7 +188,7 @@ class TestTargetGroupAllocation(APITestCase):
         self.group_b.refresh_from_db()
 
         # check that the groups don't diverge too much
-        self.assertLess(abs(self.group_a.completed - self.group_b.completed), N * 0.1)
+        self.assertLess(abs(self.group_a.num_completed - self.group_b.num_completed), N * 0.1)
 
         # run the rest of the sessions
         for i in range(total_runs // 2):
@@ -194,13 +196,11 @@ class TestTargetGroupAllocation(APITestCase):
         self.group_a.refresh_from_db()
         self.group_b.refresh_from_db()
 
-        self.assertEqual(abs(self.group_a.completed - self.group_b.completed), 0)
+        self.assertEqual(abs(self.group_a.num_completed - self.group_b.num_completed), 0)
 
     def test_target_group_recover_from_skew(self):
         self.group_a.completion_target = 10
-        self.group_a.completed = 0
         self.group_b.completion_target = 10
-        self.group_b.completed = 0
         self.group_a.save()
         self.group_b.save()
 
@@ -210,7 +210,7 @@ class TestTargetGroupAllocation(APITestCase):
                 participant.complete()
 
             # should keep trying to assign us to B
-            self.assertEqual(self.exp.assign_to_group(), self.group_b)
+            self.assertEqual(self.exp.get_next_group(), self.group_b)
 
     def test_upload_fail_without_session(self):
         # if the experiment has target groups configured, then it should no longer

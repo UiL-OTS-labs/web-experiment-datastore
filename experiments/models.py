@@ -92,12 +92,15 @@ class Experiment(models.Model):
         return self.title
 
     def is_open(self):
+        """An experiment is open if it is both approved and set to 'open'.
+        While an experiment should not be able to have the status 'open' without being approved,
+        we check both to be sure."""
         return self.state == self.OPEN and self.approved
 
     def has_groups(self):
         return self.targetgroup_set.count() > 0
 
-    def assign_to_group(self):
+    def get_next_group(self):
         # the basic idea here is to assign incoming sessions equally across all available groups.
         # however, since opened session don't necessarily reflect completed sessions, we also try
         # to rebalance the distribution whenever a session is completed
@@ -116,7 +119,12 @@ class Experiment(models.Model):
         if last_closed is not None and last_closed.date_updated > last_opened.date_started:
             # last thing to happen was a session being completed
             # assign the incoming participant to the group with less completed sessions
-            for group in self.targetgroup_set.order_by('completed'):
+            completed_expr = models.Count(
+                'participantsession',
+                filter=models.Q(participantsession__state=ParticipantSession.COMPLETED)
+            )
+            annotated = self.targetgroup_set.annotate(completed=completed_expr)
+            for group in annotated.order_by('completed'):
                 if group.is_open():
                     return group
             return None
@@ -200,7 +208,6 @@ class ParticipantSession(models.Model):
         self.state = self.COMPLETED
         self.experiment_state = self.experiment.state
         self.save()
-        self.group.update_completed()
 
 
 class TargetGroup(models.Model):
@@ -211,11 +218,9 @@ class TargetGroup(models.Model):
         help_text=_("experiments:models:targetgroup:name:help"),
     )
 
-    completed = models.PositiveIntegerField(
-        _("experiments:models:targetgroup:completed"),
-        default=0,
-        help_text=_("experiments:models:targetgroup:completed:help"),
-    )
+    @property
+    def num_completed(self):
+        return self.participantsession_set.filter(state=ParticipantSession.COMPLETED).count()
 
     completion_target = models.IntegerField(
         _("experiments:models:targetgroup:completion_target"),
@@ -224,9 +229,5 @@ class TargetGroup(models.Model):
 
     date_updated = models.DateTimeField(auto_now=True)
 
-    def update_completed(self):
-        self.completed = self.participantsession_set.filter(state=ParticipantSession.COMPLETED).count()
-        self.save()
-
     def is_open(self):
-        return self.completed < self.completion_target
+        return self.num_completed < self.completion_target
