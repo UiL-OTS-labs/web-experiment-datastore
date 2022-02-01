@@ -138,7 +138,7 @@
               </tr>
               <tr v-if="experiment.approved">
                 <td colspan="2">
-                  <a :href="$url('experiments:download', [experiment.id, 'raw'])"
+                  <a :href="$url('experiments:download', [experiment.pk, 'raw'])"
                      target="_blank">
                     {{ $t('download_raw') }}
                   </a>
@@ -146,7 +146,7 @@
               </tr>
               <tr v-if="experiment.approved">
                 <td colspan="2">
-                  <a :href="$url('experiments:download', [experiment.id, 'csv'])"
+                  <a :href="$url('experiments:download', [experiment.pk, 'csv'])"
                      target="_blank">
                     {{ $t('download_csv') }}
                   </a>
