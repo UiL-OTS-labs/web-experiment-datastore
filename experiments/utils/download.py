@@ -8,7 +8,7 @@ from django.utils.datastructures import OrderedSet
 
 from experiments.models import DataPoint, Experiment
 
-EXPORT_NO_VALUE = "NA"
+EXPORT_NO_VALUE = ""
 
 EXPORT_REPORT_HEADER = """EXPORT REPORT
 
@@ -144,13 +144,6 @@ def _flatten_json(data: str) -> str:
                 # Always add the key, even if the value is empty (checked
                 # later on). The column itself should at least be included
                 columns.add(key)
-
-                # If this key has no/an empty value, we want to print NA instead
-                # However, the DictWriter only adds NA if the field is missing
-                # So, we set it to NA manually
-                # We do an additional check to allow 'False' as a value
-                if not el[key] and not el[key] is False:
-                    el[key] = EXPORT_NO_VALUE
 
     buffer = io.StringIO()
     # DictWriter writes a dict into a CSV, only including the columns given.
