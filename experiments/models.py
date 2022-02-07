@@ -203,7 +203,7 @@ class ParticipantSession(models.Model):
     # Counter of the amount of sessions in an experiment
     # Used to obtain an incrementing ID, independent of other sessions in
     # the experiment for which this session was created.
-    subject_id = models.PositiveIntegerField(null=False)
+    subject_id = models.PositiveIntegerField(null=False, default=0)
 
     @property
     def group_name(self):
