@@ -156,7 +156,7 @@ class DataPoint(models.Model):
 
     # Counter of the amount of DP's in an experiment
     # Used to display an incrementing ID, independent from other experiments
-    number = models.PositiveIntegerField(null=False)
+    number = models.PositiveIntegerField(null=False, default=0)
 
     # Encrypted field for extra security
     data = EncryptedTextField(
