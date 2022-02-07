@@ -200,6 +200,11 @@ class ParticipantSession(models.Model):
     date_started = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
+    # Counter of the amount of sessions in an experiment
+    # Used to obtain an incrementing ID, independent of other sessions in
+    # the experiment for which this session was created.
+    subject_id = models.PositiveIntegerField(null=False)
+
     @property
     def group_name(self):
         return self.group.name
