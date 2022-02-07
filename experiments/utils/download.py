@@ -31,14 +31,14 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.number) + '.txt',
+            lambda dp: str(dp.session.subject_id) + '.txt',
             # Raw should just return the data of the DataPoint
             lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.number) + '.csv',
+            lambda dp: str(dp.session.subject_id) + '.csv',
             # CSV should apply _flatten_json to the data and return the result
             lambda dp: _flatten_json(dp.data)
         )
@@ -81,7 +81,7 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
     # downloadable file
     filename = "{}-{}.{}".format(
         data_point.experiment.title,
-        data_point.number,
+        data_point.session.subject_id,
         file_format
     )
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
