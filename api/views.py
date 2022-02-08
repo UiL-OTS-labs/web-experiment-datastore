@@ -96,10 +96,11 @@ class BaseUploadView(BaseExperimentApiView):
             raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
                                    detail='The experiment is not open to new uploads')
 
-    def _save_data_point(self, payload):
+    def _save_data_point(self, payload, session: ParticipantSession):
         dp = DataPoint()
         dp.experiment = self.experiment
         dp.data = payload
+        dp.session = session
         dp.save()
 
         return dp
@@ -117,10 +118,11 @@ class UploadView(BaseUploadView):
             raise ConfigError(code=ResultCodes.ERR_NO_SESSION,
                               detail='Missing participant session id')
 
-        self._save_data_point(payload)
-        session = ParticipantSession.objects.create(
-            experiment=self.experiment,
-        ).complete()
+        session = ParticipantSession.objects.create(experiment=self.experiment)
+        session.complete()
+
+        dp = self._save_data_point(payload, session)
+
         return Response({
             'result': ResultCodes.OK,
             'message': 'Upload successful'
@@ -144,9 +146,7 @@ class SessionUploadView(BaseUploadView):
                                    detail='Bad participant session id')
 
         # Create the new datapoint
-        dp = self._save_data_point(payload)
-        dp.session = participant
-        dp.save()
+        dp = self._save_data_point(payload, participant)
 
         participant.complete()
 
