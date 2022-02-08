@@ -196,7 +196,11 @@ class ParticipantSession(models.Model):
     )
     experiment_state = models.PositiveIntegerField(null=True)
 
-    group = models.ForeignKey('TargetGroup', on_delete=models.PROTECT)
+    group = models.ForeignKey(
+        'TargetGroup',
+        on_delete=models.PROTECT,
+        null=True
+    )
     date_started = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
