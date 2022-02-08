@@ -19,14 +19,19 @@ class ParticipantSessionTests(TestCase):
         cls.experiment = Experiment.objects.create(
             access_id=access_id
         )
-        cls.experiment.targetgroup_set.create(name='A', completion_target=2)
+
+    def setUp(self) -> None:
+        self.default_group = self.experiment.targetgroup_set.create(
+            name='A',
+            completion_target=2
+        )
 
     def test_participant_sessions_subject_id(self):
         session1 = ParticipantSession.objects.create(
-            experiment=self.experiment
+            experiment=self.experiment, group=self.default_group
         )
         session2 = ParticipantSession.objects.create(
-            experiment=self.experiment
+            experiment=self.experiment, group=self.default_group
         )
         self.assertEqual(session1.subject_id, 1)
         self.assertEqual(session2.subject_id, 2)
