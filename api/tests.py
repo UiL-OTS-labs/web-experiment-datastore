@@ -84,6 +84,7 @@ class TestTargetGroupAllocation(APITestCase):
     def test_create_participant(self):
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
         self.assertEqual(response.json()['group_name'], 'A')
+        self.assertEqual(response.json()['subject_id'], 1)
 
     def test_create_participant_fail_without_groups(self):
         access_id = uuid.uuid4()
