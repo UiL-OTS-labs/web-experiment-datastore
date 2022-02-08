@@ -118,6 +118,9 @@ class UploadView(BaseUploadView):
                               detail='Missing participant session id')
 
         self._save_data_point(payload)
+        session = ParticipantSession.objects.create(
+            experiment=self.experiment,
+        ).complete()
         return Response({
             'result': ResultCodes.OK,
             'message': 'Upload successful'
