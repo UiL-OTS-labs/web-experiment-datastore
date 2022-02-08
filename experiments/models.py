@@ -156,7 +156,7 @@ class DataPoint(models.Model):
 
     # Counter of the amount of DP's in an experiment
     # Used to display an incrementing ID, independent from other experiments
-    number = models.PositiveIntegerField(null=False, default=0)
+    number = models.PositiveIntegerField(null=False)
 
     # Encrypted field for extra security
     data = EncryptedTextField(
@@ -207,7 +207,7 @@ class ParticipantSession(models.Model):
     # Counter of the amount of sessions in an experiment
     # Used to obtain an incrementing ID, independent of other sessions in
     # the experiment for which this session was created.
-    subject_id = models.PositiveIntegerField(null=False, default=0)
+    subject_id = models.PositiveIntegerField(null=False)
 
     @property
     def group_name(self):
