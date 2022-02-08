@@ -20,13 +20,22 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
 
 
 @receiver(pre_save, sender=ParticipantSession)
-def on_participant_session_creation(sender, instance, *args, **kwargs):
+def on_participant_session_creation(
+        sender,
+        instance,
+        *args,
+        **kwargs):
     """
     Add an incremental session_id number when saving a session starting from 1
     """
     if not instance.subject_id:
         experiment = instance.experiment
-        experiment_sessions = experiment.session_set.all()
-        new_id = len(experiment_sessions) + 1
-        instance.subject_id = new_id
+        last_session = experiment.participantsession_set.all().order_by(
+            'subject_id'
+        ).last()
+
+        if last_session:
+            instance.subject_id = last_session.subject_id + 1
+        else:
+            instance.subject_id = 1
 
