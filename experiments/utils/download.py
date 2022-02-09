@@ -21,6 +21,35 @@ Files:
 
 """
 
+DEFAULT_ZFILL = 4
+
+
+def _create_file_name(
+        dp: DataPoint,
+        suffix: str = ".txt",
+        zfill: int = DEFAULT_ZFILL
+        ) -> str:
+    """Creates a file name with suffix based on the datapoint
+
+    The file name created is well suited for alphabetical
+    ordering in a filebrowser, and allows for multiple different
+    `DataPoint`s for one ParticipantSession.
+
+    :param dp: The DataPoint for which we want to create a download name
+
+    :param suffix: The suffix use to append to the file name, note that
+                   this doesn't include the '.'.
+
+    :param zfill: The amount of zero padding applied to the subject_id and
+                  `DataPoint.number`. By default, it accomodates for [0001-9999]
+                  alphabetical ordering.
+    """
+    return "{}_{}{}".format(
+        str(dp.session.subject_id).zfill(zfill),
+        str(dp.number).zfill(zfill),
+        suffix
+    )
+
 
 def create_download_response_zip(file_format: str, experiment: Experiment) -> \
         FileResponse:
@@ -31,18 +60,17 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.session.subject_id) + '.txt',
+            lambda dp: _create_file_name(dp, suffix=".txt"),
             # Raw should just return the data of the DataPoint
             lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.session.subject_id) + '.csv',
+            lambda dp: _create_file_name(dp, suffix='.csv'),
             # CSV should apply _flatten_json to the data and return the result
             lambda dp: _flatten_json(dp.data)
         )
-
 
     return FileResponse(
         zip_file,
@@ -79,9 +107,10 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
 
     # Set the content disposition header, so that browser see the page as a
     # downloadable file
-    filename = "{}-{}.{}".format(
+    filename = "{}-{}-{}.{}".format(
         data_point.experiment.title,
-        data_point.session.subject_id,
+        str(data_point.session.subject_id).zfill(DEFAULT_ZFILL),
+        str(data_point.number).zfill(DEFAULT_ZFILL),
         file_format
     )
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
