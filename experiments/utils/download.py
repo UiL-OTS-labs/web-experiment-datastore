@@ -2,6 +2,7 @@ import csv
 import io
 import zipfile
 import json
+import re
 
 from django.http import FileResponse, HttpResponse
 from django.utils.datastructures import OrderedSet
@@ -44,7 +45,9 @@ def _create_file_name(
                   `DataPoint.number`. By default, it accomodates for [0001-9999]
                   alphabetical ordering.
     """
-    return "{}_{}{}".format(
+    readable_title = re.sub(r'\s+', "-", dp.experiment.title.strip().lower())
+    return "{}_{}_{}{}".format(
+        readable_title,
         str(dp.session.subject_id).zfill(zfill),
         str(dp.number).zfill(zfill),
         suffix
@@ -107,12 +110,7 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
 
     # Set the content disposition header, so that browser see the page as a
     # downloadable file
-    filename = "{}-{}-{}.{}".format(
-        data_point.experiment.title,
-        str(data_point.session.subject_id).zfill(DEFAULT_ZFILL),
-        str(data_point.number).zfill(DEFAULT_ZFILL),
-        file_format
-    )
+    filename = _create_file_name(data_point, "." + file_format)
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
     return response
