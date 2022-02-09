@@ -97,8 +97,11 @@ class Experiment(models.Model):
         we check both to be sure."""
         return self.state == self.OPEN and self.approved
 
-    def has_groups(self):
-        return self.targetgroup_set.count() > 0
+    def uses_groups(self):
+        """
+        An experiment is designed to use groups when it has more than one group.
+        """
+        return self.targetgroup_set.count() > 1
 
     def get_next_group(self):
         # the basic idea here is to assign incoming sessions equally across all available groups.

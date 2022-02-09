@@ -1,7 +1,7 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
-from .models import DataPoint, ParticipantSession
+from .models import DataPoint, ParticipantSession, Experiment
 
 
 @receiver(pre_save, sender=DataPoint)
@@ -22,7 +22,7 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
 @receiver(pre_save, sender=ParticipantSession)
 def on_participant_session_creation(
         sender,
-        instance,
+        instance: ParticipantSession,
         *args,
         **kwargs):
     """
@@ -39,3 +39,16 @@ def on_participant_session_creation(
         else:
             instance.subject_id = 1
 
+
+@receiver(post_save, sender=Experiment)
+def on_experiment_creation(
+        sender,
+        instance: Experiment,
+        *args,
+        **kwargs):
+    """Add one default group, with "list1" as name"""
+    if instance.targetgroup_set.count() == 0:
+        instance.targetgroup_set.create(
+            name="list1",
+            completion_target=500
+        )

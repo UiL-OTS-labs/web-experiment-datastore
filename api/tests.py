@@ -78,6 +78,9 @@ class TestTargetGroupAllocation(APITestCase):
             state=Experiment.OPEN,
             approved=True
         )
+        # Remove the "default" group as that feature is newer that this tests"
+        cls.exp.targetgroup_set.all().delete()
+        # And Run the test as The tests were designed
         cls.group_a = cls.exp.targetgroup_set.create(name='A', completion_target=2)
         cls.group_b = cls.exp.targetgroup_set.create(name='B', completion_target=2)
 
@@ -93,6 +96,7 @@ class TestTargetGroupAllocation(APITestCase):
             state=Experiment.OPEN,
             approved=True
         )
+        self.exp.targetgroup_set.all().delete()  # Delete default group
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json()['result'], ResultCodes.ERR_GROUP_ASSIGN_FAIL)

@@ -112,7 +112,7 @@ class UploadView(BaseUploadView):
         payload = request.data
         self._validate_request(payload)
 
-        if self.experiment.has_groups():
+        if self.experiment.uses_groups():
             # If the experiment is configured to use target groups,
             # then session ids are mandatory
             raise ConfigError(code=ResultCodes.ERR_NO_SESSION,
@@ -135,7 +135,7 @@ class SessionUploadView(BaseUploadView):
         payload = request.data
         self._validate_request(payload)
 
-        if not self.experiment.has_groups():
+        if not self.experiment.uses_groups():
             raise ValidationError(detail='Experiment is not using session ids')
 
         try:
