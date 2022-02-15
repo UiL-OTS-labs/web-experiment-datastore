@@ -46,9 +46,9 @@ def on_experiment_creation(
         instance: Experiment,
         *args,
         **kwargs):
-    """Add one default group, with "list1" as name"""
+    """Add one default group, with "Default Group" as name"""
     if instance.targetgroup_set.count() == 0:
         instance.targetgroup_set.create(
-            name="list1",
+            name="Default Group",
             completion_target=500
         )
