@@ -38,14 +38,14 @@ def _create_file_name(
 
     :param dp: The DataPoint for which we want to create a download name
 
-    :param suffix: The suffix use to append to the file name, note that
-                   this doesn't include the '.'.
+    :param suffix: The suffix used to append to the file name, note that
+                   this doesn't include a '.'.
 
     :param zfill: The amount of zero padding applied to the subject_id and
                   `DataPoint.number`. By default, it accomodates for [0001-9999]
                   alphabetical ordering.
     """
-    readable_title = re.sub(r'\s+', "-", dp.experiment.title.strip().lower())
+    readable_title = re.sub(r'\W+', "-", dp.experiment.title.strip().lower())
     return "{}_{}_{}{}".format(
         readable_title,
         str(dp.session.subject_id).zfill(zfill),
