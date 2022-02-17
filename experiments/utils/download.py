@@ -2,13 +2,14 @@ import csv
 import io
 import zipfile
 import json
+import re
 
 from django.http import FileResponse, HttpResponse
 from django.utils.datastructures import OrderedSet
 
 from experiments.models import DataPoint, Experiment
 
-EXPORT_NO_VALUE = "NA"
+EXPORT_NO_VALUE = ""
 
 EXPORT_REPORT_HEADER = """EXPORT REPORT
 
@@ -21,6 +22,37 @@ Files:
 
 """
 
+DEFAULT_ZFILL = 4
+
+
+def _create_file_name(
+        dp: DataPoint,
+        suffix: str = ".txt",
+        zfill: int = DEFAULT_ZFILL
+        ) -> str:
+    """Creates a file name with suffix based on the datapoint
+
+    The file name created is well suited for alphabetical
+    ordering in a filebrowser, and allows for multiple different
+    `DataPoint`s for one ParticipantSession.
+
+    :param dp: The DataPoint for which we want to create a download name
+
+    :param suffix: The suffix used to append to the file name, note that
+                   this doesn't include a '.'.
+
+    :param zfill: The amount of zero padding applied to the subject_id and
+                  `DataPoint.number`. By default, it accomodates for [0001-9999]
+                  alphabetical ordering.
+    """
+    readable_title = re.sub(r'\W+', "-", dp.experiment.title.strip().lower())
+    return "{}_{}_{}{}".format(
+        readable_title,
+        str(dp.session.subject_id).zfill(zfill),
+        str(dp.number).zfill(zfill),
+        suffix
+    )
+
 
 def create_download_response_zip(file_format: str, experiment: Experiment) -> \
         FileResponse:
@@ -31,18 +63,17 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
     if file_format == 'raw':
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.number) + '.txt',
+            lambda dp: _create_file_name(dp, suffix=".txt"),
             # Raw should just return the data of the DataPoint
             lambda dp: dp.data
         )
     else:
         zip_file = _create_zip(
             experiment,
-            lambda dp: str(dp.number) + '.csv',
+            lambda dp: _create_file_name(dp, suffix='.csv'),
             # CSV should apply _flatten_json to the data and return the result
             lambda dp: _flatten_json(dp.data)
         )
-
 
     return FileResponse(
         zip_file,
@@ -79,11 +110,7 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
 
     # Set the content disposition header, so that browser see the page as a
     # downloadable file
-    filename = "{}-{}.{}".format(
-        data_point.experiment.title,
-        data_point.number,
-        file_format
-    )
+    filename = _create_file_name(data_point, "." + file_format)
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
 
     return response
@@ -144,13 +171,6 @@ def _flatten_json(data: str) -> str:
                 # Always add the key, even if the value is empty (checked
                 # later on). The column itself should at least be included
                 columns.add(key)
-
-                # If this key has no/an empty value, we want to print NA instead
-                # However, the DictWriter only adds NA if the field is missing
-                # So, we set it to NA manually
-                # We do an additional check to allow 'False' as a value
-                if not el[key] and not el[key] is False:
-                    el[key] = EXPORT_NO_VALUE
 
     buffer = io.StringIO()
     # DictWriter writes a dict into a CSV, only including the columns given.

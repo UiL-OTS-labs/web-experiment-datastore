@@ -3,12 +3,31 @@
 {% load transformat %}
 {% load datatables %}
 {% load get_field_name %}
+{% load static %}
 
 {% block header_title %}
     {% trans 'experiments:edit:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+<script src="{% static 'experiments/js/edit.js' %}"></script>
+<script nonce="{{ request.csp_nonce }}">
+ $(function() {
+     hideExtraForms({{ object.targetgroup_set.count }});
+ });
+</script>
+{% endblock %}
+
 {% block content %}
+<style>
+ input:read-only {
+     background:#efefef;
+ }
+
+ .target-group-form {
+     margin-top: 2em;
+ }
+</style>
 <div class="uu-inner-container">
     <div class="col-12">
         <h1>
@@ -22,7 +41,26 @@
             <table width="100%">
                 {{ form.as_table }}
             </table>
+            <div class="mt-4">
+              <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
+              <p>{% trans 'experiments:edit:target_groups_instructions' %}</p>
+            </div>
+            {{ target_group_formset.management_form }}
+            {% for group_form in target_group_formset %}
+                <div class="target-group-form">
+                    <table width="100%">
+                      {{ group_form.as_table }}
+                      {% if group_form.instance.id %}
+                        <tr>
+                            <th>Completed:</th>
+                            <td>{{ group_form.instance.num_completed }}</td>
+                        </tr>
+                        {% endif %}
+                    </table>
+                </div>
+            {% endfor %}
             <br/>
+            <a href="#" id="add_group">+ {% trans 'experiments:edit:add_group' %}</a>
             <div class="float-right">
                 <button type="submit">{% trans 'experiments:globals:save' %}</button>
             </div>
