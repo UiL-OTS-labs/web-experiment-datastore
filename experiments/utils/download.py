@@ -15,7 +15,7 @@ EXPORT_REPORT_HEADER = """EXPORT REPORT
 
 This file contains a list of all files in this experiment.
 
-It also indicates if the file was successfully added or not. If a file could 
+It also indicates if the file was successfully added or not. If a file could
 not be added, you can look at the raw file to see what caused it to fail.
 
 Files:
@@ -48,7 +48,7 @@ def _create_file_name(
     readable_title = re.sub(r'\W+', "-", dp.experiment.title.strip().lower())
     return "{}_{}_{}{}".format(
         readable_title,
-        str(dp.session.subject_id).zfill(zfill),
+        str(dp.session.subject_id).zfill(zfill) if dp.session else '',
         str(dp.number).zfill(zfill),
         suffix
     )
