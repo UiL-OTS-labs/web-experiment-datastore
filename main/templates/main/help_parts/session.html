@@ -57,8 +57,13 @@
               <a href="https://github.com/UiL-OTS-labs/jspsych-uil-utils/blob/main/jspsych-uil-session.js"><code>uil.utils.session</code> module</a>.
             </p>
             <p>
-              Target groups are not yet integrated in our jsPsych templates. If you would like
-              to use them in your experiment, please <a href="mailto:labman.gw@uu.nl">contact the lab support.</a>
+              If you would like to use target groups with one of our jsPsych templates, look for a section in index.html that starts with:
+              <p><code>// Option 1: client side randomization:</code></p>
+              and comment out the part below it. Then uncomment the section following:
+              <p><code>// Option 2: server side balancing:</code></p>
+            </p>
+            <p>
+              Make sure your experiment is set to Open for target groups to work.
             </p>
         </div>
     </div>
