@@ -1,0 +1,70 @@
+
+{% load i18n %}
+{% load transformat %}
+<div class="panel uu-panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" href="#collapse-session">
+                Using Target Groups
+            </a>
+        </h5>
+    </div>
+    <div id="collapse-session" class="panel-collapse collapse">
+        <div class="panel-body">
+            <p>
+                <i>This page requires some changes to your JavaScript. Feel free
+                    to <a href="mailto:{{ labstaff_email }}">email</a> us if you
+                    need assistance.</i>
+            </p>
+
+            <h3>What are target groups?</h3>
+            <p>
+              Many experiments are designed to use multiple item lists, and assign
+              participants randomly to those lists. There are currently two ways to
+              achieve that with jsPsych:
+              <ol>
+                <li>Simple randomization in your script</li>
+                <li>Balanced randomization using the datastore server</li>
+              </ol>
+            </p>
+            <p>
+              Simple randomization requires little effort, and is already implemented in
+              our templates. It relies on randomly generated numbers to evenly distribute
+              participants between lists over time.
+            </p>
+            <p>
+              In some cases, you might want better control over the distribution
+              of participants to lists. This is where target groups might be useful.
+            </p>
+            <p>
+              By adding target groups to your experiment, you can decide how many participants
+              should be assigned per list, and the datastore server would take care to
+              assign participants to lists in a balanced fashion. To do that, it keeps track of
+              ongoing and completed runs of the experiment.
+            </p>
+            <p>
+              Each target group has a name that should correspond to the relevant list name,
+              and a completion target, which indicates the number of completed runs that should
+              be reached. When a target group has its completion target fulfilled, no new participants
+              will be assigned to the corresponding list.
+              You can also modify completion targets to dynamically control the amount of
+              participants while the experiment is running.
+            </p>
+
+            <h4>Implementation</h4>
+            <p>
+              If you would like to use target groups with one of our jsPsych templates, look for a section in index.html that starts with:
+              <p><code>// Option 1: client side randomization:</code></p>
+              and comment out the part below it. Then uncomment the section following:
+              <p><code>// Option 2: server side balancing:</code></p>
+            </p>
+            <p>
+              Make sure your experiment is set to Open for target groups to work.
+            </p>
+            <p>
+              The relevant code for interacting with the target groups feature is found in the
+              <a href="https://github.com/UiL-OTS-labs/jspsych-uil-utils/blob/main/jspsych-uil-session.js"><code>uil.utils.session</code> module</a>.
+            </p>
+        </div>
+    </div>
+</div>
