@@ -114,14 +114,15 @@ class Experiment(models.Model):
         # however, since opened session don't necessarily reflect completed sessions, we also try
         # to rebalance the distribution whenever a session is completed
         groups = list(self.targetgroup_set.all().order_by('pk'))
+        filtered_sessions = self.participantsession_set.filter(experiment_state=self.state)
 
         if len(groups) < 1:
             # experiment has no groups defined, it should still be possible to run it using the old API
             # but trying to create a participant session should fail.
             return None
 
-        last_opened = self.participantsession_set.order_by('-date_started').first()
-        last_closed = self.participantsession_set\
+        last_opened = filtered_sessions.order_by('-date_started').first()
+        last_closed = filtered_sessions\
             .filter(state=ParticipantSession.COMPLETED)\
             .order_by('-date_updated').first()
 
@@ -130,7 +131,8 @@ class Experiment(models.Model):
             # assign the incoming participant to the group with less completed sessions
             completed_expr = models.Count(
                 'participantsession',
-                filter=models.Q(participantsession__state=ParticipantSession.COMPLETED)
+                filter=models.Q(participantsession__state=ParticipantSession.COMPLETED,
+                                participantsession__experiment_state=self.state)
             )
             annotated = self.targetgroup_set.annotate(completed=completed_expr)
             for group in annotated.order_by('completed'):
@@ -224,7 +226,6 @@ class ParticipantSession(models.Model):
 
     def complete(self):
         self.state = self.COMPLETED
-        self.experiment_state = self.experiment.state
         self.save()
 
 
@@ -238,7 +239,13 @@ class TargetGroup(models.Model):
 
     @property
     def num_completed(self):
-        return self.participantsession_set.filter(state=ParticipantSession.COMPLETED).count()
+        return self.participantsession_set.filter(state=ParticipantSession.COMPLETED,
+                                                  experiment_state=Experiment.OPEN).count()
+
+    @property
+    def num_pilot_completed(self):
+        return self.participantsession_set.filter(state=ParticipantSession.COMPLETED,
+                                                  experiment_state=Experiment.PILOTING).count()
 
     completion_target = models.IntegerField(
         _("experiments:models:targetgroup:completion_target"),
