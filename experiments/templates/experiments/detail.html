@@ -81,6 +81,32 @@
 </div>
 <div class="uu-inner-container mt-5">
     <div class="col-12">
+        {% if experiment.targetgroup_set.count %}
+            <div class="mb-5">
+                <h3>Progress</h3>
+                <table width="100%">
+                    <thead>
+                    <tr>
+                      <th>Group</th>
+                      <th>Started</th>
+                      <th>Piloted</th>
+                      <th>Completed</th>
+                      <th>Completion target</th>
+                    </tr>
+                    </thead>
+                    {% for group in experiment.targetgroup_set.all %}
+                    <tr>
+                        <td>{{ group.name}}</td>
+                        <td>{{ group.num_started }}</td>
+                        <td>{{ group.num_pilot_completed }}</td>
+                        <td>{{ group.num_completed }}</td>
+                        <td>{{ group.completion_target }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+
         <div class="float-right button button-colored">
             <a href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                 {% trans 'experiments:global:download_raw' %}
@@ -102,6 +128,9 @@
                         {% get_verbose_field_name "experiments" "DataPoint" "id" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "state" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
                     </th>
                     <th>
@@ -115,6 +144,9 @@
                     <tr>
                         <td>
                             {{ dataPoint.number }}
+                        </td>
+                        <td>
+                            {{ dataPoint.status_label }}
                         </td>
                         <td>
                             {{ dataPoint.date_added }}

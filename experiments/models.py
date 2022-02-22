@@ -185,6 +185,12 @@ class DataPoint(models.Model):
     session = models.ForeignKey(
         'ParticipantSession', on_delete=models.CASCADE, null=True)
 
+    @property
+    def status_label(self):
+        if self.session is None:
+            return _('Test')
+        return _('Pilot') if self.session.experiment_state == Experiment.PILOTING else _('Test')
+
 
 class ParticipantSession(models.Model):
     STARTED = 1
@@ -236,6 +242,10 @@ class TargetGroup(models.Model):
         max_length=100,
         help_text=_("experiments:models:targetgroup:name:help"),
     )
+
+    @property
+    def num_started(self):
+        return self.participantsession_set.filter(state=ParticipantSession.STARTED).count()
 
     @property
     def num_completed(self):
