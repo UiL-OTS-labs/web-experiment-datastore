@@ -93,9 +93,15 @@ class Experiment(models.Model):
 
     def is_open(self):
         """An experiment is open if it is both approved and set to 'open'.
+        It should also have at least one target group that is open to new participants.
         While an experiment should not be able to have the status 'open' without being approved,
         we check both to be sure."""
-        return self.state == self.OPEN and self.approved
+        experiment_open = self.state == self.OPEN and self.approved
+        groups_open = True
+        if self.uses_groups():
+            groups_open = any((group.is_open() for group in self.targetgroup_set.all()))
+
+        return experiment_open and groups_open
 
     def uses_groups(self):
         """
