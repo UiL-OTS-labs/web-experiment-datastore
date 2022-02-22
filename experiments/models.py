@@ -96,7 +96,7 @@ class Experiment(models.Model):
         It should also have at least one target group that is open to new participants.
         While an experiment should not be able to have the status 'open' without being approved,
         we check both to be sure."""
-        experiment_open = self.state == self.OPEN and self.approved
+        experiment_open = self.state in (self.OPEN, self.PILOTING) and self.approved
         groups_open = True
         if self.uses_groups():
             groups_open = any((group.is_open() for group in self.targetgroup_set.all()))
