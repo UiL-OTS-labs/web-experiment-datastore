@@ -56,12 +56,13 @@ class CreateExperimentForm(forms.ModelForm):
 
 
 class DownloadForm(forms.Form):
-    file_format = forms.ChoiceField(widget=forms.RadioSelect,
-                                    choices=[('csv', 'CSV'),
-                                             ('raw', 'Raw')])
-    include_status = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                               choices=[(Experiment.OPEN, 'Test'),
-                                                        (Experiment.PILOTING, 'Pilot')])
+    file_format = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        choices=[('csv', 'CSV'), ('raw', 'Raw')])
+    include_status = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        choices=[(Experiment.OPEN, _('experiments:models:datapoint:label:test')),
+                 (Experiment.PILOTING, _('experiments:models:datapoint:label:pilot'))])
     include_groups = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
                                                choices=())
 
