@@ -30,12 +30,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(
+            participant_session_assign_default_group
+        ),
         migrations.AlterField(
             model_name='participantsession',
             name='group',
             field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='experiments.targetgroup'),
-        ),
-        migrations.RunPython(
-            participant_session_assign_default_group
         )
     ]
