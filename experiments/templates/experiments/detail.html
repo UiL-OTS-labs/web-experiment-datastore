@@ -83,15 +83,15 @@
     <div class="col-12">
         {% if experiment.targetgroup_set.count %}
             <div class="mb-5">
-                <h3>Progress</h3>
+                <h3>{% trans 'experiments:detail:progress_header' %}</h3>
                 <table width="100%">
                     <thead>
                     <tr>
-                      <th>Group</th>
-                      <th>Started</th>
-                      <th>Piloted</th>
-                      <th>Completed</th>
-                      <th>Completion target</th>
+                      <th>{% trans 'experiments:detail:progress:group' %}</th>
+                      <th>{% trans 'experiments:detail:progress:started' %}</th>
+                      <th>{% trans 'experiments:detail:progress:piloted' %}</th>
+                      <th>{% trans 'experiments:detail:progress:completed' %}</th>
+                      <th>{% trans 'experiments:detail:progress:completion_target' %}</th>
                     </tr>
                     </thead>
                     {% for group in experiment.targetgroup_set.all %}
@@ -131,6 +131,9 @@
                         {% get_verbose_field_name "experiments" "Experiment" "state" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "ParticipantSession" "group" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
                     </th>
                     <th>
@@ -147,6 +150,9 @@
                         </td>
                         <td>
                             {{ dataPoint.status_label }}
+                        </td>
+                        <td>
+                            {{ dataPoint.session.group.name }}
                         </td>
                         <td>
                             {{ dataPoint.date_added }}

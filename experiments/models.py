@@ -187,9 +187,13 @@ class DataPoint(models.Model):
 
     @property
     def status_label(self):
+        test = _('experiments:models:datapoint:label:test')
+        pilot = _('experiments:models:datapoint:label:pilot')
         if self.session is None:
-            return _('Test')
-        return _('Pilot') if self.session.experiment_state == Experiment.PILOTING else _('Test')
+            return test
+        if self.session.experiment_state == Experiment.PILOTING:
+            return pilot
+        return test
 
 
 class ParticipantSession(models.Model):
@@ -215,6 +219,7 @@ class ParticipantSession(models.Model):
 
     group = models.ForeignKey(
         'TargetGroup',
+        verbose_name=_('experiments:models:participant:group'),
         on_delete=models.PROTECT,
         null=True
     )
