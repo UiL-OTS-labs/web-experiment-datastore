@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 10:45+0000\n"
+"POT-Creation-Date: 2022-02-23 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,30 +265,42 @@ msgid "experiments:detail:progress:completion_target"
 msgstr "Completion target"
 
 #: experiments/templates/experiments/detail.html:112
-#: experiments/templates/experiments/detail.html:166
+#: experiments/templates/experiments/detail.html:171
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:117
-#: experiments/templates/experiments/detail.html:170
+#: experiments/templates/experiments/detail.html:175
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
-#: experiments/templates/experiments/detail.html:121
+#: experiments/templates/experiments/detail.html:122
+msgid "experiments:global:download"
+msgstr "Download"
+
+#: experiments/templates/experiments/detail.html:126
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:140
+#: experiments/templates/experiments/detail.html:145
 msgid "experiments:global:actions"
 msgstr "Actions"
 
-#: experiments/templates/experiments/detail.html:162
+#: experiments/templates/experiments/detail.html:167
 msgid "experiments:global:delete_datapoint"
 msgstr "Delete"
 
-#: experiments/templates/experiments/detail.html:182
+#: experiments/templates/experiments/detail.html:187
 msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
+
+#: experiments/templates/experiments/download.html:8
+msgid "experiments:download:header"
+msgstr "Download Data"
+
+#: experiments/templates/experiments/download.html:16
+msgid "experiments:globals:download"
+msgstr "Download"
 
 #: experiments/templates/experiments/edit.html:9
 #: experiments/templates/experiments/edit.html:34

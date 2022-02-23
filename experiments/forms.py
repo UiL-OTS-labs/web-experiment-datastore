@@ -53,3 +53,24 @@ class CreateExperimentForm(forms.ModelForm):
             )
 
         return data.lower()
+
+
+class DownloadForm(forms.Form):
+    file_format = forms.ChoiceField(widget=forms.RadioSelect,
+                                    choices=[('csv', 'CSV'),
+                                             ('raw', 'Raw')])
+    include_status = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                               choices=[(Experiment.OPEN, 'Test'),
+                                                        (Experiment.PILOTING, 'Pilot')])
+    include_groups = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                               choices=())
+
+    def __init__(self, *args, **kwargs):
+        experiment = kwargs.pop('experiment')
+        super().__init__(*args, **kwargs)
+        self.fields['include_groups'].choices = [(tg.pk, tg.name)
+                                                 for tg in experiment.targetgroup_set.all()]
+
+        # select all by default
+        self.fields['include_status'].initial = [k for k, v in self.fields['include_status'].choices]
+        self.fields['include_groups'].initial = [k for k, v in self.fields['include_groups'].choices]

@@ -3,7 +3,7 @@ from django.urls import path
 from .views import ExperimentHomeView, ExperimentCreateView, \
     ExperimentEditView, ExperimentDetailView, DownloadView, \
     DeleteExperimentView, DeleteDataPointView, DeleteAllDataView, \
-    ExperimentHomeApiView
+    ExperimentHomeApiView, DownloadFormView
 
 app_name = 'experiments'
 
@@ -24,6 +24,8 @@ urlpatterns = [
     path('<int:experiment>/data/delete/', DeleteAllDataView.as_view(),
          name='delete_all_data'),
 
+    path('<int:experiment>/data/',
+         DownloadFormView.as_view(), name='download'),
     path('<int:experiment>/data/<str:file_format>/',
          DownloadView.as_view(), name='download'),
     path('<int:experiment>/data/<int:data_point>/<str:file_format>/',
