@@ -118,7 +118,10 @@ class UploadView(BaseUploadView):
             raise ConfigError(code=ResultCodes.ERR_NO_SESSION,
                               detail='Missing participant session id')
 
-        session = ParticipantSession.objects.create(experiment=self.experiment)
+        session = ParticipantSession.objects.create(
+            experiment=self.experiment,
+            group=self.experiment.targetgroup_set.first()
+        )
         session.complete()
 
         dp = self._save_data_point(payload, session)
