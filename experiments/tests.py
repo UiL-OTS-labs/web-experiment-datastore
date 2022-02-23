@@ -69,7 +69,10 @@ class ParticipantSessionSubjectIdTests(TestCase):
         for _ in range(100):
             choice = random.choice([1,2,3])
             if choice in [1,2]: # add a session
-                ParticipantSession.objects.create(experiment=self.experiment1)
+                ParticipantSession.objects.create(
+                    experiment=self.experiment1,
+                    group=self.experiment1.targetgroup_set.first()
+                )
             else:
                 sessions = ParticipantSession.objects.all()
                 sessions.order_by('?').first().delete()
