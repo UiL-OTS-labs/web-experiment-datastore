@@ -59,7 +59,7 @@ def _create_file_name(
 def create_download_response_zip(
         file_format: str,
         experiment: Experiment,
-        queryset: Optional[QuerySet]
+        queryset: Optional[QuerySet] = None
 ) -> FileResponse:
     """Creates a FileResponse containing a ZIP with all data of the provided
     experiment, in the desired format. """
@@ -127,7 +127,7 @@ def _create_zip(
         experiment: Experiment,
         filename_generator: callable,
         processor: callable,
-        queryset: Optional[QuerySet]
+        queryset: Optional[QuerySet] = None
 ) -> io.BytesIO:
     """Creates a ZIP in a BytesIO buffer.
 
