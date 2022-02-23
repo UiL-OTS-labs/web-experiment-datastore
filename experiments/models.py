@@ -245,7 +245,7 @@ class TargetGroup(models.Model):
 
     @property
     def num_started(self):
-        return self.participantsession_set.filter(state=ParticipantSession.STARTED).count()
+        return self.participantsession_set.count()
 
     @property
     def num_completed(self):
