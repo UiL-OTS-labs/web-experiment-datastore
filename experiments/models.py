@@ -208,7 +208,7 @@ class ParticipantSession(models.Model):
     group = models.ForeignKey(
         'TargetGroup',
         on_delete=models.PROTECT,
-        null=True
+        null=False                # There should always be a default group.
     )
     date_started = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

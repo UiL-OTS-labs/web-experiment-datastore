@@ -29,16 +29,20 @@ class ParticipantSessionSubjectIdTests(TestCase):
         and are updated incrementally.
         """
         session_e1_s1 = ParticipantSession.objects.create(
-            experiment=self.experiment1
+            experiment=self.experiment1,
+            group=self.experiment1.targetgroup_set.first()
         )
         session_e1_s2 = ParticipantSession.objects.create(
-            experiment=self.experiment1
+            experiment=self.experiment1,
+            group=self.experiment1.targetgroup_set.first()
         )
         session_e2_s1 = ParticipantSession.objects.create(
-            experiment=self.experiment2
+            experiment=self.experiment2,
+            group=self.experiment2.targetgroup_set.first()
         )
         session_e2_s2 = ParticipantSession.objects.create(
-            experiment=self.experiment2
+            experiment=self.experiment2,
+            group = self.experiment2.targetgroup_set.first()
         )
 
         self.assertEqual(session_e1_s1.subject_id, 1)
@@ -57,12 +61,18 @@ class ParticipantSessionSubjectIdTests(TestCase):
 
         # Fill with a few items to avoid to deal with a .delete() on an empty set.
         for _ in range(10):
-            ParticipantSession.objects.create(experiment=self.experiment1)
+            ParticipantSession.objects.create(
+                experiment=self.experiment1,
+                group=self.experiment1.targetgroup_set.first()
+            )
 
         for _ in range(100):
             choice = random.choice([1,2,3])
             if choice in [1,2]: # add a session
-                ParticipantSession.objects.create(experiment=self.experiment1)
+                ParticipantSession.objects.create(
+                    experiment=self.experiment1,
+                    group=self.experiment1.targetgroup_set.first()
+                )
             else:
                 sessions = ParticipantSession.objects.all()
                 sessions.order_by('?').first().delete()
