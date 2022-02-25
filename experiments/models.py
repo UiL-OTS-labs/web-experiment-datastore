@@ -185,15 +185,15 @@ class DataPoint(models.Model):
     session = models.ForeignKey(
         'ParticipantSession', on_delete=models.CASCADE, null=True)
 
-    @property
-    def status_label(self):
-        test = _('experiments:models:datapoint:label:test')
-        pilot = _('experiments:models:datapoint:label:pilot')
+    STATUS_TEST = _('experiments:models:datapoint:label:test')
+    STATUS_PILOT = _('experiments:models:datapoint:label:pilot')
+
+    def get_status_display(self):
         if self.session is None:
-            return test
+            return self.STATUS_TEST
         if self.session.experiment_state == Experiment.PILOTING:
-            return pilot
-        return test
+            return self.STATUS_PILOT
+        return self.STATUS_TEST
 
 
 class ParticipantSession(models.Model):

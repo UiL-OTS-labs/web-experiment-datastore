@@ -142,11 +142,10 @@ def _create_zip(
     with zipfile.ZipFile(buffer, "a", zipfile.ZIP_DEFLATED, True) as zip_file:
         export_report = EXPORT_REPORT_HEADER
 
-        qs = experiment.datapoint_set.all()
-        if queryset is not None:
-            qs = queryset
+        if queryset is None:
+            queryset = experiment.datapoint_set.all()
 
-        for dataPoint in qs:
+        for dataPoint in queryset:
             filename = filename_generator(dataPoint)
             try:
                 data = processor(dataPoint)
