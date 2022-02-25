@@ -91,11 +91,6 @@ class BaseUploadView(BaseExperimentApiView):
         if not payload:
             raise APIException(code=ResultCodes.ERR_NO_DATA, detail='No data was provided')
 
-        # The experiment should be approved and open.
-        if not self.experiment.is_open():
-            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
-                                   detail='The experiment is not open to new uploads')
-
     def _save_data_point(self, payload, session: ParticipantSession):
         dp = DataPoint()
         dp.experiment = self.experiment
@@ -107,6 +102,13 @@ class BaseUploadView(BaseExperimentApiView):
 
 
 class UploadView(BaseUploadView):
+    def _validate_request(self, payload):
+        super()._validate_request(payload)
+
+        # The experiment should be approved and open.
+        if not self.experiment.is_open():
+            raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
+                                   detail='The experiment is not open to new uploads')
 
     def post(self, request, access_key):
         payload = request.data
@@ -134,6 +136,7 @@ class UploadView(BaseUploadView):
 
 class SessionUploadView(BaseUploadView):
 
+
     def post(self, request, access_key, participant_id):
         payload = request.data
         self._validate_request(payload)
@@ -147,6 +150,12 @@ class SessionUploadView(BaseUploadView):
         except ParticipantSession.DoesNotExist:
             raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
                                    detail='Bad participant session id')
+
+        # We do not check if the experiment is open.
+        # We can rely on the fact that for a session to be created, the experiment had to be
+        # open when the session was started.
+        # The reason to do so is to let participants who started the experiment finish it,
+        # regardless of changes to the experiment status.
 
         # Create the new datapoint
         dp = self._save_data_point(payload, participant)
