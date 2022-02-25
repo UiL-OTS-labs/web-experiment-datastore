@@ -107,18 +107,18 @@
             </div>
         {% endif %}
 
-        <div class="float-right button button-colored">
-            <a href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
+        <div class="float-right">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                 {% trans 'experiments:global:download_raw' %}
             </a>
         </div>
-        <div class="float-right button button-colored mr-2">
-            <a href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
+        <div class="float-right mr-2">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
                 {% trans 'experiments:global:download_csv' %}
             </a>
         </div>
-        <div class="float-right button button-colored mr-2">
-            <a href="{% url 'experiments:download' experiment.id %}" target="_blank">
+        <div class="float-right mr-2">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id %}" target="_blank">
                 {% trans 'experiments:global:download' %}
             </a>
         </div>
@@ -182,8 +182,8 @@
     </div>
 </div>
 <div class="uu-inner-container justify-content-center mt-2 mb-5">
-    <div class="button button-colored">
-        <a href="{% url 'experiments:delete_all_data' experiment.id %}">
+    <div>
+        <a class="button button-colored" href="{% url 'experiments:delete_all_data' experiment.id %}">
             {% trans 'experiments:global:delete_all_data' %}
         </a>
     </div>
