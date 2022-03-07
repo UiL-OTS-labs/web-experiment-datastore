@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-24 09:11+0000\n"
+"POT-Creation-Date: 2022-02-23 14:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,62 +96,64 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:155
+#: experiments/models.py:174
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:159
+#: experiments/models.py:178
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
-#: experiments/models.py:175
+#: experiments/models.py:190
+msgid "experiments:models:datapoint:label:test"
+msgstr "Test"
+
+#: experiments/models.py:191
+msgid "experiments:models:datapoint:label:pilot"
+msgstr "Pilot"
+
+#: experiments/models.py:204
 msgid "experiments:models:participant:state:started"
 msgstr "Started"
 
-#: experiments/models.py:176
+#: experiments/models.py:205
 msgid "experiments:models:participant:state:completed"
 msgstr "Completed"
 
-#: experiments/models.py:177
+#: experiments/models.py:206
 msgid "experiments:models:participant:state:rejected"
 msgstr "Rejected"
 
-#: experiments/models.py:181
+#: experiments/models.py:210
 msgid "experiments:models:participant:uuid"
 msgstr "UUID"
 
-#: experiments/models.py:184
+#: experiments/models.py:213
 msgid "experiments:models:participant:state"
 msgstr "Status"
 
-#: experiments/models.py:185
+#: experiments/models.py:214
 msgid "experiments:models:participant:state:help"
 msgstr ""
 
-#: experiments/models.py:209
+#: experiments/models.py:222
+msgid "experiments:models:participant:group"
+msgstr "Group"
+
+#: experiments/models.py:246
 msgid "experiments:models:targetgroup:name"
 msgstr "Name"
 
-#: experiments/models.py:211
+#: experiments/models.py:248
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "The name of the target group should match the one in your experiment script"
 
-#: experiments/models.py:215
-msgid "experiments:models:targetgroup:completed"
-msgstr "Completed"
-
-#: experiments/models.py:217
-msgid "experiments:models:targetgroup:completed:help"
-msgstr ""
-"How many participants from that target group had completed the experiment "
-"(so far)"
-
-#: experiments/models.py:221
+#: experiments/models.py:266
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Completion target"
 
-#: experiments/models.py:222
+#: experiments/models.py:267
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "How many participants should the target group contain in total"
 
@@ -239,53 +241,93 @@ msgid "experiments:detail:researchers"
 msgstr "Researchers"
 
 #: experiments/templates/experiments/detail.html:86
-#: experiments/templates/experiments/detail.html:128
+msgid "experiments:detail:progress_header"
+msgstr "Progress"
+
+#: experiments/templates/experiments/detail.html:90
+msgid "experiments:detail:progress:group"
+msgstr "Group"
+
+#: experiments/templates/experiments/detail.html:91
+msgid "experiments:detail:progress:started"
+msgstr "Started"
+
+#: experiments/templates/experiments/detail.html:92
+msgid "experiments:detail:progress:piloted"
+msgstr "Piloted"
+
+#: experiments/templates/experiments/detail.html:93
+msgid "experiments:detail:progress:completed"
+msgstr "Completed"
+
+#: experiments/templates/experiments/detail.html:94
+msgid "experiments:detail:progress:completion_target"
+msgstr "Completion target"
+
+#: experiments/templates/experiments/detail.html:112
+#: experiments/templates/experiments/detail.html:171
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
-#: experiments/templates/experiments/detail.html:91
-#: experiments/templates/experiments/detail.html:132
+#: experiments/templates/experiments/detail.html:117
+#: experiments/templates/experiments/detail.html:175
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
-#: experiments/templates/experiments/detail.html:95
+#: experiments/templates/experiments/detail.html:122
+msgid "experiments:global:download"
+msgstr "Download"
+
+#: experiments/templates/experiments/detail.html:126
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:108
+#: experiments/templates/experiments/detail.html:145
 msgid "experiments:global:actions"
 msgstr "Actions"
 
-#: experiments/templates/experiments/detail.html:124
+#: experiments/templates/experiments/detail.html:167
 msgid "experiments:global:delete_datapoint"
 msgstr "Delete"
 
-#: experiments/templates/experiments/detail.html:144
+#: experiments/templates/experiments/detail.html:187
 msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
 
-#: experiments/templates/experiments/edit.html:8
-#: experiments/templates/experiments/edit.html:24
+#: experiments/templates/experiments/download.html:8
+msgid "experiments:download:header"
+msgstr "Download Data"
+
+#: experiments/templates/experiments/download.html:16
+msgid "experiments:globals:download"
+msgstr "Download"
+
+#: experiments/templates/experiments/edit.html:9
+#: experiments/templates/experiments/edit.html:34
 msgid "experiments:edit:header"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/edit.html:27
+#: experiments/templates/experiments/edit.html:37
 msgid "experiments:edit:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/edit.html:34
+#: experiments/templates/experiments/edit.html:45
 msgid "experiments:edit:target_groups_header"
 msgstr "Target Groups"
 
-#: experiments/templates/experiments/edit.html:35
+#: experiments/templates/experiments/edit.html:46
 msgid "experiments:edit:target_groups_instructions"
-msgstr "If your design includes multiple item lists, you can configure them by adding target groups using the link below. Participants would be assigned to lists randomly but in a balanced fashion. Be sure to configure your jsPsych script accordingly."
+msgstr ""
+"If your design includes multiple item lists, you can configure them by "
+"adding target groups using the link below. Participants would be assigned to "
+"lists randomly but in a balanced fashion. Be sure to configure your jsPsych "
+"script accordingly."
 
-#: experiments/templates/experiments/edit.html:45
+#: experiments/templates/experiments/edit.html:57
 msgid "experiments:edit:add_group"
 msgstr "Add target group"
 
-#: experiments/templates/experiments/edit.html:47
+#: experiments/templates/experiments/edit.html:59
 #: experiments/templates/experiments/new.html:27
 msgid "experiments:globals:save"
 msgstr "Save"
@@ -320,14 +362,14 @@ msgstr "Experiment created!"
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:201
+#: experiments/views.py:196
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:226
+#: experiments/views.py:221
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:263
+#: experiments/views.py:258
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"

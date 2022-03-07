@@ -81,14 +81,45 @@
 </div>
 <div class="uu-inner-container mt-5">
     <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
+        {% if experiment.targetgroup_set.count %}
+            <div class="mb-5">
+                <h3>{% trans 'experiments:detail:progress_header' %}</h3>
+                <table width="100%">
+                    <thead>
+                    <tr>
+                      <th>{% trans 'experiments:detail:progress:group' %}</th>
+                      <th>{% trans 'experiments:detail:progress:started' %}</th>
+                      <th>{% trans 'experiments:detail:progress:piloted' %}</th>
+                      <th>{% trans 'experiments:detail:progress:completed' %}</th>
+                      <th>{% trans 'experiments:detail:progress:completion_target' %}</th>
+                    </tr>
+                    </thead>
+                    {% for group in experiment.targetgroup_set.all %}
+                    <tr>
+                        <td>{{ group.name}}</td>
+                        <td>{{ group.num_started }}</td>
+                        <td>{{ group.num_pilot_completed }}</td>
+                        <td>{{ group.num_completed }}</td>
+                        <td>{{ group.completion_target }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+
+        <div class="float-right">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                 {% trans 'experiments:global:download_raw' %}
             </a>
         </div>
-        <div class="float-right button button-colored mr-2">
-            <a href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
+        <div class="float-right mr-2">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
                 {% trans 'experiments:global:download_csv' %}
+            </a>
+        </div>
+        <div class="float-right mr-2">
+            <a class="button button-colored" href="{% url 'experiments:download' experiment.id %}" target="_blank">
+                {% trans 'experiments:global:download' %}
             </a>
         </div>
         <h3>
@@ -100,6 +131,12 @@
                 <tr>
                     <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "id" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "Experiment" "state" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "ParticipantSession" "group" %}
                     </th>
                     <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
@@ -115,6 +152,12 @@
                     <tr>
                         <td>
                             {{ dataPoint.number }}
+                        </td>
+                        <td>
+                            {{ dataPoint.status_label }}
+                        </td>
+                        <td>
+                            {{ dataPoint.session.group.name }}
                         </td>
                         <td>
                             {{ dataPoint.date_added }}
@@ -139,8 +182,8 @@
     </div>
 </div>
 <div class="uu-inner-container justify-content-center mt-2 mb-5">
-    <div class="button button-colored">
-        <a href="{% url 'experiments:delete_all_data' experiment.id %}">
+    <div>
+        <a class="button button-colored" href="{% url 'experiments:delete_all_data' experiment.id %}">
             {% trans 'experiments:global:delete_all_data' %}
         </a>
     </div>

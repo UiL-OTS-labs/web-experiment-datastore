@@ -25,6 +25,10 @@ def on_participant_session_creation(
         instance: ParticipantSession,
         *args,
         **kwargs):
+
+    # save the state of the experiment at the time the session was started
+    instance.experiment_state = instance.experiment.state
+
     """
     Add an incremental session_id number when saving a session starting from 1
     """

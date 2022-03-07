@@ -15,7 +15,7 @@ from auditlog.utils.log import log
 from uil.core.views.mixins import DeleteSuccessMessageMixin
 from uil.vue.rest import FancyListApiView
 
-from .forms import CreateExperimentForm, EditExperimentForm
+from .forms import CreateExperimentForm, EditExperimentForm, DownloadForm
 from .models import Experiment, DataPoint, TargetGroup
 from .serializers import ExperimentSerializer
 from .utils import create_download_response_zip, create_file_response_single, \
@@ -319,3 +319,20 @@ class DownloadView(UserAllowedMixin, generic.View):
             return create_file_response_single(file_format, qs.first())
         else:
             return create_download_response_zip(file_format, self.experiment)
+
+
+class DownloadFormView(UserAllowedMixin, generic.FormView):
+    form_class = DownloadForm
+    template_name = 'experiments/download.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['experiment'] = self.experiment
+        return kwargs
+
+    def form_valid(self, form):
+        file_format = form.cleaned_data['file_format']
+        queryset = self.experiment.datapoint_set \
+            .filter(session__experiment_state__in=form.cleaned_data['include_status']) \
+            .filter(session__group__in=form.cleaned_data['include_groups'])
+        return create_download_response_zip(file_format, self.experiment, queryset)
