@@ -169,6 +169,11 @@ class DataPoint(models.Model):
     # Used to display an incrementing ID, independent from other experiments
     number = models.PositiveIntegerField(null=False)
 
+    size = models.PositiveBigIntegerField(
+        _("experiments:models:datapoint:size"),
+        null=False,
+    )
+
     # Encrypted field for extra security
     data = EncryptedTextField(
         _("experiments:models:datapoint:data"),

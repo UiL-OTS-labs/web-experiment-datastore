@@ -1,3 +1,5 @@
+import sys
+
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
@@ -17,6 +19,9 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
             instance.number = last_datapoint.number + 1
         else:
             instance.number = 1
+
+    if not instance.size or instance.size == 0:
+        instance.size = sys.getsizeof(instance.data)
 
 
 @receiver(post_delete, sender=DataPoint)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 14:49+0000\n"
+"POT-Creation-Date: 2022-03-07 15:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,14 @@ msgstr ""
 #: experiments/forms.py:52
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "A different experiment already uses this folder name!"
+
+#: experiments/forms.py:64 experiments/models.py:193
+msgid "experiments:models:datapoint:label:test"
+msgstr "Test"
+
+#: experiments/forms.py:65 experiments/models.py:194
+msgid "experiments:models:datapoint:label:pilot"
+msgstr "Pilot"
 
 #: experiments/models.py:17
 msgid "experiments:models:experiment:state:open"
@@ -96,64 +104,60 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
 
-#: experiments/models.py:174
+#: experiments/models.py:173
+msgid "experiments:models:datapoint:size"
+msgstr "Filesize"
+
+#: experiments/models.py:179
 msgid "experiments:models:datapoint:data"
 msgstr "Data"
 
-#: experiments/models.py:178
+#: experiments/models.py:183
 msgid "experiments:models:datapoint:date_added"
 msgstr "Date uploaded"
 
-#: experiments/models.py:190
-msgid "experiments:models:datapoint:label:test"
-msgstr "Test"
-
-#: experiments/models.py:191
-msgid "experiments:models:datapoint:label:pilot"
-msgstr "Pilot"
-
-#: experiments/models.py:204
+#: experiments/models.py:209
 msgid "experiments:models:participant:state:started"
 msgstr "Started"
 
-#: experiments/models.py:205
+#: experiments/models.py:210
 msgid "experiments:models:participant:state:completed"
 msgstr "Completed"
 
-#: experiments/models.py:206
+#: experiments/models.py:211
 msgid "experiments:models:participant:state:rejected"
 msgstr "Rejected"
 
-#: experiments/models.py:210
+#: experiments/models.py:215
 msgid "experiments:models:participant:uuid"
 msgstr "UUID"
 
-#: experiments/models.py:213
+#: experiments/models.py:218
 msgid "experiments:models:participant:state"
 msgstr "Status"
 
-#: experiments/models.py:214
+#: experiments/models.py:219
 msgid "experiments:models:participant:state:help"
 msgstr ""
 
-#: experiments/models.py:222
+#: experiments/models.py:227
 msgid "experiments:models:participant:group"
 msgstr "Group"
 
-#: experiments/models.py:246
+#: experiments/models.py:251
 msgid "experiments:models:targetgroup:name"
 msgstr "Name"
 
-#: experiments/models.py:248
+#: experiments/models.py:253
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "The name of the target group should match the one in your experiment script"
 
-#: experiments/models.py:266
+#: experiments/models.py:271
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Completion target"
 
-#: experiments/models.py:267
+#: experiments/models.py:272
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "How many participants should the target group contain in total"
 
@@ -265,16 +269,17 @@ msgid "experiments:detail:progress:completion_target"
 msgstr "Completion target"
 
 #: experiments/templates/experiments/detail.html:112
-#: experiments/templates/experiments/detail.html:171
+#: experiments/templates/experiments/detail.html:177
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
 #: experiments/templates/experiments/detail.html:117
-#: experiments/templates/experiments/detail.html:175
+#: experiments/templates/experiments/detail.html:181
 msgid "experiments:global:download_csv"
 msgstr "Download data as CSV"
 
 #: experiments/templates/experiments/detail.html:122
+#: experiments/templates/experiments/download.html:16
 msgid "experiments:global:download"
 msgstr "Download"
 
@@ -282,25 +287,21 @@ msgstr "Download"
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:145
+#: experiments/templates/experiments/detail.html:148
 msgid "experiments:global:actions"
 msgstr "Actions"
 
-#: experiments/templates/experiments/detail.html:167
+#: experiments/templates/experiments/detail.html:173
 msgid "experiments:global:delete_datapoint"
 msgstr "Delete"
 
-#: experiments/templates/experiments/detail.html:187
+#: experiments/templates/experiments/detail.html:193
 msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
 
 #: experiments/templates/experiments/download.html:8
 msgid "experiments:download:header"
 msgstr "Download Data"
-
-#: experiments/templates/experiments/download.html:16
-msgid "experiments:globals:download"
-msgstr "Download"
 
 #: experiments/templates/experiments/edit.html:9
 #: experiments/templates/experiments/edit.html:34
