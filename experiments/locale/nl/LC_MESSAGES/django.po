@@ -2,13 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 15:33+0000\n"
+"POT-Creation-Date: 2022-03-07 15:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,16 +33,12 @@ msgid "experiments:forms:create:duplicate_folder"
 msgstr "Een ander experiment gebruikt deze naam al."
 
 #: experiments/forms.py:64 experiments/models.py:193
-#, fuzzy
-#| msgid "experiments:models:datapoint:data"
 msgid "experiments:models:datapoint:label:test"
-msgstr "Data"
+msgstr "Test"
 
 #: experiments/forms.py:65 experiments/models.py:194
-#, fuzzy
-#| msgid "experiments:models:datapoint:data"
 msgid "experiments:models:datapoint:label:pilot"
-msgstr "Data"
+msgstr "Pilot"
 
 #: experiments/models.py:17
 msgid "experiments:models:experiment:state:open"
@@ -142,28 +136,24 @@ msgstr "UUID"
 msgid "experiments:models:participant:state"
 msgstr "Status"
 
-#: experiments/models.py:219
-msgid "experiments:models:participant:state:help"
-msgstr ""
-
-#: experiments/models.py:227
+#: experiments/models.py:226
 msgid "experiments:models:participant:group"
 msgstr "Groep"
 
-#: experiments/models.py:251
+#: experiments/models.py:250
 msgid "experiments:models:targetgroup:name"
 msgstr "Naam"
 
-#: experiments/models.py:253
+#: experiments/models.py:252
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "De naam van de groep moet hetzelfde zijn als in je groep in jsPsych script."
 
-#: experiments/models.py:271
+#: experiments/models.py:270
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Aantal participanten doel"
 
-#: experiments/models.py:272
+#: experiments/models.py:271
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "Hoeveel participanten zouden in totaal in deze groep moeten komen"
 

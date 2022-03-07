@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 15:33+0000\n"
+"POT-Creation-Date: 2022-03-07 15:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,28 +136,24 @@ msgstr "UUID"
 msgid "experiments:models:participant:state"
 msgstr "Status"
 
-#: experiments/models.py:219
-msgid "experiments:models:participant:state:help"
-msgstr ""
-
-#: experiments/models.py:227
+#: experiments/models.py:226
 msgid "experiments:models:participant:group"
 msgstr "Group"
 
-#: experiments/models.py:251
+#: experiments/models.py:250
 msgid "experiments:models:targetgroup:name"
 msgstr "Name"
 
-#: experiments/models.py:253
+#: experiments/models.py:252
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "The name of the target group should match the one in your experiment script"
 
-#: experiments/models.py:271
+#: experiments/models.py:270
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Completion target"
 
-#: experiments/models.py:272
+#: experiments/models.py:271
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "How many participants should the target group contain in total"
 

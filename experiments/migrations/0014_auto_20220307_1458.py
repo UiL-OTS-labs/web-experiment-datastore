@@ -4,14 +4,12 @@ import sys
 from django.db import migrations, models
 import django.db.models.deletion
 
-from experiments.models import DataPoint
-
 
 def datapoint_set_size(apps, schema_editor):
     """
     Make sure all existing DP's get their size set
     """
-    dp_model: DataPoint = apps.get_model("experiments", "DataPoint")
+    dp_model = apps.get_model("experiments", "DataPoint")
     for dp in dp_model.objects.filter(size=0):
         dp.size = sys.getsizeof(dp.data)
         dp.save()

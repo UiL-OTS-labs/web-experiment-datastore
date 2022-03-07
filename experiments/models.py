@@ -216,7 +216,6 @@ class ParticipantSession(models.Model):
                             unique=True, default=uuid.uuid4, editable=False)
     state = models.PositiveIntegerField(
         _("experiments:models:participant:state"),
-        help_text=_("experiments:models:participant:state:help"),
         choices=STATES,
         default=STARTED
     )
