@@ -123,14 +123,14 @@ class TestTargetGroupAllocation(APITestCase):
         self.exp.save()
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json()['result'], 'ERR_NOT_OPEN')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)
 
         self.exp.state = Experiment.OPEN
         self.exp.approved = False
         self.exp.save()
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
         self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json()['result'], 'ERR_NOT_OPEN')
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)
 
     def test_target_group_round_robin(self):
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
@@ -223,3 +223,13 @@ class TestTargetGroupAllocation(APITestCase):
         data = json.dumps({'key': 'value'})
         response = self.client.post(reverse('api:upload', args=[self.exp.access_id]), data, content_type='text/plain')
         self.assertEqual(response.status_code, 400)
+
+    def test_experiment_not_open_when_groups_are_full(self):
+        self.group_a.completion_target = 0
+        self.group_b.completion_target = 0
+        self.group_a.save()
+        self.group_b.save()
+
+        response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)

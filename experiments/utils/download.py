@@ -3,7 +3,9 @@ import io
 import zipfile
 import json
 import re
+from typing import Optional
 
+from django.db.models import QuerySet
 from django.http import FileResponse, HttpResponse
 from django.utils.datastructures import OrderedSet
 
@@ -54,8 +56,11 @@ def _create_file_name(
     )
 
 
-def create_download_response_zip(file_format: str, experiment: Experiment) -> \
-        FileResponse:
+def create_download_response_zip(
+        file_format: str,
+        experiment: Experiment,
+        queryset: Optional[QuerySet] = None
+) -> FileResponse:
     """Creates a FileResponse containing a ZIP with all data of the provided
     experiment, in the desired format. """
 
@@ -65,14 +70,16 @@ def create_download_response_zip(file_format: str, experiment: Experiment) -> \
             experiment,
             lambda dp: _create_file_name(dp, suffix=".txt"),
             # Raw should just return the data of the DataPoint
-            lambda dp: dp.data
+            lambda dp: dp.data,
+            queryset
         )
     else:
         zip_file = _create_zip(
             experiment,
             lambda dp: _create_file_name(dp, suffix='.csv'),
             # CSV should apply _flatten_json to the data and return the result
-            lambda dp: _flatten_json(dp.data)
+            lambda dp: _flatten_json(dp.data),
+            queryset
         )
 
     return FileResponse(
@@ -119,7 +126,8 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
 def _create_zip(
         experiment: Experiment,
         filename_generator: callable,
-        processor: callable
+        processor: callable,
+        queryset: Optional[QuerySet] = None
 ) -> io.BytesIO:
     """Creates a ZIP in a BytesIO buffer.
 
@@ -134,7 +142,10 @@ def _create_zip(
     with zipfile.ZipFile(buffer, "a", zipfile.ZIP_DEFLATED, True) as zip_file:
         export_report = EXPORT_REPORT_HEADER
 
-        for dataPoint in experiment.datapoint_set.all():
+        if queryset is None:
+            queryset = experiment.datapoint_set.all()
+
+        for dataPoint in queryset:
             filename = filename_generator(dataPoint)
             try:
                 data = processor(dataPoint)

@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="uu-inner-container">
+    <div class="col-12">
+        <h1>
+            {% trans 'experiments:download:header' %}
+        </h1>
+        <form method="post">
+            {% csrf_token %}
+            <table width="100%">
+                {{ form.as_table }}
+            </table>
+            <div class="float-right">
+                <button type="submit">{% trans 'experiments:globals:download' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

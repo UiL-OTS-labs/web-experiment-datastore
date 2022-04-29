@@ -39,13 +39,13 @@
 {% block content %}
 <div class="uu-inner-container">
     <div class="col-12">
-        <div class="float-right button button-colored">
-            <a href="{% url 'administration:ldap' %}">
+        <div class="float-right">
+            <a class="button button-colored" href="{% url 'administration:ldap' %}">
                 {% trans 'administration:home:server_config' %}
             </a>
         </div>
-        <div class="float-right button button-colored mr-2">
-            <a href="{% url 'admin:index' %}">
+        <div class="float-right mr-2">
+            <a class="button button-colored" href="{% url 'admin:index' %}">
                 {% trans 'administration:home:django_admin' %}
             </a>
         </div>
