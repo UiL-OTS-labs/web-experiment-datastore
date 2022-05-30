@@ -10,7 +10,7 @@ $(function() {
     $('#add_group').click((event) => {
         event.preventDefault();
         let hidden = $('.target-group-form:hidden');
-        hidden.last().show();
+        hidden.first().show();
 
         if (hidden.length - 1 <= 0) {
             $('#add_group').hide();
