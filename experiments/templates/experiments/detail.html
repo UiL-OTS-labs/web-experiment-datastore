@@ -84,7 +84,7 @@
         {% if experiment.targetgroup_set.count %}
             <div class="mb-5">
                 <h3>{% trans 'experiments:detail:progress_header' %}</h3>
-                <table width="100%">
+                <table class="w-100">
                     <thead>
                     <tr>
                       <th>{% trans 'experiments:detail:progress:group' %}</th>
@@ -126,7 +126,7 @@
             {% trans 'experiments:detail:data_header' %}
         </h3>
         <br/>
-        <table class="dt" width="100%" data-language="{% datatables_lang %}">
+        <table class="dt w-100" data-language="{% datatables_lang %}">
             <thead>
                 <tr>
                     <th>
@@ -140,6 +140,9 @@
                     </th>
                     <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
+                    </th>
+                    <th>
+                        {% get_verbose_field_name "experiments" "DataPoint" "size" %}
                     </th>
                     <th>
                         {% trans 'experiments:global:actions' %}
@@ -161,6 +164,9 @@
                         </td>
                         <td>
                             {{ dataPoint.date_added }}
+                        </td>
+                        <td>
+                            {{ dataPoint.size|filesizeformat }}
                         </td>
                         <td>
                             <a href="{% url 'experiments:delete_datapoint' experiment.id dataPoint.pk %}">
