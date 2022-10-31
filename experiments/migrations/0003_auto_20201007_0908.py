@@ -3,7 +3,7 @@
 from django.conf import settings
 import django.core.validators
 from django.db import migrations, models
-import uil.core.fields.encrypted_fields
+import cdh.core.fields.encrypted_fields
 import uuid
 
 
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='datapoint',
             name='data',
-            field=uil.core.fields.encrypted_fields.EncryptedTextField(verbose_name='experiments:models:datapoint:data'),
+            field=cdh.core.fields.encrypted_fields.EncryptedTextField(verbose_name='experiments:models:datapoint:data'),
         ),
         migrations.AlterField(
             model_name='datapoint',

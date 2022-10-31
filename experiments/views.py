@@ -12,8 +12,8 @@ from rest_framework.authentication import SessionAuthentication
 
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
-from uil.core.views.mixins import DeleteSuccessMessageMixin
-from uil.vue.rest import FancyListApiView
+from cdh.core.views.mixins import DeleteSuccessMessageMixin
+from cdh.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm, DownloadForm
 from .models import Experiment, DataPoint, TargetGroup

@@ -3,7 +3,7 @@
 import auditlog.fields
 from django.db import migrations, models
 import django.db.models.functions.datetime
-import uil.core.fields.encrypted_fields
+import cdh.core.fields.encrypted_fields
 
 
 class Migration(migrations.Migration):
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('user', models.TextField(blank=True, null=True)),
                 ('user_type', models.TextField(blank=True, choices=[('SYSTEM', 'system'), ('ADMIN', 'admin'), ('LEADER', 'leader'), ('PARTICIPANT', 'participant'), ('UNKNOWN', 'unknown')], null=True)),
                 ('extra', auditlog.fields.JSONField(blank=True, null=True)),
-                ('record', uil.core.fields.encrypted_fields.EncryptedDateTimeField(auto_now_add=True)),
+                ('record', cdh.core.fields.encrypted_fields.EncryptedDateTimeField(auto_now_add=True)),
                 ('db_record_date', models.DateTimeField(default=django.db.models.functions.datetime.Now())),
                 ('last_modification', models.DateTimeField(auto_now=True)),
             ],

@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from experiments.models import Experiment
 from main.models import User
-from uil.core.utils.mail import send_template_email
+from cdh.core.utils.mail import send_template_email
 
 
 def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \

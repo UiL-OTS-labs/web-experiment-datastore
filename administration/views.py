@@ -14,8 +14,8 @@ from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
 from experiments.mixins import ExperimentMixin
 from experiments.models import Experiment
-from uil.core.views.mixins import RedirectSuccessMessageMixin
-from uil.vue.rest import FancyListApiView
+from cdh.core.views.mixins import RedirectSuccessMessageMixin
+from cdh.vue.rest import FancyListApiView
 
 
 class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):

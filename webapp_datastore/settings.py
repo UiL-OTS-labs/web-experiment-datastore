@@ -71,8 +71,8 @@ INSTALLED_APPS = [
     'administration',
     'api',
     'experiments',
-    'uil.core',
-    'uil.vue',
+    'cdh.core',
+    'cdh.vue',
 
     # This has to be last, otherwise it's login/logout pages will take over
     'django.contrib.admin',

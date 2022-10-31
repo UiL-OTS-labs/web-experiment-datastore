@@ -1,4 +1,4 @@
-from uil.core.rest.serializers import ModelDisplaySerializer
+from cdh.rest.server.serializers import ModelDisplaySerializer
 from .models import Experiment
 from rest_framework import serializers
 
