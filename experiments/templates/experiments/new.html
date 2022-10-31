@@ -8,23 +8,32 @@
     {% trans 'experiments:new:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block html_head %}
+<script nonce="{{ request.csp_nonce }}">
+ $(function() {
+     $('#id_users').select2();
+ });
+</script>
+
+{% endblock %}
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
+
         <h1>
             {% trans 'experiments:new:header' %}
         </h1>
         <p>
             {% trans 'experiments:new:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <table width="100%">
-                {{ form.as_table }}
+                {{ form }}
             </table>
             <br/>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:save' %}</button>
+            <div>
+                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save' %}</button>
             </div>
         </form>
     </div>

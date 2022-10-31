@@ -7,10 +7,10 @@
         <h1>
             {% trans 'experiments:download:header' %}
         </h1>
-        <form method="post">
+        <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <table width="100%">
-                {{ form.as_table }}
+                {{ form }}
             </table>
             <div class="float-right">
                 <button type="submit">{% trans 'experiments:global:download' %}</button>

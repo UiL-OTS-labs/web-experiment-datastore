@@ -14,6 +14,7 @@
 <script nonce="{{ request.csp_nonce }}">
  $(function() {
      hideExtraForms({{ object.targetgroup_set.count }});
+     $('#id_users').select2();
  });
 </script>
 {% endblock %}
@@ -36,10 +37,10 @@
         <p>
             {% trans 'experiments:edit:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <table width="100%">
-                {{ form.as_table }}
+                {{ form }}
             </table>
             <div class="mt-4">
               <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
@@ -49,7 +50,7 @@
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">
                     <table width="100%">
-                      {{ group_form.as_table }}
+                      {{ group_form }}
                     </table>
                 </div>
             {% endfor %}

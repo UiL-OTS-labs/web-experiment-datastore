@@ -15,7 +15,8 @@
         <h1>
             {% trans 'experiments:delete_all_data:header' %}
         </h1>
-        <form method="post">{% csrf_token %}
+        <form method="post" class="uu-form uu-form-no-gap">
+            {% csrf_token %}
             <p>{% transformat 'experiments:delete_all_data:text' experiment.title %}</p>
             <div class="button" style="display: inline-block">
                 <a href="{% url 'experiments:detail' experiment.pk %}" >
