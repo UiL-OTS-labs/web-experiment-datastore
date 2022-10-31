@@ -49,15 +49,15 @@
             {{ target_group_formset.management_form }}
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">
-                    <table width="100%">
+                    <table class="table table-bordered table-striped" width="100%">
                       {{ group_form }}
                     </table>
                 </div>
             {% endfor %}
-            <br/>
             <a href="#" id="add_group">+ {% trans 'experiments:edit:add_group' %}</a>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:save' %}</button>
+            <hr/>
+            <div>
+                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save' %}</button>
             </div>
         </form>
     </div>
