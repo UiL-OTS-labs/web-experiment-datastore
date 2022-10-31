@@ -35,6 +35,7 @@ urlpatterns = [
     path('uilcore/', include('cdh.core.urls')),
     path('vue/', include('cdh.vue.urls')),
     path('admin/', admin.site.urls),
+    path(r'impersonate/', include('impersonate.urls'))
 ]
 
 if settings.DEBUG:

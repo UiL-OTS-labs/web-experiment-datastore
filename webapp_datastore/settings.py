@@ -74,8 +74,11 @@ INSTALLED_APPS = [
     'cdh.core',
     'cdh.vue',
 
+    'impersonate',
+
     # This has to be last, otherwise it's login/logout pages will take over
     'django.contrib.admin',
+    'django.forms',
 ]
 
 AUTH_USER_MODEL = 'main.User'
@@ -92,6 +95,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'impersonate.middleware.ImpersonateMiddleware',
     'axes.middleware.AxesMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -247,3 +251,5 @@ MENU_HIDE_EMPTY = False
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'api.exceptions.exception_handler',
 }
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

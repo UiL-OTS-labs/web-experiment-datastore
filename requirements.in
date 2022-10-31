@@ -8,6 +8,7 @@ django-rest-framework
 django-auth-ldap
 django-cors-headers
 django-extensions # QoF for the admin, adds a lot of useful manage.py commands
+django-impersonate
 pip-tools
 cryptography
 bpython
