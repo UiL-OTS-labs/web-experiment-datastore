@@ -6,6 +6,15 @@
 {% load menu %}
 {% load transformat %}
 
+{% block html_head %}
+    <style type="text/css">
+    .uu-root-container {
+        --bs-uu-hero-bg: var(--bs-red);
+        --bs-uu-hero-color: var(--bs-white);
+    }
+    </style>
+{% endblock %}
+
 {% block header_title %}
     {# Translators: This is the title that will end up in the tab of the browser  #}
     {% trans 'site:name' %}
