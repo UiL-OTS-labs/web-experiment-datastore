@@ -12,7 +12,6 @@ from rest_framework.authentication import SessionAuthentication
 
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
-from cdh.core.views.mixins import DeleteSuccessMessageMixin
 from cdh.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm, DownloadForm
@@ -187,7 +186,7 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
         return self.model.objects.filter(experiment=self.experiment)
 
 
-class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
+class DeleteExperimentView(UserAllowedMixin, SuccessMessageMixin,
                            generic.DeleteView):
     """View to delete an entire experiment"""
     model = Experiment
@@ -195,7 +194,7 @@ class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
     template_name = 'experiments/delete_experiment.html'
     success_message = _('experiments:message:delete:success')
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         object = self.get_object()
         log(
             Event.DELETE_DATA,
@@ -207,20 +206,20 @@ class DeleteExperimentView(UserAllowedMixin, DeleteSuccessMessageMixin,
             UserType.RESEARCHER
         )
 
-        return super().delete(request, *args, **kwargs)
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('experiments:home')
 
 
-class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
+class DeleteDataPointView(UserAllowedMixin, SuccessMessageMixin,
                           generic.DeleteView):
     """DeleteView for a single DataPoint"""
     model = DataPoint
     template_name = 'experiments/delete_datapoint.html'
     success_message = _('experiments:message:delete_datapoint:success')
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         log(
             Event.DELETE_DATA,
             "Deleted datapoint {} from experiment {} ({})".format(
@@ -232,7 +231,7 @@ class DeleteDataPointView(UserAllowedMixin, DeleteSuccessMessageMixin,
             UserType.RESEARCHER
         )
 
-        return super().delete(request, *args, **kwargs)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
