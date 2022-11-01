@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block html_head %}
+    {{ block.super }}
     {# This template loads in either the dev or prod Vue library, depending on settings.DEBUG #}
     {% include 'cdh.vue/vueloader.html' %}
     {% load_vue_component 'AdminExperimentList' request.csp_nonce %}

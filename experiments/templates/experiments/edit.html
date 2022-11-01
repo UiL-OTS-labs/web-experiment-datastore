@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block html_head %}
+{{ block.super }}
 <script src="{% static 'experiments/js/edit.js' %}"></script>
 <script nonce="{{ request.csp_nonce }}">
  $(function() {
