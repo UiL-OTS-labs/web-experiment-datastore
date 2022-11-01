@@ -18,12 +18,10 @@
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <p>{% transformat 'administration:approve:text' object %}</p>
-            <div class="button" style="display: inline-block">
-                <a href="{% url 'administration:home' %}" >
-                    {% trans 'administration:approve:cancel' %}
-                </a>
-            </div>
-            <input type="submit" value="{% trans 'administration:approve:confirm' %}">
+            <a class="btn btn-secondary" href="{% url 'administration:home' %}" >
+                {% trans 'administration:approve:cancel' %}
+            </a>
+            <input class="btn btn-primary" type="submit" value="{% trans 'administration:approve:confirm' %}">
         </form>
         <br/>
     </div>
