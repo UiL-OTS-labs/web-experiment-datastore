@@ -19,8 +19,8 @@
         </p>
     </div>
     <div class="col-5">
-        <strong>{% trans 'experiments:details:detail_header' %}</strong> -
-        <a href="{% url 'experiments:edit' experiment.pk %}">
+        <strong>{% trans 'experiments:details:detail_header' %}</strong>
+        <a class="float-end btn btn-sm btn-secondary" href="{% url 'experiments:edit' experiment.pk %}">
             {% trans 'experiments:global:edit' %}
         </a>
         <table class="table table-striped mt-2">
@@ -107,14 +107,14 @@
             </div>
         {% endif %}
 
-        <div class="btn-group float-end" role="group">
-            <a class="btn btn-primary btn-sm" href="{% url 'experiments:download' experiment.id %}" target="_blank">
+        <div class="btn-group btn-group-sm float-end" role="group">
+            <a class="btn btn-primary" href="{% url 'experiments:download' experiment.id %}" target="_blank">
                 {% trans 'experiments:global:download' %}
             </a>
-            <a class="btn btn-primary btn-sm" href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
+            <a class="btn btn-primary" href="{% url 'experiments:download' experiment.id 'raw' %}" target="_blank">
                 {% trans 'experiments:global:download_raw' %}
             </a>
-            <a class="btn btn-primary btn-sm" href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
+            <a class="btn btn-primary" href="{% url 'experiments:download' experiment.id 'csv' %}" target="_blank">
                 {% trans 'experiments:global:download_csv' %}
             </a>
         </div>
