@@ -29,6 +29,7 @@ FIELD_ENCRYPTION_KEY = 'IhWBKI5MORNNtI5WWqZwOflEwojBACtuz9lKXwcF4HI='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ACCEPTATION = False
 ENABLE_DEBUG_TOOLBAR = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -134,6 +135,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cdh.core.context_processors.acceptation',
             ],
         },
     },
