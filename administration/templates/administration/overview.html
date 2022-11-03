@@ -43,11 +43,11 @@
             {% trans 'administration:home:header' %}
         </h1>
 
-        <div class="btn-group" role="group">
-            <a class="btn btn-secondary btn-sm" href="{% url 'administration:ldap' %}">
+        <div class="btn-group btn-group-sm" role="group">
+            <a class="btn btn-secondary" href="{% url 'administration:ldap' %}">
                 {% trans 'administration:home:server_config' %}
             </a>
-            <a class="btn btn-secondary btn-sm" href="{% url 'admin:index' %}">
+            <a class="btn btn-secondary" href="{% url 'admin:index' %}">
                 {% trans 'administration:home:django_admin' %}
             </a>
         </div>

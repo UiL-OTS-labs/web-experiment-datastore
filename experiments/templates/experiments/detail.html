@@ -8,12 +8,20 @@
     {% trans 'experiments:detail:header' %} - {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<div class="uu-container">
-    <div class="col-7 pe-3">
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
         <h1>
             {% trans 'experiments:detail:header' %} - {{ experiment.title }}
         </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-7 pe-3">
+        <p>
+            {% trans 'experiments:detail:info_text' %}
+        </p>
         <p>
             {% trans 'experiments:detail:info_text' %}
         </p>

@@ -8,13 +8,17 @@
     {% trans 'administration:approve:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
+        <h1>
+            {% trans 'administration:approve:header' %}
+        </h1>
+    </div>
+{% endblock %}
 
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
-        <h1>
-            {% trans 'administration:approve:header' %}
-        </h1>
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <p>{% transformat 'administration:approve:text' object %}</p>
