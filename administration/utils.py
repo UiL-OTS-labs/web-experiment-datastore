@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.urls import reverse
 
-from cdh.core.utils.mail import send_template_email
+from cdh.core.mail import send_template_email
 
 from experiments.models import Experiment
 
@@ -77,9 +77,9 @@ def sent_confirmation_email(experiment: Experiment, request) -> None:
 
     send_template_email(
         recipient_list,
-        "Your experiment has been approved",
-        "administration/mail/experiment_approved",
-        {
+        subject="Your experiment has been approved",
+        html_template="administration/mail/experiment_approved.html",
+        template_context={
             "experiment": experiment,
             # By default, reverse generates a relative url. Using
             # build_absolute_url gives us an absolute url that actually works

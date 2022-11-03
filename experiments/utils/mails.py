@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from experiments.models import Experiment
 from main.models import User
-from cdh.core.utils.mail import send_template_email
+from cdh.core.mail import send_template_email
 
 
 def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
@@ -14,9 +14,9 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
     """
     send_template_email(
         [settings.LABSTAFF_EMAIL],
-        "New experiment",
-        "experiments/mail/new_experiment_staff",
-        {
+        subject="New experiment",
+        html_template="experiments/mail/new_experiment_staff.html",
+        template_context={
             "experiment": experiment,
             "user": user,
             # By default, reverse provides a relative URL. We need an
@@ -29,9 +29,9 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
     recipient_list = [user.email for user in experiment.users.all()]
     send_template_email(
         recipient_list,
-        "Confirmation new experiment",
-        "experiments/mail/new_experiment_user",
-        {
+        subject="Confirmation new experiment",
+        html_template="experiments/mail/new_experiment_user.html",
+        template_context={
             "experiment": experiment,
             "user": user,
             # By default, reverse provides a relative URL. We need an
