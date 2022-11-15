@@ -1,11 +1,14 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-from .models import Experiment, TargetGroup
+from cdh.core.forms import BootstrapRadioSelect, TemplatedForm, \
+    TemplatedModelForm, BootstrapCheckboxSelectMultiple
+
+from .models import Experiment
 
 
-class EditExperimentForm(forms.ModelForm):
+class EditExperimentForm(TemplatedModelForm):
     """Form to edit an experiment. Differs from the creation form, as it
     does not allow editing of the folder_name, but does allow changing the
     state of the experiment.
@@ -19,7 +22,7 @@ class EditExperimentForm(forms.ModelForm):
         }
 
 
-class CreateExperimentForm(forms.ModelForm):
+class CreateExperimentForm(TemplatedModelForm):
     """Form to create experiments. Differs from the edit form, as it allows
     changing of the folder_name, but does not have the state field.
     Changing the state at creation is not desired, as we want experiments to
@@ -55,16 +58,18 @@ class CreateExperimentForm(forms.ModelForm):
         return data.lower()
 
 
-class DownloadForm(forms.Form):
+class DownloadForm(TemplatedForm):
     file_format = forms.ChoiceField(
-        widget=forms.RadioSelect,
+        widget=BootstrapRadioSelect,
         choices=[('csv', 'CSV'), ('raw', 'Raw')])
     include_status = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
+        widget=BootstrapCheckboxSelectMultiple,
         choices=[(Experiment.OPEN, _('experiments:models:datapoint:label:test')),
                  (Experiment.PILOTING, _('experiments:models:datapoint:label:pilot'))])
-    include_groups = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                               choices=())
+    include_groups = forms.MultipleChoiceField(
+        widget=BootstrapCheckboxSelectMultiple,
+        choices=()
+    )
 
     def __init__(self, *args, **kwargs):
         experiment = kwargs.pop('experiment')

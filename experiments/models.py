@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
 
-from uil.core.fields import EncryptedTextField
+from cdh.core.fields import EncryptedTextField
 
 from main.models import User
 

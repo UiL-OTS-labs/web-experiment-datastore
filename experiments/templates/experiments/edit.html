@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -10,15 +10,14 @@
 {% endblock %}
 
 {% block html_head %}
+{{ block.super }}
 <script src="{% static 'experiments/js/edit.js' %}"></script>
 <script nonce="{{ request.csp_nonce }}">
  $(function() {
      hideExtraForms({{ object.targetgroup_set.count }});
+     $('#id_users').select2();
  });
 </script>
-{% endblock %}
-
-{% block content %}
 <style>
  input:read-only {
      background:#efefef;
@@ -28,18 +27,26 @@
      margin-top: 2em;
  }
 </style>
-<div class="uu-inner-container">
-    <div class="col-12">
+{% endblock %}
+
+{% block pre-messages-content %}
+    <div class="uu-hero">
         <h1>
             {% trans 'experiments:edit:header' %}
         </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
         <p>
             {% trans 'experiments:edit:info_text' %}
         </p>
-        <form method="post">
+        <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <table width="100%">
-                {{ form.as_table }}
+                {{ form }}
             </table>
             <div class="mt-4">
               <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
@@ -48,15 +55,15 @@
             {{ target_group_formset.management_form }}
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">
-                    <table width="100%">
-                      {{ group_form.as_table }}
+                    <table class="table table-bordered table-striped" width="100%">
+                      {{ group_form }}
                     </table>
                 </div>
             {% endfor %}
-            <br/>
             <a href="#" id="add_group">+ {% trans 'experiments:edit:add_group' %}</a>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:globals:save' %}</button>
+            <hr/>
+            <div>
+                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save' %}</button>
             </div>
         </form>
     </div>

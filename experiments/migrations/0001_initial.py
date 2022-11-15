@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import uil.core.fields.encrypted_fields
+import cdh.core.fields.encrypted_fields
 import uuid
 
 
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='DataPoint',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('data', uil.core.fields.encrypted_fields.EncryptedTextField()),
+                ('data', cdh.core.fields.encrypted_fields.EncryptedTextField()),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
                 ('experiment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='experiments.Experiment')),
             ],

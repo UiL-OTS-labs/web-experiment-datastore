@@ -1,15 +1,13 @@
 {% load i18n %}
 {% load transformat %}
-<div class="panel uu-panel panel-default">
-    <div class="panel-heading">
-        <h5 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" href="#collapse-developer">
-                {% trans 'main:help:developer:header' %}
-            </a>
-        </h5>
+<div class="accordion-item">
+    <div class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-developer">
+            {% trans 'main:help:developer:header' %}
+        </button>
     </div>
-    <div id="collapse-developer" class="panel-collapse collapse">
-        <div class="panel-body">
+    <div id="collapse-developer" class="collapse">
+        <div class="p-3">
             <p>
                 <i>This page requires some changes to your JavaScript. Feel free
                     to <a href="mailto:{{ labstaff_email }}">email</a> us if you

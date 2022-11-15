@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -8,23 +8,29 @@
     {% trans 'experiments:delete_datapoint:header' %} - {{ block.super }}
 {% endblock %}
 
-
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
+{% block pre-messages-content %}
+    <div class="uu-hero">
         <h1>
             {% trans 'experiments:delete_datapoint:header' %}
         </h1>
-        <form method="post">{% csrf_token %}
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <form method="post" class="uu-form uu-form-no-gap">
+            {% csrf_token %}
             <p>{% transformat 'experiments:delete_datapoint:text' object %}</p>
-            <div class="button" style="display: inline-block">
-                <a href="{% url 'experiments:detail' experiment.pk %}" >
+            <div class="btn-group">
+                <a href="{% url 'experiments:detail' object.pk %}" class="btn btn-secondary">
                     {% trans 'experiments:delete:cancel' %}
                 </a>
+                <button type="submit" class="btn btn-primary">
+                    {% trans 'experiments:delete:confirm' %}
+                </button>
             </div>
-            <input type="submit" value="{% trans 'experiments:delete:confirm' %}">
         </form>
-        <br/>
     </div>
 </div>
 {% endblock %}

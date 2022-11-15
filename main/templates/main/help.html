@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -10,20 +10,23 @@
 {% endblock %}
 
 {% block html_head %}
+    {{ block.super }}
     <script src="{% static 'experiments/js/help.js' %}"></script>
 {% endblock %}
 
 
 {% block content %}
-<div class="uu-inner-container">
+<div class="uu-hero">
+    <h1>
+        {% trans 'main:help:header' %}
+    </h1>
+</div>
+<div class="uu-container">
     <div class="col-12">
-        <h1>
-            {% trans 'main:help:header' %}
-        </h1>
         <p>
             {% trans 'main:help:info_text' %}
         </p>
-        <div class="panel-group uu-panel mt-4">
+        <div class="accordion mt-4">
             {% include 'main/help_parts/general.html' %}
             {% include 'main/help_parts/webdav.html' %}
             {% include 'main/help_parts/session.html' %}

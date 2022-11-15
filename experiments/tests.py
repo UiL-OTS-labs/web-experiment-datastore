@@ -1,7 +1,9 @@
 from django.test import TestCase, modify_settings
 from django.urls import reverse
+from unittest.mock import patch, ANY
 
 from main.models import User
+from auditlog.enums import Event
 
 import random
 import uuid
@@ -106,3 +108,21 @@ class TestDeleteData(TestCase):
         self.client.force_login(self.user)
         self.client.delete(reverse('experiments:delete_datapoint', args=[self.exp.pk, dp.pk]))
         self.assertEqual(group.participantsession_set.count(), 0)
+
+
+class TestAuditLog(TestCase):
+    databases = '__all__'  # required for login because of auditlog
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create(username='test', password='test')
+
+    @patch('experiments.views.log')
+    def test_delete_experiment(self, log):
+        exp = Experiment.objects.create(access_id=uuid.uuid4())
+        exp.users.add(self.user)
+        self.client.force_login(self.user)
+        self.client.post(reverse('experiments:delete_experiment', args=[exp.pk]))
+        self.assertEqual(self.user.experiment_set.count(), 0)
+        self.assertEqual(log.called, True)
+        log.assert_called_with(Event.DELETE_DATA, ANY, self.user, ANY)

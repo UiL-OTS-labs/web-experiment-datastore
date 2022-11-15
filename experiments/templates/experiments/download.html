@@ -1,20 +1,21 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
+{% block pre-messages-content %}
+    <div class="uu-hero">
         <h1>
             {% trans 'experiments:download:header' %}
         </h1>
-        <form method="post">
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
-            <table width="100%">
-                {{ form.as_table }}
-            </table>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:global:download' %}</button>
-            </div>
+            {{ form }}
+            <button type="submit" class="btn btn-primary mt-3">{% trans 'experiments:global:download' %}</button>
         </form>
     </div>
 </div>
