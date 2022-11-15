@@ -22,14 +22,15 @@
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <p>{% transformat 'experiments:delete:text' object %}</p>
-            <div class="button" style="display: inline-block">
-                <a href="{% url 'experiments:detail' object.pk %}" >
+            <div class="btn-group">
+                <a href="{% url 'experiments:detail' object.pk %}" class="btn btn-secondary">
                     {% trans 'experiments:delete:cancel' %}
                 </a>
+                <button type="submit" class="btn btn-primary">
+                    {% trans 'experiments:delete:confirm' %}
+                </button>
             </div>
-            <input type="submit" value="{% trans 'experiments:delete:confirm' %}">
         </form>
-        <br/>
     </div>
 </div>
 {% endblock %}

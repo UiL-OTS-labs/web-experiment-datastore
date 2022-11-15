@@ -14,12 +14,8 @@
     <div class="col-12">
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
-            <table width="100%">
-                {{ form }}
-            </table>
-            <div class="float-right">
-                <button type="submit">{% trans 'experiments:global:download' %}</button>
-            </div>
+            {{ form }}
+            <button type="submit" class="btn btn-primary mt-3">{% trans 'experiments:global:download' %}</button>
         </form>
     </div>
 </div>

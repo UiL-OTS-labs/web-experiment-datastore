@@ -34,13 +34,8 @@
         </p>
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
-            <table width="100%">
-                {{ form }}
-            </table>
-            <br/>
-            <div>
-                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save' %}</button>
-            </div>
+            {{ form }}
+            <button class="btn btn-primary mt-2" type="submit">{% trans 'experiments:globals:save' %}</button>
         </form>
     </div>
 </div>
