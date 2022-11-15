@@ -2,7 +2,8 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
-from cdh.core.forms import TemplatedForm, TemplatedModelForm
+from cdh.core.forms import BootstrapRadioSelect, TemplatedForm, \
+    TemplatedModelForm, BootstrapCheckboxSelectMultiple
 
 from .models import Experiment
 
@@ -59,14 +60,16 @@ class CreateExperimentForm(TemplatedModelForm):
 
 class DownloadForm(TemplatedForm):
     file_format = forms.ChoiceField(
-        widget=forms.RadioSelect,
+        widget=BootstrapRadioSelect,
         choices=[('csv', 'CSV'), ('raw', 'Raw')])
     include_status = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
+        widget=BootstrapCheckboxSelectMultiple,
         choices=[(Experiment.OPEN, _('experiments:models:datapoint:label:test')),
                  (Experiment.PILOTING, _('experiments:models:datapoint:label:pilot'))])
-    include_groups = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                               choices=())
+    include_groups = forms.MultipleChoiceField(
+        widget=BootstrapCheckboxSelectMultiple,
+        choices=()
+    )
 
     def __init__(self, *args, **kwargs):
         experiment = kwargs.pop('experiment')
