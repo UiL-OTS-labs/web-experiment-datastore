@@ -17,13 +17,18 @@
 </script>
 
 {% endblock %}
+
+{% block pre-messages-content %}
+<div class="uu-hero">
+    <h1>
+        {% trans 'experiments:new:header' %}
+    </h1>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
-
-        <h1>
-            {% trans 'experiments:new:header' %}
-        </h1>
         <p>
             {% trans 'experiments:new:info_text' %}
         </p>

@@ -1,12 +1,17 @@
 {% extends "base/datastore_base.html" %}
 {% load i18n %}
 
-{% block content %}
-<div class="uu-container">
-    <div class="col-12">
+{% block pre-messages-content %}
+    <div class="uu-hero">
         <h1>
             {% trans 'experiments:download:header' %}
         </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <table width="100%">

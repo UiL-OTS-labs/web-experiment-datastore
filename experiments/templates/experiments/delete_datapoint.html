@@ -8,13 +8,17 @@
     {% trans 'experiments:delete_datapoint:header' %} - {{ block.super }}
 {% endblock %}
 
+{% block pre-messages-content %}
+    <div class="uu-hero">
+        <h1>
+            {% trans 'experiments:delete_datapoint:header' %}
+        </h1>
+    </div>
+{% endblock %}
 
 {% block content %}
 <div class="uu-container">
     <div class="col-12">
-        <h1>
-            {% trans 'experiments:delete_datapoint:header' %}
-        </h1>
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
             <p>{% transformat 'experiments:delete_datapoint:text' object %}</p>
