@@ -16,6 +16,7 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
         [settings.LABSTAFF_EMAIL],
         subject="New experiment",
         html_template="experiments/mail/new_experiment_staff.html",
+        plain_template="experiments/mail/new_experiment_staff.txt",
         template_context={
             "experiment": experiment,
             "user": user,
@@ -31,6 +32,7 @@ def send_new_experiment_mail(experiment: Experiment, user: User, request) -> \
         recipient_list,
         subject="Confirmation new experiment",
         html_template="experiments/mail/new_experiment_user.html",
+        plain_template="experiments/mail/new_experiment_user.txt",
         template_context={
             "experiment": experiment,
             "user": user,
