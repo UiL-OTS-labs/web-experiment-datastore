@@ -1,15 +1,13 @@
 {% load i18n %}
 {% load transformat %}
-<div class="panel uu-panel panel-default">
-    <div class="panel-heading">
-        <h5 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" href="#collapse-general">
-                {% trans 'main:help:general:header' %}
-            </a>
-        </h5>
+<div class="accordion-item">
+    <div class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-general">
+            {% trans 'main:help:general:header' %}
+        </button>
     </div>
-    <div id="collapse-general" class="panel-collapse collapse">
-        <div class="panel-body">
+    <div id="collapse-general" class="card-collapse collapse">
+        <div class="p-3">
             <p>
                 This application provides safe storage for data collected from
                 web-experiments. This guide will describe the process of
@@ -78,9 +76,14 @@
                 how to mount the webshare can be found in the block below.
             </p>
             <p>
-                Make sure the main HTML file is called <i>index.html</i>.
+                Make sure the HTML file is called <i>index.html</i>.
                 Otherwise, the server cannot find which file should be displayed
                 without explicitly adding it to the URL.
+            </p>
+            <p>
+                There might already be a file called <i>index.html</i> in your
+                folder, as we place a placeholder page when creating new
+                folders. It's safe to overwrite this file.
             </p>
             <h4>
                 Step 5: Open your experiment

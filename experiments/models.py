@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
 
-from uil.core.fields import EncryptedTextField
+from cdh.core.fields import EncryptedTextField
 
 from main.models import User
 
@@ -169,6 +169,11 @@ class DataPoint(models.Model):
     # Used to display an incrementing ID, independent from other experiments
     number = models.PositiveIntegerField(null=False)
 
+    size = models.PositiveBigIntegerField(
+        _("experiments:models:datapoint:size"),
+        null=False,
+    )
+
     # Encrypted field for extra security
     data = EncryptedTextField(
         _("experiments:models:datapoint:data"),
@@ -211,7 +216,6 @@ class ParticipantSession(models.Model):
                             unique=True, default=uuid.uuid4, editable=False)
     state = models.PositiveIntegerField(
         _("experiments:models:participant:state"),
-        help_text=_("experiments:models:participant:state:help"),
         choices=STATES,
         default=STARTED
     )

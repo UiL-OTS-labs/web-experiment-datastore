@@ -1,17 +1,46 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 
 
 {% block content %}
-    <div class="uu-inner-container">
-        <div class="col-12">
-            <h2>
-                {% trans 'login:header:login' %}
-            </h2>
+    <div class="uu-container">
+        <div class="col-12 col-md-6 col-lg-4">
+            {% if form.errors %}
+            <p class="text-red fw-bold mb-3">
+                {% trans "main:login:error" %}
+            </p>
+            {% endif %}
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">
+
+                <label for="id_username" class="form-label">
+                    Username:
+                </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    autofocus=""
+                    autocapitalize="none"
+                    autocomplete="username"
+                    maxlength="150"
+                    required=""
+                    id="id_username"
+                />
+
+                <label for="id_password" class="form-label mt-2">
+                    Password:
+                </label>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    autocomplete="current-password"
+                    required=""
+                    id="id_password"
+                />
+                <input type="hidden" name="next" value="{{ next }}" />
+                <button type="submit" class="btn btn-primary mt-2">
                     {% trans 'login:button:login' %}
                 </button>
             </form>

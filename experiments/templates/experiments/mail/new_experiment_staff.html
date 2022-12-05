@@ -1,6 +1,10 @@
-{% extends 'mail/base.html' %}
+{% extends 'cdh.core/mail_template.html' %}
 
-{% block subtitle %}
+{% block sender %}
+    Web-experiment datastore
+{% endblock %}
+
+{% block banner %}
     New experiment created: <strong>{{ experiment.title }}</strong>
 {% endblock %}
 
@@ -19,7 +23,7 @@
     </p>
     <p>
     Beep boop,<br/>
-    The UiL OTS web-experiment datastore
+    The ILS web-experiment datastore
     </p>
 {% endblock %}
 

@@ -1,15 +1,13 @@
 {% load i18n %}
 {% load transformat %}
-<div class="panel uu-panel panel-default">
-    <div class="panel-heading">
-        <h5 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" href="#collapse-faq">
-                {% trans 'main:help:faq:header' %}
-            </a>
-        </h5>
+<div class="accordion-item">
+    <div class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-faq">
+            {% trans 'main:help:faq:header' %}
+        </button>
     </div>
-    <div id="collapse-faq" class="panel-collapse collapse">
-        <div class="panel-body">
+    <div id="collapse-faq" class="card-collapse collapse">
+        <div class="p-3">
             <strong>
                 How do I upload my web-experiment?
             </strong>

@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load vue_tags %}
 {% load i18n %}
 {% load transformat %}
@@ -13,8 +13,9 @@
 {% endblock %}
 
 {% block html_head %}
+    {{ block.super }}
     {# This template loads in either the dev or prod Vue library, depending on settings.DEBUG #}
-    {% include 'uil.vue/vueloader.html' %}
+    {% include 'cdh.vue/vueloader.html' %}
     {% load_vue_component 'ExperimentList' request.csp_nonce %}
 
     <script nonce="{{ request.csp_nonce }}">
@@ -36,17 +37,21 @@
     </script>
 {% endblock %}
 
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
-        <div class="float-right">
-            <a class="button button-colored" href="{% url 'experiments:new' %}">
-                {% trans 'experiments:home:create_experiment' %}
-            </a>
-        </div>
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
         <h1>
             {% trans 'experiments:home:header' %}
         </h1>
+
+        <a href="{% url 'experiments:new' %}" class="btn btn-secondary">
+            {% trans 'experiments:home:create_experiment' %}
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
         <p>
             {% trans 'experiments:home:info_text' %}
         </p>

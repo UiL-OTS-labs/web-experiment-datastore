@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -8,21 +8,24 @@
     {% trans 'administration:approve:header' %} - {{ block.super }}
 {% endblock %}
 
-
-{% block content %}
-<div class="uu-inner-container">
-    <div class="col-12">
+{% block pre-messages-content %}
+    <div class="uu-hero justify-content-between align-items-center">
         <h1>
             {% trans 'administration:approve:header' %}
         </h1>
-        <form method="post">{% csrf_token %}
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <form method="post" class="uu-form uu-form-no-gap">
+            {% csrf_token %}
             <p>{% transformat 'administration:approve:text' object %}</p>
-            <div class="button" style="display: inline-block">
-                <a href="{% url 'administration:home' %}" >
-                    {% trans 'administration:approve:cancel' %}
-                </a>
-            </div>
-            <input type="submit" value="{% trans 'administration:approve:confirm' %}">
+            <a class="btn btn-secondary" href="{% url 'administration:home' %}" >
+                {% trans 'administration:approve:cancel' %}
+            </a>
+            <input class="btn btn-primary" type="submit" value="{% trans 'administration:approve:confirm' %}">
         </form>
         <br/>
     </div>

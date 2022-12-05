@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -11,7 +11,7 @@
 
 
 {% block content %}
-<div class="uu-inner-container">
+<div class="uu-container">
     <div class="col-12">
         <h1>
             {% trans 'main:login_lockout:header' %}

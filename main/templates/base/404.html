@@ -1,8 +1,9 @@
-{% extends "base/base.html" %}
+{% extends "base/datastore_base.html" %}
 {% load i18n %}
 
 
 {% block html_head %}
+    {{ block.super }}
     <meta name="robots" content="noindex">
 {% endblock %}
 
@@ -12,7 +13,7 @@
 
 
 {% block content %}
-<div class="uu-inner-container">
+<div class="uu-container">
     <div class="col-12">
         <h2>{% trans '404:header' %}</h2>
         <p>

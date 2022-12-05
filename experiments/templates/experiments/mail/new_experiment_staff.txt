@@ -8,4 +8,4 @@ You can review all experiments here:
 Thanks!
 
 Beep boop,
-The UiL OTS web-experiment datastore
+The ILS web-experiment datastore

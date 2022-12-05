@@ -1,4 +1,6 @@
-from django.db.models.signals import pre_save, post_save
+import sys
+
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 
 from .models import DataPoint, ParticipantSession, Experiment
@@ -17,6 +19,15 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
             instance.number = last_datapoint.number + 1
         else:
             instance.number = 1
+
+    if not instance.size or instance.size == 0:
+        instance.size = sys.getsizeof(instance.data)
+
+
+@receiver(post_delete, sender=DataPoint)
+def on_datapoint_delete(sender, instance, *args, **kwargs):
+    if instance.session is not None:
+        instance.session.delete()
 
 
 @receiver(pre_save, sender=ParticipantSession)
