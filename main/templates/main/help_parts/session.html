@@ -45,7 +45,7 @@
               and a completion target, which indicates the number of completed runs that should
               be reached. When a target group has its completion target fulfilled, no new participants
               will be assigned to the corresponding list.
-              You can also modify completion targets to dynamically control the amount of
+              You can also modify completion targets to dynamically control the number of
               participants while the experiment is running.
             </p>
             <p>
@@ -59,7 +59,7 @@
                 <ol>
                     <li>Whenever a new participant is about to start the experiment, assign them to <code>next_group</code>.</li>
                     <li>If <code>next_group</code> is A, set it to B. Otherwise, set it to A.</li>
-                    <li>Whenever a participant completes the experiment, check which group has less completed sessions. Set <code>next_group</code> to that.</li>
+                    <li>Whenever a participant completes the experiment, check which group has fewer completed sessions. Set <code>next_group</code> to that.</li>
                 </ol>
                 Steps 1 and 2 guarantee that an incoming stream of participants will be equally distributed between groups.
                 But that is not enough, because some participants will not finish the experiment. So in step 3 we compensate for an uneven
