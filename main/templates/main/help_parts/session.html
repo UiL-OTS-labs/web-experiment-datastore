@@ -48,6 +48,25 @@
               You can also modify completion targets to dynamically control the amount of
               participants while the experiment is running.
             </p>
+            <p>
+              The next paragraphs outline how participant assignment works in somewhat finer details.
+              You can safely skip to <em>Implementation</em> and assume that participants are evenly distributed between groups,
+              but it is provided here for reference.
+              To simplify things we will describe the algorithm with just two lists—A and B—but it works for any number of groups.
+            </p>
+            <p>
+                Suppose that the server keeps track of the next group in turn using a variable called <code>next_group</code>, then:
+                <ol>
+                    <li>Whenever a new participant is about to start the experiment, assign them to <code>next_group</code>.</li>
+                    <li>If <code>next_group</code> is A, set it to B. Otherwise, set it to A.</li>
+                    <li>Whenever a participant completes the experiment, check which group has less completed sessions. Set <code>next_group</code> to that.</li>
+                </ol>
+                Steps 1 and 2 guarantee that an incoming stream of participants will be equally distributed between groups.
+                But that is not enough, because some participants will not finish the experiment. So in step 3 we compensate for an uneven
+                distribution in completed sessions.
+                Whenever a group becomes full (because the target number of completed sesssions was reached) it is taken out of the rotation, and the server
+                continues the process with the remaining open groups.
+            </p>
 
             <h4>Implementation</h4>
             <p>
