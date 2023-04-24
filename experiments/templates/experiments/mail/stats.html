@@ -1,0 +1,57 @@
+{% extends 'cdh.core/mail_template.html' %}
+
+{% block sender %}
+    Web-experiment datastore
+{% endblock %}
+
+{% block banner %}
+    Usage Stats
+{% endblock %}
+
+{% block content %}
+    <p>
+    Dear lab-staff,
+    </p>
+
+    <p>
+        Sessions per day:
+    </p>
+    <p>
+        <table style="border-collapse: collapse">
+            {% for row in per_day %}
+                <tr>
+                    <td style="border:1px solid #000; padding: 12">{{ row.0 }}</td>
+                    <td style="border:1px solid #000; padding: 12">{{ row.1 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </p>
+
+    <p>
+        Sessions per experiment:
+    </p>
+    <p>
+        <table style="border-collapse: collapse">
+            {% for row in per_experiment %}
+                <tr>
+                    <td style="border:1px solid #000; padding: 12">{{ row.0 }}</td>
+                    <td style="border:1px solid #000; padding: 12">{{ row.1 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </p>
+
+    <p>
+    Beep boop,<br/>
+    The ILS web-experiment datastore
+    </p>
+{% endblock %}
+
+{% block footer %}
+    <p>
+        <i>
+        I am but a mere Python programme. I'm afraid I cannot respond to any replies!<br/>
+        (Don't worry, all mails to non-labstaff are a lot more professional).
+        </i>
+    </p>
+{% endblock %}
