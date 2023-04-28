@@ -186,7 +186,7 @@ export default {
         edit: "Edit experiment",
         approve: "Approve",
         date_created: "Date created",
-        last_upload: "Laatse upload",
+        last_upload: "Last upload",
         show_in_ldap_config: "In LDAP config",
         researchers: "Researchers",
       },
