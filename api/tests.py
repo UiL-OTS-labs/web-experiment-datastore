@@ -118,6 +118,26 @@ class TestTargetGroupAllocation(APITestCase):
         self.assertEqual(json.loads(dp.data), {'key': 'value'})
         self.assertEqual(dp.session, session)
 
+    def test_multiple_uploads_same_session(self):
+        session = self.exp.participantsession_set.create(group=self.group_a)
+        data1 = json.dumps({'key': 'first'})
+        data2 = json.dumps({'key': 'second'})
+        response = self.client.post(reverse('api:upload', args=[self.exp.access_id, session.uuid]),
+                                    data1,
+                                    content_type='text/plain')
+        response = self.client.post(reverse('api:upload', args=[self.exp.access_id, session.uuid]),
+                                    data2,
+                                    content_type='text/plain')
+        self.assertEqual(response.status_code, 200)
+
+        j = response.json()
+        self.assertEqual(j['result'], 'OK')
+        self.assertEqual(j['message'], 'Upload successful')
+
+        self.assertEqual(self.exp.datapoint_set.count(), 2)
+        entries = [dp.data for dp in self.exp.datapoint_set.all()]
+        self.assertEqual(set(entries), set([data1, data2]))
+
     def test_create_participant_fail_when_not_open(self):
         self.exp.state = Experiment.CLOSED
         self.exp.save()

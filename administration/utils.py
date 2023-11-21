@@ -18,7 +18,9 @@ Alias /{folder} {web_root}{folder}
   AuthType Basic
   Authname "gw-c-lab-web-experiments WebDav Server"
   AuthBasicProvider ldap
-  AuthLDAPURL "ldaps://ldap.hum.uu.nl/dc=uu,dc=nl?uid?sub"
+  AuthLDAPInitialBindAsUser on
+  AuthLDAPCompareAsUser on
+  AuthLDAPURL ldaps://soliscom.uu.nl/DC=soliscom,DC=uu,DC=nl?sAMAccountName?sub?(objectclass=*)
   <RequireAny>
     {permission_string}
   </RequireAny>
