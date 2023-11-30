@@ -20,6 +20,7 @@ Alias /{folder} {web_root}{folder}
   AuthBasicProvider ldap
   AuthLDAPInitialBindAsUser on
   AuthLDAPCompareAsUser on
+  AuthLDAPInitialBindPattern (.+) $1@soliscom.uu.nl
   AuthLDAPURL ldaps://soliscom.uu.nl/DC=soliscom,DC=uu,DC=nl?sAMAccountName?sub?(objectclass=*)
   <RequireAny>
     {permission_string}
