@@ -18,7 +18,7 @@ bpython==0.24
     # via cdh-django-core
 build==1.0.3
     # via pip-tools
-cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/DH-IT-Portal-Development/django-shared-core.git
+cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
     # via -r requirements.in
 certifi==2023.11.17
     # via requests

@@ -1,4 +1,4 @@
-cdh-django-core[all] @ git+https://github.com/DH-IT-Portal-Development/django-shared-core.git
+cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
 django-axes
 django-auth-ldap
 django-cors-headers
