@@ -243,6 +243,13 @@ class ParticipantSession(models.Model):
         self.state = self.COMPLETED
         self.save()
 
+    def delete_if_empty(self):
+        # this is used in the DataPoint post_delete hook.
+        # since ParticipantSession can contain multiple data points, we would
+        # like to delete it only when the last associated data point is deleted
+        if self.datapoint_set.count() < 1:
+            self.delete()
+
 
 class TargetGroup(models.Model):
     experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
