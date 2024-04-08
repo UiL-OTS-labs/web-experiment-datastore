@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-asgiref==3.7.2
+asgiref==3.8.1
     # via
     #   django
     #   django-cors-headers
@@ -16,11 +16,11 @@ blessed==1.20.0
     # via curtsies
 bpython==0.24
     # via cdh-django-core
-build==1.0.3
+build==1.2.1
     # via pip-tools
 cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
     # via -r requirements.in
-certifi==2023.11.17
+certifi==2024.2.2
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -30,7 +30,7 @@ click==8.1.7
     # via pip-tools
 closure==20191111
     # via cdh-django-core
-cryptography==41.0.7
+cryptography==42.0.5
     # via
     #   cdh-django-core
     #   pyopenssl
@@ -47,8 +47,9 @@ defusedxml==0.7.1
     #   pysaml2
 deprecated==1.2.14
     # via cdh-django-core
-django==4.2.9
+django==4.2.11
     # via
+    #   -r requirements.in
     #   cdh-django-core
     #   django-auth-ldap
     #   django-axes
@@ -57,24 +58,27 @@ django==4.2.9
     #   django-csp
     #   django-debug-toolbar
     #   django-extensions
+    #   django-filter
     #   django-modeltranslation
     #   django-simple-menu
     #   djangorestframework
     #   djangosaml2
-django-auth-ldap==4.6.0
+django-auth-ldap==4.8.0
     # via -r requirements.in
-django-axes==6.3.0
+django-axes==6.4.0
     # via -r requirements.in
 django-braces==1.15.0
     # via cdh-django-core
 django-cors-headers==4.3.1
     # via -r requirements.in
-django-csp==3.7
+django-csp==3.8
     # via cdh-django-core
-django-debug-toolbar==4.2.0
+django-debug-toolbar==4.3.0
     # via cdh-django-core
 django-extensions==3.2.3
     # via cdh-django-core
+django-filter==24.2
+    # via -r requirements.in
 django-impersonate==1.9.2
     # via
     #   -r requirements.in
@@ -83,11 +87,11 @@ django-modeltranslation==0.18.11
     # via cdh-django-core
 django-simple-menu==2.1.3
     # via cdh-django-core
-djangorestframework==3.14.0
+djangorestframework==3.15.1
     # via cdh-django-core
 djangosaml2==1.6.0
     # via cdh-django-core
-elementpath==4.1.5
+elementpath==4.4.0
     # via xmlschema
 greenlet==3.0.3
     # via bpython
@@ -95,46 +99,46 @@ idna==3.6
     # via requests
 lesscpy==0.15.1
     # via cdh-django-core
-mysqlclient==2.2.1
+mysqlclient==2.2.4
     # via -r requirements.in
-packaging==23.2
+packaging==24.0
     # via build
-pip-tools==7.3.0
+pip-tools==7.4.1
     # via -r requirements.in
 ply==3.11
     # via lesscpy
 pscript==0.7.7
     # via vbuild
-pyasn1==0.5.1
+pyasn1==0.6.0
     # via
     #   pyasn1-modules
     #   python-ldap
-pyasn1-modules==0.3.0
+pyasn1-modules==0.4.0
     # via python-ldap
-pycparser==2.21
+pycparser==2.22
     # via cffi
 pygments==2.17.2
     # via bpython
 pyjwt==2.8.0
     # via cdh-django-core
-pyopenssl==23.3.0
+pyopenssl==24.1.0
     # via pysaml2
 pyproject-hooks==1.0.0
-    # via build
-pysaml2==7.4.2
+    # via
+    #   build
+    #   pip-tools
+pysaml2==7.5.0
     # via djangosaml2
 pyscss==1.4.0
     # via cdh-django-core
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via pysaml2
 python-ldap==3.4.4
     # via django-auth-ldap
 python-magic==0.4.27
     # via cdh-django-core
-pytz==2023.3.post1
-    # via
-    #   djangorestframework
-    #   pysaml2
+pytz==2024.1
+    # via pysaml2
 pyxdg==0.28
     # via bpython
 requests==2.31.0
@@ -156,17 +160,17 @@ tomli==2.0.1
     #   build
     #   pip-tools
     #   pyproject-hooks
-typing-extensions==4.9.0
+typing-extensions==4.11.0
     # via
     #   asgiref
     #   django-modeltranslation
-urllib3==2.1.0
+urllib3==2.2.1
     # via requests
 vbuild==0.8.2
     # via cdh-django-core
-wcwidth==0.2.12
+wcwidth==0.2.13
     # via blessed
-wheel==0.42.0
+wheel==0.43.0
     # via pip-tools
 wrapt==1.16.0
     # via deprecated
