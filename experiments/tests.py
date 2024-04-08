@@ -124,6 +124,9 @@ class TestDeleteData(TestCase):
 
         self.client.force_login(self.user)
         self.client.delete(reverse('experiments:delete_datapoint', args=[self.exp.pk, dp.pk]))
+        self.assertEqual(group.participantsession_set.count(), 1)
+
+        self.client.delete(reverse('experiments:delete_datapoint', args=[self.exp.pk, dp2.pk]))
         self.assertEqual(group.participantsession_set.count(), 0)
 
 class TestAuditLog(TestCase):
