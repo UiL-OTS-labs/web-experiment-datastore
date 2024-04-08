@@ -17,6 +17,21 @@
                 <a href="{% url 'main:help' %}#collapse-webdav" target="_blank">Access your experiment folder</a>.
             </p>
             <strong>
+                I made changes to the experiment files, but I'm not seeing them when running the experiment from the server!
+            </strong>
+            <p>
+                When you open an experiment in your browser, it may be saved in the browser's <em>cache</em> for some time.
+                When later uploading a new version of the experiment, your browser might still load the saved version from cache instead of the newest one.
+            </p>
+            <p>
+                There are several different ways to work around that:
+                <ul>
+                    <li>Start the experiment in an incognito/private window</li>
+                    <li>Hold down <em>Shift</em> while refreshing the page</li>
+                    <li>Using Chrome or Firefox: open <em>Developer tools</em> (Ctrl-Shift-C or ⌘-Shift-C), open the <em>Network</em> tab, and check the <em>Disable Cache</em> checkbox.</li>
+                </ul>
+            </p>
+            <strong>
                 Why can't I change the name of my folder on the experiment server?
             </strong>
             <p>
