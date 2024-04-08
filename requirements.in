@@ -2,6 +2,7 @@ cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-
 django-axes
 django-auth-ldap
 django-cors-headers
+django-filter
 django-impersonate
 pip-tools
 mysqlclient
