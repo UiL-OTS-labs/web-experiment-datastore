@@ -1,19 +1,11 @@
-Django>=4.0,<4.1
+Django>=4.2,<5
+cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
 django-axes
-django-braces
-django-csp
-django-simple-menu
-django-debug-toolbar
-django-rest-framework
 django-auth-ldap
 django-cors-headers
-django-extensions # QoF for the admin, adds a lot of useful manage.py commands
+django-filter
 django-impersonate
 pip-tools
-cryptography
-bpython
-pillow
--e git+https://github.com/DH-IT-Portal-Development/django-shared-core.git@v3.0.0#egg=cdh-django-core
 mysqlclient
 backports-datetime-fromisoformat
 babel

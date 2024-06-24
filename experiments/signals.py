@@ -27,7 +27,7 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
 @receiver(post_delete, sender=DataPoint)
 def on_datapoint_delete(sender, instance, *args, **kwargs):
     if instance.session is not None:
-        instance.session.delete()
+        instance.session.delete_if_empty()
 
 
 @receiver(pre_save, sender=ParticipantSession)
