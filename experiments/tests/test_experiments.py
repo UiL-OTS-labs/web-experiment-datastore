@@ -9,7 +9,7 @@ import random
 import uuid
 
 # Create your tests here.
-from .models import Experiment, ParticipantSession, TargetGroup, DataPoint
+from ..models import Experiment, ParticipantSession, TargetGroup, DataPoint
 
 
 class ParticipantSessionSubjectIdTests(TestCase):
