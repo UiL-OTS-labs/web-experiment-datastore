@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'experiments',
     'cdh.core',
     'cdh.vue',
+    'cdh.mail',
 
     'impersonate',
 
