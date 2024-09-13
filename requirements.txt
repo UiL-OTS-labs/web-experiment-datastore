@@ -19,7 +19,7 @@ bpython==0.24
     # via cdh-django-core
 build==1.2.1
     # via pip-tools
-cdh-django-core[all,core,federated-auth,files,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
+cdh-django-core[all,core,federated-auth,files,mail,recommended,rest,vue] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.2.0
     # via -r requirements.in
 certifi==2024.7.4
     # via requests
@@ -79,7 +79,9 @@ django-debug-toolbar==4.4.6
 django-extensions==3.2.3
     # via cdh-django-core
 django-filter==24.2
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   cdh-django-core
 django-impersonate==1.9.4
     # via
     #   -r requirements.in
