@@ -10,33 +10,33 @@ Menu.add_item("home", MenuItem(_('mainmenu:home'),
 Menu.add_item("main", MenuItem(_('mainmenu:login'),
                                reverse('main:login'),
                                exact_url=True,
-                               check=lambda x: not x.user.is_authenticated
+                               check=lambda x: not hasattr(x, 'user') or not x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:experiments'),
                                reverse('experiments:home'),
                                exact_url=True,
-                               check=lambda x: x.user.is_authenticated
+                               check=lambda x: hasattr(x, 'user') and x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:help'),
                                reverse('main:help'),
                                exact_url=False,
-                               check=lambda x: x.user.is_authenticated
+                               check=lambda x: hasattr(x, 'user') and x.user.is_authenticated
                                ))
 
 Menu.add_item("main", MenuItem(_('mainmenu:administration'),
                                reverse('administration:home'),
                                exact_url=True,
-                               check=lambda x: x.user.is_staff
+                               check=lambda x: hasattr(x, 'user') and x.user.is_staff
                                ))
 
 Menu.add_item("footer", MenuItem(_('footermenu:login'),
                                  reverse('main:login'),
-                                 check=lambda x: not x.user.is_authenticated
+                                 check=lambda x: not hasattr(x, 'user') or not x.user.is_authenticated
                                  ))
 
 Menu.add_item("footer", MenuItem(_('main:globals:logout'),
                                  reverse('main:logout'),
-                                 check=lambda x: x.user.is_authenticated
+                                 check=lambda x: hasattr(x, 'user') and x.user.is_authenticated
                                  ))
