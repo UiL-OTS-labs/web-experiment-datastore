@@ -1,5 +1,5 @@
 Django>=4.2,<5
-cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.1.0
+cdh-django-core[all] @ git+https://github.com/CentreForDigitalHumanities/django-shared-core.git@v3.2.0
 django-axes
 django-auth-ldap
 django-cors-headers
