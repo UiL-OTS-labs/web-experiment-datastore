@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.urls import reverse
 
-from cdh.core.mail import send_template_email
+from cdh.mail.utils import send_template_email
 
 from experiments.models import Experiment
 
