@@ -14,7 +14,7 @@ class Command(BaseCommand):
     help = 'Sends usage statistics to admins'
 
     def add_arguments(self, parser):
-        parser.add_argument('email', type=str)
+        parser.add_argument('email', type=str, nargs='?', default=settings.LABSTAFF_EMAIL)
 
     def handle(self, *args, **options):
         last_sunday = timezone.now() - timedelta(days=timezone.now().weekday() + 1)
@@ -42,9 +42,8 @@ class Command(BaseCommand):
             count=models.Count('title')
         ).values_list('title', 'count').order_by('title')
 
-        email = options.get('email', settings.LABSTAFF_EMAIL)
         if per_day or per_experiment:
-            self.send_stats_mail(email, per_day, per_experiment)
+            self.send_stats_mail(options['email'], per_day, per_experiment)
 
     def send_stats_mail(self, email, per_day, per_experiment):
         send_template_email(
