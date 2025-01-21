@@ -1,4 +1,0 @@
-Dear lab-staff,
-
-Beep boop,
-The ILS web-experiment datastore
