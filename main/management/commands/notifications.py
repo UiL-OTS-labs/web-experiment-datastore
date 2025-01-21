@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 from django.db import models
 from django.utils import timezone
 
-from cdh.core.mail import send_template_email
+from cdh.mail.utils import send_template_email
 
 from experiments.models import ParticipantSession
 
