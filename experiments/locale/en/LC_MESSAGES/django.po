@@ -26,7 +26,10 @@ msgstr "Experiment folder"
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "How the folder containing your experiment should be named. For example, "
-"'words' would give you the URL {}/words/. Can only contain letters, numbers, "
+"'words' would give you the URL {}/words/.<br>"
+"Since participants will see this name in the URL, it's advisable to "
+"choose a neutral name that doesn't give away what your experiment is about.<br>"
+"Can only contain letters, numbers, "
 "underscores and hyphens. We will convert the name to all lowercase letters."
 
 #: experiments/forms.py:52
