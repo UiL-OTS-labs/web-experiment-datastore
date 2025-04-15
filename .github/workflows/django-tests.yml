@@ -35,4 +35,5 @@ jobs:
           python manage.py compilemessages
       - name: Run Tests
         run: |
+          playwright install
           pytest
