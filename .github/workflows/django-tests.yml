@@ -36,4 +36,6 @@ jobs:
       - name: Run Tests
         run: |
           playwright install
-          pytest
+          export DJANGO_ALLOW_ASYNC_UNSAFE=1
+          pytest -k 'not integration'
+          pytest -k integration
