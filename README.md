@@ -1,7 +1,7 @@
 # Web experiment datastore
 
 This Django project provides a generic datastore, intended to store data from
-web experiments. 
+web experiments.
 
 # Requirements
 - Python 3.9+
@@ -12,10 +12,10 @@ web experiments.
 
 # Translations
 
-Against Django standard practice we use _translation keys_ to provide 
-translations, instead of wrapping text in one language in gettext calls. While 
+Against Django standard practice we use _translation keys_ to provide
+translations, instead of wrapping text in one language in gettext calls. While
 this adds the need for translation files for every supported language, it fastly
-reduces whitespace weirdness and other issues with the standard approach. 
+reduces whitespace weirdness and other issues with the standard approach.
 
 Keys are formatted in a standard way:
 
@@ -35,12 +35,12 @@ Keys are formatted in a standard way:
 
 # Installation
 
-For production/acceptation deployment, please see our Puppet module. 
+For production/acceptation deployment, please see our Puppet module.
 (Hosted on our private GitLab server).
 
 Development instructions:
 * Clone this repository
-* Install the dependencies using pip (it is recommended to use a virtual 
+* Install the dependencies using pip (it is recommended to use a virtual
   environment!). ``pip install -r requirements.txt``
 * Run all DB migrations ``python manage.py migrate``
 * Run all auditlog migrations ``python manage.py migrate --database auditlog``
@@ -51,9 +51,23 @@ Development instructions:
 
 
 ## A note on dependencies
-We use pip-tools to manage our dependencies (mostly to freeze the versions 
+We use pip-tools to manage our dependencies (mostly to freeze the versions
 used). It's listed as a dependency, so it will be installed automatically.
 
-``requirements.in`` lists the actual dependency and their version constraints. 
-To update ``requirements.txt``, edit ``requirements.in`` and run 
+``requirements.in`` lists the actual dependency and their version constraints.
+To update ``requirements.txt``, edit ``requirements.in`` and run
 ``pip-compile -U``. Don't forget to test with the new versions!
+
+
+## Integration tests
+To run the integration tests, make sure you have the dev dependencies installed:
+
+``pip install -r requirements.dev.txt``
+
+Then:
+
+```
+cd integration_tests
+export DJANGO_ALLOW_ASYNC_UNSAFE=1
+pytest
+```

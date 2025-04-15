@@ -10,7 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    continue-on-error: true
     strategy:
       max-parallel: 2
       matrix:
@@ -36,4 +35,7 @@ jobs:
           python manage.py compilemessages
       - name: Run Tests
         run: |
-          pytest
+          playwright install
+          export DJANGO_ALLOW_ASYNC_UNSAFE=1
+          pytest -k 'not integration'
+          pytest -k integration
