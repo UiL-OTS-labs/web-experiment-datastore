@@ -1,7 +1,8 @@
 from django.test import TestCase, modify_settings
 from django.urls import reverse
 from unittest.mock import patch, ANY
-
+from django.utils import timezone
+from datetime import timedelta
 from main.models import User
 from auditlog.enums import Event
 
@@ -129,6 +130,8 @@ class TestDeleteData(TestCase):
         self.client.delete(reverse('experiments:delete_datapoint', args=[self.exp.pk, dp2.pk]))
         self.assertEqual(group.participantsession_set.count(), 0)
 
+
+
 class TestAuditLog(TestCase):
     databases = '__all__'  # required for login because of auditlog
 
@@ -145,3 +148,4 @@ class TestAuditLog(TestCase):
         self.assertEqual(self.user.experiment_set.count(), 0)
         self.assertEqual(log.called, True)
         log.assert_called_with(Event.DELETE_DATA, ANY, self.user, ANY)
+
