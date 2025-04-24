@@ -54,8 +54,9 @@ def test_data_points_added_chronologically(as_admin, admin_user, db, live_server
     dp6.save()
     #Bug 85 replicate
 
+
     page.goto(f'{live_server.url}/experiments/{exp.id}/')
-    page.locator("th").nth(3).click()
+    page.locator("#DataTables_Table_0 th").nth(3).click()
 
 
     rows = page.locator("#DataTables_Table_0 tbody tr")
