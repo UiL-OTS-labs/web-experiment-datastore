@@ -64,7 +64,9 @@ def test_data_points_added_chronologically(as_admin, admin_user, db, live_server
         rows.nth(i).locator("td").nth(3).inner_text() for i in range(rows.count())
     ]
 
-    expected = sorted([dp1, dp2, dp3, dp4, dp5, dp6], key=lambda dp: dp.date_added, reverse=True) #Reverse because it started comparing ascending to the descending list
+    expected = sorted([dp1, dp2, dp3, dp4, dp5, dp6], key=lambda dp: dp.date_added) #Reverse because it started comparing ascending to the descending list
     expected_dates = [defaultfilters.date(dp.date_added)+ ", " + defaultfilters.time(dp.date_added) for dp in expected]
 
+    print (rendered_dates, expected_dates)
+    assert len(rendered_dates) == 6
     assert rendered_dates == expected_dates
