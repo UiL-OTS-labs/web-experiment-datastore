@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 09:30+0000\n"
+"POT-Creation-Date: 2025-04-24 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: administration/templates/administration/approve.html:8
-#: administration/templates/administration/approve.html:16
+#: administration/templates/administration/approve.html:14
 msgid "administration:approve:header"
 msgstr "Approve experiment"
 
-#: administration/templates/administration/approve.html:19
+#: administration/templates/administration/approve.html:24
 msgid "administration:approve:text"
 msgstr ""
 "Are you sure you want to approve this experiment ({})?<br/></br>Please make "
@@ -31,60 +31,71 @@ msgstr ""
 ">Upon approval, an email will be sent to the researchers automatically. You "
 "should receive a copy of this e-mail."
 
-#: administration/templates/administration/approve.html:22
+#: administration/templates/administration/approve.html:26
 msgid "administration:approve:cancel"
 msgstr "Cancel"
 
-#: administration/templates/administration/approve.html:25
+#: administration/templates/administration/approve.html:28
 msgid "administration:approve:confirm"
 msgstr "Confirm"
 
-#: administration/templates/administration/overview.html:11
-#: administration/templates/administration/overview.html:42
+#: administration/templates/administration/overview.html:12
+#: administration/templates/administration/overview.html:43
 msgid "administration:home:header"
 msgstr "Administration"
 
-#: administration/templates/administration/overview.html:33
+#: administration/templates/administration/overview.html:48
 msgid "administration:home:server_config"
 msgstr "LDAP server config"
 
-#: administration/templates/administration/overview.html:38
+#: administration/templates/administration/overview.html:51
 msgid "administration:home:django_admin"
 msgstr "Open Django Admin"
 
-#: administration/templates/administration/overview.html:45
+#: administration/templates/administration/overview.html:61
 msgid "administration:home:info_text"
 msgstr ""
 "Here you can see all experiments, and edit them in the Django Admin. In "
 "addition, you can generate the hosting-server LDAP config here. "
 
-#: administration/templates/administration/overview.html:60
-msgid "administration:home:approve"
-msgstr "Approve"
+#: administration/views.py:36
+msgid "experiments:models:experiment:date_created"
+msgstr ""
 
-#: administration/templates/administration/overview.html:66
-msgid "administration:globals:open_in_admin"
-msgstr "Edit"
-
-#: administration/templates/administration/overview.html:96
-msgid "administration:home:folder"
-msgstr "Folder"
-
-#: administration/templates/administration/overview.html:131
-msgid "administration:home:date_created"
-msgstr "Created"
-
-#: administration/templates/administration/overview.html:139
+#: administration/views.py:40
 msgid "administration:home:last_upload"
 msgstr "Last Upload"
 
-#: administration/templates/administration/overview.html:147
-msgid "administration:home:data_count"
-msgstr "Num. Datapoints"
+#: administration/views.py:48
+msgid "experiments:models:experiment:approved"
+msgstr ""
 
-#: administration/views.py:57
+#: administration/views.py:52
+msgid "experiments:models:experiment:show_in_ldap_config"
+msgstr ""
+
+#: administration/views.py:56
+msgid "experiments:models:experiment:state"
+msgstr ""
+
+#: administration/views.py:111
 msgid "administration:messages:switched_ldap_inclusion"
 msgstr "Switched ldap inclusion"
+
+#~ msgid "administration:home:approve"
+#~ msgstr "Approve"
+
+#~ msgid "administration:globals:open_in_admin"
+#~ msgstr "Edit"
+
+#~ msgid "administration:home:folder"
+#~ msgstr "Folder"
+
+#~ msgid "administration:home:date_created"
+#~ msgstr "Created"
+
+#~ msgid "administration:home:data_count"
+#~ msgstr "Num. Datapoints"
 
 #~ msgid "administration:globals:actions"
 #~ msgstr "Actions"

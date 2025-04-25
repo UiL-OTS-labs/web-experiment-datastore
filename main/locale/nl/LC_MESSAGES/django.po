@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 09:30+0000\n"
+"POT-Creation-Date: 2025-04-24 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,31 +42,32 @@ msgstr "Administratie"
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:39 main/templates/base/login_header.html:7
+#: main/menus.py:39 main/templates/base/datastore_base.html:58
+#: main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log uit"
 
-#: main/templates/base/403.html:9 main/templates/base/403.html:16
+#: main/templates/base/403.html:10 main/templates/base/403.html:17
 msgid "403:header"
 msgstr "Geen toegang"
 
-#: main/templates/base/403.html:18
+#: main/templates/base/403.html:19
 msgid "403:p1"
 msgstr "Het lijkt er op dat je een pagina wilt bezoeken waar je niet bij mag."
 
-#: main/templates/base/403.html:21
+#: main/templates/base/403.html:22
 msgid "403:p2"
 msgstr "Als je denkt dat dit een fout is, neem contact op met de lab technici."
 
-#: main/templates/base/404.html:10 main/templates/base/404.html:17
+#: main/templates/base/404.html:11 main/templates/base/404.html:18
 msgid "404:header"
 msgstr "Pagina niet gevonden"
 
-#: main/templates/base/404.html:19
+#: main/templates/base/404.html:20
 msgid "404:p1"
 msgstr "We kunnen de pagina waarnaar u op zoek bent niet vinden."
 
-#: main/templates/base/404.html:22
+#: main/templates/base/404.html:23
 msgid "404:p2"
 msgstr ""
 "De link waarop u hebt geklikt is mogelijk incorrect of de pagina is "
@@ -92,43 +93,59 @@ msgstr "<strong>De pagina verversen</strong> (dit helpt soms)"
 msgid "500:advice:wait"
 msgstr "<strong>Probeer het later nog een keer</strong>"
 
-#: main/templates/base/login_header.html:6
-msgid "site:header:login"
-msgstr "Welkom {}"
+#. Translators: This is the title that will end up in the tab of the browser
+#: main/templates/base/datastore_base.html:20
+#: main/templates/base/site_title.html:5
+msgid "site:name"
+msgstr "Web-experiment datastore"
+
+#: main/templates/base/datastore_base.html:29
+#: main/templates/base/datastore_base.html:30
+msgid "cdh.core:uu"
+msgstr ""
 
 #. Translators: This is the title that will end up in the header (in blue)
+#: main/templates/base/datastore_base.html:36
 #: main/templates/base/site_header.html:4
 msgid "site:header:title"
 msgstr "Web-experiment data opslag"
 
-#. Translators: This is the title that will end up in the tab of the browser
-#: main/templates/base/site_title.html:5
-msgid "site:name"
-msgstr "Web-experiment datastore"
+#: main/templates/base/datastore_base.html:56
+#: main/templates/base/login_header.html:6
+msgid "site:header:login"
+msgstr "Welkom {}"
+
+#: main/templates/base/datastore_base.html:69
+msgid "lang:en"
+msgstr ""
+
+#: main/templates/base/datastore_base.html:74
+msgid "lang:nl"
+msgstr ""
 
 #: main/templates/main/help.html:9 main/templates/main/help.html:21
 msgid "main:help:header"
 msgstr "Help"
 
-#: main/templates/main/help.html:24
+#: main/templates/main/help.html:27
 msgid "main:help:info_text"
 msgstr ""
 "Op deze pagina hebben staat informatie om te helpen bij het gebruik van deze "
 "applicatie. Helaas is deze pagina in het Engels."
 
-#: main/templates/main/help_parts/developer.html:7
+#: main/templates/main/help_parts/developer.html:6
 msgid "main:help:developer:header"
 msgstr "(Developer) Data uploaden vanuit JavaScript"
 
-#: main/templates/main/help_parts/faq.html:7
+#: main/templates/main/help_parts/faq.html:6
 msgid "main:help:faq:header"
 msgstr "Veel gestelde vragen"
 
-#: main/templates/main/help_parts/general.html:7
+#: main/templates/main/help_parts/general.html:6
 msgid "main:help:general:header"
 msgstr "Algemeen"
 
-#: main/templates/main/help_parts/webdav.html:7
+#: main/templates/main/help_parts/webdav.html:6
 msgid "main:help:webdav:header"
 msgstr "Toegang tot je experiment map"
 
@@ -151,10 +168,13 @@ msgstr "Uitgelogd"
 msgid "main:logged_out_text"
 msgstr "U bent nu uitgelogd."
 
-#: main/templates/registration/login.html:9
-msgid "login:header:login"
-msgstr "Log in"
+#: main/templates/registration/login.html:10
+msgid "main:login:error"
+msgstr "Inlog gegevens incorrect"
 
-#: main/templates/registration/login.html:15
+#: main/templates/registration/login.html:44
 msgid "login:button:login"
 msgstr "Log in"
+
+#~ msgid "login:header:login"
+#~ msgstr "Log in"

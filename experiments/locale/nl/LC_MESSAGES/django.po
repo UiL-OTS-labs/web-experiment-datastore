@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 15:51+0000\n"
+"POT-Creation-Date: 2025-04-24 12:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,30 +16,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms.py:40
+#: experiments/forms.py:43
 msgid "experiments:forms:folder_name"
 msgstr "Experiment map"
 
-#: experiments/forms.py:42
+#: experiments/forms.py:45
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "Hoe de map met je experiment moet worden genoemd. Bijvoorbeeld:'words' geeft "
-"u de URL {}/words/.<br>"
-"Omdat participanten deze mapnaam in de URL kunnen zien, is het aan te raden om een neutrale naam "
-"te kiezen die niet inhoudelijk over het experiment gaat<br>"
-"Mag alleen letters, cijfers, onderstrepingstekens en "
-"koppeltekens bevatten. We zullen alle hoofdletters vervangen met kleine "
-"letters."
+"u de URL {}/words/.<br>Omdat participanten deze mapnaam in de URL kunnen "
+"zien, is het aan te raden om een neutrale naam te kiezen die niet "
+"inhoudelijk over het experiment gaat<br>Mag alleen letters, cijfers, "
+"onderstrepingstekens en koppeltekens bevatten. We zullen alle hoofdletters "
+"vervangen met kleine letters."
 
-#: experiments/forms.py:52
+#: experiments/forms.py:55
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "Een ander experiment gebruikt deze naam al."
 
-#: experiments/forms.py:64 experiments/models.py:193
+#: experiments/forms.py:67 experiments/models.py:193
 msgid "experiments:models:datapoint:label:test"
 msgstr "Test"
 
-#: experiments/forms.py:65 experiments/models.py:194
+#: experiments/forms.py:68 experiments/models.py:194
 msgid "experiments:models:datapoint:label:pilot"
 msgstr "Pilot"
 
@@ -91,7 +90,7 @@ msgstr ""
 "moet je dit zelf doen als je klaar bent met het uitvoeren van je experiment, "
 "of vraag de lab technici om je experimentmap offline te halen."
 
-#: experiments/models.py:60 experiments/views.py:39
+#: experiments/models.py:60 experiments/views.py:38
 msgid "experiments:models:experiment:date_created"
 msgstr "Datum aangemaakt"
 
@@ -143,63 +142,63 @@ msgstr "Status"
 msgid "experiments:models:participant:group"
 msgstr "Groep"
 
-#: experiments/models.py:250
+#: experiments/models.py:257
 msgid "experiments:models:targetgroup:name"
 msgstr "Naam"
 
-#: experiments/models.py:252
+#: experiments/models.py:259
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "De naam van de groep moet hetzelfde zijn als in je groep in jsPsych script."
 
-#: experiments/models.py:270
+#: experiments/models.py:277
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Aantal participanten doel"
 
-#: experiments/models.py:271
+#: experiments/models.py:278
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "Hoeveel participanten zouden in totaal in deze groep moeten komen"
 
 #: experiments/templates/experiments/delete_all_data.html:8
-#: experiments/templates/experiments/delete_all_data.html:16
+#: experiments/templates/experiments/delete_all_data.html:14
 msgid "experiments:delete_all_data:header"
 msgstr "Verwijderd alle data"
 
-#: experiments/templates/experiments/delete_all_data.html:19
+#: experiments/templates/experiments/delete_all_data.html:24
 msgid "experiments:delete_all_data:text"
 msgstr ""
 "Weet u zeker dat u <strong> alle data </strong> uit experiment '{}' wilt "
 "verwijderen? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
 
-#: experiments/templates/experiments/delete_all_data.html:22
-#: experiments/templates/experiments/delete_datapoint.html:22
-#: experiments/templates/experiments/delete_experiment.html:22
+#: experiments/templates/experiments/delete_all_data.html:27
+#: experiments/templates/experiments/delete_datapoint.html:27
+#: experiments/templates/experiments/delete_experiment.html:27
 msgid "experiments:delete:cancel"
 msgstr "Annuleer"
 
-#: experiments/templates/experiments/delete_all_data.html:25
-#: experiments/templates/experiments/delete_datapoint.html:25
-#: experiments/templates/experiments/delete_experiment.html:25
+#: experiments/templates/experiments/delete_all_data.html:30
+#: experiments/templates/experiments/delete_datapoint.html:30
+#: experiments/templates/experiments/delete_experiment.html:30
 msgid "experiments:delete:confirm"
 msgstr "Bevestig"
 
 #: experiments/templates/experiments/delete_datapoint.html:8
-#: experiments/templates/experiments/delete_datapoint.html:16
+#: experiments/templates/experiments/delete_datapoint.html:14
 msgid "experiments:delete_datapoint:header"
 msgstr "Verwijder datapunt"
 
-#: experiments/templates/experiments/delete_datapoint.html:19
+#: experiments/templates/experiments/delete_datapoint.html:24
 msgid "experiments:delete_datapoint:text"
 msgstr ""
 "Weet u zeker dat u <strong> datapunt '{}' </strong> uit dit experiment wilt "
 "verwijderen? <br/> <br/> Dit kan niet ongedaan worden gemaakt!"
 
 #: experiments/templates/experiments/delete_experiment.html:8
-#: experiments/templates/experiments/delete_experiment.html:16
+#: experiments/templates/experiments/delete_experiment.html:14
 msgid "experiments:delete:header"
 msgstr "Verwijder experiment"
 
-#: experiments/templates/experiments/delete_experiment.html:19
+#: experiments/templates/experiments/delete_experiment.html:24
 msgid "experiments:delete:text"
 msgstr ""
 "Weet u zeker dat u <strong> experiment '{}' </strong> wilt verwijderen? <br/"
@@ -208,11 +207,11 @@ msgstr ""
 "worden gemaakt!"
 
 #: experiments/templates/experiments/detail.html:8
-#: experiments/templates/experiments/detail.html:15
+#: experiments/templates/experiments/detail.html:14
 msgid "experiments:detail:header"
 msgstr "Experiment"
 
-#: experiments/templates/experiments/detail.html:18
+#: experiments/templates/experiments/detail.html:23
 msgid "experiments:detail:info_text"
 msgstr ""
 "Hier kunt u alle gegevens bekijken die tot dusver voor dit experiment zijn "
@@ -221,103 +220,103 @@ msgstr ""
 "zal proberen om JSON-gegevens om te zetten naar CSV-bestanden. Dit kan "
 "mislukken als een van de gegevenspunten onjuist opgemaakte gegevens bevat."
 
-#: experiments/templates/experiments/detail.html:22
+#: experiments/templates/experiments/detail.html:27
 msgid "experiments:details:detail_header"
 msgstr "Experiment details"
 
-#: experiments/templates/experiments/detail.html:24
+#: experiments/templates/experiments/detail.html:29
 msgid "experiments:global:edit"
 msgstr "Wijzig"
 
-#: experiments/templates/experiments/detail.html:30
+#: experiments/templates/experiments/detail.html:35
 msgid "experiments:detail:access_id"
 msgstr "Access Key"
 
-#: experiments/templates/experiments/detail.html:49
+#: experiments/templates/experiments/detail.html:54
 msgid "experiments:global:webexp_location"
 msgstr "Locatie"
 
-#: experiments/templates/experiments/detail.html:59
+#: experiments/templates/experiments/detail.html:64
 msgid "experiments:global:webdav_location"
 msgstr "WebDav share"
 
-#: experiments/templates/experiments/detail.html:71
+#: experiments/templates/experiments/detail.html:76
 msgid "experiments:detail:researchers"
 msgstr "Onderzoekers"
 
-#: experiments/templates/experiments/detail.html:86
+#: experiments/templates/experiments/detail.html:91
 msgid "experiments:detail:progress_header"
 msgstr "Voortgang"
 
-#: experiments/templates/experiments/detail.html:90
+#: experiments/templates/experiments/detail.html:95
 msgid "experiments:detail:progress:group"
 msgstr "Groep"
 
-#: experiments/templates/experiments/detail.html:91
+#: experiments/templates/experiments/detail.html:96
 msgid "experiments:detail:progress:started"
 msgstr "Gestart"
 
-#: experiments/templates/experiments/detail.html:92
+#: experiments/templates/experiments/detail.html:97
 msgid "experiments:detail:progress:piloted"
 msgstr "Gepilot"
 
-#: experiments/templates/experiments/detail.html:93
+#: experiments/templates/experiments/detail.html:98
 msgid "experiments:detail:progress:completed"
 msgstr "Voltooid"
 
-#: experiments/templates/experiments/detail.html:94
+#: experiments/templates/experiments/detail.html:99
 msgid "experiments:detail:progress:completion_target"
 msgstr "Doel"
 
-#: experiments/templates/experiments/detail.html:112
-#: experiments/templates/experiments/detail.html:177
-msgid "experiments:global:download_raw"
-msgstr "Download ruwe data"
-
 #: experiments/templates/experiments/detail.html:117
-#: experiments/templates/experiments/detail.html:181
-msgid "experiments:global:download_csv"
-msgstr "Download data als CSV"
-
-#: experiments/templates/experiments/detail.html:122
-#: experiments/templates/experiments/download.html:16
+#: experiments/templates/experiments/download.html:18
 msgid "experiments:global:download"
 msgstr "Download"
 
-#: experiments/templates/experiments/detail.html:126
+#: experiments/templates/experiments/detail.html:120
+#: experiments/templates/experiments/detail.html:178
+msgid "experiments:global:download_raw"
+msgstr "Download ruwe data"
+
+#: experiments/templates/experiments/detail.html:123
+#: experiments/templates/experiments/detail.html:182
+msgid "experiments:global:download_csv"
+msgstr "Download data als CSV"
+
+#: experiments/templates/experiments/detail.html:127
 msgid "experiments:detail:data_header"
 msgstr "Opgeslagen data"
 
-#: experiments/templates/experiments/detail.html:148
+#: experiments/templates/experiments/detail.html:149
 msgid "experiments:global:actions"
 msgstr "Acties"
 
-#: experiments/templates/experiments/detail.html:173
+#: experiments/templates/experiments/detail.html:174
 msgid "experiments:global:delete_datapoint"
 msgstr "Verwijder"
 
-#: experiments/templates/experiments/detail.html:193
+#: experiments/templates/experiments/detail.html:194
 msgid "experiments:global:delete_all_data"
 msgstr "Verwijder alle data"
 
-#: experiments/templates/experiments/download.html:8
+#: experiments/templates/experiments/download.html:7
 msgid "experiments:download:header"
 msgstr "Download data"
 
 #: experiments/templates/experiments/edit.html:9
-#: experiments/templates/experiments/edit.html:34
+#: experiments/templates/experiments/edit.html:35
 msgid "experiments:edit:header"
 msgstr "Experiment wijzigen"
 
-#: experiments/templates/experiments/edit.html:37
+#: experiments/templates/experiments/edit.html:44
 msgid "experiments:edit:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/edit.html:45
+#: experiments/templates/experiments/edit.html:52
 msgid "experiments:edit:target_groups_header"
 msgstr "Target groepen"
 
-#: experiments/templates/experiments/edit.html:46
+#: experiments/templates/experiments/edit.html:53
 msgid "experiments:edit:target_groups_instructions"
 msgstr ""
 "Als je ontwerp meerdere itemlijsten bevat, kan je deze configureren door "
@@ -325,53 +324,53 @@ msgstr ""
 "evenwichtige manier aan lijsten toegewezen. Zorg ervoor dat je de groepen "
 "hetzelfde noemt in je jsPsych-script. "
 
-#: experiments/templates/experiments/edit.html:57
+#: experiments/templates/experiments/edit.html:63
 msgid "experiments:edit:add_group"
 msgstr "Groep toevoegen"
 
-#: experiments/templates/experiments/edit.html:59
-#: experiments/templates/experiments/new.html:27
+#: experiments/templates/experiments/edit.html:66
+#: experiments/templates/experiments/new.html:38
 msgid "experiments:globals:save"
 msgstr "Opslaan"
 
 #: experiments/templates/experiments/new.html:8
-#: experiments/templates/experiments/new.html:15
+#: experiments/templates/experiments/new.html:24
 msgid "experiments:new:header"
 msgstr "Nieuw experiment aanmaken"
 
-#: experiments/templates/experiments/new.html:18
+#: experiments/templates/experiments/new.html:33
 msgid "experiments:new:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/overview.html:12
-#: experiments/templates/experiments/overview.html:48
+#: experiments/templates/experiments/overview.html:43
 msgid "experiments:home:header"
 msgstr "Mijn experimenten"
 
-#: experiments/templates/experiments/overview.html:44
+#: experiments/templates/experiments/overview.html:47
 msgid "experiments:home:create_experiment"
 msgstr "Nieuw experiment"
 
-#: experiments/templates/experiments/overview.html:51
+#: experiments/templates/experiments/overview.html:56
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/views.py:66
+#: experiments/views.py:65
 msgid "experiments:message:create:success"
 msgstr "Experiment aangemaakt!"
 
-#: experiments/views.py:106
+#: experiments/views.py:105
 msgid "experiments:message:edit:success"
 msgstr "Experiment gewijzigd!"
 
-#: experiments/views.py:196
+#: experiments/views.py:195
 msgid "experiments:message:delete:success"
 msgstr "Experiment verwijderd!"
 
-#: experiments/views.py:221
+#: experiments/views.py:220
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapunt verwijderd!"
 
-#: experiments/views.py:258
+#: experiments/views.py:257
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"

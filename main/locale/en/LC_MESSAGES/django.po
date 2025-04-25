@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 09:30+0000\n"
+"POT-Creation-Date: 2025-04-24 12:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,32 +42,33 @@ msgstr "Administration"
 msgid "footermenu:login"
 msgstr "Log in"
 
-#: main/menus.py:39 main/templates/base/login_header.html:7
+#: main/menus.py:39 main/templates/base/datastore_base.html:58
+#: main/templates/base/login_header.html:7
 msgid "main:globals:logout"
 msgstr "Log out"
 
-#: main/templates/base/403.html:9 main/templates/base/403.html:16
+#: main/templates/base/403.html:10 main/templates/base/403.html:17
 msgid "403:header"
 msgstr "Not authorized"
 
-#: main/templates/base/403.html:18
+#: main/templates/base/403.html:19
 msgid "403:p1"
 msgstr ""
 "It looks like you are trying to access a page you are not allowed to view."
 
-#: main/templates/base/403.html:21
+#: main/templates/base/403.html:22
 msgid "403:p2"
 msgstr "If you think this is a mistake, please contact the lab technicians."
 
-#: main/templates/base/404.html:10 main/templates/base/404.html:17
+#: main/templates/base/404.html:11 main/templates/base/404.html:18
 msgid "404:header"
 msgstr "Page not found"
 
-#: main/templates/base/404.html:19
+#: main/templates/base/404.html:20
 msgid "404:p1"
 msgstr "We can't seem to find the page you're looking for."
 
-#: main/templates/base/404.html:22
+#: main/templates/base/404.html:23
 msgid "404:p2"
 msgstr "The link you clicked may be broken or the page may have been moved."
 
@@ -91,43 +92,59 @@ msgstr "<strong>Reload the page</strong> (this might help)"
 msgid "500:advice:wait"
 msgstr "<strong>Try again later</strong>"
 
-#: main/templates/base/login_header.html:6
-msgid "site:header:login"
-msgstr "Welcome {}"
+#. Translators: This is the title that will end up in the tab of the browser
+#: main/templates/base/datastore_base.html:20
+#: main/templates/base/site_title.html:5
+msgid "site:name"
+msgstr "Web-experiment datastore"
+
+#: main/templates/base/datastore_base.html:29
+#: main/templates/base/datastore_base.html:30
+msgid "cdh.core:uu"
+msgstr ""
 
 #. Translators: This is the title that will end up in the header (in blue)
+#: main/templates/base/datastore_base.html:36
 #: main/templates/base/site_header.html:4
 msgid "site:header:title"
 msgstr "Web-experiment data storage"
 
-#. Translators: This is the title that will end up in the tab of the browser
-#: main/templates/base/site_title.html:5
-msgid "site:name"
-msgstr "Web-experiment datastore"
+#: main/templates/base/datastore_base.html:56
+#: main/templates/base/login_header.html:6
+msgid "site:header:login"
+msgstr "Welcome {}"
+
+#: main/templates/base/datastore_base.html:69
+msgid "lang:en"
+msgstr ""
+
+#: main/templates/base/datastore_base.html:74
+msgid "lang:nl"
+msgstr ""
 
 #: main/templates/main/help.html:9 main/templates/main/help.html:21
 msgid "main:help:header"
 msgstr "Help"
 
-#: main/templates/main/help.html:24
+#: main/templates/main/help.html:27
 msgid "main:help:info_text"
 msgstr ""
 "On this page we have provided several resources to help you using the "
 "application."
 
-#: main/templates/main/help_parts/developer.html:7
+#: main/templates/main/help_parts/developer.html:6
 msgid "main:help:developer:header"
 msgstr "(Developer) Uploading data from JavaScript"
 
-#: main/templates/main/help_parts/faq.html:7
+#: main/templates/main/help_parts/faq.html:6
 msgid "main:help:faq:header"
 msgstr "FAQ"
 
-#: main/templates/main/help_parts/general.html:7
+#: main/templates/main/help_parts/general.html:6
 msgid "main:help:general:header"
 msgstr "General overview"
 
-#: main/templates/main/help_parts/webdav.html:7
+#: main/templates/main/help_parts/webdav.html:6
 msgid "main:help:webdav:header"
 msgstr "Access your experiment folder"
 
@@ -150,10 +167,13 @@ msgstr "Logged out"
 msgid "main:logged_out_text"
 msgstr "You are now logged out"
 
-#: main/templates/registration/login.html:9
-msgid "login:header:login"
-msgstr "Please log in"
+#: main/templates/registration/login.html:10
+msgid "main:login:error"
+msgstr "Login data incorrect"
 
-#: main/templates/registration/login.html:15
+#: main/templates/registration/login.html:44
 msgid "login:button:login"
 msgstr "Log in"
+
+#~ msgid "login:header:login"
+#~ msgstr "Please log in"
