@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-07 15:51+0000\n"
+"POT-Creation-Date: 2025-04-24 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,29 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: experiments/forms.py:40
+#: experiments/forms.py:43
 msgid "experiments:forms:folder_name"
 msgstr "Experiment folder"
 
-#: experiments/forms.py:42
+#: experiments/forms.py:45
 msgid "experiments:forms:folder_name:help"
 msgstr ""
 "How the folder containing your experiment should be named. For example, "
-"'words' would give you the URL {}/words/.<br>"
-"Since participants will see this name in the URL, it's advisable to "
-"choose a neutral name that doesn't give away what your experiment is about.<br>"
-"Can only contain letters, numbers, "
-"underscores and hyphens. We will convert the name to all lowercase letters."
+"'words' would give you the URL {}/words/.<br>Since participants will see "
+"this name in the URL, it's advisable to choose a neutral name that doesn't "
+"give away what your experiment is about.<br>Can only contain letters, "
+"numbers, underscores and hyphens. We will convert the name to all lowercase "
+"letters."
 
-#: experiments/forms.py:52
+#: experiments/forms.py:55
 msgid "experiments:forms:create:duplicate_folder"
 msgstr "A different experiment already uses this folder name!"
 
-#: experiments/forms.py:64 experiments/models.py:193
+#: experiments/forms.py:67 experiments/models.py:193
 msgid "experiments:models:datapoint:label:test"
 msgstr "Test"
 
-#: experiments/forms.py:65 experiments/models.py:194
+#: experiments/forms.py:68 experiments/models.py:194
 msgid "experiments:models:datapoint:label:pilot"
 msgstr "Pilot"
 
@@ -91,7 +91,7 @@ msgstr ""
 "you are done running your experiment, or ask the lab technicians to take "
 "your experiment folder offline. "
 
-#: experiments/models.py:60 experiments/views.py:39
+#: experiments/models.py:60 experiments/views.py:38
 msgid "experiments:models:experiment:date_created"
 msgstr "Date created"
 
@@ -143,63 +143,63 @@ msgstr "Status"
 msgid "experiments:models:participant:group"
 msgstr "Group"
 
-#: experiments/models.py:250
+#: experiments/models.py:257
 msgid "experiments:models:targetgroup:name"
 msgstr "Name"
 
-#: experiments/models.py:252
+#: experiments/models.py:259
 msgid "experiments:models:targetgroup:name:help"
 msgstr ""
 "The name of the target group should match the one in your experiment script"
 
-#: experiments/models.py:270
+#: experiments/models.py:277
 msgid "experiments:models:targetgroup:completion_target"
 msgstr "Completion target"
 
-#: experiments/models.py:271
+#: experiments/models.py:278
 msgid "experiments:models:targetgroup:completion_target:help"
 msgstr "How many participants should the target group contain in total"
 
 #: experiments/templates/experiments/delete_all_data.html:8
-#: experiments/templates/experiments/delete_all_data.html:16
+#: experiments/templates/experiments/delete_all_data.html:14
 msgid "experiments:delete_all_data:header"
 msgstr "Delete all data from experiment"
 
-#: experiments/templates/experiments/delete_all_data.html:19
+#: experiments/templates/experiments/delete_all_data.html:24
 msgid "experiments:delete_all_data:text"
 msgstr ""
 "Are you sure you want to delete <strong>all data</strong> from experiment "
 "'{}'?<br/><br/>This cannot be undone!"
 
-#: experiments/templates/experiments/delete_all_data.html:22
-#: experiments/templates/experiments/delete_datapoint.html:22
-#: experiments/templates/experiments/delete_experiment.html:22
+#: experiments/templates/experiments/delete_all_data.html:27
+#: experiments/templates/experiments/delete_datapoint.html:27
+#: experiments/templates/experiments/delete_experiment.html:27
 msgid "experiments:delete:cancel"
 msgstr "Cancel"
 
-#: experiments/templates/experiments/delete_all_data.html:25
-#: experiments/templates/experiments/delete_datapoint.html:25
-#: experiments/templates/experiments/delete_experiment.html:25
+#: experiments/templates/experiments/delete_all_data.html:30
+#: experiments/templates/experiments/delete_datapoint.html:30
+#: experiments/templates/experiments/delete_experiment.html:30
 msgid "experiments:delete:confirm"
 msgstr "Confirm"
 
 #: experiments/templates/experiments/delete_datapoint.html:8
-#: experiments/templates/experiments/delete_datapoint.html:16
+#: experiments/templates/experiments/delete_datapoint.html:14
 msgid "experiments:delete_datapoint:header"
 msgstr "Delete datapoint"
 
-#: experiments/templates/experiments/delete_datapoint.html:19
+#: experiments/templates/experiments/delete_datapoint.html:24
 msgid "experiments:delete_datapoint:text"
 msgstr ""
 "Are you sure you want to delete <strong>datapoint '{}'</strong> from this "
 "experiment?<br/><br/>This cannot be undone!"
 
 #: experiments/templates/experiments/delete_experiment.html:8
-#: experiments/templates/experiments/delete_experiment.html:16
+#: experiments/templates/experiments/delete_experiment.html:14
 msgid "experiments:delete:header"
 msgstr "Delete experiment"
 
-#: experiments/templates/experiments/delete_experiment.html:19
+#: experiments/templates/experiments/delete_experiment.html:24
 msgid "experiments:delete:text"
 msgstr ""
 "Are you sure you want to delete <strong>experiment '{}'</strong>?<br/><br/"
@@ -207,11 +207,11 @@ msgstr ""
 "strong><br/><br/>This cannot be undone!"
 
 #: experiments/templates/experiments/detail.html:8
-#: experiments/templates/experiments/detail.html:15
+#: experiments/templates/experiments/detail.html:14
 msgid "experiments:detail:header"
 msgstr "Experiment"
 
-#: experiments/templates/experiments/detail.html:18
+#: experiments/templates/experiments/detail.html:23
 msgid "experiments:detail:info_text"
 msgstr ""
 "Here you can view all the data collected for this experiment so far.<br/><br/"
@@ -219,103 +219,103 @@ msgstr ""
 "be JSON files.<br/>'Download as CSV' will try to transform JSON data to CSV "
 "files. This might fail if one of the data points has malformed data."
 
-#: experiments/templates/experiments/detail.html:22
+#: experiments/templates/experiments/detail.html:27
 msgid "experiments:details:detail_header"
 msgstr "Experiment details"
 
-#: experiments/templates/experiments/detail.html:24
+#: experiments/templates/experiments/detail.html:29
 msgid "experiments:global:edit"
 msgstr "Edit"
 
-#: experiments/templates/experiments/detail.html:30
+#: experiments/templates/experiments/detail.html:35
 msgid "experiments:detail:access_id"
 msgstr "Access Key"
 
-#: experiments/templates/experiments/detail.html:49
+#: experiments/templates/experiments/detail.html:54
 msgid "experiments:global:webexp_location"
 msgstr "Location"
 
-#: experiments/templates/experiments/detail.html:59
+#: experiments/templates/experiments/detail.html:64
 msgid "experiments:global:webdav_location"
 msgstr "Webdav share"
 
-#: experiments/templates/experiments/detail.html:71
+#: experiments/templates/experiments/detail.html:76
 msgid "experiments:detail:researchers"
 msgstr "Researchers"
 
-#: experiments/templates/experiments/detail.html:86
+#: experiments/templates/experiments/detail.html:91
 msgid "experiments:detail:progress_header"
 msgstr "Progress"
 
-#: experiments/templates/experiments/detail.html:90
+#: experiments/templates/experiments/detail.html:95
 msgid "experiments:detail:progress:group"
 msgstr "Group"
 
-#: experiments/templates/experiments/detail.html:91
+#: experiments/templates/experiments/detail.html:96
 msgid "experiments:detail:progress:started"
 msgstr "Started"
 
-#: experiments/templates/experiments/detail.html:92
+#: experiments/templates/experiments/detail.html:97
 msgid "experiments:detail:progress:piloted"
 msgstr "Piloted"
 
-#: experiments/templates/experiments/detail.html:93
+#: experiments/templates/experiments/detail.html:98
 msgid "experiments:detail:progress:completed"
 msgstr "Completed"
 
-#: experiments/templates/experiments/detail.html:94
+#: experiments/templates/experiments/detail.html:99
 msgid "experiments:detail:progress:completion_target"
 msgstr "Completion target"
 
-#: experiments/templates/experiments/detail.html:112
-#: experiments/templates/experiments/detail.html:177
-msgid "experiments:global:download_raw"
-msgstr "Download raw data"
-
 #: experiments/templates/experiments/detail.html:117
-#: experiments/templates/experiments/detail.html:181
-msgid "experiments:global:download_csv"
-msgstr "Download data as CSV"
-
-#: experiments/templates/experiments/detail.html:122
-#: experiments/templates/experiments/download.html:16
+#: experiments/templates/experiments/download.html:18
 msgid "experiments:global:download"
 msgstr "Download"
 
-#: experiments/templates/experiments/detail.html:126
+#: experiments/templates/experiments/detail.html:120
+#: experiments/templates/experiments/detail.html:178
+msgid "experiments:global:download_raw"
+msgstr "Download raw data"
+
+#: experiments/templates/experiments/detail.html:123
+#: experiments/templates/experiments/detail.html:182
+msgid "experiments:global:download_csv"
+msgstr "Download data as CSV"
+
+#: experiments/templates/experiments/detail.html:127
 msgid "experiments:detail:data_header"
 msgstr "Uploaded data"
 
-#: experiments/templates/experiments/detail.html:148
+#: experiments/templates/experiments/detail.html:149
 msgid "experiments:global:actions"
 msgstr "Actions"
 
-#: experiments/templates/experiments/detail.html:173
+#: experiments/templates/experiments/detail.html:174
 msgid "experiments:global:delete_datapoint"
 msgstr "Delete"
 
-#: experiments/templates/experiments/detail.html:193
+#: experiments/templates/experiments/detail.html:194
 msgid "experiments:global:delete_all_data"
 msgstr "Delete all data"
 
-#: experiments/templates/experiments/download.html:8
+#: experiments/templates/experiments/download.html:7
 msgid "experiments:download:header"
 msgstr "Download Data"
 
 #: experiments/templates/experiments/edit.html:9
-#: experiments/templates/experiments/edit.html:34
+#: experiments/templates/experiments/edit.html:35
 msgid "experiments:edit:header"
 msgstr "Edit experiment"
 
-#: experiments/templates/experiments/edit.html:37
+#: experiments/templates/experiments/edit.html:44
 msgid "experiments:edit:info_text"
 msgstr " "
 
-#: experiments/templates/experiments/edit.html:45
+#: experiments/templates/experiments/edit.html:52
 msgid "experiments:edit:target_groups_header"
 msgstr "Target Groups"
 
-#: experiments/templates/experiments/edit.html:46
+#: experiments/templates/experiments/edit.html:53
 msgid "experiments:edit:target_groups_instructions"
 msgstr ""
 "If your design includes multiple item lists, you can configure them by "
@@ -323,53 +323,53 @@ msgstr ""
 "lists randomly but in a balanced fashion. Be sure to configure your jsPsych "
 "script accordingly."
 
-#: experiments/templates/experiments/edit.html:57
+#: experiments/templates/experiments/edit.html:63
 msgid "experiments:edit:add_group"
 msgstr "Add target group"
 
-#: experiments/templates/experiments/edit.html:59
-#: experiments/templates/experiments/new.html:27
+#: experiments/templates/experiments/edit.html:66
+#: experiments/templates/experiments/new.html:38
 msgid "experiments:globals:save"
 msgstr "Save"
 
 #: experiments/templates/experiments/new.html:8
-#: experiments/templates/experiments/new.html:15
+#: experiments/templates/experiments/new.html:24
 msgid "experiments:new:header"
 msgstr "Create new experiment"
 
-#: experiments/templates/experiments/new.html:18
+#: experiments/templates/experiments/new.html:33
 msgid "experiments:new:info_text"
 msgstr " "
 
 #: experiments/templates/experiments/overview.html:12
-#: experiments/templates/experiments/overview.html:48
+#: experiments/templates/experiments/overview.html:43
 msgid "experiments:home:header"
 msgstr "My experiments"
 
-#: experiments/templates/experiments/overview.html:44
+#: experiments/templates/experiments/overview.html:47
 msgid "experiments:home:create_experiment"
 msgstr "Create new experiment"
 
-#: experiments/templates/experiments/overview.html:51
+#: experiments/templates/experiments/overview.html:56
 msgid "experiments:home:info_text"
 msgstr " "
 
-#: experiments/views.py:66
+#: experiments/views.py:65
 msgid "experiments:message:create:success"
 msgstr "Experiment created!"
 
-#: experiments/views.py:106
+#: experiments/views.py:105
 msgid "experiments:message:edit:success"
 msgstr "Experiment updated!"
 
-#: experiments/views.py:196
+#: experiments/views.py:195
 msgid "experiments:message:delete:success"
 msgstr "Experiment deleted!"
 
-#: experiments/views.py:221
+#: experiments/views.py:220
 msgid "experiments:message:delete_datapoint:success"
 msgstr "Datapoint deleted!"
 
-#: experiments/views.py:258
+#: experiments/views.py:257
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
