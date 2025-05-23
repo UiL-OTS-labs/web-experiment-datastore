@@ -183,7 +183,7 @@ class ExperimentDetailView(UserAllowedMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        return self.model.objects.filter(experiment=self.experiment)
+        return self.model.objects.filter(experiment=self.experiment).defer('data')
 
 
 class DeleteExperimentView(UserAllowedMixin, SuccessMessageMixin,
