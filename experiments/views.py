@@ -333,5 +333,5 @@ class DownloadFormView(UserAllowedMixin, generic.FormView):
         file_format = form.cleaned_data['file_format']
         queryset = self.experiment.datapoint_set \
             .filter(session__experiment_state__in=form.cleaned_data['include_status']) \
-            .filter(session__group__in=form.cleaned_data['include_groups'])
+            .filter(session__group__in=form.cleaned_data['include_groups']).defer('data')
         return create_download_response_zip(file_format, self.experiment, queryset)
