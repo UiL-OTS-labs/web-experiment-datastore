@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 import uuid
 
 from cdh.core.fields import EncryptedTextField
+from cdh.files.db import FileField
 
 from main.models import User
 
@@ -177,21 +178,25 @@ class DataPoint(models.Model):
     # Encrypted field for extra security
     data = EncryptedTextField(
         _("experiments:models:datapoint:data"),
+        null=True
     )
+
+    # For binary uploads
+    file = FileField(null=True)
 
     date_added = models.DateTimeField(
         _("experiments:models:datapoint:date_added"),
         auto_now_add=True
     )
 
-    def __str__(self):
-        return "Datapoint {}".format(self.number)
-
     session = models.ForeignKey(
         'ParticipantSession', on_delete=models.CASCADE, null=True)
 
     STATUS_TEST = _('experiments:models:datapoint:label:test')
     STATUS_PILOT = _('experiments:models:datapoint:label:pilot')
+
+    def is_file(self):
+        return self.file is not None
 
     def get_status_display(self):
         if self.session is None:
@@ -200,6 +205,14 @@ class DataPoint(models.Model):
             return self.STATUS_PILOT
         return self.STATUS_TEST
 
+    def save(self, *args, **kwargs):
+        if self.data is None and self.file is None:
+            raise ValueError('Datapoint must contain either inline data or a file upload')
+
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return "Datapoint {}".format(self.number)
 
 class ParticipantSession(models.Model):
     STARTED = 1

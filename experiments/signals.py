@@ -21,7 +21,10 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
             instance.number = 1
 
     if not instance.size or instance.size == 0:
-        instance.size = sys.getsizeof(instance.data)
+        if instance.data is not None:
+            instance.size = sys.getsizeof(instance.data)
+        else:
+            instance.size = instance.file.size
 
 
 @receiver(post_delete, sender=DataPoint)

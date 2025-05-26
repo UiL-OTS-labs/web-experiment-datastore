@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'api',
     'experiments',
     'cdh.core',
+    'cdh.files',
     'cdh.vue',
     'cdh.mail',
 

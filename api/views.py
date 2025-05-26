@@ -4,6 +4,7 @@ from functools import cached_property
 from rest_framework.exceptions import APIException, ValidationError, PermissionDenied, NotFound
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView, CreateAPIView
+from rest_framework.parsers import FormParser, MultiPartParser
 
 from .exceptions import ConfigError
 from .parsers import PlainTextParser
@@ -92,13 +93,11 @@ class BaseUploadView(BaseExperimentApiView):
             raise APIException(code=ResultCodes.ERR_NO_DATA, detail='No data was provided')
 
     def _save_data_point(self, payload, session: ParticipantSession):
-        dp = DataPoint()
-        dp.experiment = self.experiment
-        dp.data = payload
-        dp.session = session
-        dp.save()
-
-        return dp
+        return DataPoint.objects.create(
+            experiment=self.experiment,
+            data=payload,
+            session=session
+        )
 
 
 class UploadView(BaseUploadView):
@@ -135,8 +134,6 @@ class UploadView(BaseUploadView):
 
 
 class SessionUploadView(BaseUploadView):
-
-
     def post(self, request, access_key, participant_id):
         payload = request.data
         self._validate_request(payload)
@@ -195,3 +192,22 @@ class ParticipantView(BaseExperimentApiView, CreateAPIView):
 
         serialized = self.serializer_class(participant)
         return Response(serialized.data)
+
+
+class BinaryUploadView(BaseExperimentApiView):
+    parser_classes = [FormParser, MultiPartParser]
+
+    def post(self, request, access_key, participant_id):
+        try:
+            session = self.experiment.participantsession_set\
+                                         .get(uuid=participant_id)
+        except ParticipantSession.DoesNotExist:
+            raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
+                                   detail='Bad participant session id')
+
+        dp = DataPoint.objects.create(
+            experiment=self.experiment,
+            file=request.data['file'],
+            session=session
+        )
+        return Response(status=204)
