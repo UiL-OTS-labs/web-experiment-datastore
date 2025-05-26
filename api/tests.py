@@ -1,3 +1,4 @@
+import io
 import json
 import math
 import random
@@ -253,3 +254,11 @@ class TestTargetGroupAllocation(APITestCase):
         response = self.client.post(reverse('api:participant', args=[self.exp.access_id]))
         self.assertEqual(response.status_code, 403)
         self.assertEqual(response.json()['result'], ResultCodes.ERR_NOT_OPEN)
+
+    def test_upload_binary(self):
+        session = self.exp.participantsession_set.create(group=self.group_a)
+        data = io.BytesIO(b'A' * 1_000_000)
+        response = self.client.post(reverse('api:upload_bin', args=[self.exp.access_id, session.uuid]), dict(file=data))
+        self.assertEqual(response.status_code, 204)
+
+        self.assertEqual(self.exp.datapoint_set.last().file.read(), data.getvalue())
