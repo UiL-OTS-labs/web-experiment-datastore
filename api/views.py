@@ -138,7 +138,7 @@ class SessionUploadView(BaseUploadView):
         payload = request.data
         self._validate_request(payload)
 
-        if not self.experiment.uses_groups():
+        if not self.experiment.has_groups():
             raise ValidationError(detail='Experiment is not using session ids')
 
         try:
@@ -174,9 +174,9 @@ class ParticipantView(BaseExperimentApiView, CreateAPIView):
             raise PermissionDenied(code=ResultCodes.ERR_NOT_OPEN,
                                    detail="The experiment is not open to new uploads")
 
-        if not self.experiment.uses_groups():
+        if not self.experiment.has_groups():
             raise ConfigError(code=ResultCodes.ERR_GROUP_ASSIGN_FAIL,
-                              detail='Experiment is not configured for using session ids (only one group!)')
+                              detail='Experiment is not configured for using session ids (has no groups)')
 
         group = self.experiment.get_next_group()
         if not group:

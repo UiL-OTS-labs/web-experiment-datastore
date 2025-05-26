@@ -99,16 +99,22 @@ class Experiment(models.Model):
         we check both to be sure."""
         experiment_open = self.state in (self.OPEN, self.PILOTING) and self.approved
         groups_open = True
-        if self.uses_groups():
+        if self.has_groups():
             groups_open = any((group.is_open() for group in self.targetgroup_set.all()))
 
         return experiment_open and groups_open
 
-    def uses_groups(self):
+    def has_groups(self):
         """
-        An experiment is designed to use groups when it has at least one group.
+        An experiment supports the session api when it has at least one group.
         """
         return self.targetgroup_set.count() > 0
+
+    def uses_groups(self):
+        """
+        An experiment is explicitly designed to use groups when it has at least two group.
+        """
+        return self.targetgroup_set.count() > 1
 
     def get_next_group(self):
         # the basic idea here is to assign incoming sessions equally across all available groups.
