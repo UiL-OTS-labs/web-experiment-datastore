@@ -105,9 +105,9 @@ class Experiment(models.Model):
 
     def uses_groups(self):
         """
-        An experiment is designed to use groups when it has more than one group.
+        An experiment is designed to use groups when it has at least one group.
         """
-        return self.targetgroup_set.count() > 1
+        return self.targetgroup_set.count() > 0
 
     def get_next_group(self):
         # the basic idea here is to assign incoming sessions equally across all available groups.
