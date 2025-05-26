@@ -140,6 +140,9 @@
                         {% get_verbose_field_name "experiments" "ParticipantSession" "group" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "ParticipantSession" "subject_id" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
                     </th>
                     <th>
@@ -163,6 +166,9 @@
                         <td>
                             {{ dataPoint.session.group.name }}
                         </td>
+                        <td>
+                            {{ dataPoint.session.subject_id }}
+                        </td>
                         <td data-order="{{ dataPoint.date_added|date:'Y-m-d H:i' }}">
                             {{ dataPoint.date_added }}
                         </td>
@@ -178,9 +184,11 @@
                                 {% trans 'experiments:global:download_raw' %}
                             </a>
                             <br/>
-                            <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'csv' %}" target="_blank">
-                                {% trans 'experiments:global:download_csv' %}
-                            </a>
+                            {% if not dataPoint.is_file %}
+                                <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'csv' %}" target="_blank">
+                                    {% trans 'experiments:global:download_csv' %}
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

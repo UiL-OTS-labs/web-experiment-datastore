@@ -142,8 +142,7 @@ class SessionUploadView(BaseUploadView):
             raise ValidationError(detail='Experiment is not using session ids')
 
         try:
-            participant = self.experiment.participantsession_set\
-                                         .get(uuid=participant_id)
+            session = self.experiment.participantsession_set.get(uuid=participant_id)
         except ParticipantSession.DoesNotExist:
             raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
                                    detail='Bad participant session id')
@@ -155,9 +154,9 @@ class SessionUploadView(BaseUploadView):
         # regardless of changes to the experiment status.
 
         # Create the new datapoint
-        dp = self._save_data_point(payload, participant)
+        self._save_data_point(payload, session)
 
-        participant.complete()
+        session.complete()
 
         # Return that everything went OK
         return Response({
@@ -205,9 +204,12 @@ class BinaryUploadView(BaseExperimentApiView):
             raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
                                    detail='Bad participant session id')
 
-        dp = DataPoint.objects.create(
+        DataPoint.objects.create(
             experiment=self.experiment,
             file=request.data['file'],
             session=session
         )
+
+        # note that session.complete() is not called, because we expect
+        # that another (non-binary) upload will mark session completion
         return Response(status=204)
