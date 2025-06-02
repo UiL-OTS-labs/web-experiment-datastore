@@ -204,6 +204,9 @@ class BinaryUploadView(BaseExperimentApiView):
             raise PermissionDenied(code=ResultCodes.ERR_NO_SESSION,
                                    detail='Bad participant session id')
 
+        if 'file' not in request.FILES:
+            raise ValidationError(detail='Field "file" is missing from request or is not a valid file')
+
         DataPoint.objects.create(
             experiment=self.experiment,
             file=request.data['file'],

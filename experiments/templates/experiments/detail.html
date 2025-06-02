@@ -149,6 +149,9 @@
                         {% get_verbose_field_name "experiments" "DataPoint" "size" %}
                     </th>
                     <th>
+                        {% translate 'experiments:datapoint:filename' %}
+                    </th>
+                    <th>
                         {% trans 'experiments:global:actions' %}
                     </th>
                 </tr>
@@ -176,12 +179,19 @@
                             {{ dataPoint.size|filesizeformat }}
                         </td>
                         <td>
+                            {{ dataPoint.file.name |default:'-' }}
+                        </td>
+                        <td>
                             <a href="{% url 'experiments:delete_datapoint' experiment.id dataPoint.pk %}">
                                 {% trans 'experiments:global:delete_datapoint' %}
                             </a>
                             <br/>
                             <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'raw' %}" target="_blank">
-                                {% trans 'experiments:global:download_raw' %}
+                                {% if dataPoint.is_file %}
+                                    {% trans 'experiments:global:download_file' %}
+                                {% else %}
+                                    {% trans 'experiments:global:download_raw' %}
+                                {% endif %}
                             </a>
                             <br/>
                             {% if not dataPoint.is_file %}

@@ -11,5 +11,5 @@ urlpatterns = [
 
     path('<str:access_key>/participant/', ParticipantView.as_view(), name='participant'),
     path('<str:access_key>/upload/<str:participant_id>/', SessionUploadView.as_view(), name='upload'),
-    path('<str:access_key>/bin/<str:participant_id>/', BinaryUploadView.as_view(), name='upload_bin'),
+    path('<str:access_key>/upload-bin/<str:participant_id>/', BinaryUploadView.as_view(), name='upload_bin'),
 ]
