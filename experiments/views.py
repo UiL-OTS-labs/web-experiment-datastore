@@ -12,7 +12,6 @@ from rest_framework.authentication import SessionAuthentication
 
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
-from cdh.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm, DownloadForm
 from .models import Experiment, DataPoint, TargetGroup
@@ -37,35 +36,6 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
             qs = qs.order_by('-date_created')
         return qs
 
-
-
-class ExperimentHomeApiView(braces.LoginRequiredMixin, FancyListApiView):
-    authentication_classes = (SessionAuthentication, )
-    serializer_class = ExperimentSerializer
-
-    sort_definitions = [
-        FancyListApiView.SortDefinition(
-            'date_created',
-            _("experiments:models:experiment:date_created")
-        )
-    ]
-    default_sort = ('date_created', 'desc')
-
-    def get_context(self) -> Dict[str, Any]:
-        context = super().get_context()
-
-        context['webexp_host'] = settings.WEBEXPERIMENT_HOST
-        context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
-        context['PILOTING'] = Experiment.PILOTING
-        context['CLOSED'] = Experiment.CLOSED
-        context['OPEN'] = Experiment.OPEN
-
-        return context
-
-    def get_queryset(self):
-        return Experiment.objects.filter(
-            users=self.request.user
-        )
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,
