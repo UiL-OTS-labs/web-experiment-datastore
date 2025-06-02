@@ -25,7 +25,18 @@ from .mixins import UserAllowedMixin
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     """Overview of all experiments of the current user"""
     template_name = 'experiments/overview.html'
-    model = Experiment
+    paginate_by = 10
+
+    def get_queryset(self):
+        qs = Experiment.objects.filter(users=self.request.user)
+        if 'search' in self.request.GET:
+            qs = qs.filter(title__icontains=self.request.GET['search'])
+        if self.request.GET.get('sort', 'date_created') == 'date_created':
+            qs = qs.order_by('date_created')
+        else:
+            qs = qs.order_by('-date_created')
+        return qs
+
 
 
 class ExperimentHomeApiView(braces.LoginRequiredMixin, FancyListApiView):

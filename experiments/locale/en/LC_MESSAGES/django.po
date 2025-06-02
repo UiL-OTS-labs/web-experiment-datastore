@@ -373,3 +373,43 @@ msgstr "Datapoint deleted!"
 #: experiments/views.py:257
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
+
+
+msgid "experiments:fragment:state"
+msgstr "Status"
+
+msgid "experiments:fragment:num_datapoints"
+msgstr "Data uploaded"
+
+msgid "experiments:fragment:date_created"
+msgstr "Created on"
+
+msgid "experiments:fragment:access_key"
+msgstr "Access key"
+
+msgid "experiments:fragment:webexp_location"
+msgstr "Location"
+
+msgid "experiments:fragment:webdav_location"
+msgstr "WebDav Share"
+
+msgid "experiments:fragment:download_raw"
+msgstr "Download raw data"
+
+msgid "experiments:fragment:download_csv"
+msgstr "Download data as CSV"
+
+msgid "experiments:home:sort"
+msgstr "Sort by:"
+
+msgid "experiments:home:sort:date:desc"
+msgstr "Date created (newest first)"
+
+msgid "experiments:home:sort:date:asc"
+msgstr "Date created (oldest first)"
+
+msgid "experiments:home:search"
+msgstr "Search:"
+
+msgid "experiments:home:search:clear"
+msgstr "Clear"
