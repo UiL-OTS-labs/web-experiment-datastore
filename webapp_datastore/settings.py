@@ -257,3 +257,5 @@ REST_FRAMEWORK = {
 }
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+SILENCED_SYSTEM_CHECKS = ["cdh.files.W001"]
