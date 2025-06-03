@@ -374,3 +374,51 @@ msgstr "Datapunt verwijderd!"
 #: experiments/views.py:257
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"
+
+msgid "experiments:fragment:details"
+msgstr "Details"
+
+msgid "experiments:fragment:edit"
+msgstr "Wijzigen"
+
+msgid "experiments:fragment:delete"
+msgstr "Verwijderen"
+
+msgid "experiments:fragment:state"
+msgstr "Status"
+
+msgid "experiments:fragment:num_datapoints"
+msgstr "Geüpload data"
+
+msgid "experiments:fragment:date_created"
+msgstr "Aangemaakt op"
+
+msgid "experiments:fragment:access_key"
+msgstr "Access key"
+
+msgid "experiments:fragment:webexp_location"
+msgstr "Locatie"
+
+msgid "experiments:fragment:webdav_location"
+msgstr "WebDav Share"
+
+msgid "experiments:fragment:download_raw"
+msgstr "Download ruwe data"
+
+msgid "experiments:fragment:download_csv"
+msgstr "Download data als CSV"
+
+msgid "experiments:home:sort"
+msgstr "Sorteer op:"
+
+msgid "experiments:home:sort:date:desc"
+msgstr "Datum aangemaakt (nieuwste eerst)"
+
+msgid "experiments:home:sort:date:asc"
+msgstr "Datum aangemaakt (oudste eerst)"
+
+msgid "experiments:home:search"
+msgstr "Zoek:"
+
+msgid "experiments:home:search:clear"
+msgstr "Wissen"

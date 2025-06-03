@@ -374,6 +374,14 @@ msgstr "Datapoint deleted!"
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
 
+msgid "experiments:fragment:details"
+msgstr "Details"
+
+msgid "experiments:fragment:edit"
+msgstr "Edit"
+
+msgid "experiments:fragment:delete"
+msgstr "Delete"
 
 msgid "experiments:fragment:state"
 msgstr "Status"

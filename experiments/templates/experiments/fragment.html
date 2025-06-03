@@ -7,17 +7,17 @@
         <a href="{% url 'experiments:detail' experiment.pk %}"
            class="action me-3">
             <i class="icon-details"></i>
-            Details
+            {% translate 'experiments:fragment:details' %}
         </a>
         <a href="{% url 'experiments:edit' experiment.pk %}"
            class="action me-3">
             <i class="icon-edit"></i>
-            Edit
+            {% translate 'experiments:fragment:edit' %}
         </a>
         <a href="{% url 'experiments:delete_experiment' experiment.pk %}"
            class="action me-3">
             <i class="icon-delete"></i>
-            Delete
+            {% translate 'experiments:fragment:delete' %}
         </a>
         <span class="marker"></span>
         </div>
