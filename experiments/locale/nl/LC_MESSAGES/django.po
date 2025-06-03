@@ -422,3 +422,21 @@ msgstr "Zoek:"
 
 msgid "experiments:home:search:clear"
 msgstr "Wissen"
+
+msgid "experiments:list_item:approve"
+msgstr "Goedkeuren"
+
+msgid "experiments:list_item:researchers"
+msgstr "Onderzoekers"
+
+msgid "experiments:list_item:folder"
+msgstr "Map"
+
+msgid "experiments:list_item:last_upload"
+msgstr "Laatste upload"
+
+msgid "experiments:home:sort:last_upload:desc"
+msgstr "Data upload (nieuwste eerst)"
+
+msgid "experiments:home:sort:last_upload:asc"
+msgstr "Data upload (oudste eerst)"

@@ -416,8 +416,35 @@ msgstr "Date created (newest first)"
 msgid "experiments:home:sort:date:asc"
 msgstr "Date created (oldest first)"
 
+msgid "experiments:home:sort:last_upload:desc"
+msgstr "Data upload (newest first)"
+
+msgid "experiments:home:sort:last_upload:asc"
+msgstr "Data upload (oldest first)"
+
 msgid "experiments:home:search"
 msgstr "Search:"
 
 msgid "experiments:home:search:clear"
 msgstr "Clear"
+
+msgid "experiments:list_item:id"
+msgstr "ID"
+
+msgid "experiments:list_item:approve"
+msgstr "Approve"
+
+msgid "experiments:list_item:in_ldap"
+msgstr "In LDAP config"
+
+msgid "experiments:list_item:researchers"
+msgstr "Researchers"
+
+msgid "experiments:list_item:last_upload"
+msgstr "Last upload"
+
+msgid "experiments:list_item:folder"
+msgstr "Folder"
+
+msgid "experiments:list_item:switch"
+msgstr "switch"
