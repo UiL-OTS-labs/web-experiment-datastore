@@ -375,37 +375,37 @@ msgstr "Datapunt verwijderd!"
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"
 
-msgid "experiments:fragment:details"
+msgid "experiments:list_item:details"
 msgstr "Details"
 
-msgid "experiments:fragment:edit"
+msgid "experiments:list_item:edit"
 msgstr "Wijzigen"
 
-msgid "experiments:fragment:delete"
+msgid "experiments:list_item:delete"
 msgstr "Verwijderen"
 
-msgid "experiments:fragment:state"
+msgid "experiments:list_item:state"
 msgstr "Status"
 
-msgid "experiments:fragment:num_datapoints"
+msgid "experiments:list_item:num_datapoints"
 msgstr "Geüpload data"
 
-msgid "experiments:fragment:date_created"
+msgid "experiments:list_item:date_created"
 msgstr "Aangemaakt op"
 
-msgid "experiments:fragment:access_key"
+msgid "experiments:list_item:access_key"
 msgstr "Access key"
 
-msgid "experiments:fragment:webexp_location"
+msgid "experiments:list_item:webexp_location"
 msgstr "Locatie"
 
-msgid "experiments:fragment:webdav_location"
+msgid "experiments:list_item:webdav_location"
 msgstr "WebDav Share"
 
-msgid "experiments:fragment:download_raw"
+msgid "experiments:list_item:download_raw"
 msgstr "Download ruwe data"
 
-msgid "experiments:fragment:download_csv"
+msgid "experiments:list_item:download_csv"
 msgstr "Download data als CSV"
 
 msgid "experiments:home:sort"

@@ -1,5 +1,4 @@
 {% extends "base/datastore_base.html" %}
-{% load vue_tags %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -126,7 +125,7 @@
 
             {% for experiment in object_list %}
                 <div>
-                    {% include 'experiments/fragment.html' %}
+                    {% include 'experiments/list_item.html' %}
                 </div>
             {% endfor %}
         </div>

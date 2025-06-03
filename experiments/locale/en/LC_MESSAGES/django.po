@@ -374,37 +374,37 @@ msgstr "Datapoint deleted!"
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
 
-msgid "experiments:fragment:details"
+msgid "experiments:list_item:details"
 msgstr "Details"
 
-msgid "experiments:fragment:edit"
+msgid "experiments:list_item:edit"
 msgstr "Edit"
 
-msgid "experiments:fragment:delete"
+msgid "experiments:list_item:delete"
 msgstr "Delete"
 
-msgid "experiments:fragment:state"
+msgid "experiments:list_item:state"
 msgstr "Status"
 
-msgid "experiments:fragment:num_datapoints"
+msgid "experiments:list_item:num_datapoints"
 msgstr "Data uploaded"
 
-msgid "experiments:fragment:date_created"
+msgid "experiments:list_item:date_created"
 msgstr "Created on"
 
-msgid "experiments:fragment:access_key"
+msgid "experiments:list_item:access_key"
 msgstr "Access key"
 
-msgid "experiments:fragment:webexp_location"
+msgid "experiments:list_item:webexp_location"
 msgstr "Location"
 
-msgid "experiments:fragment:webdav_location"
+msgid "experiments:list_item:webdav_location"
 msgstr "WebDav Share"
 
-msgid "experiments:fragment:download_raw"
+msgid "experiments:list_item:download_raw"
 msgstr "Download raw data"
 
-msgid "experiments:fragment:download_csv"
+msgid "experiments:list_item:download_csv"
 msgstr "Download data as CSV"
 
 msgid "experiments:home:sort"
