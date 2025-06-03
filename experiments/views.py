@@ -30,10 +30,12 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
         qs = Experiment.objects.filter(users=self.request.user)
         if 'search' in self.request.GET:
             qs = qs.filter(title__icontains=self.request.GET['search'])
-        if self.request.GET.get('sort', 'date_created') == 'date_created':
-            qs = qs.order_by('date_created')
-        else:
-            qs = qs.order_by('-date_created')
+
+        order_by = '-date_created'
+        if self.request.GET.get('sort') == 'date_created':
+            order_by = 'date_created'
+
+        qs = qs.order_by(order_by)
         return qs
 
 

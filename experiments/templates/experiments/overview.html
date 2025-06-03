@@ -102,10 +102,10 @@
                 <div style="flex: 1">
                     <label>{% translate 'experiments:home:sort' %}
                         <select name="sort">
-                            <option value="date_created" {%if request.GET.sort == 'date_created' %}selected{%endif%}>
+                            <option value="-date_created" {%if request.GET.sort == '-date_created' %}selected{%endif%}>
                                 {% translate 'experiments:home:sort:date:desc' %}
                             </option>
-                            <option value="-date_created" {%if request.GET.sort == '-date_created' %}selected{%endif%}>
+                            <option value="date_created" {%if request.GET.sort == 'date_created' %}selected{%endif%}>
                                 {% translate 'experiments:home:sort:date:asc' %}
                             </option>
                         </select>
