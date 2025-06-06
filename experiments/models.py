@@ -214,6 +214,8 @@ class DataPoint(models.Model):
     def save(self, *args, **kwargs):
         if self.data is None and self.file is None:
             raise ValueError('Datapoint must contain either inline data or a file upload')
+        if self.data is not None and self.file is not None:
+            raise ValueError('Unexpected attempt to save datapoint containing both inline data and a file upload')
 
         return super().save(*args, **kwargs)
 
