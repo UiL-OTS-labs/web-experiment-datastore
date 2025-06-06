@@ -3,10 +3,10 @@ import io
 import zipfile
 import json
 import re
-from typing import Optional
+from typing import Callable, Optional
 
 from django.db.models import QuerySet
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, HttpResponseBase
 from django.utils.datastructures import OrderedSet
 
 from experiments.models import DataPoint, Experiment
@@ -88,7 +88,7 @@ def create_download_response_zip(
     )
 
 
-def create_file_response_single(file_format: str, data_point: DataPoint):
+def create_file_response_single(file_format: str, data_point: DataPoint) -> HttpResponseBase:
     """Creates a HttpResponse containing a the data of the provided
     DataPoint, in the desired format. """
 
@@ -128,8 +128,8 @@ def create_file_response_single(file_format: str, data_point: DataPoint):
 
 def _create_zip(
         experiment: Experiment,
-        filename_generator: callable,
-        processor: callable,
+        filename_generator: Callable[[DataPoint], str],
+        processor: Callable[[DataPoint], str],
         queryset: Optional[QuerySet] = None
 ) -> io.BytesIO:
     """Creates a ZIP in a BytesIO buffer.
