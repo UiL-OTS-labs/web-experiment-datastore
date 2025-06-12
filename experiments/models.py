@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 import uuid
 
 from cdh.core.fields import EncryptedTextField
+from cdh.files.db import FileField
 
 from main.models import User
 
@@ -98,14 +99,20 @@ class Experiment(models.Model):
         we check both to be sure."""
         experiment_open = self.state in (self.OPEN, self.PILOTING) and self.approved
         groups_open = True
-        if self.uses_groups():
+        if self.has_groups():
             groups_open = any((group.is_open() for group in self.targetgroup_set.all()))
 
         return experiment_open and groups_open
 
+    def has_groups(self):
+        """
+        An experiment supports the session api when it has at least one group.
+        """
+        return self.targetgroup_set.count() > 0
+
     def uses_groups(self):
         """
-        An experiment is designed to use groups when it has more than one group.
+        An experiment is explicitly designed to use groups when it has at least two group.
         """
         return self.targetgroup_set.count() > 1
 
@@ -177,21 +184,25 @@ class DataPoint(models.Model):
     # Encrypted field for extra security
     data = EncryptedTextField(
         _("experiments:models:datapoint:data"),
+        null=True
     )
+
+    # For binary uploads
+    file = FileField(null=True)
 
     date_added = models.DateTimeField(
         _("experiments:models:datapoint:date_added"),
         auto_now_add=True
     )
 
-    def __str__(self):
-        return "Datapoint {}".format(self.number)
-
     session = models.ForeignKey(
         'ParticipantSession', on_delete=models.CASCADE, null=True)
 
     STATUS_TEST = _('experiments:models:datapoint:label:test')
     STATUS_PILOT = _('experiments:models:datapoint:label:pilot')
+
+    def is_file(self):
+        return self.file is not None
 
     def get_status_display(self):
         if self.session is None:
@@ -200,6 +211,16 @@ class DataPoint(models.Model):
             return self.STATUS_PILOT
         return self.STATUS_TEST
 
+    def save(self, *args, **kwargs):
+        if self.data is None and self.file is None:
+            raise ValueError('Datapoint must contain either inline data or a file upload')
+        if self.data is not None and self.file is not None:
+            raise ValueError('Unexpected attempt to save datapoint containing both inline data and a file upload')
+
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return "Datapoint {}".format(self.number)
 
 class ParticipantSession(models.Model):
     STARTED = 1

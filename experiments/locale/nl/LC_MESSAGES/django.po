@@ -278,6 +278,9 @@ msgstr "Download"
 msgid "experiments:global:download_raw"
 msgstr "Download ruwe data"
 
+msgid "experiments:global:download_file"
+msgstr "Download bestand"
+
 #: experiments/templates/experiments/detail.html:123
 #: experiments/templates/experiments/detail.html:182
 msgid "experiments:global:download_csv"
@@ -374,3 +377,6 @@ msgstr "Datapunt verwijderd!"
 #: experiments/views.py:257
 msgid "experiments:message:delete_all_data:success"
 msgstr "Alle data verwijderd!"
+
+msgid "experiments:datapoint:filename"
+msgstr "Naam"

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import UploadView, MetadataView, ParticipantView, SessionUploadView
+from .views import UploadView, MetadataView, ParticipantView, SessionUploadView, BinaryUploadView
 
 app_name = 'api'
 
@@ -11,4 +11,5 @@ urlpatterns = [
 
     path('<str:access_key>/participant/', ParticipantView.as_view(), name='participant'),
     path('<str:access_key>/upload/<str:participant_id>/', SessionUploadView.as_view(), name='upload'),
+    path('<str:access_key>/upload-bin/<str:participant_id>/', BinaryUploadView.as_view(), name='upload_bin'),
 ]
