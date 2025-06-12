@@ -1,5 +1,4 @@
 {% extends "base/datastore_base.html" %}
-{% load vue_tags %}
 {% load i18n %}
 {% load transformat %}
 {% load datatables %}
@@ -14,32 +13,71 @@
 
 {% block html_head %}
     {{ block.super }}
-    {# This template loads in either the dev or prod Vue library, depending on settings.DEBUG #}
-    {% include 'cdh.vue/vueloader.html' %}
-    {% load_vue_component 'AdminExperimentList' request.csp_nonce %}
-
-    <script nonce="{{ request.csp_nonce }}">
-        // Needs to be wrapped into an onload to ensure all dependencies are loaded
-        window.onload = _ => {
-            const i18n = new VueI18n({
-                locale: '{{ LANGUAGE_CODE }}',
-            });
-            new Vue({
-                i18n,
-                el: "#list",
-                components: {
-                    // Loaded by the load_vue_component tag, no need to manually load this
-                    AdminExperimentList
-                },
-                template: "<AdminExperimentList></AdminExperimentList>",
-            });
+    <style>
+        summary {
+            list-style: none;
         }
-    </script>
+
+        details {
+            background-color: #f3f3f3;
+            border: 1px solid #eaeaea;
+            box-shadow: 3px 3px 5px #aaa;
+            padding: 10px;
+            color: #444;
+            font-size: .9rem;
+        }
+
+        summary h4 {
+            flex: 1;
+        }
+
+        .action {
+            text-decoration: none;
+        }
+
+        .icon-edit::before {
+            content:'\E905';
+        }
+        .icon-approve::before {
+            content:'\EA10';
+        }
+
+        details .marker::before {
+            content: '\E611';
+            font-family: 'icomoon-additional';
+            color: #666;
+            font-size: 10px;
+        }
+
+        details[open] .marker::before {
+            content: '\E612';
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .pagination .btn {
+            border-radius: 0;
+            padding: 6px 10px;
+        }
+
+        .list-controls {
+            display: flex;
+            font-size: .8rem;
+        }
+
+        .list-controls select, .list-controls input, .list-controls .clear {
+            background: white;
+            border:1px solid #ccc;
+            color: #444;
+        }
+    </style>
 {% endblock %}
 
 {% block pre-messages-content %}
     <div class="uu-hero justify-content-between align-items-center">
-        <h1 class="h2">
+        <h1>
             {% trans 'administration:home:header' %}
         </h1>
 
@@ -60,8 +98,61 @@
         <p>
             {% trans 'administration:home:info_text' %}
         </p>
+        <form id="list_query_form">
+            <div class="list-controls mb-2">
+                <div style="flex: 1">
+                    <label>{% translate 'experiments:home:sort' %}
+                        <select name="sort">
+                            <option value="-date_created" {%if request.GET.sort == '-date_created' %}selected{%endif%}>
+                                {% translate 'experiments:home:sort:date:desc' %}
+                            </option>
+                            <option value="date_created" {%if request.GET.sort == 'date_created' %}selected{%endif%}>
+                                {% translate 'experiments:home:sort:date:asc' %}
+                            </option>
+                            <option value="-last_upload" {%if request.GET.sort == '-last_upload' %}selected{%endif%}>
+                                {% translate 'experiments:home:sort:last_upload:desc' %}
+                            </option>
+                            <option value="last_upload" {%if request.GET.sort == 'last_upload' %}selected{%endif%}>
+                                {% translate 'experiments:home:sort:last_upload:asc' %}
+                            </option>
+                        </select>
+                    </label>
+                </div>
+                <label>
+                    {% translate 'experiments:home:search' %}
+                    <input name="search" value="{{ request.GET.search }}"></input>
+                </label>
+                {% if request.GET.search %}
+                <button class="clear ms-2">{% translate 'experiments:home:search:clear' %}</button>
+                {% endif %}
+            </div>
+        </form>
         <div id="list"></div>
-        <br/>
+        {% for experiment in object_list %}
+            {% include "experiments/list_item_admin.html" %}
+        {% endfor %}
     </div>
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
+<script nonce="{{ request.csp_nonce }}">
+    let form = document.querySelector('#list_query_form');
+    form.querySelector('select').addEventListener('change', () => {
+        form.submit();
+    });
+
+    form.querySelector('.clear').addEventListener('click', () => {
+        form.search.value = '';
+        form.submit();
+    });
+</script>
 {% endblock %}

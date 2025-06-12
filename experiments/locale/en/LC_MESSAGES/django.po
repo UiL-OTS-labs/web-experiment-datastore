@@ -377,5 +377,80 @@ msgstr "Datapoint deleted!"
 msgid "experiments:message:delete_all_data:success"
 msgstr "All data deleted!"
 
+msgid "experiments:list_item:details"
+msgstr "Details"
+
+msgid "experiments:list_item:edit"
+msgstr "Edit"
+
+msgid "experiments:list_item:delete"
+msgstr "Delete"
+
+msgid "experiments:list_item:state"
+msgstr "Status"
+
+msgid "experiments:list_item:num_datapoints"
+msgstr "Data uploaded"
+
+msgid "experiments:list_item:date_created"
+msgstr "Created on"
+
+msgid "experiments:list_item:access_key"
+msgstr "Access key"
+
+msgid "experiments:list_item:webexp_location"
+msgstr "Location"
+
+msgid "experiments:list_item:webdav_location"
+msgstr "WebDav Share"
+
+msgid "experiments:list_item:download_raw"
+msgstr "Download raw data"
+
+msgid "experiments:list_item:download_csv"
+msgstr "Download data as CSV"
+
+msgid "experiments:home:sort"
+msgstr "Sort by:"
+
+msgid "experiments:home:sort:date:desc"
+msgstr "Date created (newest first)"
+
+msgid "experiments:home:sort:date:asc"
+msgstr "Date created (oldest first)"
+
+msgid "experiments:home:sort:last_upload:desc"
+msgstr "Data upload (newest first)"
+
+msgid "experiments:home:sort:last_upload:asc"
+msgstr "Data upload (oldest first)"
+
+msgid "experiments:home:search"
+msgstr "Search:"
+
+msgid "experiments:home:search:clear"
+msgstr "Clear"
+
+msgid "experiments:list_item:id"
+msgstr "ID"
+
+msgid "experiments:list_item:approve"
+msgstr "Approve"
+
+msgid "experiments:list_item:in_ldap"
+msgstr "In LDAP config"
+
+msgid "experiments:list_item:researchers"
+msgstr "Researchers"
+
+msgid "experiments:list_item:last_upload"
+msgstr "Last upload"
+
+msgid "experiments:list_item:folder"
+msgstr "Folder"
+
+msgid "experiments:list_item:switch"
+msgstr "switch"
+
 msgid "experiments:datapoint:filename"
 msgstr "Name"

@@ -12,7 +12,6 @@ from rest_framework.authentication import SessionAuthentication
 
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
-from cdh.vue.rest import FancyListApiView
 
 from .forms import CreateExperimentForm, EditExperimentForm, DownloadForm
 from .models import Experiment, DataPoint, TargetGroup
@@ -25,36 +24,20 @@ from .mixins import UserAllowedMixin
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     """Overview of all experiments of the current user"""
     template_name = 'experiments/overview.html'
-    model = Experiment
-
-
-class ExperimentHomeApiView(braces.LoginRequiredMixin, FancyListApiView):
-    authentication_classes = (SessionAuthentication, )
-    serializer_class = ExperimentSerializer
-
-    sort_definitions = [
-        FancyListApiView.SortDefinition(
-            'date_created',
-            _("experiments:models:experiment:date_created")
-        )
-    ]
-    default_sort = ('date_created', 'desc')
-
-    def get_context(self) -> Dict[str, Any]:
-        context = super().get_context()
-
-        context['webexp_host'] = settings.WEBEXPERIMENT_HOST
-        context['webexp_webdav_host'] = settings.WEBEXPERIMENT_WEBDAV_HOST
-        context['PILOTING'] = Experiment.PILOTING
-        context['CLOSED'] = Experiment.CLOSED
-        context['OPEN'] = Experiment.OPEN
-
-        return context
+    paginate_by = 10
 
     def get_queryset(self):
-        return Experiment.objects.filter(
-            users=self.request.user
-        )
+        qs = Experiment.objects.filter(users=self.request.user)
+        if 'search' in self.request.GET:
+            qs = qs.filter(title__icontains=self.request.GET['search'])
+
+        order_by = '-date_created'
+        if self.request.GET.get('sort') == 'date_created':
+            order_by = 'date_created'
+
+        qs = qs.order_by(order_by)
+        return qs
+
 
 
 class ExperimentCreateView(braces.LoginRequiredMixin, SuccessMessageMixin,

@@ -138,6 +138,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'cdh.core.context_processors.acceptation',
+                'webapp_datastore.const.constants'
             ],
         },
     },
