@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'api',
     'experiments',
     'cdh.core',
+    'cdh.files',
     'cdh.vue',
     'cdh.mail',
 
@@ -257,3 +258,5 @@ REST_FRAMEWORK = {
 }
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+SILENCED_SYSTEM_CHECKS = ["cdh.files.W001"]

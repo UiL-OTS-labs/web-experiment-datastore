@@ -103,7 +103,8 @@ class TestDeleteData(TestCase):
         session = self.exp.participantsession_set.create(group=group)
         dp = DataPoint.objects.create(
             experiment=self.exp,
-            session=session
+            session=session,
+            data=''
         )
 
         self.client.force_login(self.user)
@@ -115,12 +116,14 @@ class TestDeleteData(TestCase):
         session = self.exp.participantsession_set.create(group=group)
         dp = DataPoint.objects.create(
             experiment=self.exp,
-            session=session
+            session=session,
+            data=''
         )
 
         dp2 = DataPoint.objects.create(
             experiment=self.exp,
-            session=session
+            session=session,
+            data=''
         )
 
         self.client.force_login(self.user)
@@ -148,4 +151,3 @@ class TestAuditLog(TestCase):
         self.assertEqual(self.user.experiment_set.count(), 0)
         self.assertEqual(log.called, True)
         log.assert_called_with(Event.DELETE_DATA, ANY, self.user, ANY)
-

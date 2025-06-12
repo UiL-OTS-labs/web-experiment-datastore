@@ -277,6 +277,9 @@ msgstr "Download"
 msgid "experiments:global:download_raw"
 msgstr "Download raw data"
 
+msgid "experiments:global:download_file"
+msgstr "Download file"
+
 #: experiments/templates/experiments/detail.html:123
 #: experiments/templates/experiments/detail.html:182
 msgid "experiments:global:download_csv"
@@ -448,3 +451,6 @@ msgstr "Folder"
 
 msgid "experiments:list_item:switch"
 msgstr "switch"
+
+msgid "experiments:datapoint:filename"
+msgstr "Name"

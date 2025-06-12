@@ -3,10 +3,10 @@ import io
 import zipfile
 import json
 import re
-from typing import Optional
+from typing import Callable, Optional
 
 from django.db.models import QuerySet
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, HttpResponseBase
 from django.utils.datastructures import OrderedSet
 
 from experiments.models import DataPoint, Experiment
@@ -88,10 +88,13 @@ def create_download_response_zip(
     )
 
 
-def create_file_response_single(file_format: str, data_point: DataPoint) -> \
-        HttpResponse:
+def create_file_response_single(file_format: str, data_point: DataPoint) -> HttpResponseBase:
     """Creates a HttpResponse containing a the data of the provided
     DataPoint, in the desired format. """
+
+    if data_point.is_file():
+        filename = _create_file_name(data_point, suffix='_' + data_point.file.name)
+        return FileResponse(data_point.file, filename=filename, as_attachment=True)
 
     try:
         if file_format == 'raw':
@@ -125,8 +128,8 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> \
 
 def _create_zip(
         experiment: Experiment,
-        filename_generator: callable,
-        processor: callable,
+        filename_generator: Callable[[DataPoint], str],
+        processor: Callable[[DataPoint], str],
         queryset: Optional[QuerySet] = None
 ) -> io.BytesIO:
     """Creates a ZIP in a BytesIO buffer.
@@ -145,10 +148,14 @@ def _create_zip(
         if queryset is None:
             queryset = experiment.datapoint_set.all()
 
-        for dataPoint in queryset:
-            filename = filename_generator(dataPoint)
+        for data_point in queryset:
+            filename = filename_generator(data_point)
             try:
-                data = processor(dataPoint)
+                if data_point.is_file():
+                    filename = _create_file_name(data_point, suffix='_' + data_point.file.name)
+                    data = data_point.file.read()
+                else:
+                    data = processor(data_point)
                 zip_file.writestr(filename, data)
                 export_report += "-{} - SUCCESS\n".format(filename)
             except Exception as e:

@@ -140,10 +140,16 @@
                         {% get_verbose_field_name "experiments" "ParticipantSession" "group" %}
                     </th>
                     <th>
+                        {% get_verbose_field_name "experiments" "ParticipantSession" "subject_id" %}
+                    </th>
+                    <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "date_added" %}
                     </th>
                     <th>
                         {% get_verbose_field_name "experiments" "DataPoint" "size" %}
+                    </th>
+                    <th>
+                        {% translate 'experiments:datapoint:filename' %}
                     </th>
                     <th>
                         {% trans 'experiments:global:actions' %}
@@ -163,6 +169,9 @@
                         <td>
                             {{ dataPoint.session.group.name }}
                         </td>
+                        <td>
+                            {{ dataPoint.session.subject_id }}
+                        </td>
                         <td data-order="{{ dataPoint.date_added|date:'Y-m-d H:i' }}">
                             {{ dataPoint.date_added }}
                         </td>
@@ -170,17 +179,26 @@
                             {{ dataPoint.size|filesizeformat }}
                         </td>
                         <td>
+                            {{ dataPoint.file.name |default:'-' }}
+                        </td>
+                        <td>
                             <a href="{% url 'experiments:delete_datapoint' experiment.id dataPoint.pk %}">
                                 {% trans 'experiments:global:delete_datapoint' %}
                             </a>
                             <br/>
                             <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'raw' %}" target="_blank">
-                                {% trans 'experiments:global:download_raw' %}
+                                {% if dataPoint.is_file %}
+                                    {% trans 'experiments:global:download_file' %}
+                                {% else %}
+                                    {% trans 'experiments:global:download_raw' %}
+                                {% endif %}
                             </a>
                             <br/>
-                            <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'csv' %}" target="_blank">
-                                {% trans 'experiments:global:download_csv' %}
-                            </a>
+                            {% if not dataPoint.is_file %}
+                                <a href="{% url 'experiments:download_single' experiment.id dataPoint.pk 'csv' %}" target="_blank">
+                                    {% trans 'experiments:global:download_csv' %}
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
