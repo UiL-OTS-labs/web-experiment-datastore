@@ -26,8 +26,15 @@ def on_datapoint_creation(sender, instance, *args, **kwargs):
 
 @receiver(post_delete, sender=DataPoint)
 def on_datapoint_delete(sender, instance, *args, **kwargs):
-    if instance.session is not None:
-        instance.session.delete_if_empty()
+    try:
+        if instance.session is not None:
+            instance.session.delete_if_empty()
+    except ParticipantSession.DoesNotExist:
+        # when deleting multiple data points, the session gets deleted
+        # the first time this signal is called, because it will be empty.
+        # this except clause will prevent the signal from failing
+        # as it is called multiple times
+        pass
 
 
 @receiver(pre_save, sender=ParticipantSession)
