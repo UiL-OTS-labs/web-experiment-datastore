@@ -1,7 +1,12 @@
+import os
 from django.shortcuts import render
 from django.urls import reverse_lazy as reverse
 from django.views import generic
 from django.conf import settings
+
+from rest_framework.views import APIView, Response
+
+from cdh.files.storage import CDHFileStorage
 
 
 class RedirectHomeView(generic.RedirectView):
@@ -33,3 +38,19 @@ def handler404(request, exception):
 
 def handler500(request, exception=None):
     return render(request, 'base/500.html', status=500)
+
+
+
+
+class StatusView(APIView):
+    """status view for monitoring app"""
+
+    def get(self, *args, **kwargs):
+        status = dict(ready=False)
+
+        # check if file storage is online
+        files_path = CDHFileStorage().base_location
+        if os.path.exists(files_path):
+            status = dict(ready=True)
+
+        return Response(status)
