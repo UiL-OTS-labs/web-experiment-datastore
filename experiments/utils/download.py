@@ -82,10 +82,12 @@ def create_download_response_zip(
             queryset
         )
 
-    return FileResponse(
+    response = FileResponse(
         zip_file,
-        filename="{}-{}.zip".format(experiment.title, file_format)
-    )
+        content_type='application/zip',
+        )
+    response['Content-Disposition'] = 'attachment; filename="{}-{}.zip"'.format(experiment.title, file_format)
+    return response
 
 
 def create_file_response_single(file_format: str, data_point: DataPoint) -> HttpResponseBase:
@@ -126,6 +128,24 @@ def create_file_response_single(file_format: str, data_point: DataPoint) -> Http
     return response
 
 
+class StreamingIO:
+    def __init__(self):
+        self.buffer = io.BytesIO()
+
+    def write(self, data):
+        return self.buffer.write(data)
+
+    def flush(self):
+        return self.buffer.flush()
+
+    def reset(self):
+        del self.buffer
+        self.buffer = io.BytesIO()
+
+    def getvalue(self):
+        return self.buffer.getvalue()
+
+
 def _create_zip(
         experiment: Experiment,
         filename_generator: Callable[[DataPoint], str],
@@ -140,13 +160,13 @@ def _create_zip(
     :param processor: a callable that produces the data in the intended
     format when given a datapoint object
     """
-    buffer = io.BytesIO()
+    buffer = StreamingIO()
 
-    with zipfile.ZipFile(buffer, "a", zipfile.ZIP_DEFLATED, True) as zip_file:
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED, True) as zip_file:
         export_report = EXPORT_REPORT_HEADER
 
         if queryset is None:
-            queryset = experiment.datapoint_set.all()
+            queryset = experiment.datapoint_set.all().defer('data')
 
         for data_point in queryset:
             filename = filename_generator(data_point)
@@ -161,13 +181,11 @@ def _create_zip(
             except Exception as e:
                 export_report += "-{} - FAILED\n".format(filename)
 
+            yield buffer.getvalue()
+            buffer.reset()
         zip_file.writestr("export_report.txt", export_report)
 
-    # Reset the buffer cursor to the start, so FileResponse reads the entire
-    # buffer
-    buffer.seek(0)
-
-    return buffer
+    yield buffer.getvalue()
 
 
 def _flatten_json(data: str) -> str:

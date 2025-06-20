@@ -134,6 +134,25 @@ class TestDeleteData(TestCase):
         self.assertEqual(group.participantsession_set.count(), 0)
 
 
+    def test_data_point_delete_all_with_session(self):
+        group = self.exp.targetgroup_set.create(name='A', completion_target=2)
+        session = self.exp.participantsession_set.create(group=group)
+        dp = DataPoint.objects.create(
+            experiment=self.exp,
+            session=session,
+            data=''
+        )
+
+        dp2 = DataPoint.objects.create(
+            experiment=self.exp,
+            session=session,
+            data=''
+        )
+
+        self.client.force_login(self.user)
+        self.client.post(reverse('experiments:delete_all_data', args=[self.exp.pk]))
+        self.assertEqual(group.participantsession_set.count(), 0)
+
 
 class TestAuditLog(TestCase):
     databases = '__all__'  # required for login because of auditlog
