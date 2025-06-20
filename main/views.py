@@ -46,11 +46,11 @@ class StatusView(APIView):
     """status view for monitoring app"""
 
     def get(self, *args, **kwargs):
-        status = dict(ready=False)
+        ready = False
 
         # check if file storage is online
         files_path = CDHFileStorage().base_location
         if os.path.exists(files_path):
-            status = dict(ready=True)
+            ready = True
 
-        return Response(status)
+        return Response(dict(ready=ready), status=200 if ready else 500)
