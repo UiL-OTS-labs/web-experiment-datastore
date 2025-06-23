@@ -192,7 +192,8 @@ class DataPoint(models.Model):
 
     date_added = models.DateTimeField(
         _("experiments:models:datapoint:date_added"),
-        auto_now_add=True
+        auto_now_add=True,
+        db_index=True
     )
 
     session = models.ForeignKey(
