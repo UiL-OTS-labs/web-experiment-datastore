@@ -24,7 +24,7 @@ class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = Experiment.objects.filter(users=self.request.user)
+        qs = Experiment.objects.all()
         if 'search' in self.request.GET:
             qs = qs.filter(title__icontains=self.request.GET['search'])
 
