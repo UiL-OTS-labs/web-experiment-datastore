@@ -109,7 +109,7 @@
                             {% translate 'experiments:list_item:last_upload' %}:
                         </td>
                         <td class="ml-1">
-                            {{ experiment.datapoint_set.last.date_added| default:'-' }}
+                            {{ experiment.last_upload| default:'-' }}
                         </td>
                     </tr>
                     <tr>
