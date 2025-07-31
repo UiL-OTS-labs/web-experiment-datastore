@@ -9,49 +9,58 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-    Dear lab-staff,
-    </p>
+    <p>Dear lab-staff,</p>
 
-    <p>
-        Sessions per day:
-    </p>
-    <p>
-        <table style="border-collapse: collapse">
-            {% for row in per_day %}
+    <p>Sessions per day:</p>
+    <table style="border-collapse: collapse">
+        <thead>
+            <tr>
+                <th style="border:1px solid #000; padding: 12px">Date</th>
+                <th style="border:1px solid #000; padding: 12px">Started</th>
+                <th style="border:1px solid #000; padding: 12px">Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day, started, completed in per_day %}
                 <tr>
-                    <td style="border:1px solid #000; padding: 12px">{{ row.0 }}</td>
-                    <td style="border:1px solid #000; padding: 12px">{{ row.1 }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ day }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ started }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ completed }}</td>
                 </tr>
+            {% empty %}
+                <tr><td colspan="3" style="border:1px solid #000; padding: 12px">No sessions this week.</td></tr>
             {% endfor %}
-        </table>
-    </p>
+        </tbody>
+    </table>
 
-    <p>
-        Sessions per experiment:
-    </p>
-    <p>
-        <table style="border-collapse: collapse">
-            {% for row in per_experiment %}
+    <p>Sessions per experiment:</p>
+    <table style="border-collapse: collapse">
+        <thead>
+            <tr>
+                <th style="border:1px solid #000; padding: 12px">Experiment</th>
+                <th style="border:1px solid #000; padding: 12px">Started</th>
+                <th style="border:1px solid #000; padding: 12px">Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for title, started, completed in per_experiment %}
                 <tr>
-                    <td style="border:1px solid #000; padding: 12px">{{ row.0 }}</td>
-                    <td style="border:1px solid #000; padding: 12px">{{ row.1 }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ title }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ started }}</td>
+                    <td style="border:1px solid #000; padding: 12px">{{ completed }}</td>
                 </tr>
+            {% empty %}
+                <tr><td colspan="3" style="border:1px solid #000; padding: 12px">No experiments this week.</td></tr>
             {% endfor %}
-        </table>
-    </p>
+        </tbody>
+    </table>
 
-    <p>
-    Beep boop,<br/>
-    The ILS web-experiment datastore
-    </p>
+    <p>Beep boop,<br/>The ILS web-experiment datastore</p>
 {% endblock %}
 
 {% block footer %}
-    <p>
-        <i>
+    <p><i>
         I am but a mere Python programme. I'm afraid I cannot respond to any replies!<br/>
         (Don't worry, all mails to non-labstaff are a lot more professional).
-        </i>
-    </p>
+    </i></p>
 {% endblock %}
