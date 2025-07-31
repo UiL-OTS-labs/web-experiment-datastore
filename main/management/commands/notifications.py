@@ -2,7 +2,8 @@ from datetime import timedelta
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.db import models
+from django.db.models import Count, Q, F, functions
+
 from django.utils import timezone
 
 from cdh.mail.utils import send_template_email
@@ -21,30 +22,25 @@ class Command(BaseCommand):
         range_from = last_sunday - timedelta(days=7)
         range_to = last_sunday
 
-        new_sessions = ParticipantSession.objects.filter(
+        sessions = ParticipantSession.objects.filter(
             date_updated__gte=range_from,
             date_updated__lte=range_to
         )
 
-        per_day = new_sessions.annotate(
-            day=models.functions.TruncDate('date_updated')
-        ).values(
-            'day'
-        ).annotate(
-            count=models.Count('day')
-        ).values_list('day', 'count').order_by('day')
+        per_day = sessions.annotate(day=functions.TruncDate('date_updated')).values('day').annotate(
+            started=Count('id'),
+            completed=Count('id', filter=Q(state=ParticipantSession.COMPLETED))
+        ).values_list('day', 'started', 'completed').order_by('day')
 
-        per_experiment = new_sessions.annotate(
-            title=models.F('experiment__title')
-        ).values(
-            'title'
-        ).annotate(
-            count=models.Count('title')
-        ).values_list('title', 'count').order_by('title')
+        # Per experiment
+        per_experiment = sessions.annotate(title=F('experiment__title')).values('title').annotate(
+            started=Count('id'),
+            completed=Count('id', filter=Q(state=ParticipantSession.COMPLETED))
+        ).values_list('title', 'started', 'completed').order_by('title')
 
         if per_day or per_experiment:
             self.send_stats_mail(options['email'], per_day, per_experiment)
-
+            
     def send_stats_mail(self, email, per_day, per_experiment):
         send_template_email(
             [email],
