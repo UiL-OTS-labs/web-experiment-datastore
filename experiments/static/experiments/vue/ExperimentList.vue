@@ -1,6 +1,6 @@
 <template>
   <FancyList
-      :items="processedItems"
+      :items="items"
       :filter-definitions="filterDefinitions"
       :context="context"
       :searchable-fields="searchableFields"
@@ -231,10 +231,7 @@ export default {
   },
   mounted() {
     this.$ufl_load(this, this.$url('experiments:home_api', []));
-    setTimeout(() => {
-      console.log(this.items);
-    }, 1000);
-  }
+  },
 }
 </script>
 
