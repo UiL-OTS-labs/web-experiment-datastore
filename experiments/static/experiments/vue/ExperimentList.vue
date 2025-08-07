@@ -1,6 +1,6 @@
 <template>
   <FancyList
-      :items="items"
+      :items="processedItems"
       :filter-definitions="filterDefinitions"
       :context="context"
       :searchable-fields="searchableFields"
@@ -14,7 +14,6 @@
       <h4 v-html="experiment.title">
       </h4>
     </template>
-
 
     <template #actions="{ item: experiment, context }">
       <a
@@ -37,7 +36,6 @@
       </a>
     </template>
 
-
     <template #undertitle="{ item: experiment, context }">
       <div class="ufl-undertitle-line">
         {{ $t('state') }}: {{ experiment.get_state_display }}
@@ -46,7 +44,6 @@
         {{ $t('num_datapoints') }}: {{ experiment.num_datapoints }}
       </div>
     </template>
-
 
     <template #details="{ item: experiment, context }">
       <div class="row">
@@ -68,6 +65,14 @@
                 </td>
                 <td>
                   {{ experiment.access_id }}
+                </td>
+              </tr>
+              <tr v-if="experiment.approved">
+                <td>{{ $t('researchers') }}:</td>
+                <td>
+                  <span v-for="(user, index) in experiment.users" :key="index">
+                    <span v-if="index !== 0">, </span>{{ user }}
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -176,6 +181,7 @@ export default {
         state: "Status",
         num_datapoints: "Data uploaded",
         access_key: "Access key",
+        researchers:"Researchers",
         download_raw: "Download raw data",
         download_csv: "Download data as CSV",
         webexp_location: "Location",
@@ -189,6 +195,7 @@ export default {
         state: "Status",
         num_datapoints: "Ge-uploade data",
         access_key: "Access key",
+        researchers:"Onderzoekers",
         download_raw: "Download ruwe data",
         download_csv: "Download data als CSV",
         webexp_location: "Locatie",
@@ -205,7 +212,7 @@ export default {
       // Actual data loaded through $ufl_load in mounted()
       'items': [],
       'context': {},
-      'searchableFields': [],
+      'searchableFields': ['title','users'],
       'filterDefinitions': {},
       'numItemsOptions': [],
       'sortDefinitions': {},
@@ -214,9 +221,20 @@ export default {
       'loaded': false,
     };
   },
+  computed: {
+    processedItems() {
+      return this.items.map(experiment => ({
+        ...experiment,
+        users_string: experiment.users ? experiment.users.join(' ') : ''
+      }));
+    }
+  },
   mounted() {
     this.$ufl_load(this, this.$url('experiments:home_api', []));
-  },
+    setTimeout(() => {
+      console.log(this.items);
+    }, 1000);
+  }
 }
 </script>
 

@@ -108,7 +108,7 @@
             <tbody>
               <tr>
                 <td>
-                  {{ $t('researchers') }}:
+                  {{ $t('users') }}:
                 </td>
                 <td>
                   <span
@@ -188,7 +188,7 @@ export default {
         date_created: "Date created",
         last_upload: "Last upload",
         show_in_ldap_config: "In LDAP config",
-        researchers: "Researchers",
+        users: "Researchers",
       },
       nl: {
         yes: "ja",
@@ -204,7 +204,7 @@ export default {
         date_created: "Datum aangemaakt",
         last_upload: "Laatse upload",
         show_in_ldap_config: "In LDAP config",
-        researchers: "Onderzoekers",
+        users: "Onderzoekers",
       }
     }
   },
