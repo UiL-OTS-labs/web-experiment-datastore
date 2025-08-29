@@ -37,7 +37,7 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
                 Q(users__username__icontains=search) |
                 Q(users__first_name__icontains=search) |
                 Q(users__last_name__icontains=search)
-            ).distinct()  # voorkomt dubbele resultaten als meerdere users matchen
+            ).distinct()  
 
         order_by = '-date_created'
         if self.request.GET.get('sort') == 'date_created':
