@@ -16,7 +16,7 @@ from experiments.mixins import ExperimentMixin
 from experiments.models import Experiment
 from cdh.core.views.mixins import RedirectSuccessMessageMixin
 from cdh.vue.rest import FancyListApiView
-
+from django.db.models import Q, Max
 
 class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
     """Home view, containing a list of all experiments"""
@@ -25,16 +25,24 @@ class AdministrationHomeView(braces.StaffuserRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         qs = Experiment.objects.all().prefetch_related('users')
-        if 'search' in self.request.GET:
-            qs = qs.filter(title__icontains=self.request.GET['search'])
 
-        qs = qs.annotate(last_upload=models.Max('datapoint__date_added'))
+        search = self.request.GET.get('search')
+        if search:
+            qs = qs.filter(
+                Q(title__icontains=search) |
+                Q(users__username__icontains=search) |
+                Q(users__first_name__icontains=search) |
+                Q(users__last_name__icontains=search)
+            ).distinct()   
+
+        qs = qs.annotate(last_upload=Max('datapoint__date_added'))
+
         order_by = '-date_created'
         if self.request.GET.get('sort') in ['date_created', 'last_upload', '-last_upload']:
             order_by = self.request.GET['sort']
 
-        qs = qs.order_by(order_by)
-        return qs
+        return qs.order_by(order_by)
+
 
 
 class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
