@@ -77,13 +77,23 @@
                             <th>{% trans "Delete" %}</th>
                             <td>
                                 <div class="form-check">
-                                    <input type="checkbox"
-                                           name="{{ group_form.prefix }}-DELETE"
-                                           id="{{ group_form.prefix }}-DELETE"
-                                           class="form-check-input">
-                                    <label class="form-check-label" for="{{ group_form.prefix }}-DELETE">
-                                        {% trans "Remove this target group" %}
-                                    </label>
+                                    {% if experiment.get_state_display != "Closed" %}
+                                        <span class="text-warning">
+                                            {% trans "Target groups can only be deleted when the experiment is closed." %}
+                                        </span>
+                                    {% elif group_form.instance.num_started > 0 %}
+                                        <span class="text-danger">
+                                            {% trans "This target group cannot be deleted because it already has data." %}
+                                        </span>
+                                    {% else %}
+                                        <input type="checkbox"
+                                               name="{{ group_form.prefix }}-DELETE"
+                                               id="{{ group_form.prefix }}-DELETE"
+                                               class="form-check-input">
+                                        <label class="form-check-label" for="{{ group_form.prefix }}-DELETE">
+                                            {% trans "Remove this target group" %}
+                                        </label>
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>
@@ -102,5 +112,3 @@
     </div>
 </div>
 {% endblock %}
-
-
