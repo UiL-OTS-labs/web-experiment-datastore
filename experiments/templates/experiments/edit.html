@@ -43,29 +43,64 @@
         <p>
             {% trans 'experiments:edit:info_text' %}
         </p>
+
         <form method="post" class="uu-form uu-form-no-gap">
             {% csrf_token %}
+            
             <table width="100%">
                 {{ form }}
             </table>
+
             <div class="mt-4">
-              <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
-              <p>{% trans 'experiments:edit:target_groups_instructions' %}</p>
+                <h4>{% trans 'experiments:edit:target_groups_header' %}</h4>
+                <p>{% trans 'experiments:edit:target_groups_instructions' %}</p>
             </div>
+
             {{ target_group_formset.management_form }}
+
             {% for group_form in target_group_formset %}
                 <div class="target-group-form">
                     <table class="table table-bordered table-striped" width="100%">
-                      {{ group_form }}
+                        <tr>
+                            <th>{{ group_form.name.label_tag }}</th>
+                            <td>{{ group_form.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ group_form.completion_target.label_tag }}</th>
+                            <td>
+                                {{ group_form.completion_target }}
+                                {{ group_form.id }}
+                                {{ group_form.experiment }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{% trans "Delete" %}</th>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox"
+                                           name="{{ group_form.prefix }}-DELETE"
+                                           id="{{ group_form.prefix }}-DELETE"
+                                           class="form-check-input">
+                                    <label class="form-check-label" for="{{ group_form.prefix }}-DELETE">
+                                        {% trans "Remove this target group" %}
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             {% endfor %}
+
             <a href="#" id="add_group">+ {% trans 'experiments:edit:add_group' %}</a>
             <hr/>
             <div>
-                <button class="btn btn-primary" type="submit">{% trans 'experiments:globals:save' %}</button>
+                <button class="btn btn-primary" type="submit">
+                    {% trans 'experiments:globals:save' %}
+                </button>
             </div>
         </form>
     </div>
 </div>
 {% endblock %}
+
+
