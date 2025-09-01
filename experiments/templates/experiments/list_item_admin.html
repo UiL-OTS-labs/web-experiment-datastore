@@ -91,10 +91,13 @@
                             {% translate 'experiments:list_item:researchers' %}:
                         </td>
                         <td>
-                            {% for user in  experiment.users.all %}
-                                {{ user.get_full_name }}{% if not forloop.last %}, {% endif %}
+                            {% for user in experiment.users.all %}
+                                {{ user.get_full_name|default:user.username }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                –
                             {% endfor %}
                         </td>
+
                     </tr>
                     <tr>
                         <td>

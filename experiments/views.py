@@ -20,6 +20,7 @@ from .utils import create_download_response_zip, create_file_response_single, \
     send_new_experiment_mail
 from .mixins import UserAllowedMixin
 
+from django.db.models import Q
 
 class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     """Overview of all experiments of the current user"""
@@ -27,16 +28,23 @@ class ExperimentHomeView(braces.LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        qs = Experiment.objects.filter(users=self.request.user)
-        if 'search' in self.request.GET:
-            qs = qs.filter(title__icontains=self.request.GET['search'])
+        qs = Experiment.objects.filter(users=self.request.user).prefetch_related('users')
+
+        search = self.request.GET.get('search')
+        if search:
+            qs = qs.filter(
+                Q(title__icontains=search) |
+                Q(users__username__icontains=search) |
+                Q(users__first_name__icontains=search) |
+                Q(users__last_name__icontains=search)
+            ).distinct()  
 
         order_by = '-date_created'
         if self.request.GET.get('sort') == 'date_created':
             order_by = 'date_created'
 
-        qs = qs.order_by(order_by)
-        return qs
+        return qs.order_by(order_by)
+
 
 
 
