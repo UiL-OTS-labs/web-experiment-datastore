@@ -8,18 +8,25 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
       matrix:
         python-version: ['3.9', '3.10']
 
+    services:
+      db:
+        image: mariadb
+        env:
+          MARIADB_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+
     steps:
       - name: Install OS dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install libldap2-dev libsasl2-dev libssl-dev gettext
+          sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev gettext default-libmysqlclient-dev
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -30,6 +37,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements.dev.txt
+          pip install mysqlclient
+      - name: Set DB env variables
+        run: |
+          echo "DATABASE_HOST=127.0.0.1" >> $GITHUB_ENV
+          echo "DATABASE_PORT=${{ job.services.db.ports['3306'] }}" >> $GITHUB_ENV
+          echo "DATABASE_USER=root" >> $GITHUB_ENV
       - name: Compile messages
         run: |
           python manage.py compilemessages
