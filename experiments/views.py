@@ -99,7 +99,7 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
         Experiment,
         TargetGroup,
         fields=('name', 'completion_target'),
-        can_delete=False,
+        can_delete=True,
         extra=4
     )
 
