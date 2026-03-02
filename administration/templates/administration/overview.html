@@ -150,9 +150,12 @@
         form.submit();
     });
 
-    form.querySelector('.clear').addEventListener('click', () => {
-        form.search.value = '';
-        form.submit();
-    });
+    let clear = form.querySelector('.clear');
+    if (clear) {
+        clear.addEventListener('click', () => {
+            form.search.value = '';
+            form.submit();
+        });
+    }
 </script>
 {% endblock %}
