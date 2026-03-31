@@ -72,7 +72,7 @@
                             {% translate 'experiments:list_item:in_ldap' %}:
                         </td>
                         <td>
-                            {{ experiment.in_ldap_config|yesno }}
+                            {{ experiment.show_in_ldap_config|yesno }}
                             - <a href="{% url 'administration:switch_ldap_inclusion' experiment.pk %}">
                                 {% translate 'experiments:list_item:switch' %}
                             </a>
