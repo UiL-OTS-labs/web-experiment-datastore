@@ -116,7 +116,7 @@
                     <input name="search" value="{{ request.GET.search }}"></input>
                 </label>
                 {% if request.GET.search %}
-                <button class="clear ms-2">{% translate 'experiments:home:search:clear' %}</button>
+                    <button type="button" class="clear ms-2">{% translate 'experiments:home:search:clear' %}</button>
                 {% endif %}
             </div>
         </form>
