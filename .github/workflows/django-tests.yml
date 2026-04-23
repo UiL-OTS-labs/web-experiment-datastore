@@ -13,16 +13,16 @@ jobs:
     strategy:
       max-parallel: 2
       matrix:
-        python-version: ['3.9', '3.10']
+        python-version: ['3.11', '3.13']
 
     steps:
       - name: Install OS dependencies
         run: |
           sudo apt-get update
           sudo apt-get install libldap2-dev libsasl2-dev libssl-dev gettext
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Dependencies
