@@ -52,6 +52,7 @@ msgstr "Open"
 msgid "experiments:models:experiment:state:closed"
 msgstr "Closed"
 
+
 #: experiments/models.py:19
 msgid "experiments:models:experiment:state:piloting"
 msgstr "Piloting"
@@ -106,6 +107,14 @@ msgstr "In LDAP config"
 #: experiments/models.py:82
 msgid "experiments:detail:awaiting_approval"
 msgstr "Awaiting approval"
+
+#: experiments/models.py:82
+msgid "experiments:detail:rejected_text"
+msgstr "This experiment has been rejected and is no longer available."
+
+#: experiments/models.py:82
+msgid "experiments:detail:rejected"
+msgstr "Rejected"
 
 #: experiments/models.py:173
 msgid "experiments:models:datapoint:size"
@@ -436,6 +445,10 @@ msgstr "ID"
 
 msgid "experiments:list_item:approve"
 msgstr "Approve"
+
+msgid "experiments:list_item:reject"
+msgstr "Reject"
+
 
 msgid "experiments:list_item:in_ldap"
 msgstr "In LDAP config"

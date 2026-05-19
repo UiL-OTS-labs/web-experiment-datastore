@@ -67,6 +67,10 @@ class Experiment(models.Model):
         _("experiments:models:experiment:approved"),
         default=False,
     )
+    rejected = models.BooleanField(
+        _("experiments:models:experiment:rejected"),
+        default=False,
+    )
 
     # Used to exclude experiments from the Apache config
     show_in_ldap_config = models.BooleanField(
@@ -79,6 +83,8 @@ class Experiment(models.Model):
         # state defined by researchers. That is also the reason why it's not
         # a state itself, because it's a hassle to make sure researchers cannot
         # override the 'awaiting approval' state.
+        if self.rejected:
+            return _('experiments:detail:rejected')
         if not self.approved:
             return _('experiments:detail:awaiting_approval')
         else:
@@ -97,11 +103,12 @@ class Experiment(models.Model):
         It should also have at least one target group that is open to new participants.
         While an experiment should not be able to have the status 'open' without being approved,
         we check both to be sure."""
+        if self.rejected:
+            return False
         experiment_open = self.state in (self.OPEN, self.PILOTING) and self.approved
         groups_open = True
         if self.has_groups():
             groups_open = any((group.is_open() for group in self.targetgroup_set.all()))
-
         return experiment_open and groups_open
 
     def has_groups(self):

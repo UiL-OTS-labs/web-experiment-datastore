@@ -39,6 +39,27 @@ msgstr "Annuleer"
 msgid "administration:approve:confirm"
 msgstr "Bevestig"
 
+#: administration/templates/administration/reject.html:8
+#: administration/templates/administration/reject.html:14
+msgid "administration:reject:header"
+msgstr "Experiment afwijzen"
+
+#: administration/templates/administration/reject.html:24
+msgid "administration:reject:text"
+msgstr "Weet je zeker dat je dit experiment ({}) wilt afwijzen?"
+
+#: administration/templates/administration/reject.html:26
+msgid "administration:reject:cancel"
+msgstr "Annuleren"
+
+#: administration/templates/administration/reject.html:28
+msgid "administration:reject:confirm"
+msgstr "Afwijzen"
+
+#: experiments/templates/experiments/detail.html
+msgid "experiments:detail:rejected_text"
+msgstr "Dit experiment is afgewezen en is niet langer beschikbaar."
+
 #: administration/templates/administration/overview.html:12
 #: administration/templates/administration/overview.html:43
 msgid "administration:home:header"

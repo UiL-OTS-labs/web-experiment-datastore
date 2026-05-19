@@ -4,11 +4,16 @@
     <summary>
         <div class="d-flex">
         <h4 class="me-4">{{ experiment.title }}</h4>
-        {% if not experiment.approved %}
+        {% if not experiment.approved and not experiment.rejected %}
             <a href="{% url 'administration:approve' experiment.pk %}"
             class="action me-3">
                 <i class="icon-approve"></i>
                 {% translate 'experiments:list_item:approve' %}
+            </a>
+            <a href="{% url 'administration:reject' experiment.pk %}"
+            class="action me-3">
+                <i class="icon-reject"></i>
+                {% translate 'experiments:list_item:reject' %}
             </a>
         {% endif %}
         <a href="{% url 'experiments:edit' experiment.pk %}"

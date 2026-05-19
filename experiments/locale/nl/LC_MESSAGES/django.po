@@ -106,6 +106,10 @@ msgstr "In LDAP config"
 msgid "experiments:detail:awaiting_approval"
 msgstr "Wacht op goedkeuring"
 
+#: experiments/models.py:82
+msgid "experiments:detail:rejected"
+msgstr "Afgewezen"
+
 #: experiments/models.py:173
 msgid "experiments:models:datapoint:size"
 msgstr "Bestandsgrootte"

@@ -19,15 +19,21 @@
 {% block content %}
 <div class="uu-container">
     <div class="col-7 pe-3">
-        <p>
-            {% trans 'experiments:detail:info_text' %}
-        </p>
+        {% if not experiment.rejected %}
+            <p>
+                {% trans 'experiments:detail:info_text' %}
+            </p>
+        {% else %}
+            <p>{% trans 'experiments:detail:rejected_text' %}</p>
+        {% endif %}
     </div>
     <div class="col-5">
         <strong>{% trans 'experiments:details:detail_header' %}</strong>
-        <a class="float-end btn btn-sm btn-secondary" href="{% url 'experiments:edit' experiment.pk %}">
-            {% trans 'experiments:global:edit' %}
-        </a>
+        {% if not experiment.rejected %}
+            <a class="float-end btn btn-sm btn-secondary" href="{% url 'experiments:edit' experiment.pk %}">
+                {% trans 'experiments:global:edit' %}
+            </a>
+        {% endif %}
         <table class="table table-striped mt-2">
             {% if experiment.approved %}
                 <tr>
@@ -84,6 +90,7 @@
         </table>
     </div>
 </div>
+{% if not experiment.rejected %}
 <div class="uu-container mt-5">
     <div class="col-12">
         {% if experiment.targetgroup_set.count %}
@@ -213,4 +220,5 @@
         </a>
     </div>
 </div>
+{% endif %}
 {% endblock %}

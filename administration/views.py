@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 import braces.views as braces
 from rest_framework.authentication import SessionAuthentication
 
-from administration.utils import approve_experiment, generate_ldap_config
+from administration.utils import approve_experiment, reject_experiment, generate_ldap_config
 from auditlog.enums import Event, UserType
 from auditlog.utils.log import log
 from experiments.mixins import ExperimentMixin
@@ -71,7 +71,26 @@ class ApproveView(braces.StaffuserRequiredMixin, generic.DetailView):
         )
 
         return HttpResponseRedirect(reverse('administration:home'))
+    
+class RejectView(braces.StaffuserRequiredMixin, generic.DetailView):
+    """View that rejects experiments.
+    """
+    template_name = 'administration/reject.html'
+    model = Experiment
 
+    def post(self, request, *args, **kwargs):
+        experiment = self.get_object()
+        reject_experiment(experiment, self.request)
+        
+        # Register action in auditlog
+        log(
+            Event.MODIFY_DATA,
+            "Rejected experiment {} ({})".format(experiment.title,
+                                                 experiment.pk),
+            self.request.user,
+            UserType.ADMIN,
+        )
+        return HttpResponseRedirect(reverse('administration:home'))
 
 class SwitchLDAPInclusionView(braces.StaffuserRequiredMixin,
                               ExperimentMixin,
