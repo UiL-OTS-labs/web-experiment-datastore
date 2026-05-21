@@ -100,12 +100,15 @@ def reject_experiment(experiment: Experiment, request) -> None:
     :param experiment: :class:`Experiment` the experiment to reject
     :param request: Django request. Used to create an absolute URL in the mail
     """
+    if experiment.rejected: 
+        return
+
     experiment.rejected = True
     experiment.approved = False
     experiment.save()
-    sent_rejection_email(experiment, request)
+    send_rejection_email(experiment, request)
 
-def sent_rejection_email(experiment: Experiment, request) -> None:
+def send_rejection_email(experiment: Experiment, request) -> None:
     """Sends the rejection email
     :param experiment: :class:`Experiment` that was rejected
     :param request: Django request. Used to create an absolute URL in the mail
