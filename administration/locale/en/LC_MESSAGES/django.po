@@ -21,6 +21,7 @@ msgstr ""
 msgid "administration:approve:header"
 msgstr "Approve experiment"
 
+
 #: administration/templates/administration/approve.html:24
 msgid "administration:approve:text"
 msgstr ""
@@ -37,6 +38,23 @@ msgstr "Cancel"
 
 #: administration/templates/administration/approve.html:28
 msgid "administration:approve:confirm"
+msgstr "Confirm"
+
+#: administration/templates/administration/reject.html:8
+#: administration/templates/administration/reject.html:14
+msgid "administration:reject:header"
+msgstr "Reject experiment"
+
+#: administration/templates/administration/reject.html:24
+msgid "administration:reject:text"
+msgstr "Are you sure you want to reject this experiment ({})?"
+
+#: administration/templates/administration/reject.html:26
+msgid "administration:reject:cancel"
+msgstr "Cancel"
+
+#: administration/templates/administration/reject.html:28
+msgid "administration:reject:confirm"
 msgstr "Confirm"
 
 #: administration/templates/administration/overview.html:12

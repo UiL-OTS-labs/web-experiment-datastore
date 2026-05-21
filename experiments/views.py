@@ -1,6 +1,7 @@
 from typing import Dict, Any
 
 from django import forms
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseBadRequest, Http404, HttpResponseRedirect
 from django.views import generic
 import braces.views as braces
@@ -102,6 +103,12 @@ class ExperimentEditView(UserAllowedMixin, SuccessMessageMixin,
         can_delete=True,
         extra=4
     )
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.experiment.rejected:
+            return HttpResponseRedirect(reverse('experiments:detail', args=[self.experiment.pk]))
+        return super().dispatch(request, *args, **kwargs)
+
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

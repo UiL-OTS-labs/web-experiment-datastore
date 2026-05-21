@@ -94,3 +94,37 @@ def sent_confirmation_email(experiment: Experiment, request) -> None:
         from_email=settings.LABSTAFF_EMAIL,
         language='en',
     )
+
+def reject_experiment(experiment: Experiment, request) -> None:
+    """Rejects an experiment, and informs users of the rejection
+    :param experiment: :class:`Experiment` the experiment to reject
+    :param request: Django request. Used to create an absolute URL in the mail
+    """
+    if experiment.rejected: 
+        return
+
+    experiment.rejected = True
+    experiment.approved = False
+    experiment.save()
+    send_rejection_email(experiment, request)
+
+def send_rejection_email(experiment: Experiment, request) -> None:
+    """Sends the rejection email
+    :param experiment: :class:`Experiment` that was rejected
+    :param request: Django request. Used to create an absolute URL in the mail
+    """
+    recipient_list = [user.email for user in experiment.users.all()]
+    recipient_list.append(settings.LABSTAFF_EMAIL)
+    send_template_email(
+        recipient_list,
+        subject="Your experiment has been rejected",
+        html_template="administration/mail/experiment_rejected.html",
+        template_context={
+            "experiment": experiment,
+            "link": request.build_absolute_uri(
+                reverse('experiments:detail', args=[experiment.pk])
+            ),
+        },
+        from_email=settings.LABSTAFF_EMAIL,
+        language='en',
+    )

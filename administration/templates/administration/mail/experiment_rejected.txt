@@ -1,0 +1,12 @@
+Dear researcher,
+
+Your experiment ({{ experiment.title }}) has been rejected. If you have any 
+questions about this decision, please contact the ILS Labs staff directly.
+
+You can view the details of your experiment here:
+{{ link }}
+
+Kind regards,
+The ILS Labs staff
+
+This mail was automatically generated.

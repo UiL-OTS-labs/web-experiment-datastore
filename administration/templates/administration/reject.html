@@ -1,0 +1,33 @@
+{% extends "base/datastore_base.html" %}
+{% load i18n %}
+{% load transformat %}
+{% load datatables %}
+{% load get_field_name %}
+
+{% block header_title %}
+    {% trans 'administration:reject:header' %} - {{ block.super }}
+{% endblock %}
+
+{% block pre-messages-content %}
+<div class="uu-hero justify-content-between align-items-center">
+    <h1>
+        {% trans 'administration:reject:header' %}
+    </h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="uu-container">
+    <div class="col-12">
+        <form method="post" class="uu-form uu-form-no-gap">
+            {% csrf_token %}
+            <p>{% transformat 'administration:reject:text' object %}</p>
+            <a class="btn btn-secondary" href="{% url 'administration:home' %}">
+                {% trans 'administration:reject:cancel' %}
+            </a>
+            <input class="btn btn-danger" type="submit" value="{% trans 'administration:reject:confirm' %}">
+        </form>
+        <br/>
+    </div>
+</div>
+{% endblock %}
