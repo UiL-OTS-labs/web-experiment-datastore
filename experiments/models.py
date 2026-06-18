@@ -253,7 +253,7 @@ class ParticipantSession(models.Model):
     group = models.ForeignKey(
         'TargetGroup',
         verbose_name=_('experiments:models:participant:group'),
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         null=False                # There should always be a default group.
     )
     date_started = models.DateTimeField(auto_now_add=True)
